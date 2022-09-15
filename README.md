@@ -21,7 +21,7 @@ index.html을 통해 실행 해주세요.
 
 |  HTML5  |   CSS   |   JavaScript  | 
 | :-----: | :-----: | :-----------: | 
-| ![html5] | ![css]  | ![javascript] | 
+|JAVA | MAVEN  | TOMCAT 8.5| 
 
 <br>
 
@@ -48,11 +48,6 @@ index.html을 통해 실행 해주세요.
 ## 라이센스
 
 <br>
-
-<!-- Stack Icon Refernces -->
-[html5]: /assets/readme/html5.svg
-[css]: /assets/readme/css.svg
-[javascript]: /assets/readme/javascript.svg
 
 <!--Readme 참고 사이트-->
 <!--https://github.com/n0hack/readme-template/blob/main/README.md-->
