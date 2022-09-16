@@ -1,5 +1,5 @@
 package com.kh.pyeonstaurant.recipe.service.logic;
 
-public class RecipeStoreLogic {
+public class RecipeCommentServiceLogic {
 
 }
