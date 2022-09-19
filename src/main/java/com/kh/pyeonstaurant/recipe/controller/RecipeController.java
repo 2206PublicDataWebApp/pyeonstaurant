@@ -42,6 +42,8 @@ public class RecipeController {
 
 	}
 
+
+
 	/**
 	 * 레시피 등록 컨트롤러
 	 * @param recipe
@@ -109,6 +111,7 @@ public class RecipeController {
 
 			// 레시피 순서 리스트 만들어서 전달하기
 			ArrayList<RecipeStep> rsList = new ArrayList<RecipeStep>();
+			rStep.getRecipeDescription();
 			String arrDescription[] = rStep.getRecipeDescription().split(",ab22bb,");
 			//더미 value까지 배열을 나누는것으로 인식해서 사용자가 ,를 입력했을때 정상적으로 table에 저장되게 한다
 			arrDescription[arrDescription.length-1] = arrDescription[arrDescription.length-1].replace(",ab22bb", "");
@@ -150,6 +153,7 @@ public class RecipeController {
 
 				
 					rsList.add(rStepOne);
+					System.out.println(rStepOne);
 
 			}
 
@@ -214,7 +218,25 @@ public class RecipeController {
 		return mv;
 	}
 
-	public ModelAndView recipeModifyView(ModelAndView mv, Integer recipeNo) {
+	@RequestMapping(value="/recipe/modifyForm.do", method = RequestMethod.GET)
+	public ModelAndView recipeModifyView(ModelAndView mv, @RequestParam("recipeNo") Integer recipeNo, HttpSession session) {
+		
+		try {
+		Recipe recipe = rService.printOneRecipe(recipeNo);
+		RecipeTag rTag = rService.printOneRecipeTag(recipeNo);
+		List<RecipeMaterial> rmList = rService.printOneRecipeMaterial(recipeNo);
+		List<RecipeStep> rsList = rService.printOneRecipeStep(recipeNo);
+		
+		mv.addObject("recipe", recipe);
+		mv.addObject("rTag", rTag);
+		mv.addObject("rmList", rmList);
+		mv.addObject("rmListSize",rmList.size());
+		mv.addObject("rsList", rsList);
+		mv.setViewName("/recipe/recipeModifyForm");
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/error");
+		}
 		return mv;
 	}
 
@@ -241,5 +263,6 @@ public class RecipeController {
 		return mv;
 
 	}
+
 
 }
