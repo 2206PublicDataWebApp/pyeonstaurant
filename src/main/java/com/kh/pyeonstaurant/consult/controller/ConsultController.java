@@ -1,4 +1,4 @@
-package com.kh.Recipe.consult.controller;
+package com.kh.pyeonstaurant.consult.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.Recipe.consult.domain.Consult;
-import com.kh.Recipe.consult.domain.ConsultServer;
-import com.kh.Recipe.consult.service.ConsultService;
-import com.kh.Recipe.member.domain.Member;
+import com.kh.pyeonstaurant.consult.domain.Consult;
+import com.kh.pyeonstaurant.consult.domain.ConsultServer;
+import com.kh.pyeonstaurant.consult.service.ConsultService;
+import com.kh.pyeonstaurant.member.domain.Member;
 
 @Controller
 public class ConsultController {
@@ -29,29 +29,29 @@ public class ConsultController {
 	private ConsultService cService;
 
 	//chat을 위한 한명의 정보 받아오기	
-	@RequestMapping(value="/consult/start.kh",  method=RequestMethod.GET)
-	public ModelAndView showChat(ModelAndView mv
+//	@RequestMapping(value="/consult/start.kh",  method=RequestMethod.GET)
+//	public ModelAndView showChat(ModelAndView mv
 /*			@RequestParam(value="memberNickName") String memberNickName*/
 /*			, @RequestParam(value="memberEmail") String memberEmail*/
-			,HttpSession session
-			,HttpServletRequest request) { 
-		try {
+//			,HttpSession session
+//			,HttpServletRequest request) { 
+//		try {
 			 
-			Member member=(Member)session.getAttribute("loginUser"); 
+	//		Member member=(Member)session.getAttribute("loginUser"); 
 			//session은 object임...
 			
-			String memberNickName=member.getMemberNickName();
-			String memberEmail=member.getMemberEmail();
+	//		String memberNickName=member.getMemberNickName();
+	//		String memberEmail=member.getMemberEmail();
 
-			System.out.println("세션 닉네임 :"+memberNickName);
-			mv.addObject("memberNickName",memberNickName);
-			mv.addObject("memberEmail",memberEmail);
-			mv.setViewName("/consult/userChat");						
-		}catch(Exception e){
-			mv.addObject("msg",e.getMessage());
-		}		
-		return mv;
-	}
+//			System.out.println("세션 닉네임 :"+memberNickName);
+//			mv.addObject("memberNickName",memberNickName);
+//			mv.addObject("memberEmail",memberEmail);
+//			mv.setViewName("/consult/userChat");						
+//		}catch(Exception e){
+//			mv.addObject("msg",e.getMessage());
+//		}		
+//		return mv;
+//	}
 	
 	// 고객채팅 시작
 	/*

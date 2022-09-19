@@ -1,12 +1,12 @@
-package com.kh.Recipe.consult.store;
+package com.kh.pyeonstaurant.consult.store;
 
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.Recipe.consult.domain.Consult;
-import com.kh.Recipe.consult.domain.ConsultServer;
+import com.kh.pyeonstaurant.consult.domain.Consult;
+import com.kh.pyeonstaurant.consult.domain.ConsultServer;
 @Repository
 public class LogicStore implements ConsultStore{
 

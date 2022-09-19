@@ -1,9 +1,9 @@
-package com.kh.Recipe.consult.service;
+package com.kh.pyeonstaurant.consult.service;
 
 import java.util.List;
 
-import com.kh.Recipe.consult.domain.Consult;
-import com.kh.Recipe.consult.domain.ConsultServer;
+import com.kh.pyeonstaurant.consult.domain.Consult;
+import com.kh.pyeonstaurant.consult.domain.ConsultServer;
 
 public interface ConsultService {
 	//리스트 전체 조회

@@ -1,4 +1,4 @@
-package com.kh.Recipe.consult.service;
+package com.kh.pyeonstaurant.consult.service;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.Recipe.consult.domain.Consult;
-import com.kh.Recipe.consult.domain.ConsultServer;
-import com.kh.Recipe.consult.store.ConsultStore;
+import com.kh.pyeonstaurant.consult.domain.Consult;
+import com.kh.pyeonstaurant.consult.domain.ConsultServer;
+import com.kh.pyeonstaurant.consult.store.ConsultStore;
 
 @Service
 public class ImplService implements ConsultService{

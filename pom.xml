@@ -22,6 +22,13 @@
 	<dependencies>
 		<!-- dependency는 이 안에 첨부 -->
 		<!-- 파일 업로드 관련 라이브러리 -->
+			<!--제이슨 추가한 부분-->		
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>

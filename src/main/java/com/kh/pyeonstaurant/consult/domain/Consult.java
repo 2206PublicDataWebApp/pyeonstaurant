@@ -1,4 +1,4 @@
-package com.kh.Recipe.consult.domain;
+package com.kh.pyeonstaurant.consult.domain;
 
 import java.util.Date;
 
