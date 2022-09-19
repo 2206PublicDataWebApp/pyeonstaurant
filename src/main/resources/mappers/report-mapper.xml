@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reportMapper">
+	<resultMap type="report" id="reportResultMap">
+		<result property="recipeNo" 	column="RECIPE_NO"/>
+		<result property="commentNo" 	column="COMMENT_NO"/>
+		<result property="reportResult" 	column="REPORT_RESULT"/>
+		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
+		<result property="reportDate" 	column="REPORT_DATE"/>
+	</resultMap>
+	<insert id="insertReportRecipe" parameterType="Report">
+		INSERT INTO REPORT VALUES(#{recipeNo}, NULL, DEFAULT, #{memberEmail}, SYSDATE)
+	</insert>
+	
+	<insert id="insertReportComment" parameterType="Report">
+		INSERT INTO REPORT VALUES(NULL, #{commentNo}, DEFAULT, #{memberEmail}, SYSDATE)
+	</insert>
+	
+	<select id="selectReportRecipe" resultMap="reportResultMap">
+		SELECT * FROM MYRECIPE WHERE RECIPE_NO = #{recipeNo}
+	</select>
+	
+	<select id="selectReportComment" resultMap="reportResultMap">
+		SELECT * FROM MYRECIPE WHERE RECIPE_NO = #{commentNo}
+	</select>
+	
+	<update id="updateRecipeStatus">
+		UPDATE REPORT SET REPORT_RESULT = 'Y' WHERE RECIPE_NO = #{recipeNo}
+	</update>
+	
+	<update id="updateCommentStatus">
+		UPDATE REPORT SET REPORT_RESULT = 'Y' WHERE RECIPE_NO = #{commentNo}
+	</update>
+	
+	<select id="selectRecipeTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MYRECIPE WHERE RECIPE_NO = #{recipeNo}
+	</select>
+	
+	<select id="selectCommentTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MYRECIPE WHERE RECIPE_NO = #{commentNo}
+	</select>
+</mapper>
