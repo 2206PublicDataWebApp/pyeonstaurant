@@ -395,10 +395,10 @@ body {
 	
  	var youUrl = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/g;
 	function isYoutube(){
-		console
 		var youtube = document.querySelector('[name="recipeVideo"]');
 		if(!youUrl.test(youtube.value)){
 			  alert("유튜브 주소는 embed이 포함된 고유주소로 입력해주세요")
+			  youtube.value="";
 			
 		} 
 		
@@ -414,7 +414,6 @@ body {
 		addplace.appendChild(detailForm.cloneNode(true));
 		 document.querySelectorAll('.REdetailC')[document.querySelectorAll('.REdetailC').length-1].childNodes[1].childNodes[1].childNodes[1].value="";
 		 document.querySelectorAll('.REdetailC')[document.querySelectorAll('.REdetailC').length-1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[3].value="";
-		 document.querySelectorAll('.REdetailC')[document.querySelectorAll('.REdetailC').length-1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[1].src="";
 		
 		count++;
 		}
@@ -472,7 +471,6 @@ body {
 
 		function imgView(obj) {
 
-			console.log(obj.previousElementSibling);
 			var imgid = obj.previousElementSibling;
 
 			imgid.src = URL.createObjectURL(event.target.files[0]);
