@@ -3,6 +3,7 @@ package com.kh.pyeonstaurant.recipe.domain;
 
 public class RecipeMaterial {
 	
+	
 	private int recipeNo;
 	private int materialOrder;
 	private String material;
@@ -68,6 +69,7 @@ public class RecipeMaterial {
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
+	
 	
 	
 

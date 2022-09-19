@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RecipeMapper">
+
+	<insert id="insertRecipe">
+
+		insert into recipe_tbl
+		values(seq_recipe_no.nextval,#{recipeName},#{recipeInfo},#{mainPic},default,#{recipeCategory},#{recipeVideo},default,#{memberEmail},default,default,#{recommandCount},#{mainPicRename},#{recipeTime})
+
+	</insert>
+
+	<insert id="insertRecipeMaterial">
+		insert into recipe_material
+		values(#{materialOrder},seq_recipe_no.currval,#{material},#{amount})
+	</insert>
+
+	<insert id="insertRecipeStep">
+		insert into recipe_step
+		values(#{recipeOrder},seq_recipe_no.currval,#{recipeDescription},#{recipePic},#{recipePicRename})
+	</insert>
+
+	<insert id="insertTag">
+		insert into recipe_tag
+		values(seq_recipe_no.currval,#{jmt},#{healthy},#{goodSpicy},#{full},#{soSpicy},#{sweet},#{easy},#{party})
+	</insert>
+
+	<resultMap type="Recipe" id="recipeResultMap">
+		<id property="recipeNo" 			column="RECIPE_NO" />
+		<result property="recipeName" 		column="RECIPE_NAME" />
+		<result property="recipeInfo" 		column="RECIPE_INFO" />
+		<result property="mainPic" 			column="MAIN_PICTURE" />
+		<result property="insertDate" 		column="INCERT_DATE" />
+		<result property="recipeCategory" 	column="RECIPE_CATEGORY" />
+		<result property="recipeVideo" 		column="RECIPE_VIDEO" />
+		<result property="viewCount" 		column="VIEW_COUNT" />
+		<result property="memberEmail" 		column="MEMBER_EMAIL" />
+		<result property="updateDate" 		column="UPDATE_DATE" />
+		<result property="recipeStatus"		column="RECIPE_STATUS" />
+		<result property="recommandCount" 	column="RECOMMAND_COUNT" />
+		<result property="mainPicRename" 	column="MAIN_PIC_RENAME" />
+		<result property="recipeTime" 		column="RECIPE_TIME" />
+	</resultMap>
+
+	<select id="selectAllRecipe" resultMap="recipeResultMap">
+		select * from recipe_tbl where RECIPE_STATUS = 'Y'
+	</select>
+
+	<select id="selectOneRecipe" resultMap="recipeResultMap">
+		select * from recipe_tbl where RECIPE_NO = #{recipeNo} and RECIPE_STATUS = 'Y'
+	</select>
+
+	<resultMap type="RecipeMaterial" id="RecipeMaterialResultMap">
+		<id property="recipeNo"				column="RECIPE_NO" />
+		<result property="materialOrder" 	column="MATERIAL_ORDER" />
+		<result property="material" 		column="MATERIAL" />
+		<result property="amount" 			column="AMOUNT" />
+	</resultMap>
+
+	<select id="selectOneRMaterial" resultMap="RecipeMaterialResultMap">
+		select * from recipe_material where RECIPE_NO = #{recipeNo}order by MATERIAL_ORDER
+	</select>
+
+	<resultMap type="RecipeTag" id="RecipeTagResultMap">
+		<id property="recipeNo" 		column="recipeNo" />
+		<result property="jmt" 			column="JMT" />
+		<result property="healthy" 		column="HEALTHY" />
+		<result property="goodSpicy" 	column="GOODSPICY" />
+		<result property="full" 		column="FULL" />
+		<result property="soSpicy" 		column="SOSPICY" />
+		<result property="sweet" 		column="SWEET" />
+		<result property="easy" 		column="EASY" />
+		<result property="party"		column="PARTY" />
+	</resultMap>
+
+	<select id="selectOneRTag" resultMap="RecipeTagResultMap">
+		select * from recipe_tag where RECIPE_NO = #{recipeNo}
+	</select>
+
+	<resultMap type="RecipeStep" id="RecipeStepResultMap">
+		<id property="recipeNo" 				column="recipeNo" />
+		<result property="recipeOrder" 			column="RECiPE_ORDER" />
+		<result property="recipeDescription"	column="RECIPE_DESCRIPTION" />
+		<result property="recipePic" 			column="RECIPE_PICTURE" />
+		<result property="recipePicRename"		column="RECIPE_PIC_RENAME" />
+	</resultMap>
+	
+	<select id="selectOneRStep" resultMap="RecipeStepResultMap">
+		select * from recipe_Step where recipe_no = #{recipeNo} order by RECIPE_ORDER
+	</select>
+
+
+
+
+
+
+</mapper>

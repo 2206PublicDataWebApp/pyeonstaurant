@@ -33,7 +33,7 @@ public interface RecipeStore {
 	
 	public List<RecipeStep> selectOneRecipeDetail(int recipeNo, SqlSessionTemplate session); 
 
-	public List<RecipeMaterial> selecttOneRecipeMaterial(int recipeNo,SqlSessionTemplate session); 
+	public List<RecipeMaterial> selectOneRecipeMaterial(int recipeNo,SqlSessionTemplate session); 
 
 	public RecipeTag selectOneRecipeTag(int recipeNo,SqlSessionTemplate session); 
 
