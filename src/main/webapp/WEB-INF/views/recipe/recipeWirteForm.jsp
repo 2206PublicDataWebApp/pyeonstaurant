@@ -66,7 +66,7 @@ body {
 					</div>
 					<br>
 					<div class="form-floating col-sm-12 ">
-						<input type="text" class="form-control" id="" name="recipeVideo">
+						<input type="text" class="form-control" id="" name="recipeVideo" onblur="isYoutube()">
 						<label for="floatingInput">유튜브 링크</label>
 					</div>
 
@@ -235,7 +235,7 @@ body {
 					<div class="row container p-3 float-start col-md-6 p-2">
 
 						<div class="form-floating col-md-12 p-0 pt-3">
-							<textarea class="form-control" placeholder=""
+							<textarea class="form-control" name="recipeDescription"  placeholder=""
 								id="floatingTextarea2" style="height: 250px"></textarea>
 							<label for="floatingTextarea2" class="mt-3">설명을 입력하세요</label>
 						</div>
@@ -279,7 +279,7 @@ body {
 
 						<div class="form-floating col-md-12 p-0 pt-3">
 							<textarea class="form-control" placeholder=""
-								id="floatingTextarea2" style="height: 250px"></textarea>
+								id="floatingTextarea2" name="recipeDescription"  style="height: 250px"></textarea>
 							<label for="floatingTextarea2" class="mt-3">설명을 입력하세요</label>
 						</div>
 
@@ -292,8 +292,8 @@ body {
 					<!-- 이미지 미리보기 이미지 파일 -->
 					<div class="row col-md-6 float-start p-2">
 						<div
-							class="col-md-5 col-sm-12 container-lg align-items-center m-0">
-							<div class="row col-md-4 col-sm-12  align-items-center">
+							class="col-md-5 container-lg align-items-center m-0">
+							<div class="row col-md-4  align-items-center">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-x-circle-fill float-end"
 									onclick="PicDel(this)">
@@ -316,13 +316,13 @@ body {
 				</div>
 				<!-- 레시피 한블럭 설명종료 -->
 				<!-- 여기서부터 레시피 설명-->
-				<div id="REdetail">
+				<div id="REdetail" class="REdetailC">
 
 					<div class="row container p-3 float-start col-md-6 p-2">
 
 						<div class="form-floating col-md-12 p-0 pt-3">
 							<textarea class="form-control" placeholder=""
-								id="floatingTextarea2" style="height: 250px"></textarea>
+								id="floatingTextarea2" name="recipeDescription" style="height: 250px"></textarea>
 							<label for="floatingTextarea2" class="mt-3">설명을 입력하세요</label>
 						</div>
 
@@ -335,8 +335,8 @@ body {
 					<!-- 이미지 미리보기 이미지 파일 -->
 					<div class="row col-md-6 float-start p-2" >
 						<div
-							class="col-md-5 col-sm-12 container-lg align-items-center m-0">
-							<div class="row col-md-4 col-sm-12  align-items-center">
+							class="col-md-5 container-lg align-items-center m-0">
+							<div class="row col-md-4  align-items-center">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-x-circle-fill float-end"
 									onclick="PicDel(this)">
@@ -344,10 +344,10 @@ body {
 										d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
 						  </svg>
 
-								<label class="input-file-button float-start"> <img
-									class="detailImg mx-auto" width="400px" height="270px"
-									style="background-color: gray; border-radius: 10px;"> <input
-									type="file" name="recipePicture" class="isFile"
+								<label class="input-file-button float-start">
+								 <img class="detailImg mx-auto" width="400px" height="270px"
+									style="background-color: gray; border-radius: 10px;">
+								 <input type="file" name="recipePicture" class="isFile"
 									style="display: none" accept="image/jpeg, image/png, image/jpg"
 									onchange="imgView(this);">
 								</label>
@@ -362,21 +362,15 @@ body {
 			</div>
 			<!-- 레시피 종료 -->
 			
-		<button type="button" onclick="addDe()">추가</button>
+			
+			<svg class="m-2" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" onclick="addDe()">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+</svg>
 
-<script>
-var detailForm =document.querySelector('#REdetail');
-var addplace =document.querySelector('#addplace');
-var i = 3;
-function addDe(){
-	if(i<=10){
-	addplace.appendChild(detailForm.cloneNode(true));
-	i++;
-	}
-	
-	
-}
-</script>
+<svg  class= "m-2"xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16" onclick="removeDe()">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+</svg>
+
 
 
 
@@ -396,6 +390,50 @@ function addDe(){
 
 
 	<script>
+	
+	//유튜브 링크 유효성체크//
+	
+ 	var youUrl = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/g;
+	function isYoutube(){
+		console
+		var youtube = document.querySelector('[name="recipeVideo"]');
+		if(!youUrl.test(youtube.value)){
+			  alert("유튜브 주소는 embed이 포함된 고유주소로 입력해주세요")
+			
+		} 
+		
+	}
+	
+	
+	///설명 추가/삭제////
+	var detailForm =document.querySelector('#REdetail');
+	var addplace =document.querySelector('#addplace');
+	var count = 3;
+	function addDe(){
+		if(count<=10){
+		addplace.appendChild(detailForm.cloneNode(true));
+		 document.querySelectorAll('.REdetailC')[document.querySelectorAll('.REdetailC').length-1].childNodes[1].childNodes[1].childNodes[1].value="";
+		 document.querySelectorAll('.REdetailC')[document.querySelectorAll('.REdetailC').length-1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[3].value="";
+		 document.querySelectorAll('.REdetailC')[document.querySelectorAll('.REdetailC').length-1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[1].src="";
+		
+		count++;
+		}
+		
+		
+	}
+	
+	function removeDe(){
+	var detailFormClass = document.querySelectorAll('.REdetailC');
+		if(count>3){
+			 detailFormClass[ detailFormClass.length-1].remove();
+		count--;
+		}
+		
+		
+	}
+
+	
+	
 		function loadFile(event) {
 			var output = document.getElementById('output');
 			output.src = URL.createObjectURL(event.target.files[0]);
