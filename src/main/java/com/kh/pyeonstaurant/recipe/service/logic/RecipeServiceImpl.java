@@ -38,7 +38,6 @@ public class RecipeServiceImpl implements RecipeService{
 	 */
 	@Override
 	public int registStep(List<RecipeStep> rsList) {
-		System.out.println(rsList.size());
 		int result = rStore.insertStep(rsList, session);
 		
 		
@@ -92,34 +91,42 @@ public class RecipeServiceImpl implements RecipeService{
 		return 0;
 	}
 
+	/**레시피수정*/
 	@Override
 	public int modifyOneRecipe(Recipe recipe) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = rStore.updateOneRecipe(session, recipe);
+		return result;
 	}
 
+	/**레시피 순서 수정*/
 	@Override
 	public int modifyOneRecipeStep(List<RecipeStep> rsList) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result= rStore.updateOneRecipeStep(session, rsList);
+		return result;
 	}
 
+	/***레시피 재료 수정*/
 	@Override
 	public int modifyOneRecipeMaterial(List<RecipeMaterial> rmList) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = rStore.updateOneRecipeMaterial(session, rmList);
+		return result;
 	}
 
+	/**레시피 태그 수정*/
 	@Override
-	public int modifyOneRecipeTag(List<RecipeTag> rtList) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modifyOneRecipeTag(RecipeTag rTag) {
+		int result = rStore.updateOneRecipeTag(session, rTag);
+		return result;
 	}
 
+	/**
+	 * 레시피 삭제
+	 */
 	@Override
 	public int removeOneRecipe(int redipeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = rStore.deleteOneRecipe(session, redipeNo);
+				
+		return result;
 	}
 /**
  * 레시피 리스트 출력
@@ -160,6 +167,15 @@ public class RecipeServiceImpl implements RecipeService{
 	public RecipeTag printOneRecipeTag(int recipeNo) {
 		RecipeTag rTag = rStore.selectOneRecipeTag(recipeNo, session);
 		return rTag;
+	}
+
+/**
+ * 이미지 삭제
+ */
+	@Override
+	public int removeOneImg(String picName) {
+		int result = rStore.deleteOneImg(session, picName);
+		return result;
 	}
 
 }

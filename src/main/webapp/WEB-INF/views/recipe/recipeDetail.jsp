@@ -54,12 +54,22 @@
 	</c:forEach>
 
 
-<!-- 비디오 주소를 입력했을때만 : 비디오 출력이 안되서 입력시에 유효성 검사 필요-->	
+<!-- 비디오 주소를 입력했을때만-->	
 	<c:if test="${recipe.recipeVideo ne null }">
 	<iframe width="560" height="315" src="${recipe.recipeVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</c:if>
-
 	
+	
+	<button onclick="location.href='/recipe/modifyForm.do?recipeNo=${recipe.recipeNo }';">수정하기</button>
+	<button onclick="removeRecipe(${recipe.recipeNo });">삭제하기</button>
 
 </body>
+<script>
+function removeRecipe(recipeNo){
+	if(confirm("삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
+		location.href='/recipe/remove.do?recipeNo='+recipeNo
+	}
+}
+
+</script>
 </html>

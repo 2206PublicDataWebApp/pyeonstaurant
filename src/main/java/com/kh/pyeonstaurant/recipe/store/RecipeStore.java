@@ -1,7 +1,5 @@
 package com.kh.pyeonstaurant.recipe.store;
 
-
-
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,7 +10,6 @@ import com.kh.pyeonstaurant.recipe.domain.RecipeMaterial;
 import com.kh.pyeonstaurant.recipe.domain.RecipeStep;
 import com.kh.pyeonstaurant.recipe.domain.RecipeTag;
 import com.kh.pyeonstaurant.recipe.domain.Recommandation;
-
 
 
 public interface RecipeStore {
@@ -56,9 +53,11 @@ public interface RecipeStore {
 
 	public int updateOneRecipeMaterial(SqlSessionTemplate session,List<RecipeMaterial>rmList); 
 
-	public int  updateOneRecipeTag(SqlSessionTemplate session,List<RecipeTag> rtList) ;
+	public int  updateOneRecipeTag(SqlSessionTemplate session,RecipeTag rTag) ;
 
-	public int deleteOneRecipe(SqlSessionTemplate session,int redipeNo); 
+	public int deleteOneRecipe(SqlSessionTemplate session,int redipeNo);
+
+	public int deleteOneImg(SqlSessionTemplate session, String picName); 
 
 
 

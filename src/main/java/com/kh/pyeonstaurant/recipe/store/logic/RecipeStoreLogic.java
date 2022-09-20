@@ -2,6 +2,7 @@ package com.kh.pyeonstaurant.recipe.store.logic;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -71,27 +72,29 @@ public class RecipeStoreLogic implements RecipeStore {
 		List<Recipe> rList = session.selectList("RecipeMapper.selectAllRecipe");
 		return rList;
 	}
-	/**상세레시피*/
+
+	/** 상세레시피 */
 	@Override
 	public Recipe selectOneRecipe(int recipeNo, SqlSessionTemplate session) {
-		Recipe recipe=session.selectOne("RecipeMapper.selectOneRecipe", recipeNo);
+		Recipe recipe = session.selectOne("RecipeMapper.selectOneRecipe", recipeNo);
 		return recipe;
 	}
 
-	/**상세 레시피 순서*/
+	/** 상세 레시피 순서 */
 	@Override
 	public List<RecipeStep> selectOneRecipeDetail(int recipeNo, SqlSessionTemplate session) {
 		List<RecipeStep> rsList = session.selectList("RecipeMapper.selectOneRStep", recipeNo);
 		return rsList;
 	}
 
-	/**상세재료*/
+	/** 상세재료 */
 	@Override
 	public List<RecipeMaterial> selectOneRecipeMaterial(int recipeNo, SqlSessionTemplate session) {
-		List<RecipeMaterial> rmList = session.selectList("RecipeMapper.selectOneRMaterial",recipeNo);
+		List<RecipeMaterial> rmList = session.selectList("RecipeMapper.selectOneRMaterial", recipeNo);
 		return rmList;
 	}
-	/**상세 태그*/
+
+	/** 상세 태그 */
 	@Override
 	public RecipeTag selectOneRecipeTag(int recipeNo, SqlSessionTemplate session) {
 		RecipeTag rTag = session.selectOne("RecipeMapper.selectOneRTag", recipeNo);
@@ -134,36 +137,91 @@ public class RecipeStoreLogic implements RecipeStore {
 		return 0;
 	}
 
+	/** 레시피수정 */
 	@Override
 	public int updateOneRecipe(SqlSessionTemplate session, Recipe recipe) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = session.update("RecipeMapper.updateOneRecipe", recipe);
+		return result;
 	}
 
+	/** 레시피 순서수정 */
 	@Override
 	public int updateOneRecipeStep(SqlSessionTemplate session, List<RecipeStep> rsList) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		for (int i = 0; i < rsList.size(); i++) {
+			result += session.update("RecipeMapper.updateOneStep", rsList.get(i));
+		}
+		
+		
+		if(result<rsList.size()) {
+			for(int i=result; i<rsList.size();i++) {
+			result+= session.insert("RecipeMapper.insertRstepPlus",rsList.get(i));
+			}
+		}
+		
+		return result;
 	}
 
+	/** 레시피 재료 수정 */
 	@Override
 	public int updateOneRecipeMaterial(SqlSessionTemplate session, List<RecipeMaterial> rmList) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+	
+
+			for (int i = 0; i < rmList.size(); i++) {
+
+				result += session.update("RecipeMapper.updateOneMaterial", rmList.get(i));
+
+			}
+		if(result<rmList.size()) {
+			//null방지코드
+			for(int i=result; i<rmList.size(); i++) {
+				if(rmList.get(i).getAmount() == null) {
+					rmList.get(i).setAmount("");
+				}
+				if(rmList.get(i).getMaterial() == null) {
+					rmList.get(i).setMaterial("");
+				}
+			session.insert("RecipeMapper.insertRecipeMaterialPlus", rmList.get(i));
+			}
+		}
+		
+		int count =session.selectOne("RecipeMapper.countMaterial",rmList.get(0).getRecipeNo());
+		
+		
+		if(count>rmList.size()) {
+			for(int i =rmList.size(); i<count; i++) {
+				HashMap<String, Integer> paraMap = new HashMap<String, Integer>();
+				paraMap.put("recipeNo", rmList.get(0).getRecipeNo());
+				paraMap.put("materialOrder", i);
+				result = session.delete("RecipeMapper.deleteOneMaterial",paraMap);
+			}
+		}
+
+		return result;
 	}
 
+	/** 레시피 태그 수정 */
 	@Override
-	public int updateOneRecipeTag(SqlSessionTemplate session, List<RecipeTag> rtList) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateOneRecipeTag(SqlSessionTemplate session, RecipeTag rTag) {
+		int result = session.update("RecipeMapper.updateOneTag", rTag);
+		return result;
 	}
 
+	/**
+	 * 레시피 삭제
+	 */
 	@Override
 	public int deleteOneRecipe(SqlSessionTemplate session, int redipeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = session.update("RecipeMapper.deleteRecipe", redipeNo);
+		return result;
 	}
 
-
+	/** 이미지삭제 */
+	@Override
+	public int deleteOneImg(SqlSessionTemplate session, String picName) {
+		int result = session.update("RecipeMapper.deleteOneImg", picName);
+		return result;
+	}
 
 }

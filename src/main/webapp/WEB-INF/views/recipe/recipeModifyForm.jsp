@@ -5,7 +5,7 @@
 
 <head>
 
-<title>레시피 등록</title>
+<title>레시피 수정</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -28,8 +28,9 @@ body {
 
 <body>
 
-	<form action="/recipe/regist.do" method="post"
+	<form action="/recipe/modify.do" method="post"
 		enctype="multipart/form-data">
+		<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
 		<div class="container-lg align-items-center">
 			<div class="container-lg col-sm-12 row align-items-center p-0">
 
@@ -51,7 +52,10 @@ body {
 							style="background-color: gray; border-radius: 10px;">
 						</label> <input type="file" id="input-file" style="display: none"
 							accept="image/jpeg, image/png, image/jpg" name="mainPicture"
-							class="isFile" onchange="loadFile(event)" required="required" />
+							class="isFile" onchange="loadFile(event)" />
+							<!-- 수정 전 이미지이름 전송 -->
+							<input type="hidden" name="mainPicRename" value="${recipe.mainPicRename }">
+							<input type="hidden" name="mainPic" value="${recipe.mainPic }">
 
 
 					</div>
@@ -141,8 +145,9 @@ body {
 				<div class=" row m-0 mt-3 mb-3  p-0 ">
 					<div class="form-floating">
 						<input type="text" class="form-control" id="" maxlength="30"
-							name="recipeInfo"  value ="${recipe.recipeInfo}"required="required"> <label
-							for="floatingInput"> 간단한소개 (30자 미만)</label>
+							name="recipeInfo" value="${recipe.recipeInfo}"
+							required="required"> <label for="floatingInput">
+							간단한소개 (30자 미만)</label>
 					</div>
 				</div>
 
@@ -156,23 +161,27 @@ body {
 						<div class="row col-md-6 col-12 float-start p-3 me-1">
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-								<c:if test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>	name="material"> <label for="floatingInput">재료명</label>
+									<c:if test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>
+									name="material"> <label for="floatingInput">재료명</label>
 							</div>
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-								<c:if  test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>	name="amount"> <label for="floatingInput">재료수량</label>
+									<c:if  test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>
+									name="amount"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
 						<div class="row col-md-6 col-12 float-start p-3 ms-1">
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-								<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).material }"</c:if>	name="material"> <label for="floatingInput">재료명</label>
+									<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).material }"</c:if>
+									name="material"> <label for="floatingInput">재료명</label>
 							</div>
 
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-								<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).amount }"</c:if>	name="amount"> <label for="floatingInput">재료수량</label>
+									<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).amount }"</c:if>
+									name="amount"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
@@ -185,23 +194,27 @@ body {
 							<div class="row col-md-6 col-12 float-start p-3 me-1">
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-									<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).material }"</c:if>	name="material"> <label for="floatingInput">재료명</label>
+										<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).material }"</c:if>
+										name="material"> <label for="floatingInput">재료명</label>
 								</div>
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-									<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).amount }"</c:if>	name="amount"> <label for="floatingInput">재료수량</label>
+										<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).amount }"</c:if>
+										name="amount"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
 							<div class="row col-md-6 col-12 float-start p-3 ms-1">
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-									<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).material }"</c:if>		name="material"> <label for="floatingInput">재료명</label>
+										<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).material }"</c:if>
+										name="material"> <label for="floatingInput">재료명</label>
 								</div>
 
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-									<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).amount }"</c:if>		name="amount"> <label for="floatingInput">재료수량</label>
+										<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).amount }"</c:if>
+										name="amount"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
@@ -210,23 +223,27 @@ body {
 								<div class="row col-md-6 col-12 float-start p-3 me-1">
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-										<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).material }"</c:if>	name="material"> <label for="floatingInput">재료명</label>
+											<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).material }"</c:if>
+											name="material"> <label for="floatingInput">재료명</label>
 									</div>
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-										<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).amount }"</c:if>	name="amount"> <label for="floatingInput">재료수량</label>
+											<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).amount }"</c:if>
+											name="amount"> <label for="floatingInput">재료수량</label>
 									</div>
 								</div>
 
 								<div class="row col-md-6 col-12 float-start p-3 ms-1">
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-										<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>		name="material"> <label for="floatingInput">재료명</label>
+											<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>
+											name="material"> <label for="floatingInput">재료명</label>
 									</div>
 
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-										<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>		name="amount"> <label for="floatingInput">재료수량</label>
+											<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>
+											name="amount"> <label for="floatingInput">재료수량</label>
 
 									</div>
 
@@ -249,10 +266,10 @@ body {
 			<div class="recipeDetail container row">
 				<!-- 여기서부터 레시피 설명-->
 				<!-- 레시피step forEach문시작 -->
-				<c:forEach items="${rsList }" var="rStep">
-					<div>
 						<hr>
-						<div class="row container p-3 float-start col-md-6 p-2">
+				<c:forEach items="${rsList }" var="rStep">
+					<div class="REdetailC" id="REdetail">
+						<div class="row container p-3 float-start col-md-6 p-2 " id="">
 
 							<div class="form-floating col-md-12 p-0 pt-3">
 								<textarea class="form-control" name="recipeDescription"
@@ -271,9 +288,10 @@ body {
 							<div
 								class="col-md-5 col-sm-12 container-lg align-items-center m-0">
 								<div class="row col-md-4 col-sm-12  align-items-center">
+						<!-- 이미지 삭제 아이콘 -->
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-x-circle-fill float-end"
-										onclick="PicDel(this)">
+										onclick="PicDel(this, '${rStep.recipePicRename }', ${recipe.recipeNo })">
 							<path
 											d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
 						  </svg>
@@ -283,7 +301,7 @@ body {
 										<c:if test="${rStep.recipePicRename  ne null }">
 									src="/resources/recipeImg/${rStep.recipePicRename }"</c:if>
 										style="background-color: gray; border-radius: 10px;"> <input
-										type="file" name="recipePicture" class="isFile"
+										type="file" name="recipePicModify" class="isFile"
 										style="display: none"
 										accept="image/jpeg, image/png, image/jpg"
 										onchange="imgView(this);">
@@ -294,9 +312,12 @@ body {
 							</div>
 						</div>
 					</div>
+				<input type="text" name="recipePicRename" value="${rStep.recipePicRename}" style="display:none">
+				<input type="text" name="recipePic" value="${rStep.recipePic}" style="display:none">
 				</c:forEach>
 				<!-- 레시피step foreach문 종료 -->
 				<!-- 레시피 한블럭 설명종료 -->
+				<span id="addplace"></span>
 
 			</div>
 			<!-- 레시피 종료 -->
@@ -352,23 +373,24 @@ body {
 		///설명 추가/삭제////
 		var detailForm = document.querySelector('#REdetail');
 		var addplace = document.querySelector('#addplace');
-		var count = 3;
+		var count = document.querySelectorAll('.REdetailC').length+1;
+		var firstCount = document.querySelectorAll('.REdetailC').length+1;
 		function addDe() {
 			if (count <= 10) {
+				count++;
 				addplace.appendChild(detailForm.cloneNode(true));
 				document.querySelectorAll('.REdetailC')[document
 						.querySelectorAll('.REdetailC').length - 1].childNodes[1].childNodes[1].childNodes[1].value = "";
 				document.querySelectorAll('.REdetailC')[document
-						.querySelectorAll('.REdetailC').length - 1].childNodes[5].childNodes[1].childNodes[1].childNodes[3].childNodes[3].value = "";
+					.querySelectorAll('.REdetailC').length - 1].childNodes[5].childNodes[1].childNodes[1].childNodes[5].childNodes[1].src = "";
 
-				count++;
 			}
 
 		}
 
 		function removeDe() {
 			var detailFormClass = document.querySelectorAll('.REdetailC');
-			if (count > 3) {
+			if (count > firstCount) {
 				detailFormClass[detailFormClass.length - 1].remove();
 				count--;
 			}
@@ -390,7 +412,7 @@ body {
 		var fileSize;
 		function checkMainPic() {
 			if (imgFile[0].value == "") {
-				alert("대표사진은 필수입니다!");
+				alert("대표 이미지를 새로 설정하지 않으면 이미지가 그대로 출력됩니다");
 
 			}
 		};
@@ -417,7 +439,7 @@ body {
 
 			imgid.src = URL.createObjectURL(event.target.files[0]);
 			imgid.onload = function() {
-				URL.revokeObjectURL(imgid.src) // free memory
+				URL.revokeObjectURL(imgid.src); // free memory
 
 			}
 			imgCheck()
@@ -429,11 +451,19 @@ body {
 			output.removeAttribute('src');
 		}
 
-		function PicDel(obj) {
+		function PicDel(obj,picName,recipeNo) {
 			var imgfiles = obj.nextElementSibling.childNodes[1];
 			var imgfilesinput = obj.nextElementSibling.childNodes[3];
-			imgfilesinput.value = "";
-			imgfiles.removeAttribute('src');
+			if(imgfiles.src == null || imgfiles.src ==''){
+				alert("삭제할 이미지가 없습니다")
+			}else{
+				if(confirm("이미지를 삭제하시겠습니까? 삭제하면 복구할수 없고 현재페이지가 새로고침됩니다")){
+					event.preventDefault()
+				imgfilesinput.value = "";
+				imgfiles.removeAttribute('src');
+				location.href = "/recipe/imgRemove.do?picName="+picName+"&recipeNo="+recipeNo
+				}
+			}
 
 		}
 	</script>
