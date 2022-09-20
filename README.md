@@ -49,6 +49,8 @@ index.html을 통해 실행 해주세요.
 
 <br>
 
+일일계획서 작성 사이트
+https://docs.google.com/spreadsheets/d/1U_QEq_8Gy_WRX_6O0GXi4yimMOE8OO678oiAk7Hg2qU/edit#gid=1014652713
 <!--Readme 참고 사이트-->
 <!--https://github.com/n0hack/readme-template/blob/main/README.md-->
 <!--https://github.com/n0hack/readme-template-->
