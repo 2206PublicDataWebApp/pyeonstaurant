@@ -138,23 +138,23 @@ body {
 						<div class="row col-md-6 col-12 float-md-start p-3 me-1">
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-									name="material"> <label for="floatingInput">재료명</label>
+									name="material" onblur="materialCheck(this);"> <label for="floatingInput" >재료명</label>
 							</div>
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-									name="amount"> <label for="floatingInput">재료수량</label>
+									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
 						<div class="row col-md-6 col-12 float-md-start p-3 ms-1">
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-									name="material"> <label for="floatingInput">재료명</label>
+									name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 							</div>
 
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-									name="amount"> <label for="floatingInput">재료수량</label>
+									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
@@ -167,23 +167,23 @@ body {
 							<div class="row col-md-6 col-12 float-md-start p-3 me-1">
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-										name="material"> <label for="floatingInput">재료명</label>
+										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-										name="amount"> <label for="floatingInput">재료수량</label>
+										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
 							<div class="row col-md-6 col-12 float-md-start p-3 ms-1">
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-										name="material"> <label for="floatingInput">재료명</label>
+										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
 
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
-										name="amount"> <label for="floatingInput">재료수량</label>
+										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
@@ -192,23 +192,23 @@ body {
 								<div class="row col-md-6 col-12 float-md-start p-3 me-1">
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-											name="material"> <label for="floatingInput">재료명</label>
+											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-											name="amount"> <label for="floatingInput">재료수량</label>
+											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 									</div>
 								</div>
 
 								<div class="row col-md-6 col-12 float-md-start p-3 ms-1" >
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-											name="material"> <label for="floatingInput">재료명</label>
+											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
 
 									<div class="form-floating col-12  col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
-											name="amount"> <label for="floatingInput">재료수량</label>
+											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 
 									</div>
 
@@ -493,6 +493,22 @@ body {
 			imgfiles.removeAttribute('src');
 
 		}
+		
+		
+		
+		//재료 유효성 검사//
+		var check = /,/
+		
+		function materialCheck(obj){
+			
+				if(check.test(obj.value)){
+					alert(",는 사용할수 없습니다.");
+					obj.value="";
+				
+			}
+			
+		}
+		
 	</script>
 
 

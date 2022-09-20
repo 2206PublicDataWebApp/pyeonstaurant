@@ -162,12 +162,12 @@ body {
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>
-									name="material"> <label for="floatingInput">재료명</label>
+									name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 							</div>
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if  test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>
-									name="amount"> <label for="floatingInput">재료수량</label>
+									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
@@ -175,13 +175,13 @@ body {
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).material }"</c:if>
-									name="material"> <label for="floatingInput">재료명</label>
+									name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 							</div>
 
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).amount }"</c:if>
-									name="amount"> <label for="floatingInput">재료수량</label>
+									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
@@ -195,12 +195,12 @@ body {
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).material }"</c:if>
-										name="material"> <label for="floatingInput">재료명</label>
+										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).amount }"</c:if>
-										name="amount"> <label for="floatingInput">재료수량</label>
+										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
@@ -208,13 +208,13 @@ body {
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).material }"</c:if>
-										name="material"> <label for="floatingInput">재료명</label>
+										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
 
 								<div class="form-floating col-md-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).amount }"</c:if>
-										name="amount"> <label for="floatingInput">재료수량</label>
+										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
@@ -224,12 +224,12 @@ body {
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).material }"</c:if>
-											name="material"> <label for="floatingInput">재료명</label>
+											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).amount }"</c:if>
-											name="amount"> <label for="floatingInput">재료수량</label>
+											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 									</div>
 								</div>
 
@@ -237,13 +237,13 @@ body {
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>
-											name="material"> <label for="floatingInput">재료명</label>
+											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
 
 									<div class="form-floating col-md-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>
-											name="amount"> <label for="floatingInput">재료수량</label>
+											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 
 									</div>
 
@@ -466,6 +466,22 @@ body {
 			}
 
 		}
+		
+		//재료 유효성 검사//
+		var check = /,/
+		
+		function materialCheck(obj){
+			
+				if(check.test(obj.value)){
+					alert(",는 사용할수 없습니다.");
+					obj.value="";
+				
+			}
+			
+		}
+		
+		
+		
 	</script>
 
 
