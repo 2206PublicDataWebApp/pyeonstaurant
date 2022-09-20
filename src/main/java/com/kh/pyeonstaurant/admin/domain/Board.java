@@ -1,4 +1,4 @@
-package com.kh.pyeonstaurant.board.domain;
+package com.kh.pyeonstaurant.admin.domain;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -10,8 +10,7 @@ public class Board {
 	public Board() {
 		
 	}
-	
-	
+
 	public Board(String memberEmail, String boardTitle) {
 		this.memberEmail = memberEmail;
 		this.boardTitle = boardTitle;
@@ -35,8 +34,5 @@ public class Board {
 	public String toString() {
 		return "BoardAdmin [memberEmail=" + memberEmail + ", boardTitle=" + boardTitle + "]";
 	}
-	
-	
-	
-
 }
+

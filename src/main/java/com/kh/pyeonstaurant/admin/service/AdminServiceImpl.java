@@ -1,11 +1,13 @@
 package com.kh.pyeonstaurant.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.pyeonstaurant.admin.domain.Board;
 import com.kh.pyeonstaurant.admin.store.AdminStore;
 
 @Service
@@ -31,6 +33,18 @@ public class AdminServiceImpl implements AdminService{
 		return mList;
 	}
 	
+	@Override
+	public int getTotalCount(Board board) {
+		int totalCount = mStore.selectTotalCount(session, board);
+		return totalCount;
+	}
+
+	@Override
+	public List<Board> searchBoard(HashMap<String, String> paraMap) {
+		List<Board> bList = mStore.searchBoard(session, paraMap);
+		return bList;
+	}
+
 	
 	
 }

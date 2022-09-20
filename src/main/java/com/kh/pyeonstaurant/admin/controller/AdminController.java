@@ -15,11 +15,32 @@ import com.kh.pyeonstaurant.admin.service.AdminService;
 
 
 
+
 @Controller
 public class AdminController {
 	@Autowired
 	private AdminService mService;
+
 	
+	@RequestMapping(value="/admin/boardList", method=RequestMethod.GET)
+	public String listBoardAdmin() {
+		return "admin/boardAdminView";
+	}	
+	
+	//나중에 레시피 조회 합칠때 사용
+//	@RequestMapping(value= {"/recipe/recipeList.do", "/board/boardList.do"} , method = RequestMethod.GET)
+//	public ModelAndView RecipeList(ModelAndView mv) {
+//		try {
+//		List<Recipe> rList = rService.printRecipeList(0,0);
+//		mv.addObject("rList", rList);
+//		mv.setViewName("/recipe/recipeList");
+//		mv.setViewName("/admin/boardAdminView");
+//		}catch (Exception e) {
+//			mv.addObject("msg", e.getMessage());
+//			mv.setViewName("common/error");
+//		}
+//		return mv;
+//	}
 	@RequestMapping(value="/admin/memberAdminList", method=RequestMethod.GET)
 	public String listMemberAdmin() {
 		return "admin/memberAdminView";

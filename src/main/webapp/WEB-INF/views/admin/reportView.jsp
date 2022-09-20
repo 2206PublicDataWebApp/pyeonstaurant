@@ -141,7 +141,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
       </div>
-	  <h2>게시물 관련 신고</h2>
+	  <h3>게시물 관련 신고</h3>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -178,7 +178,7 @@
 				</tr>
 			</c:if>
         </table>
-		<h2>댓글 관련 신고</h2>
+		<h3>댓글 관련 신고</h3>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>

@@ -13,7 +13,7 @@
 		<typeAlias type="com.kh.pyeonstaurant.myrecipe.domain.MyRecipe" alias="MyRecipe"/>
 		<typeAlias type="com.kh.pyeonstaurant.report.domain.Report" alias="Report"/>
 		<typeAlias type="com.kh.pyeonstaurant.admin.domain.Admin" alias="Admin"/>
-		<typeAlias type="com.kh.pyeonstaurant.board.domain.Board" alias="Board"/>
+		<typeAlias type="com.kh.pyeonstaurant.admin.domain.Board" alias="Board"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/myRecipe-mapper.xml"/>
