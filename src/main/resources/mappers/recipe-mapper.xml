@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="RecipeMapper">
 
+	
 	<insert id="insertRecipe">
 
 		insert into recipe_tbl
@@ -25,6 +26,54 @@
 		insert into recipe_tag
 		values(seq_recipe_no.currval,#{jmt},#{healthy},#{goodSpicy},#{full},#{soSpicy},#{sweet},#{easy},#{party})
 	</insert>
+	
+	<insert id="insertRecipeMaterialPlus">
+	insert into recipe_material
+		values(#{materialOrder},#{recipeNo},#{material},#{amount})
+	</insert>
+	
+	<insert id="insertRstepPlus">
+	insert into recipe_step values(#{recipeOrder},#{recipeNo},#{recipeDescription},#{recipePic},#{recipePicRename})
+	
+	</insert>
+	
+	<update id="deleteOneImg">
+		update recipe_step set RECIPE_PICTURE = null, RECIPE_PIC_RENAME=null where RECIPE_PIC_RENAME = #{picName}
+	</update>
+	
+	<update id="deleteRecipe">
+		update recipe_tbl set RECIPE_STATUS = 'N' where RECIPE_NO = #{recipeNo}
+	</update>
+
+<update id = "updateOneRecipe">
+	update recipe_tbl set RECIPE_NAME = #{recipeName}, RECIPE_INFO = #{recipeInfo}, MAIN_PICTURE = #{mainPic}, RECIPE_CATEGORY= #{recipeCategory},
+	RECIPE_VIDEO = #{recipeVideo}, MAIN_PIC_RENAME = #{mainPicRename}, RECIPE_TIME = #{recipeTime}, UPDATE_DATE = default
+	where RECIPE_NO = #{recipeNo}
+</update>
+
+<update id = "updateOneStep">
+	update recipe_step set recipe_Description = #{recipeDescription}, RECIPE_PICTURE = #{recipePic}, RECIPE_PIC_RENAME= #{recipePicRename}
+	where RECIPE_NO = #{recipeNo} and RECIPE_ORDER = #{recipeOrder}
+</update>
+
+<update id = "updateOneMaterial">
+	update recipe_material set MATERIAL = #{material}, AMOUNT = #{amount}
+	where RECIPE_NO = #{recipeNo} and MATERIAL_ORDER = #{materialOrder}
+</update>
+
+<update id = "updateOneTag">
+	update recipe_tag set jmt = #{jmt}, healthy = #{healthy}, goodSpicy = #{goodSpicy}, full = #{full},soSpicy = #{soSpicy}, sweet = #{sweet},easy = #{easy},party = #{party}
+	where RECIPE_NO = #{recipeNo}
+</update>
+
+<delete id="deleteOneMaterial">
+	delete recipe_material  where RECIPE_NO = #{recipeNo} and MATERIAL_ORDER = #{materialOrder}
+	
+</delete>
+
+
+
+
 
 	<resultMap type="Recipe" id="recipeResultMap">
 		<id property="recipeNo" 			column="RECIPE_NO" />
@@ -61,6 +110,10 @@
 	<select id="selectOneRMaterial" resultMap="RecipeMaterialResultMap">
 		select * from recipe_material where RECIPE_NO = #{recipeNo}order by MATERIAL_ORDER
 	</select>
+	
+	<select id="countMaterial" resultType="_int">
+		select count(*) from recipe_material where RECIPE_NO = #{recipeNo}
+	</select>
 
 	<resultMap type="RecipeTag" id="RecipeTagResultMap">
 		<id property="recipeNo" 		column="recipeNo" />
@@ -79,7 +132,7 @@
 	</select>
 
 	<resultMap type="RecipeStep" id="RecipeStepResultMap">
-		<id property="recipeNo" 				column="recipeNo" />
+		<id property="recipeNo" 				column="recipe_No" />
 		<result property="recipeOrder" 			column="RECiPE_ORDER" />
 		<result property="recipeDescription"	column="RECIPE_DESCRIPTION" />
 		<result property="recipePic" 			column="RECIPE_PICTURE" />
@@ -89,8 +142,6 @@
 	<select id="selectOneRStep" resultMap="RecipeStepResultMap">
 		select * from recipe_Step where recipe_no = #{recipeNo} order by RECIPE_ORDER
 	</select>
-
-
 
 
 
