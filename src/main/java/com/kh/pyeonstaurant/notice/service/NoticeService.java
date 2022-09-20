@@ -12,4 +12,12 @@ public interface NoticeService {
 
 	public List<Notice> printAllNotice(int currentPage, int noticeLimit);
 
+	public List<Notice> printAllByValue(String searchCondition, String searchValue, int currentPage, int noticeLimit);
+
+	public int removeOneByNo(int noticeNo);
+
+	public Notice printOneByNo(Integer noticeNo);
+
+	public int modifynotice(Notice notice);
+
 }

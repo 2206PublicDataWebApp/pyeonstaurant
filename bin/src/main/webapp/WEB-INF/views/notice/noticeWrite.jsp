@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>첨부파일</td>
-            <td><input type="file" name="uploadFile"></td>
+            <td><input type="file" name="uploadFile1"></td>
         </tr>
 <!--         <tr> -->
 <!--             <td>첨부파일</td> -->

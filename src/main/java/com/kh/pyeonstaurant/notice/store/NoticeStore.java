@@ -14,4 +14,13 @@ public interface NoticeStore {
 
 	public List<Notice> selectAllBoard(SqlSession session, int currentPage, int noticeLimit);
 
+	public List<Notice> selectAllByValue(SqlSession session, String searchCondition, String searchValue,
+			int currentPage, int noticeLimit);
+
+	public int deleteOneByNo(SqlSession session, int noticeNo);
+
+	public Notice selectOneByNo(SqlSession session, Integer noticeNo);
+
+	public int updateNotice(SqlSession session, Notice notice);
+
 }

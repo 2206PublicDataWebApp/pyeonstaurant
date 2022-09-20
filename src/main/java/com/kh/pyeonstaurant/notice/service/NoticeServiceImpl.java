@@ -38,4 +38,34 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 
+	@Override
+	public List<Notice> printAllByValue(String searchCondition, String searchValue, int currentPage, int noticeLimit) {
+		List<Notice> nList 
+		= nStore.selectAllByValue(session, searchCondition, searchValue
+				, currentPage, noticeLimit);
+		return nList;
+	}
+
+
+	@Override
+	public int removeOneByNo(int noticeNo) {
+		int result = nStore.deleteOneByNo(session, noticeNo);
+		return result;
+	}
+
+
+	@Override
+	public Notice printOneByNo(Integer noticeNo) {
+		Notice notice = nStore.selectOneByNo(session, noticeNo);
+		return notice;
+	}
+
+
+	@Override
+	public int modifynotice(Notice notice) {
+		int result = nStore.updateNotice(session, notice);
+		return result;
+	}
+
+
 }

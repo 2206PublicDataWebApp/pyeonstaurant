@@ -6,9 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -106,5 +108,140 @@ public class NoticeController {
 		}
 		mv.setViewName("notice/listView");
 		return mv;
+	}
+	
+	@RequestMapping(value="/notice/search", method=RequestMethod.GET)
+	public ModelAndView noticeSearchList(
+			ModelAndView mv
+			, @RequestParam("searchCondition") String searchCondition
+			, @RequestParam("searchValue") String searchValue
+			, @RequestParam(value="page", required=false) Integer page) {
+				try {
+					int currentPage = (page != null) ? page : 1;
+					int totalCount = nService.getTotalCount(searchCondition, searchValue);
+					int noticeLimit = 10;
+					int naviLimit = 5;
+					int maxPage;
+					int startNavi;
+					int endNavi;
+					maxPage = (int)((double)totalCount/noticeLimit + 0.9);
+					startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+					endNavi = startNavi + naviLimit - 1;
+					if(maxPage < endNavi) {
+						endNavi = maxPage;
+					}
+					List<Notice> nList = nService.printAllByValue(
+							searchCondition, searchValue, currentPage, noticeLimit);
+					if(!nList.isEmpty()) {
+						mv.addObject("nList", nList);
+					}else {
+						mv.addObject("nList", null);
+					}
+					mv.addObject("urlVal", "search");
+					mv.addObject("searchCondition", searchCondition);
+					mv.addObject("searchValue", searchValue);
+					mv.addObject("maxPage", maxPage);
+					mv.addObject("currentPage", currentPage);
+					mv.addObject("startNavi", startNavi);
+					mv.addObject("endNavi", endNavi);
+					mv.setViewName("notice/listView");
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+		return mv;
+		
+	}
+	
+	@ RequestMapping(value="/notice/remove", method=RequestMethod.GET)
+	public String noticeRemove(
+			HttpSession session
+			, Model model
+			, @RequestParam("page") Integer page) {
+		try {
+			int noticeNo = (int)session.getAttribute("noticeNo");
+			int result = nService.removeOneByNo(noticeNo);
+			if(result > 0) {
+				session.removeAttribute("noticeNo");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/notice/list?page="+page;
+	}
+
+	
+	@RequestMapping(value="/notice/detail", method=RequestMethod.GET)
+	public ModelAndView detailNotice(ModelAndView mv
+			, @RequestParam("noticeNo") Integer noticeNo
+			, @RequestParam("page") Integer page
+			, HttpSession session) {
+		try {
+			Notice notice = nService.printOneByNo(noticeNo);
+			session.setAttribute("noticeNo", notice.getNoticeNo());
+			// 세션에 noticeNo 저장 -> 삭제하기 위해서
+			mv.addObject("notice", notice);
+			mv.addObject("page", page);
+			mv.setViewName("notice/detailView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+		
+	}
+	
+	@RequestMapping(value="/notice/modifyView", method=RequestMethod.GET)
+	public ModelAndView noticeModifyView(
+			ModelAndView mv
+			,@RequestParam("noticeNo") Integer noticeNo
+			,@RequestParam("page") int page) {
+		try {
+			Notice notice = nService.printOneByNo(noticeNo);
+			mv.addObject("notice", notice);
+			mv.addObject("page", page);
+			mv.setViewName("notice/modifyView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/notice/modify", method=RequestMethod.POST)
+	public ModelAndView modifyNotice(
+			@ModelAttribute Notice notice
+			, ModelAndView mv
+			,@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile
+			,@RequestParam("page") Integer page
+			,HttpServletRequest request) {
+		try {
+		
+		if(reloadFile != null) {
+			String noticeFilename = reloadFile.getOriginalFilename();
+			// 수정, 1. 대체(replace) / 2. 삭제 후 저장
+			// 파일삭제
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String savedPath = root + "\\buploadFiles";
+			//notice bOne = bService.printOneByNo(notice.getnoticeNo());
+			File file = new File(savedPath + "\\" + notice.getNoticeFileRename());
+			if(file.exists()) {
+				file.delete();
+			}
+			// 파일 다시 저장
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String noticeFileRename = sdf.format(new Date(System.currentTimeMillis()))
+					+ "." + noticeFilename.substring(noticeFilename.lastIndexOf(".")+1);
+			String noticeFilepath = savedPath + "\\" + noticeFileRename;
+			reloadFile.transferTo(new File(noticeFilepath));
+			notice.setNoticeFilename(noticeFilename);
+			notice.setNoticeFileRename(noticeFileRename);
+			notice.setNoticeFilepath(noticeFilepath);
+		}
+		int result = nService.modifynotice(notice);
+		mv.setViewName("redirect:/notice/list?page="+page);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	return mv;
+		
 	}
 }

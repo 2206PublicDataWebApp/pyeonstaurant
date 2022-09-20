@@ -21,8 +21,7 @@
 			<c:forEach items="${nList }" var="notice" varStatus="i">
 				<tr>
 					<td>${i.count }</td>
-					<td><a href="/notice/detail?noticeNo=${notice.noticeNo }&page=${currentPage }">${notice.noticeTitle }</a></td>
-					<td>${notice.noticeDate }</td>
+					<td><a href="/notice/detail.kh?noticeNo=${notice.noticeNo }&page=${currentPage }">${notice.noticeTitle }</a></td>
 					<td>
 						<c:if test="${!empty notice.noticeFilename }">
 							O
@@ -31,9 +30,6 @@
 							X
 						</c:if>
 					</td>
-<!-- 					<form action="/notice/remove" method="get"> -->
-<!-- 					<td><input type="submit" value="삭제"></td> -->
-<!-- 					</form> -->
 				</tr>
 			</c:forEach>
 			<tr align="center" height="20">
@@ -62,7 +58,7 @@
 		</c:if>
 		<tr>
 			<td colspan="5" align="center">
-				<form action="/notice/search" method="get">
+				<form action="/notice/search.kh" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
 						<option value="title" <c:if test="${searchCondition eq 'title' }">selected</c:if>>제목</option>
