@@ -40,7 +40,7 @@ public interface RecipeStore {
 
 	public int countRecommand(SqlSessionTemplate session, int recipeNo); 
 
-	public List<RecipeComment> selectRecipeCommentList(int currentPage, int limit,SqlSessionTemplate session);
+	public List<RecipeComment> selectRecipeCommentList(int currentPage, SqlSessionTemplate session);
 
 	public int insertRecommand(Recommandation recommand,SqlSessionTemplate session);
 
@@ -58,7 +58,6 @@ public interface RecipeStore {
 	public int deleteOneRecipe(SqlSessionTemplate session,int redipeNo);
 
 	public int deleteOneImg(SqlSessionTemplate session, String picName); 
-
 
 
 

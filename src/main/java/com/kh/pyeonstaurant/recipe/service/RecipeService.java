@@ -21,7 +21,7 @@ public interface RecipeService {
 
 	public int registMaterial(List<RecipeMaterial> rmList) ;
 	
-	public List<RecipeComment> printRecipeCommentList(int currentPage,int limit);
+	public List<RecipeComment> printRecipeCommentList(int recipeNo);
 
 	public int checkRecommand(int recipeNo, String memberEmail);
 
@@ -56,7 +56,6 @@ public interface RecipeService {
 	public RecipeTag printOneRecipeTag(int recipeNo)  ;
 
 	public int removeOneImg(String picName);
-
 
 
 }

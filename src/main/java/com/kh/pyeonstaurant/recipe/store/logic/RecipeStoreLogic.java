@@ -119,10 +119,12 @@ public class RecipeStoreLogic implements RecipeStore {
 		return 0;
 	}
 
+	/**레시피 코멘트 출력*/
 	@Override
-	public List<RecipeComment> selectRecipeCommentList(int currentPage, int limit, SqlSessionTemplate session) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecipeComment> selectRecipeCommentList(int recipeNo, SqlSessionTemplate session) {
+		List<RecipeComment> rcList = session.selectList("RecipeMapper.selectCommentList", recipeNo);
+		
+		return  rcList;
 	}
 
 	@Override

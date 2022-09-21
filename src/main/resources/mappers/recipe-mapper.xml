@@ -143,6 +143,35 @@
 		select * from recipe_Step where recipe_no = #{recipeNo} order by RECIPE_ORDER
 	</select>
 
+<!--  레시피 코멘트 영역-->
+
+
+<resultMap type="RecipeComment" id="RecipeCommentResultMap">
+		<id property="commentNo" 				column="COMMENT_NO" />
+		<result property="commentDate"			column="COMMENT_DATE" />
+		<result property="commentContents" 		column="COMMNET_CONTENTS" />
+		<result property="recipeNo" 			column="RECIPE_NO" />
+		<result property="memberEmail"			column="MEMBER_EMAIL" />
+	</resultMap>
+
+
+<insert id="insertRecipeComment">
+insert into recipe_comment values(seq_r_comment_no.nextval, default, #{commentContents},#{recipeNo}, #{memberEmail} )
+</insert>
+
+<delete id="deleteOneRecipeComment">
+delete recipe_comment where COMMENT_NO= #{commentNo}
+</delete>
+	
+<update id="updateOneComment">
+update recipe_comment set COMMNET_CONTENTS=#{commentContents} where COMMENT_NO = #{commentNo}
+</update>
+	
+	
+	
+<select id="selectCommentList" resultMap="RecipeCommentResultMap">
+select * from recipe_comment where RECIPE_NO = #{recipeNo} order by COMMENT_NO
+</select>
 
 
 

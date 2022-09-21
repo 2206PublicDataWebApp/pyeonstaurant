@@ -62,9 +62,9 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public List<RecipeComment> printRecipeCommentList(int currentPage, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecipeComment> printRecipeCommentList(int recipeNo) {
+		List<RecipeComment> rcList = rStore.selectRecipeCommentList(recipeNo, session);
+		return rcList;
 	}
 
 	@Override
