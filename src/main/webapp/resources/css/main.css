@@ -29,7 +29,8 @@ header {
   height: 50px;
   width: 100%;
   padding: 12px 56px;
-  background-color: #fff;
+  background-color: #FFFFFF;
+  z-index: 999;
 }
 
 header h1 {
@@ -59,7 +60,8 @@ nav {
   height: 50px;
   width: 100%;
   padding: 12px 56px;
-  background-color: #fff;
+  background-color: #FFFFFF;
+  z-index: 999;
 }
 
 nav > ul {
@@ -80,6 +82,7 @@ main {
 	position: relative;
 	height: 1200px;
 	width: 100%;
+	padding-top: 100px;
 	padding-bottom: 102px;
 }
 

@@ -8,12 +8,12 @@
 	</settings>
 	<typeAliases>
 		<!-- 이런 형식으로 넣어주세요 -->
-		<!-- <typeAlias type="com.kh.junspring.member.domain.Member" alias="Member"/> -->
+		<typeAlias type="com.kh.pyeonstaurant.member.domain.Member" alias="Member"/>
 		<!-- <typeAlias type="com.kh.junspring.board.domain.Board" alias="Board"/>-->
 	</typeAliases>
 	<mappers>
 		<!-- 이런 형식으로 넣어주세요 -->
-		<!-- <mapper resource="mappers/member-mapper.xml"/> -->
+		<mapper resource="mappers/member-mapper.xml"/>
 		<!-- <mapper resource="mappers/board-mapper.xml"/> -->
 	</mappers>
 </configuration>

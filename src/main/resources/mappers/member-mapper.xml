@@ -5,7 +5,7 @@
 <mapper namespace="MemberMapper">
 	<resultMap type="Member" id="memberResultMap">
 		<id 	property="memberEmail" 	column="MEMBER_EMAIL"/>
-		<result property="memberPwd" 	column="MEMBER_PWD"/>
+		<result property="memberPwd" 	column="MEMBER_PW"/>
 		<result property="memberNickname" 	column="MEMBER_NICKNAME"/>
 		<result property="adminCheck" 	column="ADMIN_CHECK"/>
 		<result property="totalPoint" 	column="TOTAL_POINT"/>
@@ -21,24 +21,24 @@
 	<update id="updateMemberNickname" parameterType="Member">
 		UPDATE MEMBER_TBL
 		SET MEMBER_NICKNAME = #{memberNickname }
-		WHERE MEMBER_EMAIL = #{memberemail }
+		WHERE MEMBER_EMAIL = #{memberEmail }
 	</update>
 	
 	<update id="updateMemberPwd" parameterType="Member">
 		UPDATE MEMBER_TBL
 		SET MEMBER_PWD = #{memberPwd }
-		WHERE MEMBER_EMAIL = #{memberemail }
+		WHERE MEMBER_EMAIL = #{memberEmail }
 	</update>
 	<delete id="deleteMember">
 		DELETE FROM MEMBER_TBL
-		WHERE MEMBER_EMAIL = #{memberemail } AND MEMBER_PWD = #{memberPwd}
+		WHERE MEMBER_EMAIL = #{memberEmail } AND MEMBER_PW = #{memberPwd}
 	</delete>
 	<select id="selectLoginOne" resultMap="memberResultMap">
-		SELECT MEMBER_NICKNAME, ADIMIN_CHECK FROM MEMBER_TBL
-		WHERE MEMBER_EMAIL = #{memberemail } AND MEMBER_PWD = #{memberPwd}
+		SELECT MEMBER_NICKNAME, ADMIN_CHECK FROM MEMBER_TBL
+		 WHERE MEMBER_EMAIL = #{memberEmail } AND MEMBER_PW = #{memberPwd }
 	</select>
 	<select id="selectOneByEmail" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
-		WHERE MEMBER_EMAIL = #{memberemail }
+		WHERE MEMBER_EMAIL = #{memberEmail }
 	</select>
 </mapper>
