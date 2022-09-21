@@ -363,7 +363,7 @@ padding:0.5em;
 				<input type="submit" value="수정" onclick="checkMainPic();" class="button btn btn-outline-primary" >
 				</div>
 				<div class="col-md-6">
-				<button class="button btn btn-outline-primary" type="button">취소</button>
+				<button class="button btn btn-outline-primary" type="button"  onclick="location.href='/recipe/detail.do?recipeNo=${recipe.recipeNo }'">취소</button>
 				</div>
 			</div>
 </article><!-- 버튼영역 종료 -->
