@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/join.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
     <header>
@@ -82,7 +82,9 @@
                     <div class="input-boxes">
                       <div class="input-box">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" name="memberEmail" placeholder="Enter your email" required>
+                        <input type="text" name="memberEmail" id="email" placeholder="Enter your email" required>
+                        <button type="button" id="email_auth_btn" class="email_auth_btn">인증번호 받기</button>
+                        <input type="text" placeholder="인증번호 입력" id="email_auth_key">
                       </div>
                       
                       <!--
@@ -120,6 +122,8 @@
         <a href="#" class="store-icon"><img src="/resources/images/store.png"></a>
         <a href="#"><img src="/resources/images/chat.png"></a>
     </div>
+    
 	<script src="/resources/js/join.js"></script>
+
 </body>
 </html>
