@@ -7,10 +7,5 @@
 		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
 		<result property="boardTitle" 	column="RECIPE_NAME"/>
 	</resultMap>
-	
-	<select id="selectBoardList" parameterType="HashMap" resultMap="BoardAdminResultMap">
-		SELECT MEMBER_EMAIL, RECIPE_NAME FROM RECIPE_TBL 
-		WHERE $(colName) LIKE '%' || #(searchWord) ||'%' 
-		ORDER BY NO DESC
-	</select>
+
   </mapper>

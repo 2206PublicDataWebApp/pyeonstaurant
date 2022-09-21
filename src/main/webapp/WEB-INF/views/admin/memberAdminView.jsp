@@ -141,62 +141,110 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
       </div>
+<!--       <form action="/admin/memberSearch" method="post"> -->
+<!--            <table align="center"> -->
+<!--             <tr> -->
+<!--                 <td>검색어</td> -->
+<!--                 <td> -->
+<!--                 <select> -->
+<!--                     <option selected>아이디</option> -->
+<!--                     <option>닉네임</option> -->
+<!--                   </select> -->
+<!--                 </td> -->
+<!--                <td> <input type="text" placeholder="입력해주세요." name="memberInfo"></td> -->
+<!--                <td><input type="submit" value="검색"></td> -->
+<!--             </tr> -->
+<!--            </table>     -->
+<!--       </form> -->
       <form action="/admin/memberSearch" method="post">
-           <table align="center">
-            <tr>
-                <td>검색어</td>
-                <td>
-                <select>
-                    <option selected>아이디</option>
-                    <option>닉네임</option>
-                  </select>
-                </td>
-               <td> <input type="text" placeholder="입력해주세요." name="memberInfo"></td>
-               <td><input type="submit" value="검색"></td>
-            </tr>
-           </table>    
-      </form>
-
+				<div class="search row">
+					<div class="col-xs-2 col-sm-2">
+						<select name="searchCondition" class="form-control">
+							<option>이메일</option>
+							<option>닉네임</option>
+						</select>
+					</div>
+					 
+					<div class="col-xs-10 col-sm-10">
+						<div class="input-group">
+							<input type="text" placeholder="검색어를 입력해주세요" name="memberInfo" class="form-control">
+							<span class="input-group-btn">
+								<input type="submit" value="검색" class="btn btn-default" >
+							</span>
+						</div>
+					</div>
+				</form>
+	<h3 style="margin-top : 20px">회원 목록</h3>
 
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">아이디</th>
-              <th scope="col">닉네임</th>
-              <th scope="col">포인트</th>
-              <th scope="col">탈퇴</th>
-            </tr>
-          </thead>
-        <c:if test="${!empty mList }">
-	        <c:forEach items="${mList }" var="member" varStatus="i">
-				<tr>
-					<td>${i.count }</td>
-					<td>${member.memberEmail }</td>
-					<td>${member.memberNickName }</td>
-					<td>${member.totalPoint }</td>
-               		<td scope="col"><button><a href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a></button></td>             	
-				</tr>
-			</c:forEach>
-		</c:if>
-			<c:if test="${!empty mList }">
-				<tr align="center" height="20">
-					<td colspan="6"><c:if test="${currentPage != 1 }">
-							<a href="/admin/memberSearch?page=${currentPage - 1 }">[이전]</a>
-						</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-							<c:if test="${currentPage eq p }">
-								<b>${p }</b>
-							</c:if>
-							<c:if test="${currentPage ne p }">
-								<a href="/admin/memberSearch?page=${p }">${p }</a>
-							</c:if>
-						</c:forEach> <c:if test="${maxPage > currentPage }">
-							<a href="/admin/memberSearch?page=${currentPage + 1 }">[다음]</a>
-						</c:if></td>
-				</tr>
-			</c:if>
-		</table>
+       <table class="table" style="text-align: center; border: 1px solid #dddddd">
+                <thead>
+                    <tr>
+                        <th style="background-color: #eeeeee; text-align: center;">No</th>
+                        <th style="background-color: #eeeeee; text-align: center;">아이디</th>
+                        <th style="background-color: #eeeeee; text-align: center;">닉네임</th>
+                        <th style="background-color: #eeeeee; text-align: center;">포인트</th>
+                        <th style="background-color: #eeeeee; text-align: center;">탈퇴</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:if test="${!empty aList }">
+                        <c:forEach items="${aList }" var="member" varStatus="i">
+                            <tr>
+                                <td>${i.count }</td>
+                                <td>${member.memberEmail }</td>
+                                <td>${member.memberNickName }</td>
+                                <td>${member.totalPoint }</td>
+                                   <td scope="col"><button><a href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a></button></td>             	
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                        <c:if test="${!empty aList }">
+                            <tr align="center" height="20">
+                                <td colspan="6"><c:if test="${currentPage != 1 }">
+                                        <a href="/admin/memberAdminList?page=${currentPage - 1 }">[이전]</a>
+                                    </c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+                                        <c:if test="${currentPage eq p }">
+                                            <b>${p }</b>
+                                        </c:if>
+                                        <c:if test="${currentPage ne p }">
+                                            <a href="/admin/memberAdminList?page=${p }">${p }</a>
+                                        </c:if>
+                                    </c:forEach> <c:if test="${maxPage > currentPage }">
+                                        <a href="/admin/memberAdminList?page=${currentPage + 1 }">[다음]</a>
+                                    </c:if></td>
+                            </tr>
+                        </c:if>
+                    <c:if test="${!empty mList }">
+                        <c:forEach items="${mList }" var="member" varStatus="i">
+                            <tr>
+                                <td>${i.count }</td>
+                                <td>${member.memberEmail }</td>
+                                <td>${member.memberNickName }</td>
+                                <td>${member.totalPoint }</td>
+                                   <td scope="col"><button><a href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a></button></td>             	
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                        <c:if test="${!empty mList }">
+                            <tr align="center" height="20">
+                                <td colspan="6"><c:if test="${currentPage != 1 }">
+                                        <a href="/admin/memberSearch?page=${currentPage - 1 }">[이전]</a>
+                                    </c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+                                        <c:if test="${currentPage eq p }">
+                                            <b>${p }</b>
+                                        </c:if>
+                                        <c:if test="${currentPage ne p }">
+                                            <a href="/admin/memberSearch?page=${p }">${p }</a>
+                                        </c:if>
+                                    </c:forEach> <c:if test="${maxPage > currentPage }">
+                                        <a href="/admin/memberSearch?page=${currentPage + 1 }">[다음]</a>
+                                    </c:if></td>
+                            </tr>
+                        </c:if>
+
+                </tbody>
+            </table>
       </div>
     </main>
   </div>

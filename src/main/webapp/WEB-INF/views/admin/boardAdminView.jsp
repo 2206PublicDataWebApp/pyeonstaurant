@@ -138,108 +138,102 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">게시판 관리</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
-        </div>
+
       </div>
-      <form action="admin/memberSearch">
-           <table>
-             <tr>
-                <td>이메일</td>
-               <td> <input type="text" placeholder="입력창" name="memberEmail"></td>
-            </tr>
-               <tr>
-                <td>레시피 제목</td>
-               <td> <input type="text" placeholder="입력해주세요." name="boardTitle"></td>
-                </tr>   
-                <tr>
-               <td>작성일</td>
-               <td> <input type="date" placeholder="입력해주세요." name="searchStartDate"></td>
-               <td>~</td>
-               <td> <input type="date" placeholder="입력해주세요." name="searchEndDate"></td>
-               <td><input type="submit" value="검색"></td>
-                </tr>
-            <!-- <tr>
-                <td>분류</td>
-                <td>
-                <select>
-                    <option selected>아이디</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </td>
-            </tr>
-            <tr>
-                <td>가입일</td>
-                <td>
-                <select>
-                    <option selected>아이디</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </td>
-                <td><input type="date"></td>
-                <td>~</td>
-                <td><input type="date"></td>
-            </tr>
-            -->
-           </table>    
-      </form>
+     <form action="/admin/boardSearch" method="post">
+				<div class="search row">
+					<div class="col-xs-2 col-sm-2">
+						<select name="searchCondition" class="form-control">
+							<option>이메일</option>
+							<option>게시글 제목</option>
+							<option>날짜</option>
+						</select>
+					</div>
+					 
+					<div class="col-xs-10 col-sm-10">
+						<div class="input-group">
+							<input type="text" placeholder="검색어를 입력해주세요" name="boardInfo" class="form-control">
+							<span class="input-group-btn">
+								<input type="submit" value="검색" class="btn btn-default" >
+							</span>
+						</div>
+					</div>
+				</form>
 
 
-		<h2>댓글 신고 현황</h2>
+		<h3 style="margin-top : 20px">게시물 목록</h3>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">이름</th>
-              <th scope="col">아이디</th>
-              <th scope="col">닉네임</th>
-              <th scope="col">포인트</th>
-              <form action="admin/removeMember">
-              <th scope="col"><input type="submit" value="삭제"></th>
-              </form>
-            </tr>
-          </thead>
-        <c:if test="${!empty mList }">
-	        <c:forEach items="${mList }" var="member" varStatus="i">
+       <table class="table" style="text-align: center; border: 1px solid #dddddd">
+                <thead>
+                    <tr>
+                        <th style="background-color: #eeeeee; text-align: center;">No</th>
+                        <th style="background-color: #eeeeee; text-align: center;">게시글 제목</th>
+                        <th style="background-color: #eeeeee; text-align: center;">레시피 정보</th>
+                        <th style="background-color: #eeeeee; text-align: center;">레시피 번호</th>
+                        <th style="background-color: #eeeeee; text-align: center;">이메일</th>
+                        <th style="background-color: #eeeeee; text-align: center;">작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:if test="${!empty bList }">
+	        <c:forEach items="${bList }" var="board" varStatus="i">
 				<tr>
 					<td>${i.count }</td>
-					<td>${member.memberName }</td>
-					<td>${member.memberEmail }</td>
-					<td>${member.memberNickName }</td>
-					<td>${member.totalPoint }</td>
-               		<td scope="col"><button><a href="admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a></button></td>             	
+					<td><a href="recipe/detail.do?recipeNo=${recipeNo }">${board.boardTitle }</a></td>   
+					<td>${board.recipeInfo }</td>  
+					<td>${board.recipeNo }</td>  
+					<td>${board.memberEmail }</td>     
+					<td>${board.incertDate }</td> 	
 				</tr>
 			</c:forEach>
 		</c:if>
-			<c:if test="${!empty mList }">
+			<c:if test="${!empty bList }">
 				<tr align="center" height="20">
 					<td colspan="6"><c:if test="${currentPage != 1 }">
-							<a href="/admin/memberSearch?page=${currentPage - 1 }">[이전]</a>
+							<a href="/admin/boardSearch?page=${currentPage - 1 }">[이전]</a>
 						</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
 							<c:if test="${currentPage eq p }">
 								<b>${p }</b>
 							</c:if>
 							<c:if test="${currentPage ne p }">
-								<a href="/admin/memberSearch?page=${p }">${p }</a>
+								<a href="/admin/boardSearch?page=${p }">${p }</a>
 							</c:if>
 						</c:forEach> <c:if test="${maxPage > currentPage }">
-							<a href="/admin/memberSearch?page=${currentPage + 1 }">[다음]</a>
+							<a href="/admin/boardSearch?page=${currentPage + 1 }">[다음]</a>
 						</c:if></td>
 				</tr>
 			</c:if>
-		</table>
+			<c:if test="${!empty aList }">
+	        <c:forEach items="${aList }" var="board" varStatus="i">
+				<tr>
+					<td>${i.count }</td>
+					<td><a href="recipe/detail.do?recipeNo=${recipeNo }">${board.boardTitle }</a></td>   
+					<td>${board.recipeInfo }</td>  
+					<td>${board.recipeNo }</td>  
+					<td>${board.memberEmail }</td>     
+					<td>${board.incertDate }</td> 	
+				</tr>
+			</c:forEach>
+		</c:if>
+			<c:if test="${!empty aList }">
+				<tr align="center" height="20">
+					<td colspan="6"><c:if test="${currentPage != 1 }">
+							<a href="/admin/boardList?page=${currentPage - 1 }">[이전]</a>
+						</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+							<c:if test="${currentPage eq p }">
+								<b>${p }</b>
+							</c:if>
+							<c:if test="${currentPage ne p }">
+								<a href="/admin/boardList?page=${p }">${p }</a>
+							</c:if>
+						</c:forEach> <c:if test="${maxPage > currentPage }">
+							<a href="/admin/boardList?page=${currentPage + 1 }">[다음]</a>
+						</c:if></td>
+				</tr>
+			</c:if>
+
+                </tbody>
+            </table>
       </div>
     </main>
   </div>

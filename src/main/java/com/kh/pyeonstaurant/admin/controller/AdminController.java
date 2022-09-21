@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.pyeonstaurant.admin.domain.Admin;
+import com.kh.pyeonstaurant.admin.domain.Board;
 import com.kh.pyeonstaurant.admin.service.AdminService;
 
 
@@ -20,11 +22,42 @@ import com.kh.pyeonstaurant.admin.service.AdminService;
 public class AdminController {
 	@Autowired
 	private AdminService mService;
-
+	
+//	@RequestMapping(value="/admin/boardView", method=RequestMethod.GET)
+//	public String listBoardView() {
+//		return "admin/boardAdminView";
+//	}
+//	
 	
 	@RequestMapping(value="/admin/boardList", method=RequestMethod.GET)
-	public String listBoardAdmin() {
-		return "admin/boardAdminView";
+	public ModelAndView listBoardAdmin(
+			ModelAndView mv
+			,@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = mService.getAllBoardCount();
+		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		// 23/5 = 4.8 + 0.9 = 5(.7)
+		maxPage = (int)((double)totalCount/boardLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}		
+		List<Board> aList = mService.printAllBoard(currentPage, boardLimit);
+		if(!aList.isEmpty()) {
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("aList", aList);
+		}
+		mv.setViewName("admin/boardAdminView");
+		return mv;
+//		return "admin/boardAdminView";
 	}	
 	
 	//나중에 레시피 조회 합칠때 사용
@@ -42,8 +75,34 @@ public class AdminController {
 //		return mv;
 //	}
 	@RequestMapping(value="/admin/memberAdminList", method=RequestMethod.GET)
-	public String listMemberAdmin() {
-		return "admin/memberAdminView";
+	public ModelAndView listMemberAdmin(
+			ModelAndView mv
+			,@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = mService.getAllMemberCount();
+		int memberLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		// 23/5 = 4.8 + 0.9 = 5(.7)
+		maxPage = (int)((double)totalCount/memberLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}				
+		List<Admin> aList = mService.printAllMember(currentPage, memberLimit);
+		if(!aList.isEmpty()) {
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("aList", aList);
+		}
+		mv.setViewName("admin/memberAdminView");
+		return mv;
+//		return "admin/memberAdminView";
 	}
 	
 	@RequestMapping(value="/admin/memberSearch", method=RequestMethod.POST)
@@ -87,10 +146,43 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping(value="/admin/point", method=RequestMethod.POST)
-	public ModelAndView modifyPoint(ModelAndView mv, HttpSession session, @RequestParam("memberEmail") String memberEmail) {
-		
-		return mv;
-		
+//	@RequestMapping(value="/admin/point", method=RequestMethod.POST)
+//	public ModelAndView modifyPoint(ModelAndView mv, HttpSession session, @RequestParam("memberEmail") String memberEmail) {
+//		
+//		return mv;
+//		
+//	}
+	
+	@RequestMapping(value="/admin/boardSearch", method=RequestMethod.POST)
+	public ModelAndView searchBoard(ModelAndView mv
+			, HttpSession session
+			, @RequestParam("boardInfo") String boardInfo
+			, @RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = mService.getTotalBoardCount(boardInfo);
+		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		maxPage = (int)((double)totalCount/boardLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+			List bList = mService.searchBoard(currentPage, boardLimit, boardInfo);
+			
+			if(!bList.isEmpty()) {
+				mv.addObject("maxPage", maxPage);
+				mv.addObject("currentPage", currentPage);
+				mv.addObject("startNavi", startNavi);
+				mv.addObject("endNavi", endNavi);
+				mv.addObject("bList", bList);
+			}
+			mv.setViewName("admin/boardAdminView");
+		return mv;		
 	}
+	
+	
 }
