@@ -5,17 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${recipe.recipeName }</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 
-	
 	<style>
 #imgDiv {
 	width: 100%;
-	height: 500px;
+	height: 27rem;
 	overflow: hidden;
+}
+
+@media (max-width: 500px) {
+ #imgDiv {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+iframe{
+height: auto;
+}
+
 }
 
 #mainImg {
@@ -130,6 +142,9 @@
 					<button class="btn btn-primary"
 						onclick="removeRecipe(${recipe.recipeNo });">삭제</button>
 				</div>
+				<div id="info-area">
+				${recipe.recipeInfo }
+				</div>
 
 			</div>
 			<!-- 타이틀 영역 -->
@@ -144,7 +159,7 @@
 						<!-- 작성자 영역 -->
 						<div id="wirter-area" class="col-md-12">
 							<h5>
-								작성자 : ${recipe.memberEmail } ${recipe.recipeInfo }
+								작성자 : ${recipe.memberEmail } 
 								<button class="btn btn-danger">신고</button>
 							</h5>
 						</div>
@@ -154,7 +169,7 @@
 						<div id="youtube-area" class="col-md-12 p-3">
 							<!-- 비디오 주소를 입력했을때만-->
 							<c:if test="${recipe.recipeVideo ne null }">
-								<iframe width="560" height="315" src="${recipe.recipeVideo}"
+								<iframe width="100%" height="400em" src="${recipe.recipeVideo}"
 									title="YouTube video player" frameborder="0"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 									allowfullscreen></iframe>
@@ -364,6 +379,7 @@
 		<!-- 메인 내용 폼 전체 들어감 -->
 	</section>
 
+<!-- 부트스트랩 스타일 -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 		rel="stylesheet"
@@ -375,21 +391,26 @@
 		crossorigin="anonymous"></script>
 </body>
 <script>
+//레시피 삭제확인
 function removeRecipe(recipeNo){
 	if(confirm("삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
 		location.href='/recipe/remove.do?recipeNo='+recipeNo;
 	}
 }
 
+//리스트로 이동
 function list(){
 	location.href='/recipe/recipeList.do';
 	
 }
+
+//코멘트 수정창 안보이게 하기
 var modifyView = document.querySelectorAll('.modifyView')
 for(var i=0; i<modifyView.length;i++){
 	modifyView[i].style.display='none';
 }
 
+//코멘트 수정창 열기
 function modifyViewOn(obj) {
 	obj.parentElement.parentElement.parentElement.parentElement.parentElement.style.display='none'
 	obj.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.style.display='block'
@@ -397,11 +418,13 @@ function modifyViewOn(obj) {
 	
 }
 
+//코멘트 수정창 닫기
 function modifyViewOff(obj) {
 	obj.parentElement.parentElement.parentElement.parentElement.style.display='none';
 	obj.parentElement.parentElement.parentElement.parentElement.previousElementSibling.style.display="block";
 }
 
+//댓글 삭제 확인
 function removeComment(commentNo,recipeNo) {
 	
 	if(confirm("댓글을 삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){

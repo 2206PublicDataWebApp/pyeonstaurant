@@ -20,6 +20,7 @@
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeTag"		alias="RecipeTag" />
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeComment" alias="RecipeComment"/>
 		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QA" alias="QA"/>
+		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QAComment" alias="QAComment"/>
 	
 	</typeAliases>
 
@@ -30,6 +31,7 @@
 
 
 		<mapper resource="mappers/recipe-mapper.xml"></mapper>
+		<mapper resource="mappers/qna-mapper.xml"></mapper>
 		<mapper resource="mappers/qna-mapper.xml"></mapper>
 	</mappers>
 

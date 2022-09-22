@@ -349,7 +349,7 @@ public class RecipeController {
 			for (int i = 0; i <arrDescription.length; i++) {
 				String recipePic = recipePicture.get(i).getOriginalFilename();
 				
-				System.out.println(recipePic+","+i);
+				
 				if (recipePicture.get(i) != null && !recipePic.equals("")) {
 
 					File file = new File(savedPath + "\\" + recipeRe); // 이미 저장한 파일의 이름을 가져와야 한다.
@@ -387,7 +387,7 @@ public class RecipeController {
 
 			int result2 = rService.modifyOneRecipeStep(rsList); // 레시피 순서저장 코드 종료
 
-			mv.setViewName("redirect:/recipe/recipeList.do");
+			mv.setViewName("redirect:/recipe/detail.do?recipeNo="+recipe.getRecipeNo());
 
 		} catch (Exception e) {
 			e.printStackTrace();

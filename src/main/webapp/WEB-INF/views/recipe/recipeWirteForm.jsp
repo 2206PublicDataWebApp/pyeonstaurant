@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 
 <head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>레시피 등록</title>
 <link
@@ -18,6 +21,84 @@
 
 
 <style>
+@media (max-width: 500px) {
+label{
+padding: 0px;
+
+}
+#up-area-left{
+padding: 0px;
+margin:0 auto;
+}
+.input-file-button{
+padding: 0px;
+margin:0 auto;
+}
+
+#output{
+width:100%;
+height:auto;
+}
+
+#recipe-wrtie-from{
+padding: 0px;
+margin:0 auto;
+}
+.overflow-hidden{
+font-size:0.8em;
+}
+.container{
+padding: 0px;
+margin:0 auto;
+
+}
+.float-md-start{
+padding: 0px;
+margin:0 auto;
+}
+
+.form-floating{
+
+padding: 0px;
+margin:0 auto;
+}
+
+.ms-1,.me-1{
+padding: 0px !important;
+margin:0 auto !important;
+margin-bottom : 1em !important;
+}
+
+[name="recipeDescription"]{
+height: 15rem !important;
+width: 100% !important;
+}
+#article2-area{
+padding: 0px !important;
+margin:0 auto !important;
+}
+
+.detailImg{
+width:100%;
+height:auto;
+}
+
+.container-md{
+padding: 0px !important;
+}
+.pt-3{
+margin-top:10px !important;
+}
+
+section{
+padding-left:1.5em !important;
+}
+#recipe-button .col-md-12 .col-md-6{
+padding-left:0 !important;
+}
+}
+
+
 body {
 
 }
@@ -109,19 +190,19 @@ padding:0.5em;
 							<div class="overflow-hidden col-12 ">
 								<label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="jmt"
-									value="true"> JMT</label> <label class="w-25 float-md-start"><input
+									value="true"> JMT</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="healthy"
-									value="true"> 건강한</label> <label class="w-25 float-md-start"><input
+									value="true"> 건강한</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="goodSpicy"
-									value="true"> 맛있게 매운</label> <label class="w-25 float-md-start"><input
+									value="true"> 맛있게 매운</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="soSpicy"
-									value="true"> 아주매운</label> <label class="w-25 float-md-start"><input
+									value="true"> 아주매운</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="sweet"
-									value="true"> 달콤한</label> <label class="w-25 float-md-start"><input
+									value="true"> 달콤한</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="easy"
-									value="true"> 간편한</label> <label class="w-25 float-md-start"><input
+									value="true"> 간편한</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="full"
-									value="true"> 든든한</label> <label class="w-25 float-md-start"><input
+									value="true"> 든든한</label> <label class="w-25 float-start"><input
 									class="form-check-input" type="checkbox" name="party"
 									value="true"> 파티용</label>
 							</div>

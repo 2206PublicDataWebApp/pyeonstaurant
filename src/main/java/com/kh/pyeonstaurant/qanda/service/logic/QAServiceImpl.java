@@ -39,8 +39,10 @@ public class QAServiceImpl implements QAService{
 
 	@Override
 	public int reomoveOneQandANo(int qaNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+	
+		int result = qStore.deleteOneQandANo(qaNo, session);
+		return result;
 	}
 
 	@Override
@@ -50,9 +52,22 @@ public class QAServiceImpl implements QAService{
 	}
 
 	@Override
-	public List<QAComment> allQACommentList(int currentPage, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QAComment> allQACommentList(int currentPage, int limit, int qaNo) {
+		List<QAComment> qcList = qStore.selectallQACommentList(currentPage, limit, qaNo, session);
+		return qcList;
 	}
+
+	@Override
+	public int getTotalCount(String searchCondition, String searchValue) {
+		int count = qStore.selectTotalCount(session, searchCondition, searchValue);
+		return count;
+	}
+
+	@Override
+	public List<QA> printAllByValue(String searchCondition, String searchValue, int currentPage, int boardLimit) {
+		List<QA> qList = qStore.selectAllByValue(session,searchCondition, searchValue, currentPage,boardLimit);
+		return qList;
+	}
+
 
 }

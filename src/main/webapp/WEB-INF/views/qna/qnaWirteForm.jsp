@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Q&A등록</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -14,6 +16,19 @@
 
 
 <style>
+
+
+@media (max-width: 500px) {
+.container{
+padding:0 !important;
+padding-left:1em !important;
+}
+form{
+padding:0 !important;
+}
+
+}
+
 
 section{
 margin-top:10px;
@@ -53,14 +68,14 @@ cursor:pointer;
 				<!-- 타이틀영역 -->
 				<div id="title-area" class="row" >
 					
-					<div id="title" class="col-md-10  col-9 pt-3">
+					<div id="title" class="col-md-10 pt-3">
 						<div class="form-floating mb-3">
 	  					<input type="text" name="qaTitle" class="form-control" id="floatingInput" required="required">
 	  					<label for="floatingInput">제목</label>
 						</div> 
 					</div>
 					
-					<div id="secret" class="col-md-2 col-3 d-flex align-items-center" style="height:auto ;" >
+					<div id="secret" class="col-md-2 d-flex align-items-center" style="height:auto ;" >
 					
 						<div class="form-check ">
 						  <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" style="width:1.5rem; height:1.5rem" name="qaSecret" >
@@ -182,7 +197,7 @@ cursor:pointer;
 				<input type="submit" class="btn btn-outline-primary"  value="등록" style="width: 50%">
 				</div>
 				<div id="cancle-area" class="col-md-6" style="text-align:center ">
-				<button type="button" class="btn btn-outline-primary" style="width: 50%">취소</button>
+				<button type="button" class="btn btn-outline-primary" style="width: 50%" onclick="javascript:history.back();">취소</button>
 				</div>
 			</div>
 			<!-- 하단영역종료 -->

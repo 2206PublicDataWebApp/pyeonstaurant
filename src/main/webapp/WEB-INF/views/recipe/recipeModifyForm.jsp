@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 
 <head>
-
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 <title>레시피 수정</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -18,6 +21,85 @@
 
 
 <style>
+
+@media (max-width: 500px) {
+label{
+padding: 0px;
+
+}
+#up-area-left{
+padding: 0px;
+margin:0 auto;
+}
+.input-file-button{
+padding: 0px;
+margin:0 auto;
+}
+
+#output{
+width:100%;
+height:auto;
+}
+
+#recipe-wrtie-from{
+padding: 0px;
+margin:0 auto;
+}
+.overflow-hidden{
+font-size:0.8em;
+}
+.container{
+padding: 0px;
+margin:0 auto;
+
+}
+.float-md-start{
+padding: 0px;
+margin:0 auto;
+}
+
+.form-floating{
+
+padding: 0px;
+margin:0 auto;
+}
+
+.ms-1,.me-1{
+padding: 0px !important;
+margin:0 auto !important;
+margin-bottom : 1em !important;
+}
+
+[name="recipeDescription"]{
+height: 15rem !important;
+width: 100% !important;
+}
+#article2-area{
+padding: 0px !important;
+margin:0 auto !important;
+}
+
+.detailImg{
+width:100%;
+height:auto;
+}
+
+.container-md{
+padding: 0px !important;
+}
+.pt-3{
+margin-top:10px !important;
+}
+
+section{
+padding-left:1.5em !important;
+}
+#recipe-button .col-md-12 .col-md-6{
+padding-left:0 !important;
+}
+}
+
+
 body {
 
 }
