@@ -113,6 +113,10 @@ padding:0.5em;
 
 }
 
+#article-area2{
+justify-content: space-evenly
+}
+
 </style>
 
 </head>
