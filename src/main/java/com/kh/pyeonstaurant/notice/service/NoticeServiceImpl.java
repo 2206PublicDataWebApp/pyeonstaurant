@@ -37,5 +37,4 @@ public class NoticeServiceImpl implements NoticeService{
 		return nList;
 	}
 
-
 }

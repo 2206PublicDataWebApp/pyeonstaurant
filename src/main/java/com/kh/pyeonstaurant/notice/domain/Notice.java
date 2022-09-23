@@ -65,10 +65,4 @@ public class Notice {
 				+ ", noticeFilename=" + noticeFilename + ", noticeFileRename=" + noticeFileRename + ", noticeFilepath="
 				+ noticeFilepath + "]";
 	}
-	
-	
-	
-	
-	
-	
 }
