@@ -44,6 +44,11 @@
 	<update id="deleteRecipe">
 		update recipe_tbl set RECIPE_STATUS = 'N' where RECIPE_NO = #{recipeNo}
 	</update>
+	
+	<update id="countPlus">
+	update recipe_tbl set VIEW_COUNT = VIEW_COUNT+1 where RECIPE_NO = #{recipeNo}
+
+	</update>
 
 <update id = "updateOneRecipe">
 	update recipe_tbl set RECIPE_NAME = #{recipeName}, RECIPE_INFO = #{recipeInfo}, MAIN_PICTURE = #{mainPic}, RECIPE_CATEGORY= #{recipeCategory},
@@ -99,6 +104,12 @@
 	<select id="selectOneRecipe" resultMap="recipeResultMap">
 		select * from recipe_tbl where RECIPE_NO = #{recipeNo} and RECIPE_STATUS = 'Y'
 	</select>
+
+	<select id="selectRecommandRecipe" resultMap="recipeResultMap">
+	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory}
+	</select>
+
+
 
 	<resultMap type="RecipeMaterial" id="RecipeMaterialResultMap">
 		<id property="recipeNo"				column="RECIPE_NO" />

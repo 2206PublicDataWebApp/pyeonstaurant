@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${recipe.recipeName }</title>
 </head>
 <body>
@@ -18,17 +18,24 @@
 	overflow: hidden;
 }
 
-@media (max-width: 500px) {
- #imgDiv {
-	width: 100%;
-	height: auto;
-	overflow: hidden;
+@media ( max-width : 500px) {
+	#imgDiv {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+	}
+	iframe {
+		height: auto;
+	}
+	
+	#other-recipe-area{
+	display:none;
+	}
+	
+	
 }
-iframe{
-height: auto;
-}
+/* 미디어 쿼리 영역 종료 */
 
-}
 
 #mainImg {
 	width: 100%;
@@ -78,6 +85,16 @@ height: auto;
 	width: 80%;
 	height: auto;
 }
+
+a{
+text-decoration:none !important;
+color : black !important;
+}
+
+.card-text, #recommand-area{
+text-align:center;
+}
+
 </style>
 
 	<section style="margin: 0 auto;">
@@ -142,9 +159,7 @@ height: auto;
 					<button class="btn btn-primary"
 						onclick="removeRecipe(${recipe.recipeNo });">삭제</button>
 				</div>
-				<div id="info-area">
-				${recipe.recipeInfo }
-				</div>
+				<div id="info-area">${recipe.recipeInfo }</div>
 
 			</div>
 			<!-- 타이틀 영역 -->
@@ -159,7 +174,7 @@ height: auto;
 						<!-- 작성자 영역 -->
 						<div id="wirter-area" class="col-md-12">
 							<h5>
-								작성자 : ${recipe.memberEmail } 
+								작성자 : ${recipe.memberEmail }
 								<button class="btn btn-danger">신고</button>
 							</h5>
 						</div>
@@ -241,6 +256,27 @@ height: auto;
 						</div>
 						<div id="other-recipe-area">
 							<h4 style="text-align: center">추천 레시피</h4>
+							<!-- 추천레시피 출력영역 -->
+							<div id="recommand-area">
+								<c:forEach items="${recoList}" var="recoList" varStatus="i" begin="1" end="3">
+
+									<div class="card col-md-3 m-3" style="width: 80%;">
+										<div class="img-area" id="normal-img-area">
+											<img src="/resources/recipeImg/${recoList.mainPicRename }"
+												class="card-img-top" alt="">
+										</div>
+										<div class="card-body">
+											<p class="card-text">
+												<a href="/recipe/detail.do?recipeNo=${recoList.recipeNo }">${recoList.recipeName }</a>
+											</p>
+											
+										</div>
+									</div>
+
+								</c:forEach>
+
+							</div>
+							<!-- 추천 레시피 영역 종료 -->
 						</div>
 
 
@@ -292,7 +328,9 @@ height: auto;
 											style="text-align: right">
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
-											<button onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );" class="btn btn-outline-primary">삭제</button>
+											<button
+												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );"
+												class="btn btn-outline-primary">삭제</button>
 
 										</div>
 
@@ -307,9 +345,8 @@ height: auto;
 								<div id="comment-modify-area" class="row my-2">
 									<input type="hidden" value="${rcList.memberEmail }"
 										name="memberEmail"> <input type="hidden"
-										value="${rcList.recipeNo }" name="recipeNo">
-										<input type="hidden"
-										value="${rcList.commentNo }" name="commentNo">
+										value="${rcList.recipeNo }" name="recipeNo"> <input
+										type="hidden" value="${rcList.commentNo }" name="commentNo">
 									<div id="comment-textarea" class="col-md-11">
 										<!-- 세션에서 사용자 id가지고 올것 -->
 										<div class="form-floating">
@@ -379,7 +416,7 @@ height: auto;
 		<!-- 메인 내용 폼 전체 들어감 -->
 	</section>
 
-<!-- 부트스트랩 스타일 -->
+	<!-- 부트스트랩 스타일 -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 		rel="stylesheet"

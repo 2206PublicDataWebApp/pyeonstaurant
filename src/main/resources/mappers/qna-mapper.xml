@@ -52,7 +52,7 @@
 
 
 	<select id="SelectAllQnA" resultMap="QAResultMap">
-		select * from qa_tbl where QA_STATUS ='Y' order by QA_NO
+		select * from qa_tbl where QA_STATUS ='Y' order by QA_NO desc
 	</select>
 
 	<select id="SelectOneQnA" resultMap="QAResultMap">

@@ -57,7 +57,9 @@ public interface RecipeStore {
 
 	public int deleteOneRecipe(SqlSessionTemplate session,int redipeNo);
 
-	public int deleteOneImg(SqlSessionTemplate session, String picName); 
+	public int deleteOneImg(SqlSessionTemplate session, String picName);
+
+	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory); 
 
 
 

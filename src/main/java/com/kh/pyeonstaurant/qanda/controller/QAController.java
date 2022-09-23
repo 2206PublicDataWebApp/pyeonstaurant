@@ -91,6 +91,8 @@ public class QAController {
 					}
 					upFile.get(i).transferTo(new File(savePath + "\\" + qaFileRename[i]));// 파일을 buploadFile경로에
 																							// 저장
+					
+					System.out.println(new File(savePath + "\\" + qaFileRename[i]));
 				}
 				///// 여기까지 사진 저장코드/////
 

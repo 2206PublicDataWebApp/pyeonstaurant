@@ -208,6 +208,7 @@ public class RecipeController {
 			List<RecipeMaterial> rmList = rService.printOneRecipeMaterial(recipeNo);
 			List<RecipeStep> rsList = rService.printOneRecipeStep(recipeNo);
 			RecipeTag rTag = rService.printOneRecipeTag(recipeNo);
+			List<Recipe> recomnandList = rService.recomadRecipe(recipe.getRecipeCategory());//추천레시피 목록
 			
 			
 			///레시피 댓글 가지고 오기///
@@ -219,6 +220,7 @@ public class RecipeController {
 			mv.addObject("rsList", rsList);
 			mv.addObject("rTag", rTag);
 			mv.addObject("rcList",rcList);
+			mv.addObject("recoList",recomnandList);
 			mv.setViewName("/recipe/recipeDetail");
 
 		} catch (Exception e) {

@@ -178,5 +178,15 @@ public class RecipeServiceImpl implements RecipeService{
 		return result;
 	}
 
+	/***
+	 * 추천레시피 불러오기
+	 */
+	@Override
+	public List<Recipe> recomadRecipe(String recipeCategory) {
+		List<Recipe> RecommandList = rStore.selectRecomandRecipe(session,recipeCategory);
+		return RecommandList;
+	}
+			
+	
 }
 
