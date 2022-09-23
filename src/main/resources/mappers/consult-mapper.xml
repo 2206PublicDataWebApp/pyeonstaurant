@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="ConsultMapper">
+  <!--클라이언트  -->
+  	<resultMap type="Consult" id="clientResultMap">
+  		<id property="consultNo" column="CONSULT_NO"/> 
+		<result  property="consultNo" column="CONSULT_NO"/> 
+		<result  property="cNickName" column="C_NICKNAME"/> 
+		<result  property="cEmail" column="C_MAIL"/> 
+		<result  property="cTitle" column="C_TITLE"/> 
+		<result  property="cContexts" column="C_CONTEXTS"/>
+		<result  property="cDate" column="C_DATE"/> 
+
+  	</resultMap>
+  	<!-- 서버 -->
+  	  <resultMap type="ConsultServer" id="ChatResultMap">
+  		<id property="consultNo" column="CONSULT_NO"/> 
+		<result  property="consultNo" column="CONSULT_NO"/> 
+		<result  property="csNickName" column="CS_NICKNAME"/> 
+		<result  property="csMail" column="CS_MAIL"/>
+		<result  property="csTitle" column="CS_TITLE"/> 
+		<result  property="csDate" column="CS_DATE"/> 
+		<result  property="csResult" column="CS_RESULT"/> 
+		<result  property="csFileName" column="CS_FILENAME"/> 
+		<result  property="csFileRename" column="CS_FILERENAME"/> 
+		<result  property="csFilePath" column="CS_FILEPATH"/> 
+  	</resultMap>
+ <!--서버 매핑  --> 	
+  	<insert id="beforchat">
+ <!--  		INSERT INTO SERVERCONSULT_TBL VALUES (SEQ_SERVERCHAT_NO.NEXTVAL,#{},#{},#{},DEFAULT) --> 
+  	</insert>
+  	
+  	<select id="chatList"  resultMap="ChatResultMap">
+  		SELECT * FROM SERVERCONSULT_TBL ORDER BY CONSULT_NO DESC
+  	</select>
+  	<!-- 신규 상담건 조회 -->
+  	 	  <select id="chatNewList"  resultMap="ChatResultMap">
+  		SELECT * FROM SERVERCONSULT_TBL WHERE CS_DATE > #{requestTime} ORDER BY CONSULT_NO DESC
+  	</select>
+  	<update id="reportUpdate">
+  		<!-- UPDATE SERVERCONSULT_TBL SET CS_RESULT =#{} WHERE CONSULT_NO =#{} -->
+  	</update>
+ <!--써버 종료  -->
+ 
+ <!--고객 매핑  -->
+ 	<!-- 고객채팅 접수 저장 -->
+ 	<insert id="reseciptChat">
+ 		INSERT INTO SERVERCONSULT_TBL VALUES (SEQ_SERVERCHAT_NO.NEXTVAL,#{csNickName},#{csTitle},SYSDATE,DEFAULT,DEFAULT,DEFAULT,DEFAULT,#{csMail})
+ 	</insert>
+ 
+ 	<!-- 고객채팅 내용저장. -->
+	<insert id="inClientChat">
+    	INSERT INTO CONSULT_TBL VALUES (SQN_CHAT.NEXTVAL,#{cNickName},#{cContexts},SYSDATE,#{cEmail})
+  	</insert>
+ 	
+ <!--고객 완료.  -->
+ </mapper>

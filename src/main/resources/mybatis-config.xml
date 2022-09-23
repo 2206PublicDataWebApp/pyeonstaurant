@@ -13,11 +13,15 @@
 		<!-- 이런 형식으로 넣어주세요 -->
 		<!-- <typeAlias type="com.kh.junspring.member.domain.Member" alias="Member"/> -->
 		<!-- <typeAlias type="com.kh.junspring.board.domain.Board" alias="Board"/>-->
+
 		<typeAlias type="com.kh.pyeonstaurant.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.kh.pyeonstaurant.myrecipe.domain.MyRecipe" alias="MyRecipe"/>
 		<typeAlias type="com.kh.pyeonstaurant.report.domain.Report" alias="Report"/>
 		<typeAlias type="com.kh.pyeonstaurant.admin.domain.Admin" alias="Admin"/>
 		<typeAlias type="com.kh.pyeonstaurant.admin.domain.Board" alias="Board"/>
+		<typeAlias type="com.kh.pyeonstaurant.notice.domain.Notice" alias="Notice"/>
+		
+		
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recipe"		alias="Recipe" />
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeStep"		alias="RecipeStep" />
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeMaterial"		alias="RecipeMaterial" />
@@ -27,8 +31,11 @@
 		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QAComment" alias="QAComment"/>
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recommandation" alias="Recommandation"/>
 		
+		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" alias="ConsultServer" />
+		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" 	alias="Consult" />  <!--은정꺼예요.  -->
+</typeAliases>
 		
-	</typeAliases>
+
 
 	<mappers>
 		<!-- 이런 형식으로 넣어주세요 -->
@@ -42,7 +49,10 @@
 		<mapper resource="mappers/recipe-mapper.xml"></mapper>
 		<mapper resource="mappers/qna-mapper.xml"></mapper>
 		<mapper resource="mappers/qna-mapper.xml"></mapper>
+		<mapper resource="mappers/consult-mapper.xml" />  <!--은정꺼예요.  -->
+		<mapper resource="mappers/notice-mapper.xml" />  <!--은정꺼예요.  -->
+		
 	</mappers>
 
-		
+
 </configuration>
