@@ -3,7 +3,7 @@ package com.kh.pyeonstaurant.consult.domain;
 import java.util.Date;
 
 public class ConsultServer {
-	private int consultNo;
+	private int titleNo;    //titleNo로 변경된다.
 	private String csNickName;
 	private String csMail;
 	private String csTitle;
@@ -12,11 +12,14 @@ public class ConsultServer {
 	private String csFileName;
 	private String csFileRename;
 	private String csFilePath;
-	public int getConsultNo() {
-		return consultNo;
+	
+
+	
+	public int getTitleNo() {
+		return titleNo;
 	}
-	public void setConsultNo(int consultNo) {
-		this.consultNo = consultNo;
+	public void setTitleNo(int titleNo) {
+		this.titleNo = titleNo;
 	}
 	public String getCsNickName() {
 		return csNickName;
@@ -68,10 +71,11 @@ public class ConsultServer {
 	}
 	@Override
 	public String toString() {
-		return "ConsultServer [consultNo=" + consultNo + ", csNickName=" + csNickName + ", csMail=" + csMail
+		return "ConsultServer [titleNo=" + titleNo + ", csNickName=" + csNickName + ", csMail=" + csMail
 				+ ", csTitle=" + csTitle + ", csDate=" + csDate + ", csResult=" + csResult + ", csFileName="
 				+ csFileName + ", csFileRename=" + csFileRename + ", csFilePath=" + csFilePath + "]";
 	}
 
+	
 	
 }

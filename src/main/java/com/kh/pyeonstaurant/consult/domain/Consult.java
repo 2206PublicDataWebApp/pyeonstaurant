@@ -2,13 +2,22 @@ package com.kh.pyeonstaurant.consult.domain;
 
 import java.util.Date;
 
+import java.util.Date;
+
 public class Consult {
 	private int consultNo;
+	private int titleNo;
 	private String cNickName;
 	private String cEmail;
 	private String cContexts;
 	private Date cDate;
 	
+	public int getTitleNo() {
+		return titleNo;
+	}
+	public void setTitleNo(int titleNo) {
+		this.titleNo = titleNo;
+	}
 	public int getConsultNo() {
 		return consultNo;
 	}
@@ -44,7 +53,7 @@ public class Consult {
 	@Override
 	public String toString() {
 		return "Consult [consultNo=" + consultNo + ", cNickName=" + cNickName + ",cEmail=" + cEmail+", cContexts="
-				+ cContexts + ", cDate=" + cDate + "]";
+				+ cContexts + "titleNo="+ titleNo+", cDate=" + cDate + "]";
 	}
 	
 	
