@@ -57,7 +57,12 @@ a {
 }
 
 .img-area {
-	width: 90%;
+	width: 100%;
+	height: 10em;
+	overflow: hidden;
+}
+.normal-img-area {
+	width: 80%;
 	height: 10em;
 	overflow: hidden;
 }
@@ -239,7 +244,7 @@ a {
 
 
 						<div class="card col-md-3 m-3" style="width: 18rem;">
-							<div cclass="img-area" id="normal-img-area">
+							<div class="normal-img-area" id="normal-img-area">
 								<img src="/resources/recipeImg/${recipe.mainPicRename }"
 									class="card-img-top" alt="">
 							</div>

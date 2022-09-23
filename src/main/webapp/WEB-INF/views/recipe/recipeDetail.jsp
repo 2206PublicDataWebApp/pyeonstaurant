@@ -100,6 +100,11 @@ text-align:center;
   font-weight: 600;
 }
 
+#recommand-area{
+padding-left: 30px !important;
+}
+
+
 </style>
 
 	<section style="margin: 0 auto;">
@@ -318,7 +323,7 @@ text-align:center;
 							<div id="recommand-area">
 								<c:forEach items="${recoList}" var="recoList" varStatus="i" begin="1" end="3">
 
-									<div class="card col-md-3 m-3" style="width: 80%;">
+									<div class="card col-md-3 m-3" id="recommand-card-area"style="width: 80%;">
 										<div class="img-area" id="normal-img-area">
 											<img src="/resources/recipeImg/${recoList.mainPicRename }"
 												class="card-img-top" alt="">
