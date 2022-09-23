@@ -77,7 +77,7 @@ public class RecipeStoreLogic implements RecipeStore {
 	@Override
 	public Recipe selectOneRecipe(int recipeNo, SqlSessionTemplate session) {
 		int result = session.update("RecipeMapper.countPlus", recipeNo);
-		Recipe recipe = session.selectOne("RecipeMapper.selectOneRecipe", recipeNo);	
+		Recipe recipe = session.selectOne("RecipeMapper.selectOneRecipe", recipeNo);
 		return recipe;
 	}
 
@@ -127,17 +127,20 @@ public class RecipeStoreLogic implements RecipeStore {
 		
 		return  rcList;
 	}
-
+/**레시피 추천*/
 	@Override
 	public int insertRecommand(Recommandation recommand, SqlSessionTemplate session) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=session.insert("RecipeMapper.insertRecommand", recommand);
+		result +=session.insert("RecipeMapper.recomandPlus", recommand.getRecipeNo());
+		
+		return result;
 	}
-
+/**추천 삭제*/
 	@Override
 	public int deleteRecommand(Recommandation recommand, SqlSessionTemplate session) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result= session.delete("RecipeMapper.deleteRecommand", recommand);
+		result+= session.delete("RecipeMapper.recomandMinus", recommand);
+		return result;
 	}
 
 	/** 레시피수정 */
@@ -226,7 +229,6 @@ public class RecipeStoreLogic implements RecipeStore {
 		int result = session.update("RecipeMapper.deleteOneImg", picName);
 		return result;
 	}
-	
 	/** 추천 레시피 불러오기*/
 	@Override
 	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory) {
@@ -234,6 +236,5 @@ public class RecipeStoreLogic implements RecipeStore {
 		System.out.println(recommandList.toString());
 		return recommandList;
 	}
-
 
 }

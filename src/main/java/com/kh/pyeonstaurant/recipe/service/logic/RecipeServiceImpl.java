@@ -60,7 +60,8 @@ public class RecipeServiceImpl implements RecipeService{
 		int result = rStore.insertMaterial(rmList, session);
 		return result;
 	}
-
+/** 댓글 출력*/
+	
 	@Override
 	public List<RecipeComment> printRecipeCommentList(int recipeNo) {
 		List<RecipeComment> rcList = rStore.selectRecipeCommentList(recipeNo, session);
@@ -79,16 +80,18 @@ public class RecipeServiceImpl implements RecipeService{
 		return 0;
 	}
 
+	/**레시피 추천*/
 	@Override
 	public int setRecommand(Recommandation recommand) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result= rStore.insertRecommand(recommand, session);
+		
+		return result;
 	}
 
 	@Override
 	public int removeRecommand(Recommandation recommand) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = rStore.deleteRecommand(recommand, session);
+		return result;
 	}
 
 	/**레시피수정*/
@@ -178,14 +181,14 @@ public class RecipeServiceImpl implements RecipeService{
 		return result;
 	}
 
-	/***
-	 * 추천레시피 불러오기
-	 */
-	@Override
-	public List<Recipe> recomadRecipe(String recipeCategory) {
-		List<Recipe> RecommandList = rStore.selectRecomandRecipe(session,recipeCategory);
-		return RecommandList;
-	}
+/***
+ * 추천레시피 불러오기
+ */
+@Override
+public List<Recipe> recomadRecipe(String recipeCategory) {
+	List<Recipe> RecommandList = rStore.selectRecomandRecipe(session,recipeCategory);
+	return RecommandList;
+}
 			
 	
 }

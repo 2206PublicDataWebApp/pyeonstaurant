@@ -13,6 +13,7 @@ import com.kh.pyeonstaurant.recipe.domain.Recommandation;
 
 public interface RecipeService {
 
+
 	public int registRecipe(Recipe recipe);
 
 	public int registStep(List<RecipeStep> rsList);
@@ -58,6 +59,7 @@ public interface RecipeService {
 	public int removeOneImg(String picName);
 
 	public List<Recipe> recomadRecipe(String recipeCategory);
+
 
 
 }

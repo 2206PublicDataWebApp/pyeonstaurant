@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeComment" alias="RecipeComment"/>
 		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QA" alias="QA"/>
 		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QAComment" alias="QAComment"/>
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recommandation" alias="Recommandation"/>
 	
 	</typeAliases>
 

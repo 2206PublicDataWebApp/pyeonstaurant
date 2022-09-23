@@ -5,7 +5,7 @@
 <mapper namespace="RecipeMapper">
 
 	
-	<insert id="insertRecipe">
+<insert id="insertRecipe">
 
 		insert into recipe_tbl
 		values(seq_recipe_no.nextval,#{recipeName},#{recipeInfo},#{mainPic},default,#{recipeCategory},#{recipeVideo},default,#{memberEmail},default,default,#{recommandCount},#{mainPicRename},#{recipeTime})
@@ -44,11 +44,6 @@
 	<update id="deleteRecipe">
 		update recipe_tbl set RECIPE_STATUS = 'N' where RECIPE_NO = #{recipeNo}
 	</update>
-	
-	<update id="countPlus">
-	update recipe_tbl set VIEW_COUNT = VIEW_COUNT+1 where RECIPE_NO = #{recipeNo}
-
-	</update>
 
 <update id = "updateOneRecipe">
 	update recipe_tbl set RECIPE_NAME = #{recipeName}, RECIPE_INFO = #{recipeInfo}, MAIN_PICTURE = #{mainPic}, RECIPE_CATEGORY= #{recipeCategory},
@@ -69,6 +64,20 @@
 <update id = "updateOneTag">
 	update recipe_tag set jmt = #{jmt}, healthy = #{healthy}, goodSpicy = #{goodSpicy}, full = #{full},soSpicy = #{soSpicy}, sweet = #{sweet},easy = #{easy},party = #{party}
 	where RECIPE_NO = #{recipeNo}
+</update>
+
+<update id="countPlus">
+	update recipe_tbl set VIEW_COUNT = VIEW_COUNT+1 where RECIPE_NO = #{recipeNo}
+
+</update>
+
+<update id="recomandPlus">
+update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT+1 where RECIPE_NO = #{recipeNo}
+</update>
+
+<update id="recomandMinus">
+update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT-1 where RECIPE_NO = #{recipeNo}
+
 </update>
 
 <delete id="deleteOneMaterial">
@@ -104,12 +113,13 @@
 	<select id="selectOneRecipe" resultMap="recipeResultMap">
 		select * from recipe_tbl where RECIPE_NO = #{recipeNo} and RECIPE_STATUS = 'Y'
 	</select>
-
+	
 	<select id="selectRecommandRecipe" resultMap="recipeResultMap">
 	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory}
 	</select>
-
-
+	
+	
+	
 
 	<resultMap type="RecipeMaterial" id="RecipeMaterialResultMap">
 		<id property="recipeNo"				column="RECIPE_NO" />
@@ -153,6 +163,30 @@
 	<select id="selectOneRStep" resultMap="RecipeStepResultMap">
 		select * from recipe_Step where recipe_no = #{recipeNo} order by RECIPE_ORDER
 	</select>
+	
+	
+<!-- 레시피 추천영역 -->
+
+<insert id="insertRecommand">
+	insert into RECOMMANDATION values(#{recipeNo},#{memberEmail},default)
+</insert>
+
+<delete id="deleteRecommand">
+	delete RECOMMANDATION where RECIPE_NO = #{recipeNo} and MEMBER_EMAIL=#{memberEmail}
+
+</delete>
+
+<resultMap type="Recommandation" id="RecommandResultMap">
+	<id property="recipeNo" 				column="RECIPE_NO" />
+	<result property="memberEmail"			column="MEMBER_EMAIL" />
+
+	</resultMap>
+
+
+
+
+
+
 
 <!--  레시피 코멘트 영역-->
 
@@ -183,6 +217,7 @@ update recipe_comment set COMMNET_CONTENTS=#{commentContents} where COMMENT_NO =
 <select id="selectCommentList" resultMap="RecipeCommentResultMap">
 select * from recipe_comment where RECIPE_NO = #{recipeNo} order by COMMENT_NO
 </select>
+
 
 
 
