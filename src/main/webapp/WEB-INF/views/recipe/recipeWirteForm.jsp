@@ -95,6 +95,7 @@ padding-left:1.5em !important;
 }
 #recipe-button .col-md-12 .col-md-6{
 padding-left:0 !important;
+
 }
 }
 

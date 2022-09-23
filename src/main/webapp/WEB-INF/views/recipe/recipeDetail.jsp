@@ -101,7 +101,6 @@ text-align:center;
 
 #recommand-area{
     padding-left: 50px;
-
 }
 
 </style>

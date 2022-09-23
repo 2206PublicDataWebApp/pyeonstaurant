@@ -76,6 +76,7 @@ a {
 
 #wirte-icon-area:hover {
 	cursor: pointer
+	
 }
 </style>
 

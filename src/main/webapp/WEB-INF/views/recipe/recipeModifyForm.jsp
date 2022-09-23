@@ -459,9 +459,9 @@ justify-content: space-evenly
 
 
 
-	<script>
-	
+	<script>	
 	//유튜브 링크 유효성체크//
+	
 	
  	var youUrl = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/g;
 	function isYoutube(){
