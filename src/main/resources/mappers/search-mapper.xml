@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="SearchMapper">
+  <!--채팅기록 -->
+  	<resultMap type="Recipe" id="recipeResultMap">
+  		<id property="recipeNo" column="RECIPE_NO"/> 
+		<result  property="recipeNo" column="RECIPE_NO"/>		 
+		<result  property="recipeName" column="RECIPE_NAME"/>   <!--레시피명  -->
+		<result  property="recipeInfo" column="RECIPE_INFO"/>   <!--레시피 내용  -->
+		<result  property="viewCount" column="VIEW_COUNT"/>   <!-- 조회수 -->
+		<result  property="mainPicRename" column="MAIN_PIC_RENAME"/>    <!--메인사진  -->
+		<result  property="recipeCategory" column="RECIPE_CATEGORY"/>
+		<result  property="recipeTime" column="RECIPE_TIME"/>
+		<result  property="recipeStatus" column="RECIPE_STATUS"/>   <!--삭제여부  -->
+		<result  property="insertDate" column="INCERT_DATE"/>   <!--등록일순  -->
+		<result  property="recommandCount" column="RECOMMAND_COUNT"/>   <!--추천수  -->
+		
+
+  	</resultMap> 	
+
+  	<!--전체 조회  -->
+  	<select id="recipeAllList"  resultMap="recipeResultMap">
+  		SELECT RECIPE_NO, RECIPE_NAME, MAIN_PIC_RENAME FROM RECIPE_TBL WHERE RECIPE_STATUS='Y' ORDER BY VIEW_COUNT DESC
+  	</select>
+  	<!-- 조회  조회수, 등록일, 추천수의 각각 개별 합계 갯수-->
+ 	<select id="searchTotalCount" resultType="_int">
+	    	SELECT COUNT(*) FROM RECIPE_TBL WHERE RECIPE_STATUS='Y' 	    
+	</select>
+	<!--검색어로 갯수 조회. 1. 제목명. 2.해쉬태그 3. 재료명-->
+	<!-- SELECT * FROM RECIPE_TBL WHERE RECIPE_NO =(SELECT RECIPE_NO FROM RECIPE_TAG WHERE GOODSPICY='1');  -->
+	<select id="searchCountNum" resultType="_int">
+	    	SELECT COUNT(*) FROM RECIPE_TBL 
+	    	<where>
+	    	<if test="searchCondition.toString() == 'recipeName'"> RECIPE_NAME LIKE '%'||#{searchValue}||'%'</if>
+	    	<if test="searchCondition.toString() == 'recipe_tag'"> RECIPE_NO =(SELECT RECIPE_NO FROM RECIPE_TAG WHERE #{searchValue}</if>
+	    	<if test="searchCondition.toString() == 'recipe_material'"> RECIPE_NO IN (SELECT RECIPE_NO FROM RECIPE_MATERIAL WHERE MATERIAL LIKE '%'||#{searchValue}||'%')</if>
+	    	AND RECIPE_STATUS='Y'	    	
+	    	</where>
+	    	<if test="listCondition.toString() =='viewCount'">OEDER BY VIEW_COUNT DESC</if>
+	    	<if test="listCondition.toString() =='recommandCount'">OEDER BY RECOMMAND_COUNT DESC</if>
+	    	<if test="listCondition.toString() =='insertDate'">OEDER BY INCERT_DATE DESC</if>	    		    		    
+	</select>
+	
+	<select id="keySearchList" resultMap="recipeResultMap">
+	    	SELECT * FROM RECIPE_TBL 
+	    	<where>
+	    	<if test="searchCondition.toString() == 'recipeName'"> RECIPE_NAME LIKE '%'||#{searchValue}||'%'</if>
+	    	<if test="searchCondition.toString() == 'recipe_tag'"> RECIPE_NO =(SELECT RECIPE_NO FROM RECIPE_TAG WHERE #{searchValue}</if>
+	    	<if test="searchCondition.toString() == 'recipe_material'"> RECIPE_NO IN (SELECT RECIPE_NO FROM RECIPE_MATERIAL WHERE MATERIAL LIKE '%'||#{searchValue}||'%')</if>
+	    	AND RECIPE_STATUS='Y'	    	
+	    	</where>
+	    	<if test="listCondition.toString() =='viewCount'">OEDER BY VIEW_COUNT DESC</if>
+	    	<if test="listCondition.toString() =='recommandCount'">OEDER BY RECOMMAND_COUNT DESC</if>
+	    	<if test="listCondition.toString() =='insertDate'">OEDER BY INCERT_DATE DESC</if>	    		    		    
+	</select>
+	
+	
+ </mapper>
