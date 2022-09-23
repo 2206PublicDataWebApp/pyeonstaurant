@@ -4,8 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<settings>
-		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<!-- null값이 있으면 null로 제대로 인식하게 한다. -->
 	</settings>
+
+
 	<typeAliases>
 		<!-- 이런 형식으로 넣어주세요 -->
 		<!-- <typeAlias type="com.kh.junspring.member.domain.Member" alias="Member"/> -->
@@ -15,7 +18,18 @@
 		<typeAlias type="com.kh.pyeonstaurant.report.domain.Report" alias="Report"/>
 		<typeAlias type="com.kh.pyeonstaurant.admin.domain.Admin" alias="Admin"/>
 		<typeAlias type="com.kh.pyeonstaurant.admin.domain.Board" alias="Board"/>
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recipe"		alias="Recipe" />
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeStep"		alias="RecipeStep" />
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeMaterial"		alias="RecipeMaterial" />
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeTag"		alias="RecipeTag" />
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.RecipeComment" alias="RecipeComment"/>
+		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QA" alias="QA"/>
+		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QAComment" alias="QAComment"/>
+		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recommandation" alias="Recommandation"/>
+		
+		
 	</typeAliases>
+
 	<mappers>
 		<!-- 이런 형식으로 넣어주세요 -->
 		<!-- <mapper resource="mappers/member-mapper.xml"/> -->
@@ -25,5 +39,10 @@
 		<mapper resource="mappers/report-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/recipe-mapper.xml"></mapper>
+		<mapper resource="mappers/qna-mapper.xml"></mapper>
+		<mapper resource="mappers/qna-mapper.xml"></mapper>
 	</mappers>
+
+		
 </configuration>
