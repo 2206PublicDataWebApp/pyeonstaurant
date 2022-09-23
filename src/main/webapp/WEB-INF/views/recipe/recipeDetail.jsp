@@ -76,7 +76,7 @@
 	z-index: 99;
 }
 
-label:hover {
+label:hover, #list-icon-area:hover {
 	cursor: pointer
 }
 

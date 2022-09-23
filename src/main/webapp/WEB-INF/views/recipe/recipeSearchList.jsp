@@ -73,6 +73,10 @@ a {
 .normal-card-body {
 	padding: 2px;
 }
+
+#wirte-icon-area:hover {
+	cursor: pointer
+}
 </style>
 
 </head>
