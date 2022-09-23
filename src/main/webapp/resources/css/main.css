@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/*@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap");*/
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+/*font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1f2d3d;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #1f2d3d;
+}
+
+header {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  padding: 12px 56px;
+  background-color: #FFFFFF;
+  z-index: 999;
+}
+
+header h1 {
+  position: relative;
+  top: 1px;
+}
+
+header h1 img {
+  display: block;
+  width: auto;
+  height: 30px;
+}
+
+header a {
+  display: block;
+  text-decoration: none;
+  font-size: 0.875rem;
+  color: #313338;
+}
+
+nav {
+  display: flex;
+  position: fixed;
+  top: 50px;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  padding: 12px 56px;
+  background-color: #FFFFFF;
+  z-index: 999;
+}
+
+nav > ul {
+	padding: 0;
+	text-align: center;
+}
+
+nav li {
+	display: inline-block;
+	list-style-type: none;
+}
+
+nav li a {
+	text-decoration: none;
+}
+
+main {
+	position: relative;
+	height: 1200px;
+	width: 100%;
+	padding-top: 100px;
+	padding-bottom: 102px;
+}
+
+.addressWrapper {
+	margin: 0 50px;
+	
+}
+
+footer {
+	position: absolute;
+	width: 100%;
+	height: 200px;
+	bottom: 0;
+	left: 0;
+}

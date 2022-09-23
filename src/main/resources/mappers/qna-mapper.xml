@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QnAMapper">
+<insert id="insertQnA">
+		insert into qa_tbl
+		values(seq_qa_no.nextval,#{qaTitle},#{qaContents},#{qaFile1},#{qaFile2},#{qaFile3},#{qaFile4},#{qaFile5},
+		#{qaCategory},#{qaSecret},default,default,default,#{memberEmail},
+		#{qaFile1Rename},#{qaFile2Rename},#{qaFile3Rename},#{qaFile4Rename},#{qaFile5Rename})
+	</insert>
+
+	<update id="updateOneQnA">
+		update qa_tbl set QA_TITLE = #{qaTitle}, QA_CONTENT=#{qaContents}, QA_FILE1
+		=#{qaFile1},QA_FILE2 =#{qaFile2},QA_FILE3 =#{qaFile3},QA_FILE4
+		=#{qaFile4},QA_FILE5 =#{qaFile5},
+		QA_FILE1_rename = #{qaFile1Rename},QA_FILE2_rename = #{qaFile2Rename},QA_FILE3_rename
+		= #{qaFile3Rename},QA_FILE4_rename = #{qaFile4Rename},QA_FILE5_rename
+		= #{qaFile5Rename},
+		QA_SECRET=#{qaSecret},QA_CATEGORY=#{qaCategory},QA_UPDATE_DATE=default
+		where QA_NO =#{qaNo}
+
+	</update>
+
+	<update id="deleteOneQaNo">
+		update qa_tbl set QA_STATUS = 'N' where QA_NO =#{qaNo}
+
+	</update>
+
+
+	<resultMap type="QA" id="QAResultMap">
+		<id property="qaNo" column="QA_NO" />
+		<result property="qaTitle" column="QA_TITLE" />
+		<result property="qaContents" column="QA_CONTENT" />
+		<result property="qaFile1" column="QA_FILE1" />
+		<result property="qaFile2" column="QA_FILE2" />
+		<result property="qaFile3" column="QA_FILE3" />
+		<result property="qaFile4" column="QA_FILE4" />
+		<result property="qaFile5" column="QA_FILE5" />
+		<result property="qaCategory" column="QA_CATEGORY" />
+		<result property="qaSecret" column="QA_SECRET" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="qaInsertDate" column="QA_INSERT_DATE" />
+		<result property="qaUpdateDate" column="QA_UPDATE_DATE" />
+		<result property="qaStatus" column="QA_STATUS" />
+		<result property="qaFile1Rename" column="QA_FILE1_rename" />
+		<result property="qaFile2Rename" column="QA_FILE2_rename" />
+		<result property="qaFile3Rename" column="QA_FILE3_rename" />
+		<result property="qaFile4Rename" column="QA_FILE4_rename" />
+		<result property="qaFile5Rename" column="QA_FILE5_rename" />
+	</resultMap>
+
+
+	<select id="SelectAllQnA" resultMap="QAResultMap">
+		select * from qa_tbl where QA_STATUS ='Y' order by QA_NO desc
+	</select>
+
+	<select id="SelectOneQnA" resultMap="QAResultMap">
+		select * from qa_tbl where QA_NO = #{qaNo}
+	</select>
+
+	<select id="selectBoardCount" resultType="_int">
+
+		select count(*) from qa_tbl
+		<where>
+			<if test="searchCondition.toString() == 'title'">
+				QA_STATUS = 'Y' and QA_TITLE like '%'|| #{serchValue}
+				||'%'
+			</if>
+			<if test="searchCondition.toString() == 'contents'">
+				QA_STATUS = 'Y' and QA_CONTENT like '%'|| #{serchValue}
+				||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				QA_STATUS = 'Y' and QA_CONTENT like '%'|| #{serchValue}
+				||'%'
+				or QA_TITLE like
+				'%'|| #{serchValue} ||'%'
+			</if>
+			<if test="searchCondition.toString() == ''">
+				QA_STATUS = 'Y'
+			</if>
+		</where>
+
+	</select>
+
+	<select id="selectAllByValue" resultMap="QAResultMap">
+		select * from qa_tbl
+		<where>
+			<if test="searchCondition.toString() == 'title'">
+				QA_STATUS = 'Y' and QA_TITLE like '%'|| #{serchValue}
+				||'%'
+			</if>
+			<if test="searchCondition.toString() == 'contents'">
+				QA_STATUS = 'Y' and QA_CONTENT like '%'|| #{serchValue}
+				||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				QA_STATUS = 'Y' and QA_CONTENT like '%'|| #{serchValue}
+				||'%'
+				or QA_TITLE like
+				'%'|| #{serchValue} ||'%'
+			</if>
+			<if test="searchCondition.toString() == ''">
+				QA_STATUS = 'Y'
+			</if>
+		</where>
+	</select>
+
+
+
+
+	<!-- qna코멘트 영역 -->
+
+
+
+
+
+	<insert id="qaCommentInsert">
+		insert into QA_COMMENT
+		values(seq_qa_comment_no.nextval,#{qaNo},#{qaCommentContents},default,default,#{memberEmail})
+
+	</insert>
+
+	<update id="updateQaComment">
+		update QA_COMMENT set QA_COMMENT_CONTENT = #{qaCommentContents},
+		QA_MODIFY_DATE = #{qaModifyDate} where COMMNET_NO = #{qaCommentNo}
+
+	</update>
+
+	<delete id="deleteOneComment">
+		delete qa_comment where COMMNET_NO =#{qaCommentNo}
+	</delete>
+
+
+	<resultMap type="QAComment" id="QACommentResultMap">
+		<id property="qaCommentNo" 			 column="COMMNET_NO" />
+		<result property="qaNo" 			 column="QA_NO" />
+		<result property="memberEmail" 		 column="MEMBER_EMAIL" />
+		<result property="qaCommentContents" column="QA_COMMENT_CONTENT" />
+		<result property="qaCommentDate" 	 column="QA_COMMNET_DATE" />
+		<result property="qaModifyDate" 	 column="QA_MODIFY_DATE" />
+
+	</resultMap>
+
+
+	<select id="SelectAllQnAComment" resultMap="QACommentResultMap">
+		select * from QA_COMMENT where QA_NO = #{qaNo}
+
+	</select>
+
+</mapper>
