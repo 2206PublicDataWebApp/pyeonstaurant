@@ -46,35 +46,35 @@
                     <li class="nav-link">
                         <a href="/member/myPage.kh">
                             <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">Dashboard</span>
+                            <span class="text nav-text">회원정보 조회</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
-                            <span class="text nav-text">Revenue</span>
+                            <span class="text nav-text">회원정보 수정</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Notifications</span>
+                            <span class="text nav-text">작성 레시피 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">Analytics</span>
+                            <span class="text nav-text">작성 댓글 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-heart icon' ></i>
-                            <span class="text nav-text">Likes</span>
+                            <span class="text nav-text">포인트 내역 조회</span>
                         </a>
                     </li>
 
@@ -91,37 +91,44 @@
             <div class="bottom-content">
                 <li class="">
                     <a href="/member/logout.kh">
-                        <i class='bx bx-log-out icon' ></i>
+                        <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>
                 </li>
-
-                
             </div>
         </div>
 
     </nav>
     
     <main>
-    <table border="1">
-	<tr>
-		<td><input type="text" name="memberEmail" value="${member}"></td>
-		<td>${sessionScope.loginUser.memberEmail }님 환영합니다!!</td>
-	</tr>
-	<tr>
-		<td>비밀번호</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>이름</td>
-		<td>${member.userPwd }</td>
-	</tr>
-	<tr>
-		<td>이메일</td>
-		<td>${member.userNickname }</td>
-	</tr>
-
-</table>
+        <div class="user-card">
+            <div class="user-photo">
+              <img src="/resources/images/user.png">
+            </div>
+            <h1 class="user-name">
+              ${sessionScope.loginUser.memberNickname }
+            </h1>
+      
+            <h2>
+                ${sessionScope.loginUser.memberEmail }
+            </h2>
+            <div class="user-info">
+                  <li>
+                      <ul class= "info-property">레시피 수</ul>
+                      <ul class= "info-value">구현 미완</ul>
+                  </li>
+      
+                  <li>
+                      <ul class= "info-property">댓글</ul>
+                      <ul class= "info-value">구현 미완</ul>
+                  </li>
+      
+                  <li>
+                      <ul class= "info-property">포인트</ul>
+                      <ul class= "info-value">${sessionScope.loginUser.totalPoint }P</ul>
+                  </li>
+            </div>
+          </div>
     </main>
 
 

@@ -72,7 +72,7 @@
                             1:1 문의하기
                         </button>
                         <button>
-                            공지사항
+                            공지사항!
                         </button>
                     </div>
                 </div>
