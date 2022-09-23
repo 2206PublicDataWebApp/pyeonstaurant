@@ -307,7 +307,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				List<RecipeStep> rsList = rService.printOneRecipeStep(recipeNo);
 
 				//작성자 아니면 수정금지
-//				if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//				if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
 //					
 //					mv.addObject("msg", "작성자만 수정할 수 있습니다");
 //					mv.setViewName("common/error");
@@ -547,7 +547,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				@RequestParam(value = "memberEmail", required = false) String memberEmail) {
 			
 			//작성자 아니면 삭제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
 //				
 //				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
 //				mv.setViewName("common/error");

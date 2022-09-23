@@ -248,7 +248,11 @@ text-align:center;
 						<div id="wirter-area" class="col-md-12">
 							<h5>
 								작성자 : ${name }
+								
+							<%-- 	<c:if test="${loginUser !=null }"> 로그인시에만 보임 --%>
 								<button class="btn btn-danger">신고</button>
+							<%-- 	</c:if> --%>
+								
 							</h5>
 						</div>
 						<!-- 작성자 영역종료 -->
@@ -443,7 +447,12 @@ text-align:center;
 												<h4>${rcList.memberName }</h4>
 											</div>
 											<div id="comment-button" class="col-md-2"
-												style="text-align: right">신고</div>
+												style="text-align: right">
+												<%-- <c:if test= "${loginUser != null }"> 로그인 시에만 보임 --%>
+												신고
+												<%-- </c:if> --%>
+												
+												</div>
 										</div>
 										<div id="comment-text-area">
 											<span>${rcList.commentDate }</span> <br>
@@ -451,11 +460,15 @@ text-align:center;
 										</div>
 										<div id="comment-delmodi-buttom-area"
 											style="text-align: right">
+											
+											<%-- <c:if test="${loginUser.memberEmail == rcList.memberEmail || loginUser.adminCheck==true } "> 관리자나 작성자만 보임 --%>
+											
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
 											<button
 												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );"
 												class="btn btn-outline-primary">삭제</button>
+												<%-- </c:if> --%>
 
 										</div>
 

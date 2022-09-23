@@ -64,10 +64,10 @@ public class RecipeCommentController {
 		try {
 			
 			
-			//작성자 아니면 삭제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+			//작성자 아니면 수정금지
+//			if(!session.getAttribute("loginUser.memberEmail").equals(rComment.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
 //				
-//				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+//				mv.addObject("msg", "작성자만 수정할 수 있습니다");
 //				mv.setViewName("common/error");
 //				return mv;
 //			}
@@ -100,7 +100,7 @@ public class RecipeCommentController {
 		try {
 			
 			//작성자 아니면 삭제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
 //				
 //				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
 //				mv.setViewName("common/error");

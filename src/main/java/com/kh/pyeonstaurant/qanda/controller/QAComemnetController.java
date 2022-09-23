@@ -79,7 +79,7 @@ public class QAComemnetController {
 			
 			
 			//작성자 아니면 수정금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(qAComment.getMemberEmail())) {
+//			if(!session.getAttribute("loginUser.memberEmail").equals(qAComment.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
 //				
 //				mv.addObject("msg", "작성자만 수정할 수 있습니다");
 //				mv.setViewName("common/error");
@@ -113,7 +113,7 @@ public class QAComemnetController {
 			
 			
 			//작성자 아니면 삭제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(memberEmail) {
+//			if(!session.getAttribute("loginUser.memberEmail").equals(memberEmail)||session.getAttribute("loginUser.adminCheck")==false) {
 //				
 //				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
 //				mv.setViewName("common/error");

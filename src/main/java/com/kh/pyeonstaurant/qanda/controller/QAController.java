@@ -239,7 +239,7 @@ public class QAController {
 		try {
 			
 			//작성자 아니면수정제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(qA.getMemberEmail())) {
+//			if(!session.getAttribute("loginUser.memberEmail").equals(qA.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
 //				
 //				mv.addObject("msg", "작성자만 수정할 수 있습니다");
 //				mv.setViewName("common/error");
@@ -329,7 +329,7 @@ public class QAController {
 		try {
 			
 			//작성자 아니면 삭제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(memberEmail) {
+//			if(!session.getAttribute("loginUser.memberEmail").equals(memberEmail)||session.getAttribute("loginUser.adminCheck")==false) {
 //				
 //				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
 //				mv.setViewName("common/error");

@@ -128,7 +128,7 @@ a {
 					<c:forEach items="${qList }" var="qList">
 						<tr>
 							
-							<%-- <c:if test="${loginUser.adminCheck==1}"> 세션용 관리자일시에만 보임 --%>
+							<%-- <c:if test="${loginUser.adminCheck==true}"> 세션용 관리자일시에만 보임 --%>
 							<td>
 								<!-- 삭제용 체크박스 -->
 
@@ -162,8 +162,11 @@ a {
 				<!-- 글쓰기 버튼영역 -->
 				<div class="col-md-12" id="write-button-area"
 					style="text-align: right">
+					
+<%-- 					<c:if test="${loginUser !=null }"> 로그인 했을때만 보임 --%>
 					<button class="btn btn-outline-primary"
 						onclick="location.href='/qna/wirteForm.do';">글쓰기</button>
+<%-- 						</c:if> --%>
 				</div>
 			</div>
 			<!-- 게시판 출력영역 종료 -->
