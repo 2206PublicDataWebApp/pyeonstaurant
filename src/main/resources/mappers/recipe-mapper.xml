@@ -3,8 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="RecipeMapper">
-
-	
 <insert id="insertRecipe">
 
 		insert into recipe_tbl
@@ -218,6 +216,11 @@ update recipe_comment set COMMNET_CONTENTS=#{commentContents} where COMMENT_NO =
 select * from recipe_comment where RECIPE_NO = #{recipeNo} order by COMMENT_NO
 </select>
 
+<select id="selectCommentCount" resultType="_int">
+
+select count(*) from recipe_comment where RECIPE_NO = #{recipeNo}
+
+</select>
 
 
 

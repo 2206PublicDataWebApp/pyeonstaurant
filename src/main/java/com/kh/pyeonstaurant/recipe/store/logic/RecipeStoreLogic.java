@@ -6,6 +6,7 @@ package com.kh.pyeonstaurant.recipe.store.logic;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -103,11 +104,6 @@ public class RecipeStoreLogic implements RecipeStore {
 		return rTag;
 	}
 
-	@Override
-	public int selectRecipeCommentList(int page, int limit, int recipeNo, SqlSessionTemplate session) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int selectRecommand(SqlSessionTemplate session, int recipeNo, String memberEmail) {
@@ -123,8 +119,10 @@ public class RecipeStoreLogic implements RecipeStore {
 
 	/**레시피 코멘트 출력*/
 	@Override
-	public List<RecipeComment> selectRecipeCommentList(int recipeNo, SqlSessionTemplate session) {
-		List<RecipeComment> rcList = session.selectList("RecipeMapper.selectCommentList", recipeNo);
+	public List<RecipeComment> selectRecipeCommentList(int recipeNo, SqlSessionTemplate session, int currentPage,int limit) {
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<RecipeComment> rcList = session.selectList("RecipeMapper.selectCommentList", recipeNo, rowBounds);
 		
 		return  rcList;
 	}
@@ -236,6 +234,14 @@ public class RecipeStoreLogic implements RecipeStore {
 		List<Recipe> recommandList = session.selectList("RecipeMapper.selectRecommandRecipe",recipeCategory);
 		System.out.println(recommandList.toString());
 		return recommandList;
+	}
+
+	/**댓글 갯수 가져오기*/
+	@Override
+	public int selectTotalCount(SqlSessionTemplate session, int recipeNo) {
+		int count = session.selectOne("RecipeMapper.selectCommentCount",recipeNo);
+		return count;
+		
 	}
 
 }

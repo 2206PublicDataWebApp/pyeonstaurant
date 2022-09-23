@@ -8,10 +8,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${recipe.recipeName }</title>
-</head>
-<body>
+<link href="/resources/css/page.css" rel="stylesheet">
 
-	<style>
+<style>
 #imgDiv {
 	width: 100%;
 	height: 27rem;
@@ -101,11 +100,17 @@ text-align:center;
 }
 
 #recommand-area{
-padding-left: 30px !important;
+    padding-left: 50px;
+
 }
 
-
 </style>
+
+
+
+</head>
+<body>
+	
 
 	<section style="margin: 0 auto;">
 		<span id="list-icon-area"> <svg onclick="list();"
@@ -177,6 +182,64 @@ padding-left: 30px !important;
 
 			<div class="col-md-12 m-0 row">
 				<!--  아티클 전체 들어감-->
+				
+				
+				
+					<!-- 레시피 왼쪽 영역 (반응형을 위한영역 pc에선 안보임) -->
+				<div class="col-md-4 m-0 d-sm-none d-block" id="article4">
+					<article>
+						<div id="material-area" class="m-3">
+							<h4 style="text-align: center">레시피 재료</h4>
+							<ul>
+								<c:forEach items="${rmList}" var="rmList">
+									<li>재료: ${rmList.material}, 수량 : ${rmList.amount}
+								</c:forEach>
+							</ul>
+							<hr>
+						</div>
+						<div id="recipe-time-area" class="m-3" style="text-align: center">
+							<h4>조리 시간</h4>
+							${recipe.recipeTime }
+							<hr>
+						</div>
+						<div id="other-recipe-area">
+							<h4 style="text-align: center">추천 레시피</h4>
+							<!-- 추천레시피 출력영역 -->
+							<div id="recommand-area">
+								<c:forEach items="${recoList}" var="recoList" varStatus="i" begin="1" end="3">
+
+									<div class="card col-md-3 m-3" style="width: 80%;">
+										<div class="img-area" id="normal-img-area">
+											<img src="/resources/recipeImg/${recoList.mainPicRename }"
+												class="card-img-top" alt="">
+										</div>
+										<div class="card-body">
+											<p class="card-text">
+												<a href="/recipe/detail.do?recipeNo=${recoList.recipeNo }">${recoList.recipeName }</a>
+											</p>
+											
+										</div>
+									</div>
+
+								</c:forEach>
+
+							</div>
+							<!-- 추천 레시피 영역 종료 -->
+						</div>
+
+
+
+					</article>
+				</div><!-- 오른쪽 영역 종료 -->
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				<div class="col-md-8" id="article1">
 					<article>
 
@@ -300,8 +363,8 @@ padding-left: 30px !important;
 
 
 
-
-				<div class="col-md-4 m-0" id="article2">
+				<!-- 레시피 오른쪽 영역 -->
+				<div class="col-md-4 m-0 d-sm-block d-none" id="article2">
 					<article>
 						<div id="material-area" class="m-3">
 							<h4 style="text-align: center">레시피 재료</h4>
@@ -323,7 +386,7 @@ padding-left: 30px !important;
 							<div id="recommand-area">
 								<c:forEach items="${recoList}" var="recoList" varStatus="i" begin="1" end="3">
 
-									<div class="card col-md-3 m-3" id="recommand-card-area"style="width: 80%;">
+									<div class="card col-md-3 m-3" style="width: 80%;">
 										<div class="img-area" id="normal-img-area">
 											<img src="/resources/recipeImg/${recoList.mainPicRename }"
 												class="card-img-top" alt="">
@@ -345,7 +408,7 @@ padding-left: 30px !important;
 
 
 					</article>
-				</div>
+				</div><!-- 오른쪽 영역 종료 -->
 			</div>
 
 			<article id="reply-area">
@@ -360,8 +423,7 @@ padding-left: 30px !important;
 								<div id="comment-picture" class="col-md-2 d-none d-md-inline">
 									<!-- 코맨트 사진영역 -->
 
-									<svg xmlns="http://www.w3.org/2000/svg" width="80%"
-										height="80%" fill="currentColor"
+									<svg xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" fill="currentColor"
 										class="bi bi-person-bounding-box" viewBox="0 0 16 16">
 				  					<path
 											d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
@@ -461,6 +523,52 @@ padding-left: 30px !important;
 
 						</div>
 						<!-- 코멘트 작성영역 종료 -->
+						
+						
+						
+						<!-- 코멘트 페이지 영역 -->
+							<div id="page-area" style="text-align:center">
+							
+							
+							<div id="app" class="container">
+							<ul class="page">
+								<!-- 1페이지 아닐때만 -->
+								<c:if test="${startNavi ne 1 && startNavi > 0}">
+									<li class="page__btn">
+									<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }&page=${startNavi-1 }#reply-area"> < </a>
+									</li>
+								</c:if>
+								
+								<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+								
+									<c:if test="${currentPage == p}">
+										<li class="page__numbers active">${p }</li>
+									</c:if>
+									<c:if test="${currentPage ne p}">
+										<li class="page__numbers"><a
+											href="/recipe/detail.do?recipeNo=${recipe.recipeNo }&page=${p }#reply-area">${p }</a></li>
+									</c:if>
+								</c:forEach>
+
+
+
+								<!-- 마지막페이지 아닐때만 -->
+								<c:if test="${endNavi < maxPage }">
+									<li class="page__btn">
+										<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }&page=${endNavi+1 }#reply-area"> > </a>
+										</li>
+								</c:if>
+							</ul>
+						</div>
+							
+							
+							
+							
+							
+							
+							</div>
+						
+						<!-- 코멘트 페이지 영역 종료 -->
 					</form>
 
 

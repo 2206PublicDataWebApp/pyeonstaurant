@@ -51,7 +51,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		 * 레시피 등록 컨트롤러
 		 * 
 		 * @param recipe
-		 *  @param rStep
+		 * @param rStep
 		 * @param rMaterial
 		 * @param rTag
 		 * @param mv
@@ -99,7 +99,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				ArrayList<RecipeMaterial> rmList = new ArrayList<RecipeMaterial>();
 				String amount[] = rMaterial.getAmount().split(",");
 				String material[] = rMaterial.getMaterial().split(",");
-				int count =1;
+				int count = 1;
 				for (int i = 0; i < material.length; i++) {
 					// 재료나 수량이 비어있지 않을때만 List에 저장
 					if (!amount[i].equals("") && !material[i].equals("")) {
@@ -108,7 +108,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 						rMaterialOne.setMaterial(material[i]);
 						rMaterialOne.setMaterialOrder(count++);
 						rmList.add(rMaterialOne);
-						
+
 					}
 
 				}
@@ -148,13 +148,12 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 					}
 					// 여기서부터 레시피 step 테이블에 저장할 값 List화 시키는 코드
 					RecipeStep rStepOne = new RecipeStep();
-						
+
 					rStepOne.setRecipeDescription(arrDescription[i]);
-					
+
 					rStepOne.setRecipeOrder(countStep++);
 					rStepOne.setRecipePic(recipePic);
 					rStepOne.setRecipePicRename(recipePicRename);
-					
 
 					rsList.add(rStepOne);
 
@@ -202,26 +201,53 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		 * @return
 		 */
 		@RequestMapping(value = "/recipe/detail.do", method = RequestMethod.GET)
-		public ModelAndView viewRecipeStep(int recipeNo, HttpSession session, ModelAndView mv) {
+		public ModelAndView viewRecipeStep(int recipeNo, HttpSession session, ModelAndView mv,
+				@RequestParam(value = "page", required = false) Integer page) {
 
 			try {
-				Recipe recipe = rService.printOneRecipe(recipeNo); 
+				Recipe recipe = rService.printOneRecipe(recipeNo);
 				List<RecipeMaterial> rmList = rService.printOneRecipeMaterial(recipeNo);
 				List<RecipeStep> rsList = rService.printOneRecipeStep(recipeNo);
 				RecipeTag rTag = rService.printOneRecipeTag(recipeNo);
-				List<Recipe> recomnandList = rService.recomadRecipe(recipe.getRecipeCategory());//추천레시피 목록
-				
-				
-				///레시피 댓글 가지고 오기///
-				List<RecipeComment> rcList = rService.printRecipeCommentList(recipeNo);
-				
+				List<Recipe> recomnandList = rService.recomadRecipe(recipe.getRecipeCategory());// 추천레시피 목록
+
+				/// 레시피 댓글 가지고 오기///
+				// 페이징중//
+				int currentPage = (page != null) ? page : 1;
+				// 현재 페이지
+				// 만약 page값이 없으면 기본형 1로 출력할것, 아니면 받아온 page의 값을 준다.
+				// 삼항연상자 사용
+
+				int totalCount = rService.getTotalCount(recipeNo);
+				int boardLimit = 10; // 한 화면에 출력할 게시물 수
+				int naviLimit = 10; // 한 화면에 출력할 게시판 페이지 수
+				int maxPage; // 게시판의 총 페이지 수
+				int startNavi; // 한 화면에 출력되는 게시판 페이지의 처음 수
+				int endNavi;// 한 화면에 출력되는 게시판 페이지의 마지막 수
+
+				maxPage = (int) ((double) totalCount / boardLimit + 0.9);
+				startNavi = ((int) ((double) currentPage / naviLimit + 0.9) - 1) * naviLimit + 1;
+				endNavi = startNavi + naviLimit - 1;
+
+				// endNavi가 maxNavi보다 커지는 오류방지
+				if (maxPage < endNavi) {
+					endNavi = maxPage;
+				}
+				mv.addObject("startNavi", startNavi);
+				mv.addObject("endNavi", endNavi);
+				mv.addObject("maxPage", maxPage);
+				mv.addObject("currentPage", currentPage);
+
+				/// 페이징 종료////
+
+				List<RecipeComment> rcList = rService.printRecipeCommentList(recipeNo,currentPage,boardLimit);
 
 				mv.addObject("recipe", recipe);
 				mv.addObject("rmList", rmList);
 				mv.addObject("rsList", rsList);
 				mv.addObject("rTag", rTag);
-				mv.addObject("rcList",rcList);
-				mv.addObject("recoList",recomnandList);
+				mv.addObject("rcList", rcList);
+				mv.addObject("recoList", recomnandList);
 				mv.setViewName("/recipe/recipeDetail");
 
 			} catch (Exception e) {
@@ -284,7 +310,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				@RequestParam("recipeNo") Integer recipeNo, HttpSession session, HttpServletRequest request) {
 
 			try {
-				
+
 				// 대표 이미지 교체
 				String mainPic = mainPicture.getOriginalFilename();
 				if (mainPicture != null && !mainPic.equals(""))// 새로 파일을 올렸을때, 이름이 없는 파일이 있을 경우를 생각해 null체크 2번함
@@ -345,19 +371,18 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				// 배열의 마지막은 ,가 안들어가기때문에 더미vlaue 배열값으로 인식한다, ,가 없는 더미value를 삭제 해주는 코드
 
 				// 레시피 이미지 교체
-				
+
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				String savedPath = root + "\\recipeImg";
 				String recipeRe[] = rStep.getRecipePicRename().split(",");
 				// 반복문으로 삭제/저장
-				for (int i = 0; i <arrDescription.length; i++) {
+				for (int i = 0; i < arrDescription.length; i++) {
 					String recipePic = recipePicture.get(i).getOriginalFilename();
-					
-					
+
 					if (recipePicture.get(i) != null && !recipePic.equals("")) {
 
 						File file = new File(savedPath + "\\" + recipeRe); // 이미 저장한 파일의 이름을 가져와야 한다.
-						
+
 						if (file.exists()) { // 지정한 파일이 있는지 없는지 체크
 							file.delete(); // 있으면 삭제
 						}
@@ -384,14 +409,13 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 						rStepOne.setRecipeNo(recipeNo);
 
 						rsList.add(rStepOne);
-						
 
 					}
 				} // 레시지 저장 반복문 종료
 
 				int result2 = rService.modifyOneRecipeStep(rsList); // 레시피 순서저장 코드 종료
 
-				mv.setViewName("redirect:/recipe/detail.do?recipeNo="+recipe.getRecipeNo());
+				mv.setViewName("redirect:/recipe/detail.do?recipeNo=" + recipe.getRecipeNo());
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -405,38 +429,36 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 
 		/**
 		 * 레시피 추천
-		 * */
-		
-		@RequestMapping(value="/recipe/recommand.do", method = RequestMethod.GET)
-		public ModelAndView setRecommand(@ModelAttribute Recommandation recommand, 
-				HttpSession session, ModelAndView mv) {
-			
+		 */
+
+		@RequestMapping(value = "/recipe/recommand.do", method = RequestMethod.GET)
+		public ModelAndView setRecommand(@ModelAttribute Recommandation recommand, HttpSession session, ModelAndView mv) {
+
 			try {
-				int result=rService.setRecommand(recommand);
-				
-				mv.setViewName("redirect:/recipe/detail.do?recipeNo="+recommand.getRecipeNo()+"#recom-bookm-area");
-				
-			}catch (Exception e) {
+				int result = rService.setRecommand(recommand);
+
+				mv.setViewName("redirect:/recipe/detail.do?recipeNo=" + recommand.getRecipeNo() + "#recom-bookm-area");
+
+			} catch (Exception e) {
 				e.printStackTrace();
 				mv.addObject("msg", e.getMessage());
 				mv.setViewName("common/error");
 			}
-			
+
 			return mv;
 
 		}
 
-		/**추천취소*/
-		@RequestMapping(value="/recipe/recoRemove.do", method= RequestMethod.GET)
-		public ModelAndView removeRecommand(@ModelAttribute Recommandation recommand, HttpSession session, ModelAndView mv) {
+		/** 추천취소 */
+		@RequestMapping(value = "/recipe/recoRemove.do", method = RequestMethod.GET)
+		public ModelAndView removeRecommand(@ModelAttribute Recommandation recommand, HttpSession session,
+				ModelAndView mv) {
 			try {
-				
-			int result = rService.removeRecommand(recommand);
-			mv.setViewName("redirect:/recipe/detail.do?recipeNo="+recommand.getRecipeNo()+"#recom-bookm-area");
-			
 
-			
-			}catch (Exception e) {
+				int result = rService.removeRecommand(recommand);
+				mv.setViewName("redirect:/recipe/detail.do?recipeNo=" + recommand.getRecipeNo() + "#recom-bookm-area");
+
+			} catch (Exception e) {
 				e.printStackTrace();
 				mv.addObject("msg", e.getMessage());
 				mv.setViewName("common/error");
