@@ -144,8 +144,12 @@ a {
 
 
 
-							<td><a href="/qna/detail.do?qaNo=${qList.qaNo}"> <c:if
-										test="${qList.qaSecret == true}">
+							<td>
+							
+			<%-- 			<c:if test="${qList.qaSecret == true && (loginUser.adminCheck==true || loginUser.memeberEmail == qList.memberEmail)}">	 --%>
+						<a href="/qna/detail.do?qaNo=${qList.qaNo}">
+					<%-- 	</c:if>  --%>
+						<c:if test="${qList.qaSecret == true}">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
 			  <path
@@ -153,6 +157,10 @@ a {
 			</svg>
 									</c:if> ${qList.qaTitle }
 							</a></td>
+							
+							
+							
+							
 							<td>${qList.name }</td>
 							<td class="d-md-table-cell d-none">${qList.qaInsertDate }</td>
 						</tr>

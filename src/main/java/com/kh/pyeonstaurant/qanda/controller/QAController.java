@@ -362,6 +362,14 @@ public class QAController {
 			QA qa = qService.printOneQANo(qaNo);
 			List<QAComment> qcList = qService.allQACommentList(0, 0, qaNo);
 			
+			//비밀글시에
+			if(qa.isQaSecret()){
+				if(!session.getAttribute("loginUser.memberEmail").equals(qa.getMemberEmail())|| (boolean)session.getAttribute("loginUser.adminCheck")==false) {
+					
+					
+				}
+				
+			}
 			
 			//사용자 이름 출력영역
 			String name = qService.printMemberName(qa.getMemberEmail());
