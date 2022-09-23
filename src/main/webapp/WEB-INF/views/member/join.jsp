@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/join.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="/resources/js/join.js"></script>
 </head>
 <body>
     <header>
@@ -84,23 +85,20 @@
                         <i class="fas fa-envelope"></i>
                         <input type="text" name="memberEmail" id="email" placeholder="Enter your email" required>
                         <button type="button" id="email_auth_btn" class="email_auth_btn">인증번호 받기</button>
-                        <input type="text" placeholder="인증번호 입력" id="email_auth_key">
                       </div>
                       
-                      <!--
                       <div class="input-box">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="Verification Code" required>
-                      </div>
-                      -->
+                        <input type="text" id="email_auth_key" placeholder="Verification Code" required>
+                      </div>                      
+                      
                       <div class="input-box">
                         <i class="fas fa-lock"></i>
-                        <input type="password"  name="memberPwd" placeholder="Enter your password" required>
+                        <input type="password"  id="password" name="memberPwd" placeholder="Enter your password" required>
                       </div>
-                      <!--  <div class="input-box">
+                      <div class="input-box">
                         <i class="fas fa-lock"></i>
-                        <input type="text" placeholder="Re-Enter your password" required>
-                        -->
+                        <input type="password"  id="password_check" placeholder="Re-Enter your password" required>
                       </div>
                       <div class="input-box">
                         <i class="fas fa-user"></i>
@@ -108,7 +106,7 @@
                       </div>
                       
                       <div class="button input-box">
-                        <input type="submit" value="Sumbit">
+                        <input type="submit" id="join" value="Sumbit">
                       </div>
                       <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
                 </form>
@@ -123,7 +121,7 @@
         <a href="#"><img src="/resources/images/chat.png"></a>
     </div>
     
-	<script src="/resources/js/join.js"></script>
+
 
 </body>
 </html>

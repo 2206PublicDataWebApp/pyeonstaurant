@@ -14,5 +14,5 @@ public interface MemberStore {
 	public int updateMemberNickname(SqlSession session, Member member);
 	public int updateMemberPwd(SqlSession session, Member member);
 	// deleteMember
-	public int deleteMember(SqlSession session, Member member);
+	public int deleteMember(SqlSession session, String memberEmail);
 }

@@ -41,8 +41,8 @@ public class MemberStoreLogic implements MemberStore{
 	}
 	
 	@Override
-	public int deleteMember(SqlSession session, Member member) {
-		int result = session.delete("MemberMapper.deleteMember", member);
+	public int deleteMember(SqlSession session, String memberEmail) {
+		int result = session.delete("MemberMapper.deleteMember", memberEmail);
 		return result;
 	}
 

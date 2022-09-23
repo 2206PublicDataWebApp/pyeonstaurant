@@ -11,9 +11,7 @@
 		<result property="totalPoint" 	column="TOTAL_POINT"/>
 		
 	</resultMap>
-<!-- 	<select id="selectCheckOne" resultType="_int"> -->
-<!-- 		SELECT COUNT(*) FROM MEMBER_TBL -->
-<!-- 	</select> -->
+
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER_TBL
 		VALUES(#{memberEmail}, #{memberPwd}, #{memberNickname}, DEFAULT, DEFAULT)
@@ -31,10 +29,10 @@
 	</update>
 	<delete id="deleteMember">
 		DELETE FROM MEMBER_TBL
-		WHERE MEMBER_EMAIL = #{memberEmail } AND MEMBER_PW = #{memberPwd}
+		WHERE MEMBER_EMAIL = #{memberEmail }
 	</delete>
 	<select id="selectLoginOne" resultMap="memberResultMap">
-		SELECT MEMBER_NICKNAME, ADMIN_CHECK FROM MEMBER_TBL
+		SELECT * FROM MEMBER_TBL
 		 WHERE MEMBER_EMAIL = #{memberEmail } AND MEMBER_PW = #{memberPwd }
 	</select>
 	<select id="selectOneByEmail" resultMap="memberResultMap">

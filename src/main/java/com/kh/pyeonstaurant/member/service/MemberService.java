@@ -5,7 +5,7 @@ import com.kh.pyeonstaurant.member.domain.Member;
 public interface MemberService {
 	// loginMember
 	public Member loginMember(Member member);
-	// printOneById
+	// printOneByEmail
 	public Member printOneByEmail(String memberEmail);
 	// registerMember
 	public int registerMember(Member member);
@@ -13,5 +13,5 @@ public interface MemberService {
 	public int modifyMemberNickname(Member member);
 	public int modifyMemberPwd(Member member);
 	// removeMember
-	public int removeMember(Member member);
+	public int removeMember(String memberEmail);
 }

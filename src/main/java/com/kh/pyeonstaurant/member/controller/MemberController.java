@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.member.service.MemberService;
 import com.kh.pyeonstaurant.member.service.logic.MemberServiceImpl;
@@ -75,7 +77,7 @@ public class MemberController {
 		try {
 			int result = mService.registerMember(member);
 			if(result > 0) {
-				mv.setViewName("member/congratulations");
+				mv.setViewName("redirect:/");
 			}else {
 				mv.addObject("msg", "회원가입을 실패했습니다.");
 				mv.setViewName("common/errorPage");
@@ -85,8 +87,6 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -108,7 +108,6 @@ public class MemberController {
                 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
         
         try {
-            
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(setFrom);
@@ -120,10 +119,58 @@ public class MemberController {
         }catch(Exception e) {
             e.printStackTrace();
         }
-        
         return Integer.toString(checkNum);
- 
 	}
 	
+	
+	// 회원정보 상세 조회
+	@RequestMapping(value="/member/myPage.kh", method=RequestMethod.GET)
+	public ModelAndView showMyPage(HttpServletRequest request
+			, ModelAndView mv) {
+		try {
+			HttpSession session = request.getSession();
+			Member member = (Member)session.getAttribute("loginUser");
+			String memberEmail = member.getMemberEmail();
+			Member mOne = mService.printOneByEmail(memberEmail);
+			mv.addObject("member", mOne);
+			mv.setViewName("member/myPage");
 
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	// 로그아웃
+	@RequestMapping(value="/member/logout.kh", method=RequestMethod.GET)
+	public ModelAndView memberLogout(
+			HttpServletRequest request
+			, ModelAndView mv) {
+		HttpSession session = request.getSession();
+		if(session != null) {
+			session.invalidate();
+			mv.setViewName("redirect:/");
+		}else {
+			mv.addObject("msg", "로그아웃 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+
+	//회원 탈퇴 기능 구현 중
+	@RequestMapping(value="/member/remove.kh", method=RequestMethod.GET)
+	public ModelAndView removeMember(HttpSession session
+//			, Model model
+			, ModelAndView mv) {
+		try {
+			Member member = (Member)session.getAttribute("loginUser");
+			String memberEmail = member.getMemberEmail();
+			int result = mService.removeMember(memberEmail);
+			mv.setViewName("redirect:/member/logout.kh");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
 }

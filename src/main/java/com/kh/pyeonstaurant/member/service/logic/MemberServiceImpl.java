@@ -48,8 +48,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int removeMember(Member member) {
-		int result = mStore.deleteMember(session, member);
+	public int removeMember(String memberEmail) {
+		int result = mStore.deleteMember(session, memberEmail);
 		return result;
 	}
 
