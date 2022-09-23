@@ -60,6 +60,4 @@ public class Member {
 		return "Member [memberEmail=" + memberEmail + ", memberPwd=" + memberPwd + ", memberNickname=" + memberNickname
 				+ ", adminCheck=" + adminCheck + ", totalPoint=" + totalPoint + "]";
 	}
-	
-	
 }

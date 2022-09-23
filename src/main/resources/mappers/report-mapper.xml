@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reportMapper">
+	<resultMap type="report" id="reportResultMap">
+		<result property="recipeNo" 	column="RECIPE_NO"/>
+		<result property="commentNo" 	column="COMMENT_NO"/>
+		<result property="reportResult" 	column="REPORT_RESULT"/>
+		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
+		<result property="reportDate" 	column="REPORT_DATE"/>
+	</resultMap>
+	<insert id="insertReportRecipe" parameterType="Report">
+		INSERT INTO REPORT VALUES(#{recipeNo}, NULL, DEFAULT, #{memberEmail}, SYSDATE)
+	</insert>
+	
+	<insert id="insertReportComment" parameterType="Report">
+		INSERT INTO REPORT VALUES(NULL, #{commentNo}, DEFAULT, #{memberEmail}, SYSDATE)
+	</insert>
+
+	<select id="selectAllReport" resultMap="reportResultMap">
+		SELECT * FROM REPORT WHERE RECIPE_NO IS NOT NULL
+	</select>
+	
+	<select id="selectAllComment" resultMap="reportResultMap">
+		SELECT * FROM REPORT WHERE COMMENT_NO IS NOT NULL
+	</select>
+	
+	<update id="updateRecipeStatus">
+		UPDATE REPORT SET REPORT_RESULT = 'Y' WHERE RECIPE_NO = #{recipeNo}
+	</update>
+	
+	<update id="updateCommentStatus">
+		UPDATE REPORT SET REPORT_RESULT = 'Y' WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<select id="selectReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE RECIPE_NO IS NOT NULL
+	</select>
+	
+	<select id="selectCommentCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE RECIPE_NO IS NOT NULL
+	</select>
+</mapper>

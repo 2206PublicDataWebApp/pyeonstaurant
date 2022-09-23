@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminMapper">
+	<resultMap type="Admin" id="MemberAdminResultMap">
+		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
+		<result property="memberNickName" 	column="MEMBER_NICKNAME"/>
+		<result property="totalPoint" 	column="TOTAL_POINT"/>
+	</resultMap>
+	
+	 <resultMap type="Board" id="BoardAdminResultMap">
+		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
+		<result property="boardTitle" 	column="RECIPE_NAME"/>
+		<result property="incertDate"   column="INCERT_DATE"/>
+		<result property="recipeInfo"   column="RECIPE_INFO"/>
+		<result property="recipeNo"   column="RECIPE_NO"/>
+	</resultMap>
+	
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_EMAIL LIKE '%'||#{memberInfo}||'%'
+	</select>
+		
+	<select id="selectAllEmail" resultMap="MemberAdminResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_EMAIL LIKE '%'||#{memberInfo}||'%'
+	</select>
+	
+	<select id="selectAllNickName" resultMap="MemberAdminResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_NICKNAME LIKE '%'||#{memberInfo}||'%'
+	</select>
+	
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail}
+	</delete>
+	
+	<select id="selectEmailTotal" resultType="_int">
+		SELECT COUNT(*) FROM RECIPE_TBL WHERE MEMBER_EMAIL LIKE '%'||#{boardInfo}||'%'
+	</select>
+	
+	<select id="selectTitleTotal" resultType="_int">
+		SELECT COUNT(*) FROM RECIPE_TBL WHERE RECIPE_NAME LIKE '%'||#{boardInfo}||'%'
+	</select>
+	
+	<select id="selectBoardEmail" resultMap="BoardAdminResultMap">
+		SELECT * FROM RECIPE_TBL WHERE MEMBER_EMAIL LIKE '%'||#{boardInfo}||'%'
+	</select>
+	
+	<select id="selectBoardTitle" resultMap="BoardAdminResultMap">
+		SELECT * FROM RECIPE_TBL WHERE RECIPE_NAME LIKE '%'||#{boardInfo}||'%'
+	</select>
+	
+	<select id="selectAllBoardCount" resultType="_int">
+		SELECT COUNT(*) FROM RECIPE_TBL
+	</select>
+	
+	<select id="selectAllBoard" resultMap="BoardAdminResultMap">
+		SELECT * FROM RECIPE_TBL
+	</select>
+	
+	<select id="selectAllMemberCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_TBL
+	</select>
+	
+	<select id="selectAllMember" resultMap="MemberAdminResultMap">
+		SELECT * FROM MEMBER_TBL
+	</select>
+	</mapper>
