@@ -65,6 +65,26 @@ public class AdminServiceImpl implements AdminService{
 		List<Admin> aList = mStore.selectAllMember(session, currentPage, memberLimit);
 		return aList;
 	}
+	@Override
+	public List selectAllPoint(String memberEmail) {
+		List pList = mStore.selectPoint(session, memberEmail);
+		return pList;
+	}
+	@Override
+	public int addPoint(String memberEmail) {
+		int result = mStore.addPoint(session, memberEmail);
+		return result;
+	}
+	@Override
+	public int decreasePoint(String memberEmail) {
+		int result = mStore.decreasePoint(session, memberEmail);
+		return result;
+	}
+	@Override
+	public int resetPoint(String memberEmail) {
+		int result = mStore.resetPoint(session, memberEmail);
+		return result;
+	}
 
 
 	

@@ -98,5 +98,29 @@ public class AdminStoreLogic implements AdminStore{
 		return aList;
 	}
 
+	@Override
+	public List selectPoint(SqlSession session, String memberEmail) {
+		List pList = session.selectList("AdminMapper.selectPoint", memberEmail);
+		return pList;
+	}
+
+	@Override
+	public int addPoint(SqlSession session, String memberEmail) {
+		int result = session.update("AdminMapper.increasePoint", memberEmail);
+		return result;
+	}
+
+	@Override
+	public int decreasePoint(SqlSession session, String memberEmail) {
+		int result = session.update("AdminMapper.decreasePoint", memberEmail);
+		return result;
+	}
+
+	@Override
+	public int resetPoint(SqlSession session, String memberEmail) {
+		int result = session.update("AdminMapper.resetPoint", memberEmail);
+		return result;
+	}
+
 
 }

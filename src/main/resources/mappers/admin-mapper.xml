@@ -64,4 +64,21 @@
 	<select id="selectAllMember" resultMap="MemberAdminResultMap">
 		SELECT * FROM MEMBER_TBL
 	</select>
+	
+	<select id="selectPoint" resultMap="MemberAdminResultMap">
+		SELECT * FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
+	</select>
+	
+	
+	<update id="increasePoint">
+		UPDATE MEMBER_TBL SET TOTAL_POINT = TOTAL_POINT + 1 WHERE MEMBER_EMAIL = #{memberEmail}
+	</update>
+	
+	<update id="decreasePoint">
+		UPDATE MEMBER_TBL SET TOTAL_POINT = TOTAL_POINT - 1 WHERE MEMBER_EMAIL = #{memberEmail}
+	</update>
+	
+	<update id="resetPoint">
+		UPDATE MEMBER_TBL SET TOTAL_POINT = 0 WHERE MEMBER_EMAIL = #{memberEmail}
+	</update>
 	</mapper>

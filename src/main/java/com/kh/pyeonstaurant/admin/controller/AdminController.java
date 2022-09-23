@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +58,7 @@ public class AdminController {
 		}
 		mv.setViewName("admin/boardAdminView");
 		return mv;
-//		return "admin/boardAdminView";
+
 	}	
 	
 	//나중에 레시피 조회 합칠때 사용
@@ -151,7 +152,7 @@ public class AdminController {
 //		
 //	}
 	
-	@RequestMapping(value="/admin/boardSearch", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/boardSearch", method=RequestMethod.GET)
 	public ModelAndView searchBoard(ModelAndView mv
 			, HttpSession session
 			, @RequestParam("boardInfo") String boardInfo
@@ -182,5 +183,53 @@ public class AdminController {
 		return mv;		
 	}
 	
+	//포인트 부분
+	@RequestMapping(value="/point/pointList", method=RequestMethod.GET)
+	public ModelAndView pointList(
+			ModelAndView mv
+			,@ModelAttribute Admin admin
+			,@RequestParam("memberEmail") String memberEmail) {
+		List pList = mService.selectAllPoint(memberEmail);
+		
+		if(!pList.isEmpty()) {
+			mv.addObject("pList", pList);
+		}
+		mv.setViewName("admin/point");
+		return mv;
+		
+	}
+	@RequestMapping(value="/admin/increasePoint", method=RequestMethod.GET)
+	public String increasePoint(@RequestParam("memberEmail") String memberEmail) {
+		int result = mService.addPoint(memberEmail);
+				
+		if(result > 0) {
+			System.out.println("추가 성공");
+		}
+		return "redirect:/point/pointList?memberEmail="+memberEmail;
+		
+	}
+	
+	@RequestMapping(value="/admin/decreasePoint", method=RequestMethod.GET)
+	public String decreasePoint(@RequestParam("memberEmail") String memberEmail) {
+		int result = mService.decreasePoint(memberEmail);
+				
+		if(result > 0) {
+			System.out.println("감소 성공");
+		}
+		return "redirect:/point/pointList?memberEmail="+memberEmail;
+		
+	}
+	
+
+	@RequestMapping(value="/admin/resetPoint", method=RequestMethod.GET)
+	public String resetPoint(@RequestParam("memberEmail") String memberEmail) {
+		int result = mService.resetPoint(memberEmail);
+				
+		if(result > 0) {
+			System.out.println("리셋 성공");
+		}
+		return "redirect:/point/pointList?memberEmail="+memberEmail;
+		
+	}
 	
 }

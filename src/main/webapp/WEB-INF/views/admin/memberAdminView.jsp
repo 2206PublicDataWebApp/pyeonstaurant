@@ -143,6 +143,10 @@
 							href="/admin/boardList"> <span data-feather="shopping-cart"
 								class="align-text-bottom"></span> 게시글 관리
 						</a></li>
+						<li class="nav-item"><a class="nav-link reportAdmin"
+							href="/admin/boardList"> <span data-feather="shopping-cart"
+								class="align-text-bottom"></span> 채팅 관리
+						</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -174,7 +178,7 @@
 				<h3 style="margin-top: 20px">회원 목록</h3>
 
 				<div class="table-responsive">
-					<table class="table"
+					<table class="table table-hover"
 						style="text-align: center; border: 1px solid #dddddd">
 						<thead>
 							<tr>
@@ -192,7 +196,7 @@
 										<td>${i.count }</td>
 										<td>${member.memberEmail }</td>
 										<td>${member.memberNickName }</td>
-										<td>${member.totalPoint }</td>
+										<td><a href="/point/pointList?memberEmail=${member.memberEmail }">${member.totalPoint }</a></td>
 										<td scope="col"><button>
 												<a
 													href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a>
@@ -230,22 +234,7 @@
 									</tr>
 								</c:forEach>
 							</c:if>
-							<c:if test="${!empty mList }">
-								<tr align="center" height="20">
-									<td colspan="6"><c:if test="${currentPage != 1 }">
-											<a href="/admin/memberSearch?page=${currentPage - 1 }">[이전]</a>
-										</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-											<c:if test="${currentPage eq p }">
-												<b>${p }</b>
-											</c:if>
-											<c:if test="${currentPage ne p }">
-												<a href="/admin/memberSearch?page=${p }">${p }</a>
-											</c:if>
-										</c:forEach> <c:if test="${maxPage > currentPage }">
-											<a href="/admin/memberSearch?page=${currentPage + 1 }">[다음]</a>
-										</c:if></td>
-								</tr>
-							</c:if>
+				
 
 						</tbody>
 					</table>

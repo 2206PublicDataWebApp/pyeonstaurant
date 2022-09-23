@@ -154,116 +154,28 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">신고 관리</h1>
-					<div class="btn-toolbar mb-2 mb-md-0"></div>
+					<h1 class="h2">포인트 관리</h1>
+				
 				</div>
-				<h3 style="margin-top: 20px">신고 현황</h3>
-
-				<div class="table-responsive">
-					<table class="table table-hover"
-						style="text-align: center; border: 1px solid #dddddd">
-						<thead>
-							<tr>
-								<th style="background-color: #eeeeee; text-align: center;">레시피
-									번호</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고내용</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고자</th>
-								<th style="background-color: #eeeeee; text-align: center;">날짜</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리
-									상태</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리
-									확인</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${!empty rList }">
-								<c:forEach items="${rList }" var="report" varStatus="i">
-									<tr>
-										<td>${report.recipeNo }</td>
-										<td>레시피 관련 신고</td>
-										<td>${report.memberEmail }</td>
-										<td>${report.reportDate }</td>
-										<td>${report.reportResult }</td>
-										<td><button>
-												<a href="/report/successRecipe?recipeNo=${report.recipeNo }">확인</a>
-											</button></td>
-									</tr>
-								</c:forEach>
-								<c:if test="${!empty rList }">
-									<tr align="center" height="20">
-										<td colspan="6"><c:if test="${currentPage != 1 }">
-												<a href="/report/reportRecipe?page=${currentPage - 1 }">[이전]</a>
-											</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-												<c:if test="${currentPage eq p }">
-													<b>${p }</b>
-												</c:if>
-												<c:if test="${currentPage ne p }">
-													<a href="/report/reportRecipe?page=${p }">${p }</a>
-												</c:if>
-											</c:forEach> <c:if test="${maxPage > currentPage }">
-												<a href="/report/reportRecipe?page=${currentPage + 1 }">[다음]</a>
-											</c:if></td>
-									</tr>
-								</c:if>
-							</c:if>
-						</tbody>
-					</table>
-
-					<table class="table"
-						style="text-align: center; border: 1px solid #dddddd">
-						<thead>
-							<tr>
-								<th style="background-color: #eeeeee; text-align: center;">댓글
-									번호</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고내용</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고자</th>
-								<th style="background-color: #eeeeee; text-align: center;">날짜</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리상태</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리
-									확인</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${!empty cList }">
-								<c:forEach items="${cList }" var="comment" varStatus="i">
-									<tr>
-										<td>${comment.commentNo }</td>
-										<td>댓글 관련 신고</td>
-										<td>${comment.memberEmail }</td>
-										<td>${comment.reportDate }</td>
-										<td>${comment.reportResult }</td>
-										<td><button>
-												<a
-													href="/report/successComment?commentNo=${comment.commentNo }">확인</a>
-											</button></td>
-								</c:forEach>
-								<c:if test="${!empty cList }">
-									<tr align="center" height="20">
-										<td colspan="6"><c:if test="${currentPage2 != 1 }">
-												<a href="/report/reportRecipe?page=${currentPage2 - 1 }">[이전]</a>
-											</c:if> <c:forEach var="p" begin="${startNavi2 }" end="${endNavi2 }">
-												<c:if test="${currentPage2 eq p }">
-													<b>${p }</b>
-												</c:if>
-												<c:if test="${currentPage2 ne p }">
-													<a href="/report/reportRecipe?page=${p }">${p }</a>
-												</c:if>
-											</c:forEach> <c:if test="${maxPage2 > currentPage2 }">
-												<a href="/report/reportRecipe?page=${currentPage2 + 1 }">[다음]</a>
-											</c:if></td>
-									</tr>
-								</c:if>
-							</c:if>
-						</tbody>
-					</table>
-				</div>
+				<c:if test="${!empty pList }">
+					<c:forEach items="${pList }" var="point" varStatus="i">
+					<h3 style="margin-top: 20px">${point.memberNickName }님의 정보</h3>			
+				<h4>${point.memberNickName }님의 총 포인트는 ${point.totalPoint }점 입니다.</h4>				
+				<button><a href="/admin/increasePoint?memberEmail=${point.memberEmail}">추가</a></button>
+				<button><a href="/admin/decreasePoint?memberEmail=${point.memberEmail }">차감</a></button>
+				<button><a href="/admin/resetPoint?memberEmail=${point.memberEmail }">초기화</a></button>
+					</c:forEach>	
+				</c:if>
 			</main>
 		</div>
 	</div>
 
-	<script>
-	
-</script>
+	</div>
+	</main>
+	</div>
+	</div>
+
+
 
 
 	<script
