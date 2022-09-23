@@ -10,16 +10,15 @@ public interface ReportService {
 
 	public int addReportComment(Report report);
 
-
-	public List<Report> reportRecipeView(int currentPage, int boardLimit, int recipeNo);
-
-	public List<Report> reportCommentView(int currentPage, int boardLimit, int commentNo);
-
 	public int processedReportRecipe(int recipeNo);
 
 	public int processedReportComment(int commentNo);
 
-	public int getRecipeTotalCount(int recipeNo);
+	public int getTotalReoprtCount();
 
-	public int getCommentTotalCount(int commentNo);
+	public List<Report> reportAllView(int currentPage, int boardLimit);
+
+	public int getTotalCommentCount();
+
+	public List<Report> reportCommentAllView(int currentPage2, int boardLimit2);
 }

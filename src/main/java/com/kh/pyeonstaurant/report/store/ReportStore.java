@@ -12,16 +12,16 @@ public interface ReportStore {
 
 	public int insertReportCommentNo(SqlSession session, Report report);
 
-	public List<Report> selectAllByValue(SqlSession session, int currentPage, int boardLimit, int recipeNo);
-
-	public List<Report> selectAllByCommentValue(SqlSession session, int currentPage, int boardLimit, int commentNo);
-
 	public int updateReportRecipe(SqlSession session, int recipeNo);
 
 	public int updateReportComment(SqlSession session, int commentNo);
 
-	public int selectRecipeTotalCount(SqlSession session, int recipeNo);
+	public int selectTotalReportCount(SqlSession session);
 
-	public int selectCommentNoTotalCount(SqlSession session, int commentNo);
+	public List<Report> selectAllReport(SqlSession session, int currentPage, int boardLimit);
+
+	public int selectTotalCommentCount(SqlSession session);
+
+	public List<Report> selectAllComment(SqlSession session, int currentPage2, int boardLimit2);
 
 }

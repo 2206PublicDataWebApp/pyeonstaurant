@@ -30,31 +30,6 @@ public class ReportServiceImpl implements ReportService{
 		return result;
 	}
 
-
-	@Override
-	public List<Report> reportRecipeView(int currentPage, int boardLimit, int recipeNo) {
-		List<Report> rList 
-		= rStore.selectAllByValue(
-				session
-				, currentPage
-				, boardLimit
-				, recipeNo
-				);
-		return rList;
-	}
-
-	@Override
-	public List<Report> reportCommentView(int currentPage, int boardLimit, int commentNo) {
-		List<Report> rList 
-		= rStore.selectAllByCommentValue(
-				session
-				, currentPage
-				, boardLimit
-				, commentNo
-				);
-		return rList;
-	}
-
 	@Override
 	public int processedReportRecipe(int recipeNo) {
 		int result = rStore.updateReportRecipe(session, recipeNo);
@@ -67,18 +42,40 @@ public class ReportServiceImpl implements ReportService{
 		return result;
 	}
 
-
 	@Override
-	public int getRecipeTotalCount(int recipeNo) {
-		int totalCount = rStore.selectRecipeTotalCount(session, recipeNo);
-		return totalCount;
+	public int getTotalReoprtCount() {
+		int result = rStore.selectTotalReportCount(session);
+		return result;
 	}
 
 	@Override
-	public int getCommentTotalCount(int commentNo) {
-		int totalCount = rStore.selectCommentNoTotalCount(session, commentNo);
-		return totalCount;
+	public List<Report> reportAllView(int currentPage, int boardLimit) {
+		List<Report> rList 
+		= rStore.selectAllReport(
+				session
+				, currentPage
+				, boardLimit
+				);
+		return rList;
 	}
+
+	@Override
+	public int getTotalCommentCount() {
+		int result = rStore.selectTotalCommentCount(session);
+		return result;
+	}
+
+	@Override
+	public List<Report> reportCommentAllView(int currentPage2, int boardLimit2) {
+		List<Report> cList 
+		= rStore.selectAllComment(
+				session
+				, currentPage2
+				, boardLimit2
+				);
+		return cList;
+	}
+
 
 	
 	

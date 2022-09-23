@@ -22,53 +22,55 @@ public class MyRecipeController {
 	@Autowired
 	private MyRecipeService mService;
 
-	@RequestMapping(value="/myRecipe/remove", method=RequestMethod.POST)
-	public String removeMyRecipe(Model model, HttpSession session) {
+//	@RequestMapping(value="/myRecipe/remove", method=RequestMethod.GET)
+//	public String removeMyRecipe(Model model, HttpSession session, HttpServletRequest request) {
+//
+//		try {
+//			session = request.getSession();
+//			MyRecipe member = (MyRecipe)session.getAttribute("memberEmail");
+//			String memberEmail = member.getMemberId();
+//			int result = mService.removeMyRecipe(recipeNo);
+//			
+//			if(result > 0) {
+//				session.removeAttribute("recipeNo");
+//			}
+//			
+//		}catch(Exception e) {
+//			//			model.addAttribute("msg", e.toString());
+//			//			return "common/errorPage";
+//
+//		}
+//		return "redirect:/myrecipe/list";
+//	}
 
-		try {
-			int recipeNo = (int)session.getAttribute("recipeNo");
-			int result = mService.removeMyRecipe(recipeNo);
-			if(result > 0) {
-				session.removeAttribute("recipeNo");
-			}
-			
-		}catch(Exception e) {
-			//			model.addAttribute("msg", e.toString());
-			//			return "common/errorPage";
-
-		}
-		return "redirect:/myrecipe/list";
-	}
-
-	@RequestMapping(value="/myRecipe/add", method=RequestMethod.POST)
+	@RequestMapping(value="/myRecipe/add", method=RequestMethod.GET)
 	public ModelAndView addMyRecipe(
 			ModelAndView mv
 			, HttpSession session
-			,@ModelAttribute MyRecipe myRecipe
-			, @RequestParam("memberEmail") String memberEmail
-			, @RequestParam("recipeNo") int recipeNo
+			, @ModelAttribute MyRecipe myRecipe
 			,HttpServletRequest request) {
 		try {
-			myRecipe.setRecipeNo(recipeNo);
+			session = request.getSession();
+			MyRecipe email = (MyRecipe)session.getAttribute("memberEmail");
+			String memberEmail = email.getMemberEmail();
+			myRecipe.setMemberEmail(memberEmail);
 			int result = mService.addMyRecipe(myRecipe);
 			if(result > 0) {
-				mv.setViewName("redirect:/레시피 상세 페이지");	//이부분 추가해야함.
+				mv.setViewName("redirect:/recipe/detail.do");
 			}
 		}catch(Exception e) {
 		}
 		return mv;	
 	}
 	
-	@RequestMapping(value="/myRecipe/list", method=RequestMethod.POST)
+	@RequestMapping(value="/myRecipe/list", method=RequestMethod.GET)
 	public ModelAndView selectAllMyRecipe(ModelAndView mv
 			, HttpSession session
 			,HttpServletRequest request
-			,@RequestParam(value="page", required=false) Integer page ) {
-		
-		session = request.getSession();
-		MyRecipe myRecipe = (MyRecipe)session.getAttribute("memberEmail");
-		String memberEmail = myRecipe.getMemberEmail();
-		
+			,@RequestParam(value="page", required=false) Integer page) {	
+//		session = request.getSession();
+//		MyRecipe myRecipe = (MyRecipe)session.getAttribute("memberEmail");
+		String memberEmail = "woals8503@gmail.com";
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = mService.getTotalCount(memberEmail);
 		int boardLimit = 10;
@@ -90,10 +92,11 @@ public class MyRecipeController {
 			mv.addObject("startNavi", startNavi);
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("mList", mList);
+		}else {
+			System.out.println("데이터 없음");
 		}
 		mv.setViewName("myrecipe/myRecipeList");
 		return mv;
-		
 	}
 	
 

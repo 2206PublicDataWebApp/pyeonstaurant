@@ -13,12 +13,6 @@ import com.kh.pyeonstaurant.myrecipe.domain.MyRecipe;
 public class MyRecipeStoreLogic implements MyRecipeStore{
 
 	@Override
-	public int deleteOneByMyRecipe(SqlSession session, int recipeNo) {
-		int result = session.delete("MyRecipeMapper.removeMyRecipe", recipeNo);
-		return result;
-	}
-
-	@Override
 	public int insertMyRecipe(SqlSession session, MyRecipe myRecipe) {
 		int result = session.insert("MyRecipeMapper.insertMyRecipe", myRecipe);
 		return result;
@@ -40,6 +34,19 @@ public class MyRecipeStoreLogic implements MyRecipeStore{
 				, memberEmail, rowBounds);
 		return mList;
 	}
+
+
+	@Override
+	public int deleteOneByMyRecipe(SqlSession session, MyRecipe myRecipe) {
+		int result = session.delete("MyRecipeMapper.removeMyRecipe", myRecipe);
+		return result;
+	}
+
+//	@Override
+//	public int deleteOneByMyRecipe(SqlSession session, int recipeNo, String memberEmail) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 
 	

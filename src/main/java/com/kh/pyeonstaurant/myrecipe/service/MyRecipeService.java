@@ -6,7 +6,6 @@ import java.util.List;
 import com.kh.pyeonstaurant.myrecipe.domain.MyRecipe;
 
 public interface MyRecipeService {
-	public int removeMyRecipe(int recipeNo);
 
 	public int addMyRecipe(MyRecipe myRecipe);
 
@@ -14,6 +13,7 @@ public interface MyRecipeService {
 
 	public List<MyRecipe> printMyRecipeList(int currentPage, int boardLimit, String memberEmail);
 
-	
+	public int removeMyRecipe(MyRecipe myRecipe);
+
 
 }

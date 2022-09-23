@@ -114,7 +114,7 @@
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item reportBlock">
-            <a class="nav-link active reportAdmin" aria-current="page" href="/report/reportView">
+            <a class="nav-link active reportAdmin" aria-current="page" href="/report/reportAdmin">
               <span data-feather="home" class="align-text-bottom"></span>
               신고 관리
             </a>

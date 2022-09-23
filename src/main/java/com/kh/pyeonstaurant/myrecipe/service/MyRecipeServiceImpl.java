@@ -15,13 +15,7 @@ public class MyRecipeServiceImpl implements MyRecipeService{
 	private SqlSession session;
 	@Autowired
 	private MyRecipeStore mStore;
-	
 
-	@Override
-	public int removeMyRecipe(int recipeNo) {
-		int result = mStore.deleteOneByMyRecipe(session, recipeNo);
-		return result;
-	}
 
 
 	@Override
@@ -48,6 +42,16 @@ public class MyRecipeServiceImpl implements MyRecipeService{
 				,memberEmail);
 		return mList;
 	}
+
+
+	@Override
+	public int removeMyRecipe(MyRecipe myRecipe) {
+		int result = mStore.deleteOneByMyRecipe(session, myRecipe);
+		return result;
+	}
+
+
+
 
 
 

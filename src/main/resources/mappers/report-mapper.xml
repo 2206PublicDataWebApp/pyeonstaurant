@@ -17,13 +17,13 @@
 	<insert id="insertReportComment" parameterType="Report">
 		INSERT INTO REPORT VALUES(NULL, #{commentNo}, DEFAULT, #{memberEmail}, SYSDATE)
 	</insert>
-	
-	<select id="selectReportRecipe" resultMap="reportResultMap">
-		SELECT * FROM MYRECIPE WHERE RECIPE_NO = #{recipeNo}
+
+	<select id="selectAllReport" resultMap="reportResultMap">
+		SELECT * FROM REPORT WHERE RECIPE_NO IS NOT NULL
 	</select>
 	
-	<select id="selectReportComment" resultMap="reportResultMap">
-		SELECT * FROM MYRECIPE WHERE RECIPE_NO = #{commentNo}
+	<select id="selectAllComment" resultMap="reportResultMap">
+		SELECT * FROM REPORT WHERE COMMENT_NO IS NOT NULL
 	</select>
 	
 	<update id="updateRecipeStatus">
@@ -31,14 +31,14 @@
 	</update>
 	
 	<update id="updateCommentStatus">
-		UPDATE REPORT SET REPORT_RESULT = 'Y' WHERE RECIPE_NO = #{commentNo}
+		UPDATE REPORT SET REPORT_RESULT = 'Y' WHERE COMMENT_NO = #{commentNo}
 	</update>
 	
-	<select id="selectRecipeTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MYRECIPE WHERE RECIPE_NO = #{recipeNo}
+	<select id="selectReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE RECIPE_NO IS NOT NULL
 	</select>
 	
-	<select id="selectCommentTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MYRECIPE WHERE RECIPE_NO = #{commentNo}
+	<select id="selectCommentCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE RECIPE_NO IS NOT NULL
 	</select>
 </mapper>

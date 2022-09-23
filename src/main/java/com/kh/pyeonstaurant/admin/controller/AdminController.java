@@ -137,9 +137,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/removeMember")
-	public String removeMember(ModelAndView mv
-			, HttpSession session
-			, @RequestParam("memberEmail") String memberEmail) {		
+	public String removeMember(@RequestParam("memberEmail") String memberEmail) {		
 		int result = mService.removeOneByMember(memberEmail);
 
 		return "redirect:/admin/memberAdminList";

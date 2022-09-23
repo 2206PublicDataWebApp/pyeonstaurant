@@ -7,10 +7,12 @@
 		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
 		<result property="recipeNo" 	column="RECIPE_NO"/>
 		<result property="myRecipeNo" 	column="MYRECIPE_NO"/>
+		<result property="mainPicture" 	column="MAIN_PICTURE"/>
+		<result property="recipeName" 	column="RECIPE_NAME"/>
 	</resultMap>
 	
-	<delete id="removeMyRecipe" parameterType="MyRecipe">
-		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo}
+	<delete id="removeMyRecipe">
+		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo} AND MEMBER_EMAIL = #{memberEmail }
 	</delete>
 	
 	<insert id="insertMyRecipe" parameterType="MyRecipe">
@@ -18,11 +20,12 @@
 	</insert>
 	
 	<select id="selectAllByValue" resultMap="MyRecipeResultMap">
-		SELECT * FROM MYRECIPE WHERE MEMBER_EMAIL = #{memberEmail}
+		SELECT * FROM RECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
-	<select id="selectTotalCount" parameterType="String">
-		SELECT COUNT(*) FROM MYRECIPE WHERE MEMBER_EMAIL = #{memberEmail}
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
 	</select>
 
+	
 </mapper>

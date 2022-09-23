@@ -21,15 +21,61 @@ public class ReportController {
 	@Autowired
 	private ReportService rService;
 	
-	@RequestMapping(value="/report/reportView", method=RequestMethod.GET)
-	public String reportView() {
-		return "admin/reportView";
+	@RequestMapping(value="/report/reportAdmin", method=RequestMethod.GET)
+	public ModelAndView reportView(
+			ModelAndView mv
+			, @RequestParam(value="page", required=false) Integer page
+			, @RequestParam(value="page2", required=false) Integer page2) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = rService.getTotalReoprtCount();
+		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		maxPage = (int)((double)totalCount/boardLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+		List<Report> rList = rService.reportAllView(currentPage, boardLimit);
+		if(!rList.isEmpty()) {
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("rList", rList);
+		}
+		
+		int currentPage2 = (page2 != null) ? page2 : 1;
+		int totalCount2 = rService.getTotalCommentCount();
+		int boardLimit2 = 10;
+		int naviLimit2 = 5;
+		int maxPage2;
+		int startNavi2;
+		int endNavi2;
+		maxPage2 = (int)((double)totalCount2/boardLimit2 + 0.9);
+		startNavi2 = ((int)((double)currentPage2/naviLimit2+0.9)-1)*naviLimit2+1;
+		endNavi2 = startNavi2 + naviLimit2 - 1;
+		if(maxPage2 < endNavi2) {
+			endNavi2 = maxPage2;
+		}
+		List<Report> cList = rService.reportCommentAllView(currentPage2, boardLimit2);
+		if(!rList.isEmpty()) {
+			mv.addObject("maxPage2", maxPage2);
+			mv.addObject("currentPage2", currentPage2);
+			mv.addObject("startNavi2", startNavi2);
+			mv.addObject("endNavi2", endNavi2);
+			mv.addObject("cList", cList);
+		}
+		mv.setViewName("admin/reportView");
+		return mv;
 	}
 	
 	@RequestMapping(value="/report/add", method=RequestMethod.POST)
 	public ModelAndView addReportRecipe(ModelAndView mv
 			, HttpSession session
-			, @RequestParam("recipeNo") int recipeNo
 			, @ModelAttribute Report report
 			,HttpServletRequest request
 			) {
@@ -38,7 +84,6 @@ public class ReportController {
 			Report email = (Report)session.getAttribute("memberEmail");
 			String memberEmail = email.getMemberEmail();	//신고자 이메일
 			report.setMemberEmail(memberEmail);
-			report.setRecipeNo(recipeNo);
 			int result = rService.addReportRecipe(report);
 			if(result > 0) {
 				mv.setViewName("redirect:/레시피 상세페이지");
@@ -52,7 +97,6 @@ public class ReportController {
 	@RequestMapping(value="/report/addComment", method=RequestMethod.POST)
 	public ModelAndView addReportComment(ModelAndView mv
 			, HttpSession session
-			, @RequestParam("commentNo") int commentNo
 			, @ModelAttribute Report report
 			,HttpServletRequest request
 			) {
@@ -61,7 +105,6 @@ public class ReportController {
 			Report email = (Report)session.getAttribute("memberEmail");
 			String memberEmail = email.getMemberEmail();	//신고자 이메일
 			report.setMemberEmail(memberEmail);
-			report.setRecipeNo(commentNo);
 			int result = rService.addReportComment(report);
 			if(result > 0) {
 				mv.setViewName("redirect:/레시피 상세페이지");
@@ -71,98 +114,16 @@ public class ReportController {
 		}
 		return mv;	
 	}
-	
-	@RequestMapping(value="/report/reportRecipe", method=RequestMethod.POST)
-	public ModelAndView reportRecipeView(ModelAndView mv
-			, HttpSession session
-			, @RequestParam(value="page", required=false) Integer page
-			, @RequestParam("recipeNo") int recipeNo
-			) {				
-		int currentPage = (page != null) ? page : 1;
-		int totalCount = rService.getRecipeTotalCount(recipeNo);
-		int boardLimit = 10;
-		int naviLimit = 5;
-		int maxPage;
-		int startNavi;
-		int endNavi;
-		maxPage = (int)((double)totalCount/boardLimit + 0.9);
-		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
-		endNavi = startNavi + naviLimit - 1;
-		if(maxPage < endNavi) {
-			endNavi = maxPage;
-		}
-		List<Report> rList = rService.reportRecipeView(currentPage, boardLimit, recipeNo);
-		if(!rList.isEmpty()) {
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("startNavi", startNavi);
-			mv.addObject("endNavi", endNavi);
-			mv.addObject("rList", rList);
-		}
-		mv.setViewName("report/reportView");
-		return mv;
-		
+	@RequestMapping(value="/report/successRecipe", method=RequestMethod.GET)
+	public String successReportRecipe(@RequestParam("recipeNo") int recipeNo) {
+		int result = rService.processedReportRecipe(recipeNo);
+		return "redirect:/report/reportAdmin";
+
 	}
-	
-	@RequestMapping(value="/report/reportComment", method=RequestMethod.POST)
-	public ModelAndView reportCommentView(ModelAndView mv
-			, HttpSession session
-			, @RequestParam(value="page", required=false) Integer page
-			, @RequestParam("commentNo") int commentNo
-			) {				
-		int currentPage = (page != null) ? page : 1;
-		int totalCount = rService.getCommentTotalCount(commentNo);
-		int boardLimit = 10;
-		int naviLimit = 5;
-		int maxPage;
-		int startNavi;
-		int endNavi;
-		maxPage = (int)((double)totalCount/boardLimit + 0.9);
-		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
-		endNavi = startNavi + naviLimit - 1;
-		if(maxPage < endNavi) {
-			endNavi = maxPage;
-		}
-		List<Report> cList = rService.reportCommentView(currentPage, boardLimit, commentNo);
-		if(!cList.isEmpty()) {
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("startNavi", startNavi);
-			mv.addObject("endNavi", endNavi);
-			mv.addObject("cList", cList);
-		}
-		mv.setViewName("report/reportView");
-		return mv;
-	}
-	
-	public ModelAndView successReportRecipe(ModelAndView mv
-			, HttpSession session
-			, @RequestParam("recipeNo") int recipeNo) {
-			try {
-				int result = rService.processedReportRecipe(recipeNo);
-				if(result > 0) {
-					mv.setViewName("report/reportView");
-				}
-			}catch(Exception e) {
-				
-			}
- 				return mv;
-		
-	}
-	
-	public ModelAndView successReportComment(ModelAndView mv
-			, HttpSession session
-			, @RequestParam("commentNo") int commentNo) {
-			try {
-				int result = rService.processedReportComment(commentNo);
-				if(result > 0) {
-					mv.setViewName("report/reportView");
-				}
-			}catch(Exception e) {
-				
-			}
- 				return mv;
-		
+	@RequestMapping(value="/report/successComment", method=RequestMethod.GET)
+	public String successReportComment(@RequestParam("commentNo") int commentNo) {
+		int result = rService.processedReportComment(commentNo);
+		return "redirect:/report/reportAdmin";
 	}
 	
 }
