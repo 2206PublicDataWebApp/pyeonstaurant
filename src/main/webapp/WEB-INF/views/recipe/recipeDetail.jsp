@@ -247,7 +247,7 @@ text-align:center;
 						<!-- 작성자 영역 -->
 						<div id="wirter-area" class="col-md-12">
 							<h5>
-								작성자 : ${recipe.memberEmail }
+								작성자 : ${name }
 								<button class="btn btn-danger">신고</button>
 							</h5>
 						</div>
@@ -440,7 +440,7 @@ text-align:center;
 										class="shadow-lg p-3 mb-5 bg-body rounded mt-4 text-justify">
 										<div id="comment-row" class="row">
 											<div id="comment-writer" class="col-md-10">
-												<h4>${rcList.memberEmail }</h4>
+												<h4>${rcList.memberName }</h4>
 											</div>
 											<div id="comment-button" class="col-md-2"
 												style="text-align: right">신고</div>
@@ -500,6 +500,8 @@ text-align:center;
 
 					<!-- 코멘트 작성영역 -->
 
+				<%-- <c:if test="${loginUser != null}">  로그인 시에만 보임--%>
+				
 					<form action="/recipe/commentWrite.do" method="post">
 						<div id="comment-write-area" class="row">
 							<input type="hidden" value="" name="memberEmail"> <input
@@ -522,6 +524,9 @@ text-align:center;
 
 
 						</div>
+						</form>
+					<%-- 	</c:if> --%>
+						
 						<!-- 코멘트 작성영역 종료 -->
 						
 						

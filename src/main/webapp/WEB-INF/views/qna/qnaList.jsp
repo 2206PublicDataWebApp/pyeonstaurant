@@ -50,8 +50,11 @@ a {
 				<div id="button-search-area" class="row">
 					<div class="col-6" id="button">
 						<!-- 삭제버튼영역 -->
-
+						<%-- <c:if test="${loginUser.adminCheck==1}"> 세션으로 관리자 체크 --%>
+						
 						<button onclick="checkRemove()" class="btn btn-outline-primary">삭제</button>
+						
+						<%-- </c:if> --%>
 					</div>
 
 					<!-- 검색영역 -->
@@ -108,7 +111,12 @@ a {
 				<table class="col-12 table table-striped mt-2"
 					style="text-align: center">
 					<tr class="">
+					
+						<%-- <c:if test="${loginUser.adminCheck==1}"> 세션으로 관리자 체크 --%>
 						<td style="width: 5%"></td>
+						<%-- </c:if> --%>
+						
+						
 						<td style="width: 16%" class="d-md-table-cell d-none">번호</td>
 						<td style="width: 20%" class="d-md-table-cell d-none">카테고리</td>
 						<td style="width: 40%" id="title-cell">제목</td>
@@ -116,12 +124,17 @@ a {
 						<td class="d-md-table-cell d-none">작성일</td>
 					</tr>
 
+				<!-- 게시판 내용 출력영역	 -->
 					<c:forEach items="${qList }" var="qList">
 						<tr>
+							
+							<%-- <c:if test="${loginUser.adminCheck==1}"> 세션용 관리자일시에만 보임 --%>
 							<td>
-								<!-- 삭제용 체크박스 --> <input type="checkbox" name="qaNo"
-								value="${qList.qaNo }">
+								<!-- 삭제용 체크박스 -->
+
+					<input type="checkbox" name="qaNo" value="${qList.qaNo }">
 							</td>
+						<%-- 	</c:if> --%>
 							<!-- 삭제용 체크 박스 종료 -->
 							<td class="d-md-table-cell d-none">${qList.qaNo }</td>
 							<td class="d-md-table-cell d-none"><c:if
@@ -140,7 +153,7 @@ a {
 			</svg>
 									</c:if> ${qList.qaTitle }
 							</a></td>
-							<td>${qList.memberEmail }</td>
+							<td>${qList.name }</td>
 							<td class="d-md-table-cell d-none">${qList.qaInsertDate }</td>
 						</tr>
 					</c:forEach>

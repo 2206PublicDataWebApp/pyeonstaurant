@@ -59,7 +59,7 @@ img {
 				<!-- 타이틀 영역 종료 -->
 				<!-- 글쓴이 영역 -->
 				<div id="writer-area" class="col-md-2">
-					<h4>작성자 : ${qa.memberEmail }</h4>
+					<h4>작성자 : ${qa.name }</h4>
 				</div>
 				<!-- 글쓴이 영역 종료 -->
 			</div>
@@ -74,6 +74,10 @@ img {
 							${qa.qaInsertDate }</div>
 						<div class="col-md-2 row"
 							style="text-align: center; padding: 1em;">
+							
+							
+							<%-- <c:if test=${$qa.memberEmail ==loginUser.memeberEmail }> 세션 용 --%>
+							
 							<div class="col-6">
 								<button
 									onclick="location.href='/qna/modifyView.do?qaNo=${qa.qaNo}'"
@@ -84,6 +88,10 @@ img {
 									class="btn btn-outline-primary" style="width: 100%">삭제</button>
 
 							</div>
+							
+							<%-- </c:if> --%>
+							
+							
 
 						</div>
 					</div>
@@ -162,11 +170,10 @@ img {
 									<div
 										class="shadow-lg p-3 mb-5 bg-body rounded mt-4 text-justify">
 										<div id="comment-row" class="row">
-											<div id="comment-writer" class="col-md-10">
-												<h4>${qcList.memberEmail }작성자</h4>
+											<div id="comment-writer" class="col-md-12">
+												<h4>${qcList.qcName }</h4>
 											</div>
-											<div id="comment-button" class="col-md-2"
-												style="text-align: right">신고</div>
+											
 										</div>
 										<div id="comment-text-area">
 											<span>${qcList.qaCommentDate }</span> <br>
@@ -174,11 +181,16 @@ img {
 										</div>
 										<div id="comment-delmodi-buttom-area"
 											style="text-align: right">
+											
+											<%-- <c:if test="${${qcList.memberEmail == loginUser.memberEmail}"> 세션용 --%>
+											
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
 											<button
 												onclick="removeComment(${qcList.qaCommentNo},${qcList.qaNo} );"
 												class="btn btn-outline-primary">삭제</button>
+
+											<%-- 	</c:if> --%>
 
 										</div>
 

@@ -61,7 +61,9 @@ public interface RecipeStore {
 
 	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory);
 
-	public int selectTotalCount(SqlSessionTemplate session, int recipeNo); 
+	public int selectTotalCount(SqlSessionTemplate session, int recipeNo);
+
+	public String selectMemberName(String memberEmail, SqlSessionTemplate session); 
 
 
 

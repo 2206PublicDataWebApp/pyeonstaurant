@@ -82,6 +82,7 @@ a {
 </head>
 <body>
 
+<%-- <c:if test="${loginUser != null }"> 로그인 했을때만 보임 --%>
 	<!--글 입력 아이콘 영역-->
 	<span id="wirte-icon-area"> <svg
 			onclick="location.href='/recipe/writeView.do'" id="write-icon"
@@ -92,7 +93,7 @@ a {
 				d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                </svg>
 	</span>
-
+<%-- </c:if> --%>
 
 	<section class="container-md">
 

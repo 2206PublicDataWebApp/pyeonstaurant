@@ -123,6 +123,7 @@ public class RecipeStoreLogic implements RecipeStore {
 		int offset = (currentPage - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<RecipeComment> rcList = session.selectList("RecipeMapper.selectCommentList", recipeNo, rowBounds);
+		System.out.println(rcList.toString());
 		
 		return  rcList;
 	}
@@ -232,7 +233,6 @@ public class RecipeStoreLogic implements RecipeStore {
 	@Override
 	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory) {
 		List<Recipe> recommandList = session.selectList("RecipeMapper.selectRecommandRecipe",recipeCategory);
-		System.out.println(recommandList.toString());
 		return recommandList;
 	}
 
@@ -242,6 +242,13 @@ public class RecipeStoreLogic implements RecipeStore {
 		int count = session.selectOne("RecipeMapper.selectCommentCount",recipeNo);
 		return count;
 		
+	}
+
+	/**멤버 닉네임 가져오기*/
+	@Override
+	public String selectMemberName(String memberEmail,SqlSessionTemplate session) {
+		String name = session.selectOne("RecipeMapper.selectOneName", memberEmail);
+		return name;
 	}
 
 }

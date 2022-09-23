@@ -198,6 +198,13 @@ public int getTotalCount(int recipeNo) {
 	return count;
 
 }
+
+
+/**멤버 이름 가져오기**/
+public String printMemberName(String memberEmail) {
+	String name = rStore.selectMemberName(memberEmail, session);
+	return name;
+}
 		
 	
 }

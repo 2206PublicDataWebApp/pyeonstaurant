@@ -61,6 +61,8 @@ public interface RecipeService {
 
 	public int getTotalCount(int recipeNo);
 
+	public String printMemberName(String memberEmail);
+
 
 
 }

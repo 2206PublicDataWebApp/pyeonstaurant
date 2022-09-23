@@ -26,10 +26,14 @@ public class QA {
 	private Date qaInsertDate;
 	private Date qaUpdateDate;
 	private String qaStatus;
+	private String name;
+	
 	
 	
 	public QA() {}
 	
+
+
 	@Override
 	public String toString() {
 		return "QA [qaNo=" + qaNo + ", qaTitle=" + qaTitle + ", qaContents=" + qaContents + ", qaFile1=" + qaFile1
@@ -37,8 +41,23 @@ public class QA {
 				+ ", qaFile1Rename=" + qaFile1Rename + ", qaFile2Rename=" + qaFile2Rename + ", qaFile3Rename="
 				+ qaFile3Rename + ", qaFile4Rename=" + qaFile4Rename + ", qaFile5Rename=" + qaFile5Rename
 				+ ", qaCategory=" + qaCategory + ", qaSecret=" + qaSecret + ", memberEmail=" + memberEmail
-				+ ", qaInsertDate=" + qaInsertDate + ", qaUpdateDate=" + qaUpdateDate + ", qaStatus=" + qaStatus + "]";
+				+ ", qaInsertDate=" + qaInsertDate + ", qaUpdateDate=" + qaUpdateDate + ", qaStatus=" + qaStatus
+				+ ", name=" + name + "]";
 	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 
 	public QA(int qaNo, String qaTitle, String qaContents, String qaFile1, String qaFile2, String qaFile3,
 			String qaFile4, String qaFile5, String qaFile1Rename, String qaFile2Rename, String qaFile3Rename,

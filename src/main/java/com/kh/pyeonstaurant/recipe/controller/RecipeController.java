@@ -40,8 +40,20 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		 * @param session
 		 * @return
 		 */
+		
 		@RequestMapping(value = "/recipe/writeView.do", method = RequestMethod.GET)
 		public ModelAndView showRecipeWrite(ModelAndView mv, HttpSession session) {
+			
+//			로그인 유저용
+//			if(session.getAttribute("loginUser")==null) {
+//				mv.addObject("msg", "로그인한 유저만 작성가능합니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//				
+//			}
+			
+			
+			
 			mv.setViewName("/recipe/recipeWirteForm");
 			return mv;
 
@@ -68,6 +80,8 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				@RequestParam(value = "recipePicture", required = false) List<MultipartFile> recipePicture,
 				HttpSession session, HttpServletRequest request) {
 			try {
+				
+				
 				// 레시피 전달
 
 				// 사진 저장코드
@@ -242,6 +256,21 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 
 				List<RecipeComment> rcList = rService.printRecipeCommentList(recipeNo,currentPage,boardLimit);
 
+				//멤버 닉네임 가지고 오기
+				String name = rService.printMemberName(recipe.getMemberEmail());
+				
+				//코멘트 닉네임 가지고 오기
+				String cName[] = new String[rcList.size()];
+				
+				for(int i=0; i<cName.length;i++) {
+					
+					cName[i] = rService.printMemberName(rcList.get(i).getMemberEmail());
+					rcList.get(i).setMemberName(cName[i]);
+					
+					
+				}
+				
+				mv.addObject("name", name);
 				mv.addObject("recipe", recipe);
 				mv.addObject("rmList", rmList);
 				mv.addObject("rsList", rsList);
@@ -268,6 +297,8 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		@RequestMapping(value = "/recipe/modifyForm.do", method = RequestMethod.GET)
 		public ModelAndView recipeModifyView(ModelAndView mv, @RequestParam("recipeNo") Integer recipeNo,
 				HttpSession session) {
+			
+			
 
 			try {
 				Recipe recipe = rService.printOneRecipe(recipeNo);
@@ -275,6 +306,17 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				List<RecipeMaterial> rmList = rService.printOneRecipeMaterial(recipeNo);
 				List<RecipeStep> rsList = rService.printOneRecipeStep(recipeNo);
 
+				//작성자 아니면 수정금지
+//				if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//					
+//					mv.addObject("msg", "작성자만 수정할 수 있습니다");
+//					mv.setViewName("common/error");
+//					return mv;
+//				}
+				
+				
+				
+				
 				mv.addObject("recipe", recipe);
 				mv.addObject("rTag", rTag);
 				mv.addObject("rmList", rmList);
@@ -435,6 +477,18 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		public ModelAndView setRecommand(@ModelAttribute Recommandation recommand, HttpSession session, ModelAndView mv) {
 
 			try {
+				
+//				로그인 유저용
+//				if(session.getAttribute("loginUser")==null) {
+//					mv.addObject("msg", "로그인한 유저만 추천가능합니다");
+//					mv.setViewName("common/error");
+//					return mv;
+//					
+//				}
+				
+				
+				
+				
 				int result = rService.setRecommand(recommand);
 
 				mv.setViewName("redirect:/recipe/detail.do?recipeNo=" + recommand.getRecipeNo() + "#recom-bookm-area");
@@ -453,6 +507,18 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		@RequestMapping(value = "/recipe/recoRemove.do", method = RequestMethod.GET)
 		public ModelAndView removeRecommand(@ModelAttribute Recommandation recommand, HttpSession session,
 				ModelAndView mv) {
+			
+//			로그인 유저용
+//			if(session.getAttribute("loginUser")==null) {
+//				mv.addObject("msg", "로그인한 유저만 추천가능합니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//				
+//			}
+			
+			
+			
+			
 			try {
 
 				int result = rService.removeRecommand(recommand);
@@ -479,6 +545,17 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		@RequestMapping(value = "/recipe/remove.do", method = RequestMethod.GET)
 		public ModelAndView removeRecipe(HttpSession session, ModelAndView mv, @RequestParam("recipeNo") int recipeNo,
 				@RequestParam(value = "memberEmail", required = false) String memberEmail) {
+			
+			//작성자 아니면 삭제금지
+//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//				
+//				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//			}
+			
+			
+			
 			try {
 				int result = rService.removeOneRecipe(recipeNo);
 				mv.setViewName("redirect:/recipe/recipeList.do");

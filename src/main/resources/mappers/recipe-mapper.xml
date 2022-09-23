@@ -223,5 +223,12 @@ select count(*) from recipe_comment where RECIPE_NO = #{recipeNo}
 </select>
 
 
+<!-- 멤버 불러오기 영역 -->
+
+
+<select id="selectOneName" resultType="string">
+select MEMBER_NICKNAME from Member_tbl where MEMBER_EMAIL =#{memberEmail}
+</select>
+
 
 </mapper>

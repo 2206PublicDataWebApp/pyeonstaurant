@@ -33,6 +33,16 @@ public class QAComemnetController {
 	public ModelAndView registQAComment(ModelAndView mv, @ModelAttribute QAComment qAComment, HttpSession session) {
 		// 나중에 세션으로 반드시 로그인 체크할것! 로그안 안되어있으면 오류메세지 로그인해주세요로 연결
 		try {
+			
+//			로그인 유저용
+//			if(session.getAttribute("loginUser")==null) {
+//				mv.addObject("msg", "로그인한 유저만 작성가능합니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//				
+//			}
+			
+			
 
 			qAComment.setQaCommentNo(0);
 			int result = qcService.registQAComment(qAComment);
@@ -59,10 +69,23 @@ public class QAComemnetController {
 	public ModelAndView modifyQAComment(ModelAndView mv, @ModelAttribute QAComment qAComment, HttpSession session) {
 
 		try {
+			
+			
+			
 
 			int result = qcService.modifyQAComment(qAComment);
 
 			mv.setViewName("redirect:/qna/detail.do?qaNo=" + qAComment.getQaNo() + "#reply-area");
+			
+			
+			//작성자 아니면 수정금지
+//			if(!session.getAttribute("loginUser.memberEmail").equals(qAComment.getMemberEmail())) {
+//				
+//				mv.addObject("msg", "작성자만 수정할 수 있습니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//			}
+			
 
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
@@ -87,6 +110,17 @@ public class QAComemnetController {
 
 		try {
 			int result = qcService.reomoveOneQACommentNo(qaCommentNo);
+			
+			
+			//작성자 아니면 삭제금지
+//			if(!session.getAttribute("loginUser.memberEmail").equals(memberEmail) {
+//				
+//				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//			}
+			
+			
 
 			mv.setViewName("redirect:/qna/detail.do?qaNo=" + qaNo + "#reply-area");
 

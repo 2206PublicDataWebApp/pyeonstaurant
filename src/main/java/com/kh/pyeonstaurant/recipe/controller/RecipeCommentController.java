@@ -31,6 +31,14 @@ public class RecipeCommentController {
 		//나중에 세션으로 반드시 로그인 체크할것! 로그안 안되어있으면 오류메세지 로그인해주세요로 연결
 		try {
 			
+//			로그인 유저용
+//			if(session.getAttribute("loginUser")==null) {
+//				mv.addObject("msg", "로그인한 유저만 가능합니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//				
+//			}
+			
 			
 		
 		int result = rcService.registRecipeComment(rComment);
@@ -52,7 +60,19 @@ public class RecipeCommentController {
 	 */
 	@RequestMapping(value="/recipe/commentModify.do")
 	public ModelAndView modifyRecipeComment(ModelAndView mv,@ModelAttribute RecipeComment rComment,HttpSession  session) {
+		
 		try {
+			
+			
+			//작성자 아니면 삭제금지
+//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//				
+//				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//			}
+			
+			
 			
 			int result = rcService.modifyOneRecipeComment(rComment);
 			mv.setViewName("redirect:/recipe/detail.do?recipeNo="+rComment.getRecipeNo()+"#reply-area");
@@ -78,6 +98,17 @@ public class RecipeCommentController {
 			@RequestParam(value="memberEmail", required = false)String memberEmail) {
 		
 		try {
+			
+			//작성자 아니면 삭제금지
+//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())) {
+//				
+//				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+//				mv.setViewName("common/error");
+//				return mv;
+//			}
+			
+			
+			
 		int result = rcService.removeOneRecipeComment(commentNo);
 		mv.setViewName("redirect:/recipe/detail.do?recipeNo="+recipeNo+"#reply-area");
 			

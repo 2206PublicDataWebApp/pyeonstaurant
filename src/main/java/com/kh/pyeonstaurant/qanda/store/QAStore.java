@@ -27,5 +27,7 @@ public interface QAStore {
 	public List<QA> selectAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue,
 			int currentPage, int boardLimit);
 
+	public String selectMemberName(String memberEmail, SqlSessionTemplate session);
+
 }
 
