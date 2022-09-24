@@ -128,6 +128,7 @@ justify-content: space-evenly
 
 <div class="container row col-md-12" id="recipe-wrtie-from"><!-- 레시피 입력 폼 시작 -->
 	<form action="/recipe/regist.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name ="memberEmail" value="${loginUser.memberEmail }">
 	
 			<article id="uparea"><!-- 상단 에어리어 -->
 			<div class="col-12 row p-0" id="article1">
@@ -161,7 +162,7 @@ justify-content: space-evenly
 				<!-- 상단 오른쪽 위 영역 -->
 					<div class="row"  id="title-video-area">
 						<div class="form-floating col-12 my-2">
-							<input type="text" class="form-control" id="" name="recipeName">
+							<input type="text" class="form-control" id="" name="recipeName" required="required">
 							<label for="floatingInput">레시피 제목</label>
 						</div>
 					
@@ -222,7 +223,7 @@ justify-content: space-evenly
 					<div class="form-floating">
 						<input type="text" class="form-control" id="" maxlength="30"
 							name="recipeInfo" required="required"> <label
-							for="floatingInput"> 간단한소개 (30자 미만)</label>
+							for="floatingInput" required="required"> 간단한소개 (30자 미만)</label>
 					</div>
 				</div><!-- 소개영역종료 -->
 
@@ -237,11 +238,11 @@ justify-content: space-evenly
 						<div class="row col-md-6 col-12 float-md-start p-3 me-1">
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-									name="material" onblur="materialCheck(this);"> <label for="floatingInput" >재료명</label>
+									name="material" onblur="materialCheck(this);" required="required"> <label for="floatingInput" >재료명</label>
 							</div>
 							<div class="form-floating col-md-6">
 								<input type="text" class="form-control" id="" maxlength="10"
-									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
+									name="amount" onblur="materialCheck(this);"required="required"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
@@ -341,7 +342,7 @@ justify-content: space-evenly
 
 						<div class="form-floating col-md-12 p-0 pt-3">
 							<textarea class="form-control" name="recipeDescription"  placeholder=""
-								id="floatingTextarea2" style="height: 250px"></textarea>
+								id="floatingTextarea2" style="height: 250px" required="required"></textarea>
 							<label for="floatingTextarea2" class="mt-3">설명을 입력하세요</label>
 						</div>
 

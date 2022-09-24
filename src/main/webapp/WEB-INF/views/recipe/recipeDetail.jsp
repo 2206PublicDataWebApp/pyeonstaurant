@@ -522,6 +522,7 @@ text-align:center;
 											style="text-align: right">
 											
 											<!-- 관리자 작성자만 보임 -->
+											<c:if test= "${loginUser != null }">
 											<c:if test="${loginUser.memberEmail == rcList.memberEmail}">
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
@@ -539,6 +540,7 @@ text-align:center;
 												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo},'${rcList.memberEmail }' );"
 												class="btn btn-outline-primary">삭제</button>
 												
+												 </c:if>
 												 </c:if>
 
 										</div>

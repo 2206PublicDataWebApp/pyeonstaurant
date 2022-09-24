@@ -174,6 +174,8 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 				}
 
 				int result2 = rService.registStep(rsList); // 레시피 순서저장 코드 종료
+				
+
 
 				// 레시피 태그 true false로 받음
 				int result3 = rService.registTag(rTag);
@@ -198,6 +200,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 			try {
 				List<Recipe> rList = rService.printRecipeList(0, 0);
 				mv.addObject("rList", rList);
+				
 				mv.setViewName("/recipe/recipeSearchList");
 			} catch (Exception e) {
 				mv.addObject("msg", e.getMessage());
