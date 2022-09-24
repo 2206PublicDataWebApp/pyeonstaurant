@@ -39,6 +39,14 @@ public class RecipeCommentServiceLogic implements RecipeCommentService{
 		int result =rcStore.deleteOneRecipeComment(commentNo, session);
 		return result;
 		
+	}
+
+
+/**작성자 이메일주소 가져오기*/
+	@Override
+	public String selectMemberEmail(Integer commentNo) {
+		String memberEmail = rcStore.selectMemberEmail(session,commentNo);
+		return memberEmail;
 	};
 
 	

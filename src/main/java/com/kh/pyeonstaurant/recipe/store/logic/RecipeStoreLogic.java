@@ -260,5 +260,12 @@ public class RecipeStoreLogic implements RecipeStore {
 		return result;
 	}
 
+	/**회원이메일 가져오기*/
+	@Override
+	public String selectMemberEmail(SqlSessionTemplate session, int recipeNo) {
+		String memberEmail=session.selectOne("RecipeMapper.selectMember", recipeNo);
+		return memberEmail;
+	}
+
 }
 

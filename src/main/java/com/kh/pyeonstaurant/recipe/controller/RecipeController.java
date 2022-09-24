@@ -576,14 +576,16 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 		 * @return
 		 */
 		@RequestMapping(value = "/recipe/remove.do", method = RequestMethod.GET)
-		public ModelAndView removeRecipe(HttpSession session, ModelAndView mv, @RequestParam("recipeNo") int recipeNo,
-				@RequestParam(value="memberEmail", required = false) String memberEmail) {
+		public ModelAndView removeRecipe(HttpSession session, ModelAndView mv, @RequestParam("recipeNo") int recipeNo) {
 			
 			if(session.getAttribute("loginUser")==null) {
 				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
 				mv.setViewName("common/error");
 				return mv;
 			}
+			
+			String memberEmail = rService.getMemberEmial(recipeNo);
+			System.out.println(memberEmail);
 			//작성자 아니면 삭제금지
 			Member loginUser= (Member)session.getAttribute("loginUser");
 			if(!loginUser.getMemberEmail().equals(memberEmail)&&loginUser.getAdminCheck()==false) {

@@ -116,6 +116,10 @@ update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT-1 where RECIPE_NO = #{re
 	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory} and RECIPE_STATUS = 'Y'
 	</select>
 	
+	<select id="selectMember" resultType="string">
+	select MEMBER_EMAIL from recipe_tbl where RECIPE_NO = #{recipeNo}
+	</select>
+	
 
 	
 	
@@ -231,6 +235,10 @@ select * from recipe_comment where RECIPE_NO = #{recipeNo} order by COMMENT_NO
 
 select count(*) from recipe_comment where RECIPE_NO = #{recipeNo}
 
+</select>
+
+<select id="selectCommentMember" resultType="string">
+select MEMBER_EMAIL from recipe_comment where COMMENT_NO = #{commentNo}
 </select>
 
 

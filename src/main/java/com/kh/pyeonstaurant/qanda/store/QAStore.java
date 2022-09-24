@@ -29,5 +29,7 @@ public interface QAStore {
 
 	public String selectMemberName(String memberEmail, SqlSessionTemplate session);
 
+	public String selectMeberEmail(Integer qaNo,SqlSessionTemplate session);
+
 }
 

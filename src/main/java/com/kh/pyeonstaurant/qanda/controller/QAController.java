@@ -330,14 +330,14 @@ public class QAController {
 	 * @return
 	 */
 	@RequestMapping(value = "/qna/remove.do", method = RequestMethod.GET)
-	public ModelAndView removeQA(HttpSession session, ModelAndView mv, @RequestParam("qaNo") Integer qaNo,
-			 @RequestParam("memberEmail")	String memberEmail) {
+	public ModelAndView removeQA(HttpSession session, ModelAndView mv, @RequestParam("qaNo") Integer qaNo
+			 ) {
 		try {
-			
+
 			//작성자 아니면 삭제금지
 			Member loginUser = (Member)session.getAttribute("loginUser");
-			System.out.println(loginUser.getMemberEmail());
-			System.out.println(memberEmail);
+			String memberEmail = qService.getMemberEmail(qaNo);
+			
 			if(!loginUser.getMemberEmail().equals(memberEmail)&&loginUser.getAdminCheck()==false) {
 				
 				mv.addObject("msg", "작성자만 삭제할 수 있습니다");

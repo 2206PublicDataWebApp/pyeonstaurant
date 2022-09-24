@@ -68,6 +68,7 @@ img {
 			<!-- 내용영역 -->
 			<article>
 				<div id="contents-area" class="row">
+			<!-- 날짜 버튼영역 -->
 					<div id="date-button-area" class="py-10 row">
 						<hr style="margin: 2px">
 						<div id="date area" class="col-md-10" style="padding: 1em;">
@@ -190,13 +191,13 @@ img {
 											<!-- 검색아닐시 -->	
 										<c:if test="${searchCondition == null }">
 											<button
-												onclick="removeComment(${qcList.qaCommentNo},${qcList.qaNo},${page },'${loginUser.memberEmail }' );"
+												onclick="removeComment(${qcList.qaCommentNo},${qcList.qaNo},${page } );"
 												class="btn btn-outline-primary">삭제</button>
 										</c:if>
 											<!-- 검색시 -->
 										<c:if test="${searchCondition != null }">
 											<button
-												onclick="removeComment1(${qcList.qaCommentNo},${qcList.qaNo},${page },'${searchCondition}','${searchValue}','${loginUser.memberEmail }' );"
+												onclick="removeComment1(${qcList.qaCommentNo},${qcList.qaNo},${page },'${searchCondition}','${searchValue}' );"
 												class="btn btn-outline-primary">삭제</button>
 										</c:if>
 											
@@ -329,7 +330,7 @@ img {
 
 function removeQnA() {
 	if(confirm("삭제하시겠습니까?")){
-	location.href='/qna/remove.do?qaNo=${qa.qaNo}&memberEmail=${qa.memberEmail}'
+	location.href='/qna/remove.do?qaNo=${qa.qaNo}'
 }
 	
 }
@@ -359,7 +360,7 @@ function modifyViewOff(obj) {
 function removeComment(commentNo,qaNo,page,memberEmail) {
 	
 	if(confirm("댓글을 삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
-		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo+'&page='+page+'&memberEmail='+memberEmail;
+		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo+'&page='+page;
 	}
 	
 }
@@ -368,7 +369,7 @@ function removeComment(commentNo,qaNo,page,memberEmail) {
 function removeComment1(commentNo,qaNo,page,searchCondition,searchValue,memberEmail) {
 	var sValue = decodeURI(searchValue);
 	if(confirm("댓글을 삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
-		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo+'&page='+page+'&searchCondition='+searchCondition+'&searchValue='+sValue+'&memberEmail='+memberEmail;
+		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo+'&page='+page+'&searchCondition='+searchCondition+'&searchValue='+sValue;
 	}
 	
 }

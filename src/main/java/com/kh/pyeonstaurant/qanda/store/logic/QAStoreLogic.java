@@ -85,5 +85,12 @@ public class QAStoreLogic implements QAStore {
 		String name = session.selectOne("RecipeMapper.selectOneName", memberEmail);
 		return name;
 	}
+
+	@Override
+	public String selectMeberEmail(Integer qaNo,SqlSessionTemplate session) {
+		
+		String memberEmail = session.selectOne("QnAMapper.selectMemberEmail", qaNo);
+		return memberEmail;
+	}
 }
 

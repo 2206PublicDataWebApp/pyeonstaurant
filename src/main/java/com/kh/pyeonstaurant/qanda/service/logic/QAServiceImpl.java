@@ -76,6 +76,14 @@ public class QAServiceImpl implements QAService{
 		return name;
 	}
 
+	@Override
+	public String getMemberEmail(Integer qaNo) {
+		
+		String memberEmail = qStore.selectMeberEmail(qaNo,session);
+		
+		return memberEmail;
+	}
+
 
 }
 

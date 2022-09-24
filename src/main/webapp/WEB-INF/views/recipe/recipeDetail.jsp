@@ -178,7 +178,7 @@ text-align:center;
 					<button class="btn btn-primary"
 						onclick="location.href='/recipe/modifyForm.do?recipeNo=${recipe.recipeNo }';">수정</button>
 					<button class="btn btn-primary"
-						onclick="removeRecipe(${recipe.recipeNo },'${recipe.memberEmail }');">삭제</button>
+						onclick="removeRecipe(${recipe.recipeNo });">삭제</button>
 				</div>
 				<div id="info-area">${recipe.recipeInfo }</div>
 
@@ -527,7 +527,7 @@ text-align:center;
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
 											<button
-												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo},'${rcList.memberEmail }' );"
+												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );"
 												class="btn btn-outline-primary">삭제</button>
 											
 											
@@ -537,7 +537,7 @@ text-align:center;
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
 											<button
-												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo},'${rcList.memberEmail }' );"
+												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo});"
 												class="btn btn-outline-primary">삭제</button>
 												
 												 </c:if>
@@ -692,9 +692,9 @@ text-align:center;
 </body>
 <script>
 //레시피 삭제확인
-function removeRecipe(recipeNo,memberEmail){
+function removeRecipe(recipeNo){
 	if(confirm("삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
-		location.href='/recipe/remove.do?recipeNo='+recipeNo+"&memberEmail="+memberEmail;
+		location.href='/recipe/remove.do?recipeNo='+recipeNo;
 	}
 }
 
@@ -725,10 +725,10 @@ function modifyViewOff(obj) {
 }
 
 //댓글 삭제 확인
-function removeComment(commentNo,recipeNo,memberEmail) {
+function removeComment(commentNo,recipeNo) {
 	
 	if(confirm("댓글을 삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
-		location.href='/recipe/removeComment.do?commentNo='+commentNo+'&recipeNo='+recipeNo+'&memberEmail='+memberEmail;
+		location.href='/recipe/removeComment.do?commentNo='+commentNo+'&recipeNo='+recipeNo;
 	}
 	
 }

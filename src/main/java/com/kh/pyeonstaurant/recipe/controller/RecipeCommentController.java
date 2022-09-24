@@ -96,13 +96,13 @@ public class RecipeCommentController {
 	 * @return
 	 */
 	@RequestMapping(value="/recipe/removeComment.do", method=RequestMethod.GET)
-	public ModelAndView removeRecipeComment( HttpSession session ,ModelAndView mv,@RequestParam("commentNo")Integer commentNo,@RequestParam("recipeNo")Integer recipeNo,
-			@RequestParam(value="memberEmail", required = false)String memberEmail) {
+	public ModelAndView removeRecipeComment( HttpSession session ,ModelAndView mv,@RequestParam("commentNo")Integer commentNo,@RequestParam("recipeNo")Integer recipeNo) {
 		
 		try {
 			
 			//작성자 아니면 삭제금지
 			Member loginUser = (Member)session.getAttribute("loginUser");
+			String memberEmail=rcService.selectMemberEmail(commentNo);
 			if(!loginUser.getMemberEmail().equals(memberEmail)&&loginUser.getAdminCheck()==false) {
 				
 				mv.addObject("msg", "작성자만 삭제할 수 있습니다");

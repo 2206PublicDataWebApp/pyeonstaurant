@@ -212,6 +212,13 @@ public int checkMyRecipe(int recipeNo, String memberEmail) {
 	int result = rStore.selectMyRecipe(session,recipeNo,memberEmail);
 	return result;
 }
+
+/**회원이메일불러오기*/
+@Override
+public String getMemberEmial(int recipeNo) {
+	String memberEmail= rStore.selectMemberEmail(session,recipeNo);
+	return memberEmail;
+}
 		
 	
 }

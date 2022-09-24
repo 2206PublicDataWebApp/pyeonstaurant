@@ -64,7 +64,9 @@ public interface RecipeStore {
 
 	public String selectMemberName(String memberEmail, SqlSessionTemplate session);
 
-	public int selectMyRecipe(SqlSessionTemplate session, int recipeNo, String memberEmail); 
+	public int selectMyRecipe(SqlSessionTemplate session, int recipeNo, String memberEmail);
+
+	public String selectMemberEmail(SqlSessionTemplate session, int recipeNo); 
 
 
 

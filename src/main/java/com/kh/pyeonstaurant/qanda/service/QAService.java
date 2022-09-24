@@ -26,6 +26,8 @@ public interface QAService {
 
 	public String printMemberName(String memberEmail);
 
+	public String getMemberEmail(Integer qaNo);
+
 
 }
 

@@ -138,8 +138,7 @@ public class QAComemnetController {
 			@RequestParam("qaCommentNo") Integer qaCommentNo,@RequestParam("qaNo") Integer qaNo,
 			@RequestParam("page") int page,
 			@RequestParam(value="searchCondition", required = false) String searchCondition
-			,@RequestParam(value="searchValue", required = false) String searchValue,
-			@RequestParam(value = "memberEmail", required = false) String memberEmail) {
+			,@RequestParam(value="searchValue", required = false) String searchValue) {
 
 		try {
 			
@@ -147,7 +146,7 @@ public class QAComemnetController {
 			//로그인 유저용
 			Member loginUser = (Member)session.getAttribute("loginUser");
 			if(loginUser.getAdminCheck()==false) {
-				mv.addObject("msg", "관리자만 작성가능합니다");
+				mv.addObject("msg", "관리자만 삭제가능합니다");
 				mv.setViewName("common/error");
 				return mv;
 				

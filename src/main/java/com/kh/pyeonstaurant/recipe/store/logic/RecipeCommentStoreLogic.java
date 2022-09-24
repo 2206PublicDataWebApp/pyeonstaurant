@@ -29,5 +29,12 @@ public class RecipeCommentStoreLogic implements RecipeCommentStore {
 		return result;
 	}
 
+	/**작성자 이메일 가져오기*/
+	@Override
+	public String selectMemberEmail(SqlSessionTemplate session, Integer commentNo) {
+		String memberEmail = session.selectOne("RecipeMapper.selectCommentMember", commentNo);
+		return memberEmail;
+	}
+
 
 }

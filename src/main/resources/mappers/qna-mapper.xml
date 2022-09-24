@@ -81,7 +81,13 @@
 				QA_STATUS = 'Y'
 			</if>
 		</where>
+		
+		
 
+	</select>
+	
+	<select id="selectMemberEmail" resultType="string">
+	select MEMBER_EMAIL from  qa_tbl where  QA_NO = #{qaNo} 
 	</select>
 
 	<select id="selectAllByValue" resultMap="QAResultMap">
