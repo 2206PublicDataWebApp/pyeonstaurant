@@ -49,6 +49,7 @@
 
 .card {
 	border: 0 !important;
+	text-align: center;
 }
 
 a {
@@ -61,10 +62,20 @@ a {
 	height: 10em;
 	overflow: hidden;
 }
+
 .normal-img-area {
 	width: 80%;
 	height: 10em;
 	overflow: hidden;
+	margin: 0 auto;
+}
+
+.normal-card-body {
+	padding: 2px;
+}
+
+#wirte-icon-area:hover {
+	cursor: pointer
 }
 </style>
 
@@ -93,7 +104,8 @@ a {
 				</div>
 
 				<!-- 검색 창 영역 -->
-				<div class="col-md-6 container" id="search" style="text-align: center">
+				<div class="col-md-6 container" id="search"
+					style="text-align: center">
 					<!-- 검색창시작 -->
 					<form action="/recipe/recipeSearch.do" method="get">
 						<div class="row" id="searchArea">
@@ -125,7 +137,8 @@ a {
 							</div>
 							<!-- 검색어입력창 종료 -->
 							<!-- 검색 버튼영역 -->
-							<div id="search-button" class="col-md-2 col-1 p-1" style="width: auto;" >
+							<div id="search-button" class="col-md-2 col-1 p-1"
+								style="width: auto;">
 								<button type="submit" class="btn btn-primary">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -232,7 +245,7 @@ a {
 
 					<div id="second-area" class="col-md-4"></div>
 					<div id="third-area" class="col-md-4"></div>
-
+					<hr>
 				</div>
 				<!--랭킹영역 종료-->
 				<!--일반 리스트 영역-->
@@ -248,7 +261,7 @@ a {
 								<img src="/resources/recipeImg/${recipe.mainPicRename }"
 									class="card-img-top" alt="">
 							</div>
-							<div class="card-body">
+							<div class="card-body normal-card-body">
 								<p class="card-text">
 									<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">${recipe.recipeName }</a>
 								</p>
@@ -266,44 +279,41 @@ a {
 			<!-- 본문 구간 종료 -->
 
 
-		<!-- 페이징 영역 시작 -->
-		<div id="page-area">
-		
-		 <nav aria-label="Page navigation example" >               
-                        <ul class="pagination">
-                          <li class="page-item">
-                              <c:if test="${startNavi !=1}">
-                                <a class="page-link" href="/search/move.kh?page=${startNavi - 1 }" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                                </a>
-                               </c:if>
-                          </li>
-                              <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-                                  <!-- 현재페이지면 진하게 -->
-                                  <c:if test="${currentPage eq P }">
-                                       <li class="page-item"><a class="page-link" href="#"><b>${p }</b></a></li>
-                                  </c:if>
-                                  <c:if test="${currentPage ne P }">
-                                       <li class="page-item">
-                                           <a class="page-link" href="/search/search/search.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}$listCondition=${listCondition}">
-                                           ${p }</a>
-                                       </li>
-                                  </c:if>
-                              </c:forEach>	
-                          <li class="page-item">
-                          <c:if test="${currentPage ne p }">
-                            <a class="page-link" href="search/move.kh?page=${currentPage+3 }" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>                          
-                            </a>
-                           </c:if>
-                          </li>
-                        </ul>
-                      </nav>
-		
-		
-		
-		
-		</div>
+			<!-- 페이징 영역 시작 -->
+			<div id="page-area">
+
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><c:if test="${startNavi !=1}">
+								<a class="page-link"
+									href="/search/move.kh?page=${startNavi - 1 }"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a>
+							</c:if></li>
+						<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+							<!-- 현재페이지면 진하게 -->
+							<c:if test="${currentPage eq P }">
+								<li class="page-item"><a class="page-link" href="#"><b>${p }</b></a></li>
+							</c:if>
+							<c:if test="${currentPage ne P }">
+								<li class="page-item"><a class="page-link"
+									href="/search/search/search.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}$listCondition=${listCondition}">
+										${p }</a></li>
+							</c:if>
+						</c:forEach>
+						<li class="page-item"><c:if test="${currentPage ne p }">
+								<a class="page-link"
+									href="search/move.kh?page=${currentPage+3 }" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</c:if></li>
+					</ul>
+				</nav>
+
+
+
+
+			</div>
 
 		</div>
 

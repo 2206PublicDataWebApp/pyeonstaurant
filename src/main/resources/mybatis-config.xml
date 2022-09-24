@@ -48,7 +48,6 @@
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/recipe-mapper.xml"></mapper>
 		<mapper resource="mappers/qna-mapper.xml"></mapper>
-		<mapper resource="mappers/qna-mapper.xml"></mapper>
 		<mapper resource="mappers/consult-mapper.xml" />  <!--은정꺼예요.  -->
 		<mapper resource="mappers/notice-mapper.xml" />  <!--은정꺼예요.  -->
 		

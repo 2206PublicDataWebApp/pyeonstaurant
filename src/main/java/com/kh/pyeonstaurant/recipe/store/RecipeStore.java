@@ -15,6 +15,7 @@ import com.kh.pyeonstaurant.recipe.domain.Recommandation;
 
 public interface RecipeStore {
 
+
 	public int insertRecipe(Recipe recipe,SqlSessionTemplate session);
 
 	public int insertStep(List<RecipeStep> rmList,SqlSessionTemplate session); 
@@ -34,13 +35,12 @@ public interface RecipeStore {
 
 	public RecipeTag selectOneRecipeTag(int recipeNo,SqlSessionTemplate session); 
 
-	public int selectRecipeCommentList(int page, int limit, int recipeNo,SqlSessionTemplate session);
+	public List<RecipeComment> selectRecipeCommentList(int recipeNo, SqlSessionTemplate session, int currentPage,int limit);
 
 	public int selectRecommand(SqlSessionTemplate session,int recipeNo,String memberEmail);
 
 	public int countRecommand(SqlSessionTemplate session, int recipeNo); 
 
-	public List<RecipeComment> selectRecipeCommentList(int currentPage, SqlSessionTemplate session);
 
 	public int insertRecommand(Recommandation recommand,SqlSessionTemplate session);
 
@@ -59,7 +59,10 @@ public interface RecipeStore {
 
 	public int deleteOneImg(SqlSessionTemplate session, String picName);
 
-	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory); 
+	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory);
+
+	public int selectTotalCount(SqlSessionTemplate session, int recipeNo); 
+
 
 
 
