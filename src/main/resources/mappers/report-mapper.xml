@@ -9,6 +9,7 @@
 		<result property="reportResult" 	column="REPORT_RESULT"/>
 		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
 		<result property="reportDate" 	column="REPORT_DATE"/>
+		<result property="cnt" 	column="CNT"/>
 	</resultMap>
 	<insert id="insertReportRecipe" parameterType="Report">
 		INSERT INTO REPORT VALUES(#{recipeNo}, NULL, DEFAULT, #{memberEmail}, SYSDATE)
@@ -41,4 +42,5 @@
 	<select id="selectCommentCount" resultType="_int">
 		SELECT COUNT(*) FROM REPORT WHERE RECIPE_NO IS NOT NULL
 	</select>
+
 </mapper>

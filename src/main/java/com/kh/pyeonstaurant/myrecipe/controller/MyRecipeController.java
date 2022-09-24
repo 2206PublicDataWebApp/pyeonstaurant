@@ -93,7 +93,7 @@ public class MyRecipeController {
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("mList", mList);
 		}else {
-			System.out.println("µ¥ÀÌÅÍ ¾øÀ½");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		mv.setViewName("myrecipe/myRecipeList");
 		return mv;

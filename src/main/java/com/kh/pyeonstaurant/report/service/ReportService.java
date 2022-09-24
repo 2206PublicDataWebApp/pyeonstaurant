@@ -1,5 +1,6 @@
 package com.kh.pyeonstaurant.report.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.kh.pyeonstaurant.report.domain.Report;
@@ -21,4 +22,5 @@ public interface ReportService {
 	public int getTotalCommentCount();
 
 	public List<Report> reportCommentAllView(int currentPage2, int boardLimit2);
+
 }

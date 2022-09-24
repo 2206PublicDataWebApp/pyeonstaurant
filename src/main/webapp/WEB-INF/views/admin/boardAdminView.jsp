@@ -144,7 +144,7 @@
 								class="align-text-bottom"></span> 게시글 관리
 						</a></li>
 						<li class="nav-item"><a class="nav-link reportAdmin"
-							href="/admin/boardList"> <span data-feather="shopping-cart"
+							href="#"> <span data-feather="shopping-cart"
 								class="align-text-bottom"></span> 채팅 관리
 						</a></li>
 					</ul>

@@ -1,5 +1,6 @@
 package com.kh.pyeonstaurant.report.store;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,6 +71,7 @@ public class ReportStoreLogic implements ReportStore{
 				, rowBounds);
 		return cList;
 	}
+
 
 
 }

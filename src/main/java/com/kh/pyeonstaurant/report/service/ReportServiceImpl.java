@@ -1,5 +1,6 @@
 package com.kh.pyeonstaurant.report.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -75,6 +76,7 @@ public class ReportServiceImpl implements ReportService{
 				);
 		return cList;
 	}
+
 
 
 	

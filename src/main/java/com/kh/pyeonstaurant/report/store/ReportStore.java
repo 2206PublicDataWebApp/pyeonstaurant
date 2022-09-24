@@ -1,5 +1,6 @@
 package com.kh.pyeonstaurant.report.store;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,5 +24,6 @@ public interface ReportStore {
 	public int selectTotalCommentCount(SqlSession session);
 
 	public List<Report> selectAllComment(SqlSession session, int currentPage2, int boardLimit2);
+
 
 }

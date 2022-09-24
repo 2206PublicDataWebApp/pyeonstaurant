@@ -1,7 +1,9 @@
 package com.kh.pyeonstaurant.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,7 @@ public class AdminController {
 
 	}	
 	
-	//³ªÁß¿¡ ·¹½ÃÇÇ Á¶È¸ ÇÕÄ¥¶§ »ç¿ë
+	//ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½Ä¥ï¿½ï¿½ ï¿½ï¿½ï¿½
 //	@RequestMapping(value= {"/recipe/recipeList.do", "/board/boardList.do"} , method = RequestMethod.GET)
 //	public ModelAndView RecipeList(ModelAndView mv) {
 //		try {
@@ -183,7 +185,7 @@ public class AdminController {
 		return mv;		
 	}
 	
-	//Æ÷ÀÎÆ® ºÎºÐ
+	//ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îºï¿½
 	@RequestMapping(value="/point/pointList", method=RequestMethod.GET)
 	public ModelAndView pointList(
 			ModelAndView mv
@@ -201,10 +203,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/increasePoint", method=RequestMethod.GET)
 	public String increasePoint(@RequestParam("memberEmail") String memberEmail) {
 		int result = mService.addPoint(memberEmail);
-				
-		if(result > 0) {
-			System.out.println("Ãß°¡ ¼º°ø");
-		}
+
 		return "redirect:/point/pointList?memberEmail="+memberEmail;
 		
 	}
@@ -212,10 +211,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/decreasePoint", method=RequestMethod.GET)
 	public String decreasePoint(@RequestParam("memberEmail") String memberEmail) {
 		int result = mService.decreasePoint(memberEmail);
-				
-		if(result > 0) {
-			System.out.println("°¨¼Ò ¼º°ø");
-		}
+
 		return "redirect:/point/pointList?memberEmail="+memberEmail;
 		
 	}
@@ -224,12 +220,11 @@ public class AdminController {
 	@RequestMapping(value="/admin/resetPoint", method=RequestMethod.GET)
 	public String resetPoint(@RequestParam("memberEmail") String memberEmail) {
 		int result = mService.resetPoint(memberEmail);
-				
-		if(result > 0) {
-			System.out.println("¸®¼Â ¼º°ø");
-		}
+
 		return "redirect:/point/pointList?memberEmail="+memberEmail;
 		
 	}
+	
+	
 	
 }
