@@ -145,7 +145,7 @@
 
 
 	<select id="SelectAllQnAComment" resultMap="QACommentResultMap">
-		select * from QA_COMMENT where QA_NO = #{qaNo}
+		select * from QA_COMMENT where QA_NO = #{qaNo} order by COMMNET_NO desc
 
 	</select>
 

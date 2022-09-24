@@ -47,6 +47,7 @@ cursor:pointer;
 			<!-- 게시판 영역시작 -->
 		<div class="row container" >
 			<form action="/qna/Regist.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="memberEmail" value="${loginUser.memberEmail }">
 			<!-- 상단영역시작 -->
 			<div id="first">
 				<!-- 카테고리영역 -->
