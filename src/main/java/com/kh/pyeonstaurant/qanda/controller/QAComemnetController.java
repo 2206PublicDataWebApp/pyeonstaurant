@@ -1,6 +1,8 @@
 
 package com.kh.pyeonstaurant.qanda.controller;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +157,7 @@ public class QAComemnetController {
 			int result = qcService.reomoveOneQACommentNo(qaCommentNo);
 			
 			if(searchCondition != null) {
+				searchValue =URLEncoder.encode(searchValue, "UTF-8");
 				mv.setViewName("redirect:/qna/detail.do?qaNo=" + qaNo +"&searchCondition="+searchCondition
 						+"&searchValue="+searchValue+"&page="+page+"#reply-area");
 				

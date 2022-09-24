@@ -451,6 +451,15 @@ public class QAController {
 
 			if (!qList.isEmpty()) {
 
+				
+				//사용자 이름 출력영역
+				String name[] = new String[qList.size()];
+				for(int i=0; i<name.length;i++) {
+					name[i]=qService.printMemberName(qList.get(i).getMemberEmail());
+					qList.get(i).setName(name[i]);
+						}
+				
+
 				mv.addObject("qList", qList);
 
 			} else {
@@ -479,6 +488,7 @@ public class QAController {
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("maxPage", maxPage);
 			//////////////////////////////// 페이징종료///////////////////////////////////
+			
 			
 			mv.addObject("pageNow", currentPage);
 			mv.addObject("searchValue", searchValue);

@@ -75,8 +75,7 @@ img {
 						<div class="col-md-2 row"
 							style="text-align: center; padding: 1em;">
 
-
-							<%-- <c:if test=${$qa.memberEmail ==loginUser.memeberEmail || loginUser.adminCheck==true }> 세션 용 --%>
+							<c:if test="${qa.memberEmail ==loginUser.memberEmail || loginUser.adminCheck==true }">
 
 							<div class="col-6">
 								<button
@@ -89,7 +88,7 @@ img {
 
 							</div>
 
-							<%-- </c:if> --%>
+							 </c:if> 
 
 
 
@@ -182,7 +181,7 @@ img {
 										<div id="comment-delmodi-buttom-area"
 											style="text-align: right">
 
-											<%-- <c:if test="${${qcList.memberEmail == loginUser.memberEmail} || loginUser.adminCheck==true"> 세션용 --%>
+											<c:if test="${loginUser.adminCheck==true}">
 
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
@@ -204,7 +203,7 @@ img {
 											
 											
 											
-											<%-- 	</c:if> --%>
+											</c:if>
 
 										</div>
 
@@ -259,7 +258,8 @@ img {
 					</c:forEach>
 					<hr>
 
-					<%-- 				<c:if test="${loginUser != null }"> 로그인한 유저만 보임--%>
+<!-- 				관리자 보임 -->
+				<c:if test="${loginUser.adminCheck==true }"> 
 					<!-- 코멘트 작성영역 -->
 
 					<form action="/qna/commentWrite.do" method="post">
@@ -294,7 +294,7 @@ img {
 						</div>
 						<!-- 코멘트 작성영역 종료 -->
 					</form>
-					<%-- 		</c:if> --%>
+						</c:if> 
 
 
 				</div>
