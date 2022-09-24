@@ -71,8 +71,8 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public int checkRecommand(int recipeNo, String memberEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = rStore.selectRecommand(session, recipeNo, memberEmail);
+		return result;
 	}
 
 	@Override
@@ -204,6 +204,13 @@ public int getTotalCount(int recipeNo) {
 public String printMemberName(String memberEmail) {
 	String name = rStore.selectMemberName(memberEmail, session);
 	return name;
+}
+
+/** 마이레시피 했는지 체크하기*/
+@Override
+public int checkMyRecipe(int recipeNo, String memberEmail) {
+	int result = rStore.selectMyRecipe(session,recipeNo,memberEmail);
+	return result;
 }
 		
 	

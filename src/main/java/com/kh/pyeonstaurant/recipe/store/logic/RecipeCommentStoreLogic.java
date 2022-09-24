@@ -20,7 +20,6 @@ public class RecipeCommentStoreLogic implements RecipeCommentStore {
 	@Override
 	public int updateOneRecipeComment(RecipeComment rComment, SqlSessionTemplate session) {
 		int result= session.update("RecipeMapper.updateOneComment",rComment);
-		System.out.println(rComment.toString());
 		return result;
 	}
 

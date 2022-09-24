@@ -104,18 +104,17 @@ public class RecipeStoreLogic implements RecipeStore {
 		return rTag;
 	}
 
-
+	/**레시피 추천 수 가져오기*/
 	@Override
 	public int selectRecommand(SqlSessionTemplate session, int recipeNo, String memberEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Recipe recipeOne = new Recipe();
+		recipeOne.setRecipeNo(recipeNo);
+		recipeOne.setMemberEmail(memberEmail);
+		int result = session.selectOne("RecipeMapper.selectRecommandCount", recipeOne);
+		return result;
 	}
 
-	@Override
-	public int countRecommand(SqlSessionTemplate session, int recipeNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	/**레시피 코멘트 출력*/
 	@Override
@@ -123,7 +122,6 @@ public class RecipeStoreLogic implements RecipeStore {
 		int offset = (currentPage - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<RecipeComment> rcList = session.selectList("RecipeMapper.selectCommentList", recipeNo, rowBounds);
-		System.out.println(rcList.toString());
 		
 		return  rcList;
 	}
@@ -249,6 +247,17 @@ public class RecipeStoreLogic implements RecipeStore {
 	public String selectMemberName(String memberEmail,SqlSessionTemplate session) {
 		String name = session.selectOne("RecipeMapper.selectOneName", memberEmail);
 		return name;
+	}
+
+	
+	/**마이레시피 등록여부 확인하기*/
+	@Override
+	public int selectMyRecipe(SqlSessionTemplate session, int recipeNo, String memberEmail) {
+		Recipe oneRecipe = new Recipe();
+		oneRecipe.setMemberEmail(memberEmail);
+		oneRecipe.setRecipeNo(recipeNo);
+		int result = session.selectOne("RecipeMapper.selectMyrecipe", oneRecipe);
+		return result;
 	}
 
 }

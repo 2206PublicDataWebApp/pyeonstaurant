@@ -59,7 +59,7 @@ img {
 				<!-- 타이틀 영역 종료 -->
 				<!-- 글쓴이 영역 -->
 				<div id="writer-area" class="col-md-2">
-					<h4>작성자 : ${qa.name }</h4>
+					<h4> ${qa.name }</h4>
 				</div>
 				<!-- 글쓴이 영역 종료 -->
 			</div>

@@ -39,7 +39,6 @@ public interface RecipeStore {
 
 	public int selectRecommand(SqlSessionTemplate session,int recipeNo,String memberEmail);
 
-	public int countRecommand(SqlSessionTemplate session, int recipeNo); 
 
 
 	public int insertRecommand(Recommandation recommand,SqlSessionTemplate session);
@@ -63,7 +62,9 @@ public interface RecipeStore {
 
 	public int selectTotalCount(SqlSessionTemplate session, int recipeNo);
 
-	public String selectMemberName(String memberEmail, SqlSessionTemplate session); 
+	public String selectMemberName(String memberEmail, SqlSessionTemplate session);
+
+	public int selectMyRecipe(SqlSessionTemplate session, int recipeNo, String memberEmail); 
 
 
 

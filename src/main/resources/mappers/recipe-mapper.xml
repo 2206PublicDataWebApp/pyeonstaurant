@@ -116,6 +116,8 @@ update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT-1 where RECIPE_NO = #{re
 	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory}
 	</select>
 	
+
+	
 	
 	
 
@@ -180,7 +182,16 @@ update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT-1 where RECIPE_NO = #{re
 
 	</resultMap>
 
-
+	<select id="selectRecommandCount" resultType="_int">
+	
+	select count(*) from RECOMMANDATION where RECIPE_NO= #{recipeNo} and MEMBER_EMAIL = #{memberEmail}
+	
+	</select>
+	
+	<select id="selectMyrecipe" resultType="_int">
+	
+	select count(*) from myrecipe_tbl where RECIPE_NO= #{recipeNo} and MEMBER_EMAIL = #{memberEmail}
+	</select>
 
 
 

@@ -63,6 +63,8 @@ public interface RecipeService {
 
 	public String printMemberName(String memberEmail);
 
+	public int checkMyRecipe(int recipeNo, String memberEmail);
+
 
 
 }

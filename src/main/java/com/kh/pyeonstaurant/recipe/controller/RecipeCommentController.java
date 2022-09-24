@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.recipe.domain.RecipeComment;
 import com.kh.pyeonstaurant.recipe.service.RecipeCommentService;
 
@@ -32,12 +33,12 @@ public class RecipeCommentController {
 		try {
 			
 //			로그인 유저용
-//			if(session.getAttribute("loginUser")==null) {
-//				mv.addObject("msg", "로그인한 유저만 가능합니다");
-//				mv.setViewName("common/error");
-//				return mv;
-//				
-//			}
+			if(session.getAttribute("loginUser")==null) {
+				mv.addObject("msg", "로그인한 유저만 가능합니다");
+				mv.setViewName("common/error");
+				return mv;
+				
+			}
 			
 			
 		
@@ -65,12 +66,13 @@ public class RecipeCommentController {
 			
 			
 			//작성자 아니면 수정금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(rComment.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
-//				
-//				mv.addObject("msg", "작성자만 수정할 수 있습니다");
-//				mv.setViewName("common/error");
-//				return mv;
-//			}
+			Member loginUser = (Member)session.getAttribute("loginUser");			
+			if(!loginUser.getMemberEmail().equals(rComment.getMemberEmail())&&loginUser.getAdminCheck()==false) {
+				
+				mv.addObject("msg", "작성자만 수정할 수 있습니다");
+				mv.setViewName("common/error");
+				return mv;
+			}
 			
 			
 			
@@ -100,12 +102,13 @@ public class RecipeCommentController {
 		try {
 			
 			//작성자 아니면 삭제금지
-//			if(!session.getAttribute("loginUser.memberEmail").equals(recipe.getMemberEmail())||session.getAttribute("loginUser.adminCheck")==false) {
-//				
-//				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
-//				mv.setViewName("common/error");
-//				return mv;
-//			}
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			if(!loginUser.getMemberEmail().equals(memberEmail)&&loginUser.getAdminCheck()==false) {
+				
+				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+				mv.setViewName("common/error");
+				return mv;
+			}
 			
 			
 			

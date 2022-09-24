@@ -56,7 +56,7 @@
 	</select>
 
 	<select id="SelectOneQnA" resultMap="QAResultMap">
-		select * from qa_tbl where QA_NO = #{qaNo}
+		select * from qa_tbl where QA_NO = #{qaNo} and QA_STATUS = 'Y'
 	</select>
 
 	<select id="selectBoardCount" resultType="_int">
@@ -72,10 +72,10 @@
 				||'%'
 			</if>
 			<if test="searchCondition.toString() == 'all'">
-				QA_STATUS = 'Y' and QA_CONTENT like '%'|| #{serchValue}
+				QA_STATUS = 'Y' and (QA_CONTENT like '%'|| #{serchValue}
 				||'%'
 				or QA_TITLE like
-				'%'|| #{serchValue} ||'%'
+				'%'|| #{serchValue} ||'%')
 			</if>
 			<if test="searchCondition.toString() == ''">
 				QA_STATUS = 'Y'
@@ -96,15 +96,16 @@
 				||'%'
 			</if>
 			<if test="searchCondition.toString() == 'all'">
-				QA_STATUS = 'Y' and QA_CONTENT like '%'|| #{serchValue}
+				QA_STATUS = 'Y' and (QA_CONTENT like '%'|| #{serchValue}
 				||'%'
 				or QA_TITLE like
-				'%'|| #{serchValue} ||'%'
+				'%'|| #{serchValue} ||'%')
 			</if>
 			<if test="searchCondition.toString() == ''">
 				QA_STATUS = 'Y'
 			</if>
 		</where>
+		order by QA_NO desc
 	</select>
 
 

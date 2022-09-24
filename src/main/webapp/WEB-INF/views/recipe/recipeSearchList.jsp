@@ -78,6 +78,40 @@ a {
 	cursor: pointer
 	
 }
+
+
+.normal-img-area{
+	margin-left: 0px !important;
+    margin-right: 0px !important;
+    width: 100%;
+    border-radius: 15px;
+}
+.card-img-top{
+width:100%;
+
+}
+.card-text{
+font-weight: 600;
+}
+
+
+#list-area .card{
+padding:0;
+margin:0 auto !important;
+}
+
+ p{margin : 0 auto;
+}
+
+#list-area .card .card-body{
+
+    margin-bottom: 30px;
+
+}
+img:hover{
+transform: scale(1.1);
+transition:.1s;
+}
 </style>
 
 </head>
@@ -259,16 +293,18 @@ a {
 
 
 						<div class="card col-md-3 m-3" style="width: 18rem;">
+						<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">
 							<div class="normal-img-area" id="normal-img-area">
+							
 								<img src="/resources/recipeImg/${recipe.mainPicRename }"
 									class="card-img-top" alt="">
 							</div>
 							<div class="card-body normal-card-body">
 								<p class="card-text">
-									<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">${recipe.recipeName }</a>
-								</p>
+									${recipe.recipeName }
+								
 								<p>${recipe.recipeInfo }</p>
-							</div>
+							</div></a>
 						</div>
 
 					</c:forEach>
