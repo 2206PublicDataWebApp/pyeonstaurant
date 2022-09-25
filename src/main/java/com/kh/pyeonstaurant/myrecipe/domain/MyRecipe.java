@@ -4,19 +4,9 @@ public class MyRecipe {
 	private String memberEmail;
 	private int recipeNo;
 	private int myRecipeNo;
-	private String mainPicture;
 	private String recipeName;
 	
 	public MyRecipe() {}
-
-
-	public MyRecipe(String memberEmail, int recipeNo, int myRecipeNo, String mainPicture, String recipeName) {
-		this.memberEmail = memberEmail;
-		this.recipeNo = recipeNo;
-		this.myRecipeNo = myRecipeNo;
-		this.mainPicture = mainPicture;
-		this.recipeName = recipeName;
-	}
 
 	public String getMemberEmail() {
 		return memberEmail;
@@ -42,14 +32,6 @@ public class MyRecipe {
 		this.myRecipeNo = myRecipeNo;
 	}
 
-	public String getMainPicture() {
-		return mainPicture;
-	}
-
-	public void setMainPicture(String mainPicture) {
-		this.mainPicture = mainPicture;
-	}
-
 	public String getRecipeName() {
 		return recipeName;
 	}
@@ -58,11 +40,15 @@ public class MyRecipe {
 		this.recipeName = recipeName;
 	}
 
-	@Override
-	public String toString() {
-		return "MyRecipe [memberEmail=" + memberEmail + ", recipeNo=" + recipeNo + ", myRecipeNo=" + myRecipeNo
-				+ ", mainPicture=" + mainPicture + ", recipeName=" + recipeName + "]";
+	public MyRecipe(String memberEmail, int recipeNo, int myRecipeNo, String recipePicRename, String recipeName) {
+		this.memberEmail = memberEmail;
+		this.recipeNo = recipeNo;
+		this.myRecipeNo = myRecipeNo;
+		this.recipeName = recipeName;
 	}
+
+
+	
 	
 
 	

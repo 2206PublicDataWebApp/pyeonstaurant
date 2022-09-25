@@ -116,8 +116,41 @@ update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT-1 where RECIPE_NO = #{re
 	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory}
 	</select>
 	
+	<!-- 	마이레시피 조회용 -->
+	<select id="selectAllByValue" resultMap="recipeResultMap">
+<!-- 		SELECT * FROM RECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail} -->
+		SELECT * FROM RECIPE_TBL, MYRECIPE_TBL 
+WHERE RECIPE_TBL.RECIPE_NO = MYRECIPE_TBL.RECIPE_NO AND MYRECIPE_TBL.MEMBER_EMAIL = #{memberEmail}
+	</select>
 	
 	
+	
+<!-- 	마이레시피 맵 -->
+
+	<resultMap type="MyRecipe" id="MyRecipeResultMap">
+		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
+		<result property="recipeNo" 	column="RECIPE_NO"/>
+		<result property="myRecipeNo" 	column="MYRECIPE_NO"/>
+		<result property="recipeName" 	column="RECIPE_NAME"/>
+	</resultMap>
+	
+	<!-- 	마이레시피 추가할때 사진이름 가져오기 위한 쿼리문 -->
+	
+	<delete id="removeMyRecipe">
+		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo} AND MEMBER_EMAIL = #{memberEmail }
+	</delete>
+	
+	<insert id="insertMyRecipe">
+		INSERT INTO MYRECIPE_TBL VALUES(#{memberEmail}, #{recipeNo}, SEQ_MYRECIPE_NO.NEXTVAL, #{recipeName})
+	</insert>
+	
+	
+	
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
+<!-- 	마이레시피 맵 끝 -->
 
 	<resultMap type="RecipeMaterial" id="RecipeMaterialResultMap">
 		<id property="recipeNo"				column="RECIPE_NO" />

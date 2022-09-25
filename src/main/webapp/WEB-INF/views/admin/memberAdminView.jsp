@@ -200,23 +200,23 @@
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
-			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">게시물
+			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">회원
 				목록</h3>
-			<form action="/admin/boardSearch" method="get">
+			<form action="/admin/memberSearch" method="post">
 				<div class="search row">
 					<div class="col-xs-2 col-sm-2"
 						style="margin-left: 36px; margin-bottom: 20px;">
 						<select name="searchCondition" class="form-control">
 							<option>이메일</option>
-							<option>게시글 제목</option>
+							<option>닉네임</option>
 						</select>
 					</div>
 
 					<div class="col-xs-8 col-sm-8">
 						<div class="input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="memberInfo"
-									class="form-control"> <span class="input-group-btn">
-									<input type="submit" value="검색" class="btn btn-default">
+									class="form-control" id="searchVal"> <span class="input-group-btn">
+									<input type="submit" value="검색" class="btn btn-default" onClick="sbm();">
 								</span>
 						</div>
 					</div>
@@ -348,5 +348,17 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 	<script src="/resources/js/swiper.js"></script>
+	
+	<script>
+	function sbm(){
+		var searchVal = document.getElementById("searchVal");
+		if(searchVal.value == "") {
+			alert("검색어를 입력해주세요.");
+			searchVal.focus();
+			event.preventDefault();
+			return false;
+		}
+	}	
+	</script>
 </body>
 </html>

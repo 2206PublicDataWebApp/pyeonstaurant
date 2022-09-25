@@ -215,8 +215,8 @@
 					<div class="col-xs-8 col-sm-8">
 						<div class="input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="boardInfo"
-								class="form-control"> <span class="input-group-btn">
-								<input type="submit" value="검색" class="btn btn-default">
+								class="form-control" id="searchVal"> <span class="input-group-btn" >
+								<input type="submit" value="검색" class="btn btn-default" onClick="sbm();">
 							</span>
 						</div>
 					</div>
@@ -245,7 +245,7 @@
 								<c:forEach items="${bList }" var="board" varStatus="i">
 									<tr>
 										<td>${i.count }</td>
-										<td><a href="/recipe/detail.do?recipeNo=${recipeNo }">${board.boardTitle }</a></td>
+										<td><a href="/recipe/detail.do?recipeNo=${board.recipeNo }">${board.boardTitle }</a></td>
 										<td>${board.recipeInfo }</td>
 										<td>${board.recipeNo }</td>
 										<td>${board.memberEmail }</td>
@@ -275,7 +275,7 @@
 										<c:forEach items="${aList }" var="board" varStatus="i">
 											<tr>
 												<td>${i.count }</td>
-												<td><a href="recipe/detail.do?recipeNo=${recipeNo }">${board.boardTitle }</a></td>
+												<td><a href="/recipe/detail.do?recipeNo=${board.recipeNo }">${board.boardTitle }</a></td>
 												<td>${board.recipeInfo }</td>
 												<td>${board.recipeNo }</td>
 												<td>${board.memberEmail }</td>
@@ -325,7 +325,7 @@
 									<li class="hr">&nbsp;</li>
 									<li><a href="#">이용약관</a></li>
 									<li class="hr">&nbsp;</li>
-									<li><a href="#">공지사항</a></li>
+									<li><a href="/notice/list">공지사항</a></li>
 									<li class="hr">&nbsp;</li>
 									<li><a href="#">Q &amp;A</a></li>
 								</ul>
@@ -345,7 +345,17 @@
 		</div>
 	</div>
 
-
+	<script>
+	function sbm(){
+		var searchVal = document.getElementById("searchVal");
+		if(searchVal.value == "") {
+			alert("검색어를 입력해주세요.");
+			searchVal.focus();
+			event.preventDefault();
+			return false;
+		}
+	}	
+	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

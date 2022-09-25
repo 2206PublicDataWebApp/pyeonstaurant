@@ -4,6 +4,7 @@ package com.kh.pyeonstaurant.myrecipe.service;
 import java.util.List;
 
 import com.kh.pyeonstaurant.myrecipe.domain.MyRecipe;
+import com.kh.pyeonstaurant.recipe.domain.Recipe;
 
 public interface MyRecipeService {
 
@@ -11,9 +12,11 @@ public interface MyRecipeService {
 
 	public int getTotalCount(String memberEmail);
 
-	public List<MyRecipe> printMyRecipeList(int currentPage, int boardLimit, String memberEmail);
+	public List<Recipe> printMyRecipeList(String memberEmail);
 
 	public int removeMyRecipe(MyRecipe myRecipe);
+
+	public String selectPicName(int recipeNo);
 
 
 }

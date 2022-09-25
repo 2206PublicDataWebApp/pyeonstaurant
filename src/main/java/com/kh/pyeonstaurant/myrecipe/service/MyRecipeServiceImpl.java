@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.pyeonstaurant.myrecipe.domain.MyRecipe;
 import com.kh.pyeonstaurant.myrecipe.store.MyRecipeStore;
+import com.kh.pyeonstaurant.recipe.domain.Recipe;
 
 @Service
 public class MyRecipeServiceImpl implements MyRecipeService{
@@ -20,7 +21,7 @@ public class MyRecipeServiceImpl implements MyRecipeService{
 
 	@Override
 	public int addMyRecipe(MyRecipe myRecipe) {
-		int result = mStore.insertMyRecipe(session, myRecipe);
+		 int result = mStore.insertMyRecipe(session, myRecipe);
 		return result;
 	}
 
@@ -32,14 +33,10 @@ public class MyRecipeServiceImpl implements MyRecipeService{
 
 
 	@Override
-	public List<MyRecipe> printMyRecipeList(int currentPage
-			, int boardLimit, String memberEmail) {
-		List<MyRecipe> mList 
+	public List<Recipe> printMyRecipeList(String memberEmail) {
+		List<Recipe> mList 
 		= mStore.selectAllByValue(
-				session
-				, currentPage
-				, boardLimit
-				,memberEmail);
+				session, memberEmail);
 		return mList;
 	}
 
@@ -49,6 +46,13 @@ public class MyRecipeServiceImpl implements MyRecipeService{
 		int result = mStore.deleteOneByMyRecipe(session, myRecipe);
 		return result;
 	}
+
+	@Override
+	public String selectPicName(int recipeNo) {
+		String result = mStore.selectPicName(session, recipeNo);
+		return result;
+	}
+
 
 
 
