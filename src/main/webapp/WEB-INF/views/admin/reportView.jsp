@@ -12,10 +12,19 @@
 <meta name="generator" content="Hugo 0.101.0">
 <title>Dashboard Template · Bootstrap v5.2</title>
 
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
+<link href="/resources/css/styles.css" rel="stylesheet" />
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+	crossorigin="anonymous"></script>
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
 
-
+<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/swiper.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
 
 
@@ -106,164 +115,239 @@
 </head>
 <body>
 
-	<header
-		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-1 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">편스토랑
-			관리자페이지</a>
-		<button class="navbar-toggler position-absolute d-md-none collapsed"
-			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
-			aria-controls="sidebarMenu" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<!-- <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search"> -->
-		<div class="navbar-nav">
-			<div class="nav-item text-nowrap">
-				<a class="nav-link px-3" href="#">Sign out</a>
-			</div>
-		</div>
-	</header>
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="index.html">편스토랑 관리자페이지</a>
+		<!-- Sidebar Toggle-->
+		<!-- 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" -->
+		<!-- 			id="sidebarToggle" href="#!"> -->
+		<!-- 			<i class="fas fa-bars"></i> -->
+		<!-- 		</button> -->
 
-	<div class="container-fluid">
-		<div class="row">
-			<nav id="sidebarMenu"
-				class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-				<div class="position-sticky pt-3 sidebar-sticky">
-					<ul class="nav flex-column">
-						<li class="nav-item reportBlock"><a
-							class="nav-link active reportAdmin" aria-current="page"
-							href="/report/reportAdmin"> <span data-feather="home"
-								class="align-text-bottom"></span> 신고 관리
-						</a></li>
-						<li class="nav-item"><a class="nav-link reportAdmin"
-							href="/admin/memberAdminList"> <span data-feather="file"
-								class="align-text-bottom"></span> 회원 관리
-						</a></li>
-						<li class="nav-item"><a class="nav-link reportAdmin"
-							href="/admin/boardList"> <span data-feather="shopping-cart"
-								class="align-text-bottom"></span> 게시글 관리
-						</a></li>
-						<li class="nav-item"><a class="nav-link reportAdmin"
-							href="#"> <span data-feather="shopping-cart"
-								class="align-text-bottom"></span> 채팅 관리
-						</a></li>
-					</ul>
+		<!-- Navbar-->
+		<!-- 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"> -->
+		<!-- 			<li class="nav-item dropdown"><a -->
+		<!-- 				class="nav-link dropdown-toggle" id="navbarDropdown" href="#" -->
+		<!-- 				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i -->
+		<!-- 					class="fas fa-user fa-fw"></i></a> -->
+		<!-- 				<ul class="dropdown-menu dropdown-menu-end" -->
+		<!-- 					aria-labelledby="navbarDropdown"> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Settings</a></li> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
+		<!-- 					<li><hr class="dropdown-divider" /></li> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Logout</a></li> -->
+		<!-- 				</ul></li> -->
+		<!-- 		</ul> -->
+	</nav>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark"
+				id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+
+
+						<div class="collapse" id="collapsePages"
+							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav accordion"
+								id="sidenavAccordionPages">
+								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+									aria-controls="pagesCollapseAuth"> Authentication
+									<div class="sb-sidenav-collapse-arrow">
+										<i class="fas fa-angle-down"></i>
+									</div>
+								</a>
+								<div class="collapse" id="pagesCollapseAuth"
+									aria-labelledby="headingOne"
+									data-bs-parent="#sidenavAccordionPages">
+									<nav class="sb-sidenav-menu-nested nav">
+										<a class="nav-link" href="login.html">Login</a> <a
+											class="nav-link" href="register.html">Register</a> <a
+											class="nav-link" href="password.html">Forgot Password</a>
+									</nav>
+								</div>
+
+							</nav>
+						</div>
+						<div class="sb-sidenav-menu-heading">메뉴</div>
+						<a class="nav-link" href="/report/reportAdmin">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div> 신고 관리
+						</a> 
+						<a class="nav-link" href="/admin/memberAdminList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-table"></i>
+							</div> 회원 관리
+						</a>
+						<a class="nav-link" href="/admin/boardList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div> 게시판 관리
+						</a> 
+						<a class="nav-link" href="charts.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div> 채팅 관리
+						</a> 
+					</div>
+				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small">편스토랑</div>
+					관리자 페이지
 				</div>
 			</nav>
+		</div>
+		<div id="layoutSidenav_content">
+			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">신고
+				목록</h3>
 
-			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<div
-					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">신고 관리</h1>
-					<div class="btn-toolbar mb-2 mb-md-0"></div>
-				</div>
-				<h3 style="margin-top: 20px">신고 현황</h3>
 
-				<div class="table-responsive">
-					<table class="table table-hover"
-						style="text-align: center; border: 1px solid #dddddd">
-						<thead>
-							<tr>
-								<th style="background-color: #eeeeee; text-align: center;">레시피
-									번호</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고내용</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고자</th>
-								<th style="background-color: #eeeeee; text-align: center;">날짜</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리
-									상태</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리
-									확인</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${!empty rList }">
-								<c:forEach items="${rList }" var="report" varStatus="i">
-									<tr>
-										<td>${report.recipeNo }</td>
-										<td>레시피 관련 신고</td>
-										<td>${report.memberEmail }</td>
-										<td>${report.reportDate }</td>
-										<td>${report.reportResult }</td>
-										<td><button>
-												<a href="/report/successRecipe?recipeNo=${report.recipeNo }">확인</a>
-											</button></td>
-									</tr>
-								</c:forEach>
+			<div class="container-fluid px-5">
+
+
+				<div class="card mb-5">
+
+
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>레시피 번호</th>
+									<th>신고내용</th>
+									<th>신고자</th>
+									<th>날짜</th>
+									<th>처리 상태</th>
+									<th>처리 확인</th>
+								</tr>
+							</thead>
+							<tbody>
 								<c:if test="${!empty rList }">
-									<tr align="center" height="20">
-										<td colspan="6"><c:if test="${currentPage != 1 }">
-												<a href="/report/reportRecipe?page=${currentPage - 1 }">[이전]</a>
-											</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-												<c:if test="${currentPage eq p }">
-													<b>${p }</b>
-												</c:if>
-												<c:if test="${currentPage ne p }">
-													<a href="/report/reportRecipe?page=${p }">${p }</a>
-												</c:if>
-											</c:forEach> <c:if test="${maxPage > currentPage }">
-												<a href="/report/reportRecipe?page=${currentPage + 1 }">[다음]</a>
-											</c:if></td>
-									</tr>
+									<c:forEach items="${rList }" var="report" varStatus="i">
+										<tr>
+											<td>${report.recipeNo }</td>
+											<td>레시피 관련 신고</td>
+											<td>${report.memberEmail }</td>
+											<td>${report.reportDate }</td>
+											<td>${report.reportResult }</td>
+											<td><button>
+													<a
+														href="/report/successRecipe?recipeNo=${report.recipeNo }">확인</a>
+												</button></td>
+										</tr>
+									</c:forEach>
+									<c:if test="${!empty rList }">
+										<tr align="center" height="20">
+											<td colspan="6"><c:if test="${currentPage != 1 }">
+													<a href="/report/reportRecipe?page=${currentPage - 1 }">[이전]</a>
+												</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+													<c:if test="${currentPage eq p }">
+														<b>${p }</b>
+													</c:if>
+													<c:if test="${currentPage ne p }">
+														<a href="/report/reportRecipe?page=${p }">${p }</a>
+													</c:if>
+												</c:forEach> <c:if test="${maxPage > currentPage }">
+													<a href="/report/reportRecipe?page=${currentPage + 1 }">[다음]</a>
+												</c:if></td>
+										</tr>
+									</c:if>
 								</c:if>
-							</c:if>
-						</tbody>
-					</table>
+							</tbody>
+						</table>
 
-					<table class="table"
-						style="text-align: center; border: 1px solid #dddddd">
-						<thead>
-							<tr>
-								<th style="background-color: #eeeeee; text-align: center;">댓글
-									번호</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고내용</th>
-								<th style="background-color: #eeeeee; text-align: center;">신고자</th>
-								<th style="background-color: #eeeeee; text-align: center;">날짜</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리상태</th>
-								<th style="background-color: #eeeeee; text-align: center;">처리
-									확인</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${!empty cList }">
-								<c:forEach items="${cList }" var="comment" varStatus="i">
-									<tr>
-										<td>${comment.commentNo }</td>
-										<td>댓글 관련 신고</td>
-										<td>${comment.memberEmail }</td>
-										<td>${comment.reportDate }</td>
-										<td>${comment.reportResult }</td>
-										<td><button>
-												<a
-													href="/report/successComment?commentNo=${comment.commentNo }">확인</a>
-											</button></td>
-								</c:forEach>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th ">댓글
+										번호</th>
+									<th>신고내용</th>
+									<th>신고자</th>
+									<th>날짜</th>
+									<th>처리상태</th>
+									<th>처리
+										확인</th>
+								</tr>
+							</thead>
+							<tbody>
 								<c:if test="${!empty cList }">
-									<tr align="center" height="20">
-										<td colspan="6"><c:if test="${currentPage2 != 1 }">
-												<a href="/report/reportRecipe?page=${currentPage2 - 1 }">[이전]</a>
-											</c:if> <c:forEach var="p" begin="${startNavi2 }" end="${endNavi2 }">
-												<c:if test="${currentPage2 eq p }">
-													<b>${p }</b>
-												</c:if>
-												<c:if test="${currentPage2 ne p }">
-													<a href="/report/reportRecipe?page=${p }">${p }</a>
-												</c:if>
-											</c:forEach> <c:if test="${maxPage2 > currentPage2 }">
-												<a href="/report/reportRecipe?page=${currentPage2 + 1 }">[다음]</a>
-											</c:if></td>
-									</tr>
+									<c:forEach items="${cList }" var="comment" varStatus="i">
+										<tr>
+											<td>${comment.commentNo }</td>
+											<td>댓글 관련 신고</td>
+											<td>${comment.memberEmail }</td>
+											<td>${comment.reportDate }</td>
+											<td>${comment.reportResult }</td>
+											<td><button>
+													<a
+														href="/report/successComment?commentNo=${comment.commentNo }">확인</a>
+												</button></td>
+									</c:forEach>
+									<c:if test="${!empty cList }">
+										<tr align="center" height="20">
+											<td colspan="6"><c:if test="${currentPage2 != 1 }">
+													<a href="/report/reportRecipe?page=${currentPage2 - 1 }">[이전]</a>
+												</c:if> <c:forEach var="p" begin="${startNavi2 }"
+													end="${endNavi2 }">
+													<c:if test="${currentPage2 eq p }">
+														<b>${p }</b>
+													</c:if>
+													<c:if test="${currentPage2 ne p }">
+														<a href="/report/reportRecipe?page=${p }">${p }</a>
+													</c:if>
+												</c:forEach> <c:if test="${maxPage2 > currentPage2 }">
+													<a href="/report/reportRecipe?page=${currentPage2 + 1 }">[다음]</a>
+												</c:if></td>
+										</tr>
+									</c:if>
 								</c:if>
-							</c:if>
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</main>
+			</div>
+			<footer class="footer">
+				<div class="footer_inner">
+					<div class="footer_content_first">
+						<div class="footer_content left">
+							<p class="title">고객센터</p>
+							<p class="tel">02-123-4567</p>
+							<p class="work_time">오전 10시 ~ 오후 5시 (주말, 공휴일 제외)</p>
+							<div>
+								<button>1:1 문의하기</button>
+								<button>공지사항</button>
+							</div>
+						</div>
+
+						<div class="footer_content right">
+							<p class="title">(주)편스토랑</p>
+							<div class="content_link">
+								<ul>
+									<li><a href="#">개인정보처리방침</a></li>
+									<li class="hr">&nbsp;</li>
+									<li><a href="#">이용약관</a></li>
+									<li class="hr">&nbsp;</li>
+									<li><a href="#">공지사항</a></li>
+									<li class="hr">&nbsp;</li>
+									<li><a href="#">Q &amp;A</a></li>
+								</ul>
+							</div>
+
+							<p class="footer_content_sub_txt">
+								법인명 : (주)편스토랑 | 사업자등록번호 : 000-00-00000 | 벤처기업 : 제 20220923103호 <br>특허
+								제 00-000000호 | 통신판매업신고 : 2022-서울종로구-0000 | 개인정보보호책임자 : 송신애 <br>주소
+								: 서울 종로구 어딘가 159, KH 정보교육원 3층 | 대표이사 : 공석 <br>제휴/협력 문의 :
+								asdf@asdf.com |
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+
 		</div>
 	</div>
 
-	<script>
-	
-</script>
 
 
 	<script
@@ -275,10 +359,12 @@
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
 		integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-		integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+	<script src="js/scripts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
 		crossorigin="anonymous"></script>
-	<script src="dashboard.js"></script>
+	<script src="js/datatables-simple-demo.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+	<script src="/resources/js/swiper.js"></script>
 </body>
 </html>
