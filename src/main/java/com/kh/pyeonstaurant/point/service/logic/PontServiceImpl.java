@@ -19,8 +19,14 @@ public class PontServiceImpl implements PointService{
 	SqlSessionTemplate session;
 
 	@Override
-	public List<Point> printPointHistory(String pointMemberEmail) {
-		List<Point> pList = pStore.selectAllPoint(pointMemberEmail, session);
+	public List<Point> printAllBoard(int currentPage, int limit) {
+		List<Point> pList = pStore.selectAllBoard(session, currentPage, limit);
 		return pList;
+	}
+	
+	@Override
+	public int getTotalCount() {
+		int totalCount = pStore.selectTotalCount(session);
+		return totalCount;
 	}
 }

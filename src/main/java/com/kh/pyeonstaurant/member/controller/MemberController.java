@@ -218,5 +218,26 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
+	
+	// 비밀 번호 찾기 기능 구현 중
+	/*@RequestMapping(value="/member/findPw.kh", method=RequestMethod.GET)
+	public ModelAndView modifyMemberPwd(
+			@ModelAttribute Member member
+			, ModelAndView mv) {
+		try {
+			int result = mService.modifyMemberPwd(member);
+			if(result > 0) {
+				mv.setViewName("redirect:/");
+			}else {
+				mv.addObject("msg", "회원 정보 수정 실패!");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
+		return mv;
+	}*/
 }
 

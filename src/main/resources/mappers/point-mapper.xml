@@ -10,7 +10,12 @@
 		<result property="pointDate" 	column="POINT_DATE"/>
 	</resultMap>
 
-	<select id="selectAllPoint" resultMap="memberResultMap">
-		SELECT * FROM POINT WHERE POINT_MEMBER_EMAIL = #{pointmemberEmail } order by POINT_DATE desc
+	<select id="selectAllPoint" resultMap="pointResultMap">
+		SELECT * FROM POINT WHERE POINT_MEMBER_EMAIL = #{pointmemberEmail } order by POINT_DATE DESC
+	</select>
+	
+	<select id="selectTotalCount" resultType="_int">
+	SELECT COUNT(*) FROM POINT WHERE POINT_MEMBER_EMAIL = #{pointmemberEmail }
+	
 	</select>
 </mapper>
