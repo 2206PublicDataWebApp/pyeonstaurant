@@ -31,6 +31,14 @@ public interface AdminStore {
 
 	public List<Admin> selectAllMember(SqlSession session, int currentPage, int memberLimit);
 
+	public List selectPoint(SqlSession session, String memberEmail);
+
+	public int addPoint(SqlSession session, String memberEmail);
+
+	public int decreasePoint(SqlSession session, String memberEmail);
+
+	public int resetPoint(SqlSession session, String memberEmail);
+
 
 
 

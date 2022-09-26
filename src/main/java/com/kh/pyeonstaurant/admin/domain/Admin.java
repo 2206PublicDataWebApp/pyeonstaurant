@@ -8,9 +8,6 @@ public class Admin {
 	public Admin() {
 		
 	}
-	
-	
-
 	public Admin(String memberEmail, String memberNickName, int totalPoint) {
 		this.memberEmail = memberEmail;
 		this.memberNickName = memberNickName;

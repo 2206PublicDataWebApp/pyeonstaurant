@@ -1,11 +1,14 @@
 package com.kh.pyeonstaurant.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,10 +60,10 @@ public class AdminController {
 		}
 		mv.setViewName("admin/boardAdminView");
 		return mv;
-//		return "admin/boardAdminView";
+
 	}	
 	
-	//³ªÁß¿¡ ·¹½ÃÇÇ Á¶È¸ ÇÕÄ¥¶§ »ç¿ë
+	//ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½Ä¥ï¿½ï¿½ ï¿½ï¿½ï¿½
 //	@RequestMapping(value= {"/recipe/recipeList.do", "/board/boardList.do"} , method = RequestMethod.GET)
 //	public ModelAndView RecipeList(ModelAndView mv) {
 //		try {
@@ -151,7 +154,7 @@ public class AdminController {
 //		
 //	}
 	
-	@RequestMapping(value="/admin/boardSearch", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/boardSearch", method=RequestMethod.GET)
 	public ModelAndView searchBoard(ModelAndView mv
 			, HttpSession session
 			, @RequestParam("boardInfo") String boardInfo
@@ -181,6 +184,47 @@ public class AdminController {
 			mv.setViewName("admin/boardAdminView");
 		return mv;		
 	}
+	
+	//ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îºï¿½
+	@RequestMapping(value="/point/pointList", method=RequestMethod.GET)
+	public ModelAndView pointList(
+			ModelAndView mv
+			,@ModelAttribute Admin admin
+			,@RequestParam("memberEmail") String memberEmail) {
+		List pList = mService.selectAllPoint(memberEmail);
+		
+		if(!pList.isEmpty()) {
+			mv.addObject("pList", pList);
+		}
+		mv.setViewName("admin/point");
+		return mv;
+		
+	}
+	@RequestMapping(value="/admin/increasePoint", method=RequestMethod.GET)
+	public String increasePoint(@RequestParam("memberEmail") String memberEmail) {
+		int result = mService.addPoint(memberEmail);
+
+		return "redirect:/point/pointList?memberEmail="+memberEmail;
+		
+	}
+	
+	@RequestMapping(value="/admin/decreasePoint", method=RequestMethod.GET)
+	public String decreasePoint(@RequestParam("memberEmail") String memberEmail) {
+		int result = mService.decreasePoint(memberEmail);
+
+		return "redirect:/point/pointList?memberEmail="+memberEmail;
+		
+	}
+	
+
+	@RequestMapping(value="/admin/resetPoint", method=RequestMethod.GET)
+	public String resetPoint(@RequestParam("memberEmail") String memberEmail) {
+		int result = mService.resetPoint(memberEmail);
+
+		return "redirect:/point/pointList?memberEmail="+memberEmail;
+		
+	}
+	
 	
 	
 }

@@ -7,19 +7,21 @@ public class Report {
 	private int commentNo;
 	private String reportResult;
 	private String memberEmail;
-	private Date reportDate;                                                                                                         
+	private Date reportDate;     
+	private int cnt;
 	
 	public Report() {
 		
 	}
 
-
-	public Report(int recipeNo, int commentNo, String reportResult, String memberEmail, Date reportDate) {
+	public Report(int recipeNo, int commentNo, String reportResult, String memberEmail, Date reportDate, Date fromDate,
+			Date toDate, int cnt) {
 		this.recipeNo = recipeNo;
 		this.commentNo = commentNo;
 		this.reportResult = reportResult;
 		this.memberEmail = memberEmail;
 		this.reportDate = reportDate;
+		this.cnt = cnt;
 	}
 
 	public int getRecipeNo() {
@@ -62,13 +64,14 @@ public class Report {
 		this.reportDate = reportDate;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Report [recipeNo=" + recipeNo + ", commentNo=" + commentNo + ", reportResult=" + reportResult
-				+ ", memberEmail=" + memberEmail + ", reportDate=" + reportDate + "]";
+	public int getCnt() {
+		return cnt;
 	}
-	
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
 	
 	
 }

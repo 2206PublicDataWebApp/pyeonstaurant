@@ -28,5 +28,13 @@ public interface AdminService {
 
 	public List<Admin> printAllMember(int currentPage, int memberLimit);
 
+	public List selectAllPoint(String memberEmail);
+
+	public int addPoint(String memberEmail);
+
+	public int decreasePoint(String memberEmail);
+
+	public int resetPoint(String memberEmail);
+
 
 }

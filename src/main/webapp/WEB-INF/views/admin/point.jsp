@@ -10,7 +10,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.101.0">
-<title>Dashboard Template · Bootstrap v5.2</title>
+<title>채팅 관리</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
@@ -57,10 +57,6 @@
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
-}
-
-a{
-	text-decoration:none;
 }
 
 @media ( min-width : 768px) {
@@ -111,6 +107,11 @@ a{
 	color: red;
 	font-style: inherit;
 }
+
+a{
+	text-decoration:none;
+}
+
 </style>
 
 
@@ -123,25 +124,25 @@ a{
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="index.html">편스토랑 관리자페이지</a>
 		<!-- Sidebar Toggle-->
-<!-- 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" -->
-<!-- 			id="sidebarToggle" href="#!"> -->
-<!-- 			<i class="fas fa-bars"></i> -->
-<!-- 		</button> -->
+		<!-- 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" -->
+		<!-- 			id="sidebarToggle" href="#!"> -->
+		<!-- 			<i class="fas fa-bars"></i> -->
+		<!-- 		</button> -->
 
 		<!-- Navbar-->
-<!-- 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"> -->
-<!-- 			<li class="nav-item dropdown"><a -->
-<!-- 				class="nav-link dropdown-toggle" id="navbarDropdown" href="#" -->
-<!-- 				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i -->
-<!-- 					class="fas fa-user fa-fw"></i></a> -->
-<!-- 				<ul class="dropdown-menu dropdown-menu-end" -->
-<!-- 					aria-labelledby="navbarDropdown"> -->
-<!-- 					<li><a class="dropdown-item" href="#!">Settings</a></li> -->
-<!-- 					<li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
-<!-- 					<li><hr class="dropdown-divider" /></li> -->
-<!-- 					<li><a class="dropdown-item" href="#!">Logout</a></li> -->
-<!-- 				</ul></li> -->
-<!-- 		</ul> -->
+		<!-- 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"> -->
+		<!-- 			<li class="nav-item dropdown"><a -->
+		<!-- 				class="nav-link dropdown-toggle" id="navbarDropdown" href="#" -->
+		<!-- 				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i -->
+		<!-- 					class="fas fa-user fa-fw"></i></a> -->
+		<!-- 				<ul class="dropdown-menu dropdown-menu-end" -->
+		<!-- 					aria-labelledby="navbarDropdown"> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Settings</a></li> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
+		<!-- 					<li><hr class="dropdown-divider" /></li> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Logout</a></li> -->
+		<!-- 				</ul></li> -->
+		<!-- 		</ul> -->
 	</nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
@@ -179,22 +180,19 @@ a{
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 신고 관리
-						</a> 
-						<a class="nav-link" href="/admin/memberAdminList">
+						</a> <a class="nav-link" href="/admin/memberAdminList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 회원 관리
-						</a>
-						<a class="nav-link" href="/admin/boardList">
+						</a> <a class="nav-link" href="/admin/boardList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> 
-						<a class="nav-link" href="charts.html">
+						</a> <a class="nav-link" href="charts.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리
-						</a> 
+						</a>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">
@@ -204,113 +202,44 @@ a{
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
-			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">회원
+			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">게시물
 				목록</h3>
-			<form action="/admin/memberSearch" method="post">
-				<div class="search row">
-					<div class="col-xs-2 col-sm-2"
-						style="margin-left: 36px; margin-bottom: 20px;">
-						<select name="searchCondition" class="form-control">
-							<option>이메일</option>
-							<option>닉네임</option>
-						</select>
-					</div>
-
-					<div class="col-xs-8 col-sm-8">
-						<div class="input-group">
-							<input type="text" placeholder="검색어를 입력해주세요" name="memberInfo"
-									class="form-control" id="searchVal"> <span class="input-group-btn">
-									<input type="submit" value="검색" class="btn  btn-outline-primary output"  style="margin-left:15px;" onClick="sbm();">
-								</span>
-						</div>
-					</div>
-			</form>
-
 			<div class="container-fluid px-5">
+				`
 
 
-				<div class="card mb-5">
-
-
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>No</th>
-									<th>아이디</th>
-									<th>닉네임</th>
+				<div class="table-responsive">
+					<c:forEach items="${pList }" var="point" varStatus="i">
+						<c:if test="${!empty pList }">
+							<table class="table table-hover">
+								<thead>
+									<th>회원 닉네임</th>
 									<th>포인트</th>
-									<th>탈퇴</th>
+									<th>추가</th>
+									<th>차감</th>
+									<th>초기화</th>
+								</thead>
+								<tr>
+									<td>${point.memberNickName }님의정보</td>
+									<td>${point.totalPoint }점</td>
+									<td><button class="btn  btn-outline-primary output col-5">
+											<a
+												href="/admin/increasePoint?memberEmail=${point.memberEmail}">추가</a>
+										</button ></td>
+									<td><button class="btn  btn-outline-primary output col-5"> 
+											<a
+												href="/admin/decreasePoint?memberEmail=${point.memberEmail }">차감</a>
+										</button></td>
+									<td><button class="btn  btn-outline-primary output col-5">
+											<a href="/admin/resetPoint?memberEmail=${point.memberEmail }">초기화</a>
+										</button></td>
 								</tr>
-							</thead>
-					<tbody>
-							<c:if test="${!empty aList }">
-								<c:forEach items="${aList }" var="member" varStatus="i">
-									<tr>
-										<td>${i.count }</td>
-										<td>${member.memberEmail }</td>
-										<td>${member.memberNickName }</td>
-										<td><a href="/point/pointList?memberEmail=${member.memberEmail }">${member.totalPoint }</a></td>
-										<td scope="col"><button class="btn  btn-outline-primary output">
-												<a
-													href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a>
-											</button></td>
-									</tr>
-								</c:forEach>
-							</c:if>
-							<c:if test="${!empty aList }">
-								<tr align="center">
-										<td colspan="6"><nav aria-label="Page navigation example">
-												<ul class="pagination justify-content-center">
-													<c:if test="${currentPage != 1 }">
-														<a class="page-link"
-															href="/admin/memberAdminList?page=${currentPage - 1 }">이전</a>
-													</c:if>
-													
-													<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-													<c:if test="${currentPage eq p }">
-															<li class="page-item">${p }</a></li>
-														</c:if>
-														<c:if test="${currentPage ne p }">
-															<li class="page-item"><a class="page-link"
-																href="/admin/memberAdminList?page=${p }">${p }</a></li>
-														</c:if>
-													</c:forEach>
-													<c:if test="${maxPage > currentPage }">
-														<a class="page-link"
-															href="/admin/memberAdminList?page=${currentPage + 1 }">다음</a>
-													</c:if>
-													</li>
-												</ul>
-											</nav>
-											</td>
-									</tr>
-								
-								
-								
-								
-								
-								
-							</c:if>
-							<c:if test="${!empty mList }">
-								<c:forEach items="${mList }" var="member" varStatus="i">
-									<tr>
-										<td>${i.count }</td>
-										<td>${member.memberEmail }</td>
-										<td>${member.memberNickName }</td>
-										<td>${member.totalPoint }</td>
-										<td scope="col"><button>
-												<a
-													href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a>
-											</button></td>
-									</tr>
-								</c:forEach>
-							</c:if>
-							</tbody>
-						</table>
-					</div>
+							</table>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
+
 			<footer class="footer">
 				<div class="footer_inner">
 					<div class="footer_content_first">
@@ -332,7 +261,7 @@ a{
 									<li class="hr">&nbsp;</li>
 									<li><a href="#">이용약관</a></li>
 									<li class="hr">&nbsp;</li>
-									<li><a href="/notice/list">공지사항</a></li>
+									<li><a href="#">공지사항</a></li>
 									<li class="hr">&nbsp;</li>
 									<li><a href="#">Q &amp;A</a></li>
 								</ul>
@@ -370,17 +299,5 @@ a{
 	<script
 		src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 	<script src="/resources/js/swiper.js"></script>
-	
-	<script>
-	function sbm(){
-		var searchVal = document.getElementById("searchVal");
-		if(searchVal.value == "") {
-			alert("검색어를 입력해주세요.");
-			searchVal.focus();
-			event.preventDefault();
-			return false;
-		}
-	}	
-	</script>
 </body>
 </html>

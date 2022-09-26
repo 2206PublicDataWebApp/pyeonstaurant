@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MyRecipeMapper">
-	<resultMap type="MyRecipe" id="MyRecipeResultMap">
-		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
-		<result property="recipeNo" 	column="RECIPE_NO"/>
-		<result property="myRecipeNo" 	column="MYRECIPE_NO"/>
-		<result property="mainPicture" 	column="MAIN_PICTURE"/>
-		<result property="recipeName" 	column="RECIPE_NAME"/>
-	</resultMap>
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<!-- <!DOCTYPE mapper -->
+<!--   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" -->
+<!--   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<!-- <mapper namespace="MyRecipeMapper"> -->
+<!-- 	<resultMap type="MyRecipe" id="MyRecipeResultMap"> -->
+<!-- 		<result property="memberEmail" 	column="MEMBER_EMAIL"/> -->
+<!-- 		<result property="recipeNo" 	column="RECIPE_NO"/> -->
+<!-- 		<result property="myRecipeNo" 	column="MYRECIPE_NO"/> -->
+<!-- 		<result property="recipePicRename" 	column="MAIN_PICTURE"/> -->
+<!-- 		<result property="recipeName" 	column="RECIPE_NAME"/> -->
+<!-- 	</resultMap> -->
 	
-	<delete id="removeMyRecipe">
-		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo} AND MEMBER_EMAIL = #{memberEmail }
-	</delete>
+<!-- 	<delete id="removeMyRecipe"> -->
+<!-- 		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo} AND MEMBER_EMAIL = #{memberEmail } -->
+<!-- 	</delete> -->
 	
-	<insert id="insertMyRecipe" parameterType="MyRecipe">
-		INSERT INTO MYRECIPE_TBL VALUES(SEQ_MYRECIPE_NO.NEXTVAL, #{memberEmail}, #{recipeNo})
-	</insert>
+<!-- 	<insert id="insertMyRecipe"> -->
+<!-- 		INSERT INTO MYRECIPE_TBL VALUES(#{memberEmail}, #{recipeNo}, SEQ_MYRECIPE_NO.NEXTVAL, #{recipePicRename}, #{recipeName}); -->
+<!-- 	</insert> -->
 	
-	<select id="selectAllByValue" resultMap="MyRecipeResultMap">
-		SELECT * FROM RECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
-	</select>
+<!-- 	<select id="selectAllByValue" resultMap="MyRecipeResultMap"> -->
+<!-- 		SELECT * FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail} -->
+<!-- 	</select> -->
 	
-	<select id="selectTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
-	</select>
+<!-- 	<select id="selectTotalCount" resultType="_int"> -->
+<!-- 		SELECT COUNT(*) FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail} -->
+<!-- 	</select> -->
 
 	
-</mapper>
+<!-- </mapper> -->

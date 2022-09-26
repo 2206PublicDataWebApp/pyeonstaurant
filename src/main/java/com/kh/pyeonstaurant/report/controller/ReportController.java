@@ -1,5 +1,7 @@
 package com.kh.pyeonstaurant.report.controller;
 
+import java.sql.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kh.pyeonstaurant.report.domain.Report;
 import com.kh.pyeonstaurant.report.service.ReportService;
 
@@ -82,11 +87,11 @@ public class ReportController {
 		try {
 			session = request.getSession();
 			Report email = (Report)session.getAttribute("memberEmail");
-			String memberEmail = email.getMemberEmail();	//½Å°íÀÚ ÀÌ¸ÞÀÏ
+			String memberEmail = email.getMemberEmail();	//ï¿½Å°ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
 			report.setMemberEmail(memberEmail);
 			int result = rService.addReportRecipe(report);
 			if(result > 0) {
-				mv.setViewName("redirect:/·¹½ÃÇÇ »ó¼¼ÆäÀÌÁö");
+				mv.setViewName("redirect:/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 		}catch(Exception e) {
 			
@@ -103,11 +108,11 @@ public class ReportController {
 		try {
 			session = request.getSession();
 			Report email = (Report)session.getAttribute("memberEmail");
-			String memberEmail = email.getMemberEmail();	//½Å°íÀÚ ÀÌ¸ÞÀÏ
+			String memberEmail = email.getMemberEmail();	//ï¿½Å°ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
 			report.setMemberEmail(memberEmail);
 			int result = rService.addReportComment(report);
 			if(result > 0) {
-				mv.setViewName("redirect:/·¹½ÃÇÇ »ó¼¼ÆäÀÌÁö");
+				mv.setViewName("redirect:/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 		}catch(Exception e) {
 			

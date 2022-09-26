@@ -179,7 +179,7 @@ public class NoticeController {
 		try {
 			Notice notice = nService.printOneByNo(noticeNo);
 			session.setAttribute("noticeNo", notice.getNoticeNo());
-			// ¼¼¼Ç¿¡ noticeNo ÀúÀå -> »èÁ¦ÇÏ±â À§ÇØ¼­
+			// ï¿½ï¿½ï¿½Ç¿ï¿½ noticeNo ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
 			mv.addObject("notice", notice);
 			mv.addObject("page", page);
 			mv.setViewName("notice/detailView");
@@ -217,8 +217,8 @@ public class NoticeController {
 		
 		if(reloadFile != null) {
 			String noticeFilename = reloadFile.getOriginalFilename();
-			// ¼öÁ¤, 1. ´ëÃ¼(replace) / 2. »èÁ¦ ÈÄ ÀúÀå
-			// ÆÄÀÏ»èÁ¦
+			// ï¿½ï¿½ï¿½ï¿½, 1. ï¿½ï¿½Ã¼(replace) / 2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			// ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½
 			String root = request.getSession().getServletContext().getRealPath("resources");
 			String savedPath = root + "\\buploadFiles";
 			//notice bOne = bService.printOneByNo(notice.getnoticeNo());
@@ -226,7 +226,7 @@ public class NoticeController {
 			if(file.exists()) {
 				file.delete();
 			}
-			// ÆÄÀÏ ´Ù½Ã ÀúÀå
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			String noticeFileRename = sdf.format(new Date(System.currentTimeMillis()))
 					+ "." + noticeFilename.substring(noticeFilename.lastIndexOf(".")+1);
