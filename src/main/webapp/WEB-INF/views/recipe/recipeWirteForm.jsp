@@ -324,7 +324,7 @@ justify-content: space-evenly
 
 					</div>
 
-				</div><!--  재료 입력 영역 종료 -->
+				</div><!--  재료 입력 영역 종료 --> <!-- 재료입력 반응형으로 수정 -->
 			</div>
 			
 			</article><!-- 상단 에어리어 종료 -->

@@ -260,12 +260,12 @@ justify-content: space-evenly
 					<div class=" col-md-12 m-0 p-0">
 
 						<div class="row col-md-6 col-12 float-start p-3 me-1">
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>
 									name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 							</div>
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if  test="${rmListSize >=1  }"> value="${rmList.get(0).material }"</c:if>
 									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
@@ -273,13 +273,13 @@ justify-content: space-evenly
 						</div>
 
 						<div class="row col-md-6 col-12 float-start p-3 ms-1">
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).material }"</c:if>
 									name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 							</div>
 
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									<c:if  test="${rmListSize >=2  }"> value="${rmList.get(1).amount }"</c:if>
 									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
@@ -293,12 +293,12 @@ justify-content: space-evenly
 						<div class="col-12 col-md-12">
 
 							<div class="row col-md-6 col-12 float-md-start p-3 me-1">
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).material }"</c:if>
 										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=3  }"> value="${rmList.get(2).amount }"</c:if>
 										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
@@ -306,13 +306,13 @@ justify-content: space-evenly
 							</div>
 
 							<div class="row col-md-6 col-12 float-start p-3 ms-1">
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).material }"</c:if>
 										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
 
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										<c:if  test="${rmListSize >=4  }"> value="${rmList.get(3).amount }"</c:if>
 										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
@@ -322,12 +322,12 @@ justify-content: space-evenly
 							<div class=" col-md-12 border-bottom-1">
 
 								<div class="row col-md-6 col-12 float-start p-3 me-1">
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).material }"</c:if>
 											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=5  }"> value="${rmList.get(4).amount }"</c:if>
 											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
@@ -335,13 +335,13 @@ justify-content: space-evenly
 								</div>
 
 								<div class="row col-md-6 col-12 float-start p-3 ms-1">
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>
 											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
 
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											<c:if  test="${rmListSize >=6  }"> value="${rmList.get(5).amount }"</c:if>
 											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
@@ -361,6 +361,7 @@ justify-content: space-evenly
 					</div>
 
 				</div><!--  재료 입력 영역 종료 -->
+				<!-- 재료 입력 반응형 수정 -->
 			</div>
 			</article><!-- 상단 에어리어 종료 -->
 			
