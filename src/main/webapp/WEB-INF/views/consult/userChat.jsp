@@ -19,36 +19,33 @@
 			<P id="nickName">${memberNickName}</p>
 			<p style="color: white;">의 채팅상담</P>
 			<input type="hidden" name="memberEmail" value="${memberEmail}">
-			<input type="hidden" name="titleNo" id="titleNo" />
+			<input type="hidden" name="titleNo" id="titleNo" />			
 		</div>
 
 		<div class="btn">
 			<button onclick="chatfinish();" id="endChat">종료</button>
 		</div>
 	</div>
+	
 	<div id="before">
-		사용자님 반갑습니다. 상담원하시는 주제를 10자 이내로 기록해주시면 관리자가 접속시 참고하여 진행해드립니다. 다른 상담으로
-		인해 대기시간이 소요될수 있는 점은 양해부탁드립니다.
-		<table width="100%">
-			<tr>
-				<td><input type="text" name="cTitle" id="inTitle" /></td>
-				<td><button id="centerbtn" onclick="(beforeChat('${memberNickName}','${memberEmail}')) ;" value="접수">접수</button></td>
-				
-			</tr>
-		</table>
-
-	</div>
-	<!--context 내용 입력부분 -->
-
-	<div class="context">
-		<div id="after">
-			
+			사용자님 반갑습니다. 상담원하시는 주제를 10자 이내로 기록해주시면 관리자가 접속시 참고하여 진행해드립니다. 다른 상담으로
+			인해 대기시간이 소요될수 있는 점은 양해부탁드립니다.
+			<table width="100%">
+				<tr>
+					<td><input type="text" name="cTitle" id="inTitle" /></td>
+					<td><button id="centerbtn" onclick="(beforeChat('${memberNickName}','${memberEmail}')) ;" value="접수">접수</button></td>
+					
+				</tr>
+			</table>
+	
 		</div>
-
-
-
-
+		<!--context 내용 입력부분 -->
+	
+	<div class="context">
+		<div id="after"></div>	
 	</div>
+	
+	
 	<!--foot 입력부분  -->
 	<div class="footer">
 		<div class="textIn">
@@ -134,7 +131,7 @@
 					console.log("리스트 수신성공: " + result);
 					//var data = JSON.parse(result);  //배열로 온것을 파싱한다.
 					//console.log(data); 			
-					console.log("리스트 수신성공: " + result);
+				
 					for ( var i in result) {
 						addChat(result[i].cNickName, result[i].cContexts,result[i].cDate);
 						console.log(result[i].cNickName);

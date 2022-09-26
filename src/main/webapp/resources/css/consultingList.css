@@ -65,3 +65,25 @@ p {
 	font-size:15px;
 	font-weight:bold;
 }
+
+    /* 제목 */
+#pagename{
+    width: 600px;
+    height: 100px;
+    border-radius: 15%;
+    font-size: 50px;
+    font-weight: bold ;
+    color: #FFF;    
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(7, 26, 133);
+    justify-content: center;
+}
+
+span{
+  display: inline;
+  font-size: 20px;
+  font-weight: bold;  
+  padding: 5px;
+  
+}

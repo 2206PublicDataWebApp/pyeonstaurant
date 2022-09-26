@@ -47,9 +47,9 @@
 		/* 전송버튼을 클릭하면 */
 		var titleNo= ${param.titleNo};
 		var msg={								//json형식으로 데이터set
-			cNickName: "manager",
+			cNickName: "임시관리자",
 			cContexts:$('#magText').val(),
-			cEmail: "manager@iei.com",
+			cEmail: "test_admin",
 			titleNo: titleNo
 		};
 		$('#magText').val('');
@@ -100,19 +100,18 @@
 
 		function addChat(cNickName, cContext, cDate) {
 			console.log("데이터 올림 확인 : " + cNickName);
-			if(cNickName==='manager'){
-				 $('#after').append(
-					 '<div class="left">'
-                 	   +'<h5 >'+cNickName+'</h5>'
-                       +'<div class="middleBox"><span class="dateBox">'+cDate+'</span>'
-                       +'<span class="contextBox">'+ cContext +'</span></div></div>');
-
-			}else{
-				 $('#after').append(
-						 '<div class="right" >'
+			if(cNickName==='임시관리자'){
+				 $('#after').append('<div class="right" >'
 	                 	   +'<h5 >'+cNickName+'</h5>'
 	                       +'<div class="middleBox"><span class="dateBox">'+cDate+'</span>'
-	                       +'<span class="contextBox">'+ cContext +'</span></div></div>');				
+	                       +'<span class="contextBox">'+ cContext +'</span></div></div>');
+					
+
+			}else{
+				 $('#after').append('<div class="left">'
+	                 	   +'<h5 >'+cNickName+'</h5>'
+	                       +'<div class="middleBox"><span class="dateBox">'+cDate+'</span>'
+	                       +'<span class="contextBox">'+ cContext +'</span></div></div>');		
 			}			
 		}
 		
@@ -121,24 +120,36 @@
 		var titleNo= ${param.titleNo};
 		if (confirm("정말로 종료하시겠습니까?")) {			
 			var csResult=prompt('상담결과를 입력하세요.');
+			console.log("종료구문확인1");
 			$.ajax({
-				url : "consult/finish.kh",
+				url : "/consult/finish.kh",
 				type : 'post',		
 				data : {
 				 titleNo : titleNo,
 				 csResult:csResult				
 				},
-				success : function(result) {				
-					if(csResult!=null){
-					window.close();					
-			}else : function(e) {
-				alert("종료 되지 않았습니다. 다시 해주세요");			
-			}
-		}
-			
-			
+				
+				success : function(data) {					
+						console.log("data:"+data);
+						if(data.result>0){
+							console.log("3번");
+						//	var win=window.open("","_self");
+						//window.opener.closeparents();
+							self.close();
+						}else {
+							console.log("3");
+							alert("종료 되지 않았습니다. 다시 해주세요");		
+						
+						};
+				},					
+				error: function(e) {
+					alert('error : ' + e);
+				}
+			});		
+			console.log("4번");
+		};
 	}
-	
+
 
 </script>
 </body>

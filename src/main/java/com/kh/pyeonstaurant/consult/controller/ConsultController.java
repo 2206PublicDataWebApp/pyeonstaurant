@@ -1,5 +1,7 @@
-package com.kh.pyeonstaurant.consult.controller;
+package com.kh.Recipe.consult.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -17,41 +19,63 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.pyeonstaurant.consult.domain.Consult;
-import com.kh.pyeonstaurant.consult.domain.ConsultServer;
-import com.kh.pyeonstaurant.consult.service.ConsultService;
-import com.kh.pyeonstaurant.member.domain.Member;
+import com.kh.Recipe.consult.domain.Consult;
+import com.kh.Recipe.consult.domain.ConsultServer;
+import com.kh.Recipe.consult.domain.SwitchChat;
+import com.kh.Recipe.consult.service.ConsultService;
+import com.kh.Recipe.member.domain.Member;
 
 @Controller
 public class ConsultController {
 	@Autowired
 	private ConsultService cService;
+	
+	//채팅상담 진행시 on/of확인부분.	
+	@ResponseBody
+	@RequestMapping(value = "/client/chatCheck.kh", method = RequestMethod.GET)
+	public String checkChat() {
+		SwitchChat switchChat = new SwitchChat();
+		String switchbtn =cService.selechbtn();
+		switchChat.setOn_off(switchbtn);
+		JSONObject jsonObj = new JSONObject();
+		if (!(switchbtn.isEmpty())) {			
+			jsonObj.put("switchbtn", switchbtn);
+		} else {
+			jsonObj.put("resultMsg", "error");
+
+		}
+		return jsonObj.toJSONString();
+	}
+
 
 	// chat을 위한 한명의 정보 받아오기
-	@RequestMapping(value = "/consult/start.kh", method = RequestMethod.GET)
+	@RequestMapping(value = "/consult/chatbefore.kh", method = RequestMethod.GET)
 	public ModelAndView showChat(ModelAndView mv
 	/* @RequestParam(value="memberNickName") String memberNickName */
 	/* , @RequestParam(value="memberEmail") String memberEmail */
-			, HttpSession session, HttpServletRequest request) {
-		try {
+			, HttpSession session, HttpServletRequest request) {	
 
 			Member member = (Member) session.getAttribute("loginUser");
-			if(member == null) {
-				mv.setViewName("redirect:/home.kh");
-				return mv;
-			}
-			// session은 object임...
-
-			String memberNickName = member.getMemberNickname();
-			String memberEmail = member.getMemberEmail();
-
+			try {				
+				SwitchChat switchChat=new SwitchChat();
+				if(member == null){
+					mv.setViewName("redirect:/home.kh");
+				}
+				String memberNickName = "일용자";
+				String memberEmail = member.getMemberEmail();
+				String swichbtn = switchChat.getOn_off();
+				
 //			System.out.println("세션 닉네임 :" + memberNickName);
-			mv.addObject("memberNickName", memberNickName);
-			mv.addObject("memberEmail", memberEmail);
-			mv.setViewName("/consult/userChat");
-		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-		}
+				mv.addObject("swichbtn", swichbtn);
+				mv.addObject("memberNickName", memberNickName);
+				mv.addObject("memberEmail", memberEmail);
+				mv.setViewName("/consult/userChat");
+			
+			} catch (Exception e) {
+			
+				mv.addObject("msg", e.getMessage());
+			}
+	
 		return mv;
 	}
 
@@ -173,7 +197,9 @@ public class ConsultController {
 	public ModelAndView move(ModelAndView mv, HttpSession session) {
 
 		Member member = (Member) session.getAttribute("loginUser");
-		if(member == null) {
+		
+		if(!(member.getMemberEmail().equals("test_admin"))) {
+			
 			mv.setViewName("redirect:/home.kh");
 			return mv;
 		}
@@ -187,6 +213,8 @@ public class ConsultController {
 	@ResponseBody
 	@RequestMapping(value = "/consult/chatSession.kh", produces="application/json;charset=UTF-8", method = RequestMethod.GET)
 	public String managerList() {
+		
+
 		List<ConsultServer> chatList  = cService.printAllChat();	
 		JSONObject jsonObj = new JSONObject();
 		JSONArray jsonArr = new JSONArray();		
@@ -244,24 +272,26 @@ public class ConsultController {
 		}
 
 	//관리자 상담종료 한기
-	@RequestMapping(value = "/consult/finish.kh", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "/consult/finish.kh", produces="application/json;charset=UTF-8", method = RequestMethod.POST)
 	public String managerList(			
-		    @RequestParam(value="csResult") String csResult,
-		    @RequestParam(value="titleNo") Integer titleNo 
+		    @RequestParam("csResult") String csResult,
+		    @RequestParam("titleNo") Integer titleNo		    
 			) {
 			ConsultServer conServer=new ConsultServer();
+			JSONObject jsonObj = new JSONObject();
+				
 				conServer.setTitleNo(titleNo);
-				conServer.setCsResult(csResult);
+				conServer.setCsResult(csResult);		
 			
-			
-		try {
 			int result=cService.chatFinish(conServer );	
-			
-			return "";
-		} catch (Exception e) {
-			return "home.kh";
-		}
+				if(result>0) {
+					jsonObj.put("result", result);
+				}else {
+					jsonObj.put("result",result);
+				}
+			return jsonObj.toJSONString();
+			}		
 		
 	}
 
-}

@@ -1,11 +1,11 @@
-package com.kh.pyeonstaurant.consult.store;
+package com.kh.Recipe.consult.store;
 
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-import com.kh.pyeonstaurant.consult.domain.Consult;
-import com.kh.pyeonstaurant.consult.domain.ConsultServer;
+import com.kh.Recipe.consult.domain.Consult;
+import com.kh.Recipe.consult.domain.ConsultServer;
 
 public interface ConsultStore {
 
@@ -25,6 +25,12 @@ public interface ConsultStore {
 
 
 	public int finishChat(SqlSessionTemplate session, ConsultServer conServer);
+
+	public int changebutten(SqlSessionTemplate session, String string);
+
+	public String selechbtn(SqlSessionTemplate session);
+
+
 
 
 }

@@ -128,12 +128,23 @@ select{
     border-top: 3px solid cornflowerblue ;
     text-align: right;
 }
+/*검색결과 말해주는 자리  */
+#laveltitle{
+	width:100%;
+	display:flex;		
+}
+.titleLavel{
+	font-size: 1.6em;
+    font-weight: bold;
+}
 /* 검색후 이미지등등이 올라갈 자리들 */
+
 #rowbody{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    overFlow-y: auto; 
 }
 
 /* 하단자리 */

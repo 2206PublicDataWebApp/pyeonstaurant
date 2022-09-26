@@ -1,9 +1,9 @@
-package com.kh.pyeonstaurant.consult.service;
+package com.kh.Recipe.consult.service;
 
 import java.util.List;
 
-import com.kh.pyeonstaurant.consult.domain.Consult;
-import com.kh.pyeonstaurant.consult.domain.ConsultServer;
+import com.kh.Recipe.consult.domain.Consult;
+import com.kh.Recipe.consult.domain.ConsultServer;
 
 public interface ConsultService {
 	//관리자 리스트 전체 조회
@@ -23,6 +23,14 @@ public interface ConsultService {
 		public List<Consult> nowChatList(int titleNo);
 	//관리자 채팅종료
 		public int chatFinish(ConsultServer conServer);
+		//on버튼으로 변경
+		public int changebutten(String string);
+		//버튼값 받기
+		public String selechbtn();
+
+
+
+
 		
 		
 

@@ -1,12 +1,14 @@
-package com.kh.pyeonstaurant.consult.store;
+package com.kh.Recipe.consult.store;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.pyeonstaurant.consult.domain.Consult;
-import com.kh.pyeonstaurant.consult.domain.ConsultServer;
+import com.kh.Recipe.consult.domain.Consult;
+import com.kh.Recipe.consult.domain.ConsultServer;
 @Repository
 public class LogicStore implements ConsultStore{
 	//고객채팅 리스트 받아오기
@@ -49,8 +51,16 @@ public class LogicStore implements ConsultStore{
 		int num=session.update("ConsultMapper.reportUpdate",conServer);
 		return num;
 	}
-
-
-
-
+//채팅 시작 버튼 변경
+	@Override
+	public int changebutten(SqlSessionTemplate session,String string) {
+		int num=session.update("ConsultMapper.switchUpdate",string);
+		return num;
+	}
+//버튼값 받기
+	@Override
+	public String selechbtn(SqlSessionTemplate session) {
+		String btnresult=session.selectOne("ConsultMapper.switchbtncheck");
+		return btnresult;
+	}
 }
