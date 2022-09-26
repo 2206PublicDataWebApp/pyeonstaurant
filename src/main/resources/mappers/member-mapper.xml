@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MemberMapper">
-	<resultMap type="Member" id="memberResultMap">
-		<id 	property="memberEmail" 	column="MEMBER_EMAIL"/>
-		<result property="memberPwd" 	column="MEMBER_PW"/>
-		<result property="memberNickname" 	column="MEMBER_NICKNAME"/>
-		<result property="adminCheck" 	column="ADMIN_CHECK"/>
-		<result property="totalPoint" 	column="TOTAL_POINT"/>
-		
-	</resultMap>
-
-	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER_TBL
-		VALUES(#{memberEmail}, #{memberPwd}, #{memberNickname}, DEFAULT, DEFAULT)
+  
+  <mapper namespace="MemberMapper">
+  	<resultMap type="Member" id="memberResultMap">
+  		<id property="memberId" column="MEMBER_ID"/> <!--id   -->
+		<result  property="memberNickName" column="MEMBER_NICKNAME"/> 
+		<result  property="memberPwd" column="MEMBER_PWD"/> 
+		<result  property="memberEmail" column="MEMBER_EMAIL"/> 
+  	</resultMap>
+	<insert id="insertMember">
+		INSERT INTO MEMBER_TBL VALUES(#{memberNickName}, #{memberEmail},#{memberPwd})
 	</insert>
+
 	<update id="updateMemberNickname" parameterType="Member">
 		UPDATE MEMBER_TBL
 		SET MEMBER_NICKNAME = #{memberNickname }
@@ -31,12 +30,9 @@
 		DELETE FROM MEMBER_TBL
 		WHERE MEMBER_EMAIL = #{memberEmail }
 	</delete>
+
 	<select id="selectLoginOne" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
-		 WHERE MEMBER_EMAIL = #{memberEmail } AND MEMBER_PW = #{memberPwd }
+  		WHERE MEMBER_EMAIL=#{memberEmail} AND MEMBER_PW=#{memberPwd} 
 	</select>
-	<select id="selectOneByEmail" resultMap="memberResultMap">
-		SELECT * FROM MEMBER_TBL
-		WHERE MEMBER_EMAIL = #{memberEmail }
-	</select>
-</mapper>
+  </mapper>

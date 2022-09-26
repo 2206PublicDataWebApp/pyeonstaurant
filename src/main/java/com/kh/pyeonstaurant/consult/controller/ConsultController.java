@@ -1,25 +1,25 @@
 package com.kh.pyeonstaurant.consult.controller;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.Spring;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.pyeonstaurant.consult.domain.Consult;
 import com.kh.pyeonstaurant.consult.domain.ConsultServer;
+import com.kh.pyeonstaurant.consult.domain.SwitchChat;
 import com.kh.pyeonstaurant.consult.service.ConsultService;
 import com.kh.pyeonstaurant.member.domain.Member;
 
@@ -27,32 +27,56 @@ import com.kh.pyeonstaurant.member.domain.Member;
 public class ConsultController {
 	@Autowired
 	private ConsultService cService;
-
-	//chat을 위한 한명의 정보 받아오기	
-//	@RequestMapping(value="/consult/start.kh",  method=RequestMethod.GET)
-//	public ModelAndView showChat(ModelAndView mv
-/*			@RequestParam(value="memberNickName") String memberNickName*/
-/*			, @RequestParam(value="memberEmail") String memberEmail*/
-//			,HttpSession session
-//			,HttpServletRequest request) { 
-//		try {
-			 
-	//		Member member=(Member)session.getAttribute("loginUser"); 
-			//session은 object임...
-			
-	//		String memberNickName=member.getMemberNickName();
-	//		String memberEmail=member.getMemberEmail();
-
-//			System.out.println("세션 닉네임 :"+memberNickName);
-//			mv.addObject("memberNickName",memberNickName);
-//			mv.addObject("memberEmail",memberEmail);
-//			mv.setViewName("/consult/userChat");						
-//		}catch(Exception e){
-//			mv.addObject("msg",e.getMessage());
-//		}		
-//		return mv;
-//	}
 	
+	//채팅상담 진행시 on/of확인부분.	
+	@ResponseBody
+	@RequestMapping(value = "/client/chatCheck.kh", method = RequestMethod.GET)
+	public String checkChat() {
+		SwitchChat switchChat = new SwitchChat();
+		String switchbtn =cService.selechbtn();
+		switchChat.setOn_off(switchbtn);
+		JSONObject jsonObj = new JSONObject();
+		if (!(switchbtn.isEmpty())) {			
+			jsonObj.put("switchbtn", switchbtn);
+		} else {
+			jsonObj.put("resultMsg", "error");
+
+		}
+		return jsonObj.toJSONString();
+	}
+
+
+	// chat을 위한 한명의 정보 받아오기
+	@RequestMapping(value = "/consult/chatbefore.kh", method = RequestMethod.GET)
+	public ModelAndView showChat(ModelAndView mv
+	/* @RequestParam(value="memberNickName") String memberNickName */
+	/* , @RequestParam(value="memberEmail") String memberEmail */
+			, HttpSession session, HttpServletRequest request) {	
+
+			Member member = (Member) session.getAttribute("loginUser");
+			try {				
+				SwitchChat switchChat=new SwitchChat();
+				if(member == null){
+					mv.setViewName("redirect:/home.kh");
+				}
+				String memberNickName = "일용자";
+				String memberEmail = member.getMemberEmail();
+				String swichbtn = switchChat.getOn_off();
+				
+//			System.out.println("세션 닉네임 :" + memberNickName);
+				mv.addObject("swichbtn", swichbtn);
+				mv.addObject("memberNickName", memberNickName);
+				mv.addObject("memberEmail", memberEmail);
+				mv.setViewName("/consult/userChat");
+			
+			} catch (Exception e) {
+			
+				mv.addObject("msg", e.getMessage());
+			}
+	
+		return mv;
+	}
+
 	// 고객채팅 시작
 	/*
 	 * @RequestMapping(value="client/start.kh", method=RequestMethod.GET) public
@@ -60,80 +84,212 @@ public class ConsultController {
 	 * num=cService.inputChat(consult); if(num>0) {
 	 * mv.setViewName("/consult/userChat"); } return mv; }
 	 */
-	//채팅 상담접수
+	// 채팅 상담접수
 	@ResponseBody
-	@RequestMapping(value="/client/afterChat.kh",  method=RequestMethod.POST)
-	public String clientChat(String cNickName,String ctitle,String cEmail,
-		@ModelAttribute ConsultServer conServer) {
+	@RequestMapping(value = "/client/afterChat.kh", method = RequestMethod.POST)
+	public String clientChat(String cNickName, String csTitle, String cEmail, @ModelAttribute ConsultServer conServer) {
 		conServer.setCsNickName(cNickName);
-		conServer.setCsMail(ctitle);
-		conServer.setCsTitle(cEmail);
-		System.out.println(conServer.toString());
-		int result=cService.receiptChat(conServer);
+		conServer.setCsTitle(csTitle);
+		conServer.setCsMail(cEmail);
+//		System.out.println("고객상담접수:"+conServer.toString());
+		int result = cService.receiptChat(conServer);//상담접수하고
+		int titleNo= cService.serchTitleNo(conServer); //접수번호 가져오기
+//		System.out.println("titleNo:"+titleNo);
 		JSONObject jsonObj = new JSONObject();
-		if(result>=0) {
-			jsonObj.put("resultMsg","success" );
-		}else {
-			jsonObj.put("resultMsg","error" );
-			
+		if (result >= 0) {
+			jsonObj.put("resultMsg", "success");
+			jsonObj.put("titleNo", titleNo);
+		} else {
+			jsonObj.put("resultMsg", "error");
+
 		}
-		
+
 		return jsonObj.toJSONString();
 	}
-			
-	//채팅 보내기
+
+	// 채팅DB 보내기
 	@ResponseBody
-	@RequestMapping(value="/client/start.kh",  method=RequestMethod.GET)
-	public String clientChat(String cNickName,String cContext,String cEmail,
-			@ModelAttribute Consult consult,Model model,
-			HttpServletRequest req) { 	
+	@RequestMapping(value = "/client/start.kh", method = RequestMethod.POST)
+	public String clientChat(
+			String cNickName, String cContexts, String cEmail, int titleNo) {
+//		System.out.println("채팅내용 DB로 저장 cContext :" + cContexts);
+		Consult consult = new Consult();
 		consult.setcNickName(cNickName);
-		consult.setcContexts(cContext);
+		consult.setcContexts(cContexts);
 		consult.setcEmail(cEmail);
-		
-		System.out.println(cNickName);
-		System.out.println("cContext :"+cContext);
-		System.out.println("req :"+req.toString());
-		
-		int result=cService.inputChat(consult);
-		  //////////String 으로 바꾼 body부를 JSON형태로 변환함
-	    //org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-	    //Object obj = parser.parse(consult);
-		//String fromYear = (String) jsonObj.get("fromYear");
+		consult.setTitleNo(titleNo);
+
+		int result = cService.inputChat(consult);
 		JSONObject jsonObj = new JSONObject();
-	    jsonObj.put(cNickName, cNickName);
-	    jsonObj.put(cContext, cContext);
-	    jsonObj.put(cEmail, cEmail);
-	    // 제이슨으로 다시 화면에 전송함...
-         
-  
+		
+		//JSONObject jsonObj = new JSONObject();
+		if(result >= 0) {
+			//jsonObj.put("resultMsg", "success");
+			System.out.println("채팅내용 DB로 보낼때 cContext :전송성공");
+			jsonObj.put("status", "success");
+		} else {
+			//jsonObj.put("resultMsg", "error");
+			System.out.println("채팅내용 DB로 보낼때 cContext :전송실패");
+			jsonObj.put("status", "error");
+
+		}
+		// 제이슨으로 다시 화면에 전송함...
 		return jsonObj.toJSONString();
+	}
+
+	// 채팅내역 실시간 화면으로전송해주기
+
+	@ResponseBody
+	@RequestMapping(value = "/client/listprint.kh", produces="application/json;charset=UTF-8", method = RequestMethod.POST)
+	public String clientChat(@RequestParam("titleNo") int titleNo) {
+	
+		List<Consult> conList = cService.nowChatList(titleNo);		
+		JSONArray jsonArr = new JSONArray();
+		//JSONObject jsonObj = new JSONObject();
+		System.out.println("리스트 전달 1번");
+		// 리스트 자체를 array이로 넘ruwndh.
+		if (!(conList.isEmpty())) {
+			for( int i=0; i<conList.size(); i++) { //for Each문, conList에 있는 객체를 하나씩 거내서 객체
+				Consult consult = conList.get(i);				
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("cNickName",consult.getcNickName()); 
+				System.out.println("리스트 전달 2번 : "+consult.getcNickName());
+				jsonObj.put("cContexts", consult.getcContexts());
+				//데이트형 문자열로 바꾸기
+				SimpleDateFormat format1=new SimpleDateFormat("HH:mm:ss");
+				String cDate="";					 
+				cDate=format1.format(consult.getcDate());		
+				
+				jsonObj.put("cDate",cDate); // 데이트형 문자열로 바꿔서 가져오기!
+				System.out.println("리스트 전달 2번 : "+cDate);
+				jsonArr.add(jsonObj);
+				//jsonObj = new JSONObject(); //d total jsonObject객체를
+			}
+			
+		}else {
+		  //jsonObj.put("resultMsg", "error");
+		}
+		System.out.println("리스트 전달 마지막");
+		
+		return jsonArr.toJSONString();
+	}
+
+//서버자리///////////////////////////////////////////////////
+	// 그냥 채팅 전체 리스트 가져오면서 시작임.  //홈에서 출발시 들고온것임....
+//	@RequestMapping(value = "consult/move.kh", method = RequestMethod.GET)
+//	public ModelAndView move(ModelAndView mv) {
+//		try {
+//			List<ConsultServer> chatList = cService.printAllChat();
+//			System.out.println("리스트 준비 완료 ");
+//			mv.addObject("chatList", chatList);
+//			mv.setViewName("/consult/consultingList");
+//		} catch (Exception e) {
+//			mv.addObject("msg", e.getMessage());
+//			mv.setViewName("/error");
+//		}
+//
+//		return mv;
+//	}
+  //관리자가 리스트 페이지 들어와서 on했을때 
+	@RequestMapping(value = "/consult/move.kh", method = RequestMethod.GET)
+	public ModelAndView move(ModelAndView mv, HttpSession session) {
+
+		Member member = (Member) session.getAttribute("loginUser");
+		
+		if(!(member.getMemberEmail().equals("test_admin"))) {
+			
+			mv.setViewName("redirect:/home.kh");
+			return mv;
+		}
+		
+		mv.setViewName("/consult/consultingList");
+		return mv;
+	}
+
+
+//관리자 전체 리스트 가져오는 것
+	@ResponseBody
+	@RequestMapping(value = "/consult/chatSession.kh", produces="application/json;charset=UTF-8", method = RequestMethod.GET)
+	public String managerList() {
+		
+
+		List<ConsultServer> chatList  = cService.printAllChat();	
+		JSONObject jsonObj = new JSONObject();
+		JSONArray jsonArr = new JSONArray();		
+//		System.out.println("리스트 준비 완료 ");
+		
+		if (!(chatList.isEmpty())) {
+			for( int i=0; i<chatList.size(); i++) { //for Each문, conList에 있는 객체를 하나씩 거내서 객체
+				ConsultServer consultServer = chatList.get(i);	
+//				System.out.println("관리자 리스트 확인1: " +consultServer.toString());
+				jsonObj.put("titleNo",consultServer.getTitleNo());
+				jsonObj.put("csNickName",consultServer.getCsNickName());
+				jsonObj.put("csMail",consultServer.getCsMail());
+				jsonObj.put("csTitle",consultServer.getCsTitle());
+				//데이트형 문자열로 바꾸기
+				SimpleDateFormat format1=new SimpleDateFormat("yy.MM.dd HH:mm:ss");
+				String csDate="";					 
+				csDate=format1.format(consultServer.getCsDate());				
+				jsonObj.put("csDate",csDate);
+				///////////
+				jsonObj.put("csResult",consultServer.getCsResult());
+				jsonObj.put("csFileName",consultServer.getCsFileName());
+				jsonObj.put("csFileRename",consultServer.getCsFileRename());
+				jsonObj.put("csFilePath",consultServer.getCsFilePath());
+//				System.out.println("관리자 리스트 확인2: " +jsonObj.toString());
+				jsonArr.add(jsonObj);			
+				jsonObj = new JSONObject();
+			}
+			
+		}else {
+		  //jsonObj.put("resultMsg", "error");
+		}
+//		System.out.println("리스트 전달 마지막");
+		
+		return jsonArr.toJSONString();	
 		
 	}
 	
-//서버자리///////////////////////////////////////////////////
-	//그냥 채팅 전체 리스트 가져오면서 시작임.
-	@RequestMapping(value="/consult/move.kh",  method=RequestMethod.GET)
-	public ModelAndView move(ModelAndView mv) {
-		try {
-			List<ConsultServer> chatList=cService.printAllChat();	
-			System.out.println("리스트 준비 완료 ");
-			mv.addObject("chatList",chatList);
-			mv.setViewName("/consult/consultingList");						
-		}catch(Exception e){
-			mv.addObject("msg",e.getMessage());
-			mv.setViewName("/error");	
+	// 관리자 상담 시작하기
+		@RequestMapping(value = "/serverchat/start.kh", method = RequestMethod.GET)
+		public ModelAndView serverChat(ModelAndView mv,
+				HttpServletRequest request,
+				@RequestParam("csNickName") String csNickName,
+				@RequestParam("csTitle") String csTitle,
+				@RequestParam("titleNo") Integer titleNo) {
+			try {				
+				mv.addObject("csTitle", csTitle);
+				mv.addObject("cNickName", csNickName);
+				mv.addObject("titleNo", titleNo);
+				mv.setViewName("/consult/managerChat");
+			}catch (Exception e) {
+				mv.addObject("msg",e.toString());
+				mv.setViewName("/error");			}
+
+			return mv;
 		}
-			
-		return mv;
-	}
-	
-//채팅시작 이후에 신규 상담건 받아오기
-	
-// 관리자 상담 시작하기
-	@RequestMapping(value="/serverchat/start.kh",  method=RequestMethod.GET)
-	public ModelAndView serverChat(ModelAndView mv) { 		
+
+	//관리자 상담종료 한기
+	@ResponseBody
+	@RequestMapping(value = "/consult/finish.kh", produces="application/json;charset=UTF-8", method = RequestMethod.POST)
+	public String managerList(			
+		    @RequestParam("csResult") String csResult,
+		    @RequestParam("titleNo") Integer titleNo		    
+			) {
+			ConsultServer conServer=new ConsultServer();
+			JSONObject jsonObj = new JSONObject();
 				
-		return mv;
+				conServer.setTitleNo(titleNo);
+				conServer.setCsResult(csResult);		
+			
+			int result=cService.chatFinish(conServer );	
+				if(result>0) {
+					jsonObj.put("result", result);
+				}else {
+					jsonObj.put("result",result);
+				}
+			return jsonObj.toJSONString();
+			}		
+		
 	}
-}
+

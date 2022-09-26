@@ -32,7 +32,9 @@
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recommandation" alias="Recommandation"/>
 		
 		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" alias="ConsultServer" />
-		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" 	alias="Consult" />  <!--은정꺼예요.  -->
+		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" alias="ConsultServer" /><!--은정꺼예요.  -->
+		<typeAlias type="com.kh.pyeonstaurant.consult.domain.Consult"	alias="Consult" /><!--은정꺼예요.  -->
+		<typeAlias type="com.kh.pyeonstaurant.consult.domain.SwitchChat" alias="SwitchChat" />  <!--은정꺼예요.  -->
 </typeAliases>
 		
 
@@ -48,8 +50,11 @@
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/recipe-mapper.xml"></mapper>
 		<mapper resource="mappers/qna-mapper.xml"></mapper>
-		<mapper resource="mappers/consult-mapper.xml" />  <!--은정꺼예요.  -->
-		<mapper resource="mappers/notice-mapper.xml" />  <!--은정꺼예요.  -->
+		<mapper resource="mappers/consult-mapper.xml" /><!--은정꺼예요.  -->
+		<mapper resource="mappers/member-mapper.xml" /><!--은정꺼예요.  -->
+		<mapper resource="mappers/search-mapper.xml" /><!--은정꺼예요.  -->
+		
+		<mapper resource="mappers/notice-mapper.xml" />  
 		
 	</mappers>
 
