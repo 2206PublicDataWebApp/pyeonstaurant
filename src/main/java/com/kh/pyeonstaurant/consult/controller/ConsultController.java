@@ -25,6 +25,7 @@ import com.kh.pyeonstaurant.member.domain.Member;
 
 @Controller
 public class ConsultController {
+	
 	@Autowired
 	private ConsultService cService;
 
