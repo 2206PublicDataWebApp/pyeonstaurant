@@ -234,23 +234,23 @@ justify-content: space-evenly
 					<div class=" col-md-12 m-0 p-0">
 
 						<div class="row col-md-6 col-12 float-md-start p-3 me-1">
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									name="material" onblur="materialCheck(this);"> <label for="floatingInput" >재료명</label>
 							</div>
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 							</div>
 						</div>
 
 						<div class="row col-md-6 col-12 float-md-start p-3 ms-1">
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 							</div>
 
-							<div class="form-floating col-md-6">
+							<div class="form-floating col-6">
 								<input type="text" class="form-control" id="" maxlength="10"
 									name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 							</div>
@@ -263,23 +263,23 @@ justify-content: space-evenly
 						<div class="col-12 col-md-12">
 
 							<div class="row col-md-6 col-12 float-md-start p-3 me-1">
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 								</div>
 							</div>
 
 							<div class="row col-md-6 col-12 float-md-start p-3 ms-1">
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 								</div>
 
-								<div class="form-floating col-md-6">
+								<div class="form-floating col-6">
 									<input type="text" class="form-control" id="" maxlength="10"
 										name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 								</div>
@@ -288,23 +288,23 @@ justify-content: space-evenly
 							<div class=" col-md-12 col-12   border-bottom-1">
 
 								<div class="row col-md-6 col-12 float-md-start p-3 me-1">
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 									</div>
 								</div>
 
 								<div class="row col-md-6 col-12 float-md-start p-3 ms-1" >
-									<div class="form-floating col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											name="material" onblur="materialCheck(this);"> <label for="floatingInput">재료명</label>
 									</div>
 
-									<div class="form-floating col-12  col-md-6">
+									<div class="form-floating col-6">
 										<input type="text" class="form-control" id="" maxlength="10"
 											name="amount" onblur="materialCheck(this);"> <label for="floatingInput">재료수량</label>
 
@@ -333,8 +333,8 @@ justify-content: space-evenly
 				<!-- 여기서부터 레시피 설명-->
 				
 				<!-- 레시피 step한개 입력영역 -->
-					<hr>
-				<div id="oneStep-area" class="row"> 
+					
+				<div id="oneStep-area" class="row border-top"> 
 					<!-- 레시피 설명영역 -->
 					<div class="container-md p-3  col-md-6 p-2">
 

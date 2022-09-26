@@ -110,6 +110,11 @@ text-align:center;
 
 </head>
 <body>
+
+<header>
+	<jsp:include page="../header.jsp"/>
+
+</header>
 	
 
 	<section style="margin: 0 auto;">
@@ -595,6 +600,8 @@ text-align:center;
 		</div>
 		<!-- 메인 내용 폼 전체 들어감 -->
 	</section>
+	
+	<jsp:include page="../footer.jsp"/>
 
 	<!-- 부트스트랩 스타일 -->
 	<link
