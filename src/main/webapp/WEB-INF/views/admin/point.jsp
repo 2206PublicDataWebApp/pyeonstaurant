@@ -107,6 +107,11 @@
 	color: red;
 	font-style: inherit;
 }
+
+a{
+	text-decoration:none;
+}
+
 </style>
 
 
@@ -119,25 +124,25 @@
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="index.html">편스토랑 관리자페이지</a>
 		<!-- Sidebar Toggle-->
-<!-- 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" -->
-<!-- 			id="sidebarToggle" href="#!"> -->
-<!-- 			<i class="fas fa-bars"></i> -->
-<!-- 		</button> -->
+		<!-- 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" -->
+		<!-- 			id="sidebarToggle" href="#!"> -->
+		<!-- 			<i class="fas fa-bars"></i> -->
+		<!-- 		</button> -->
 
 		<!-- Navbar-->
-<!-- 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"> -->
-<!-- 			<li class="nav-item dropdown"><a -->
-<!-- 				class="nav-link dropdown-toggle" id="navbarDropdown" href="#" -->
-<!-- 				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i -->
-<!-- 					class="fas fa-user fa-fw"></i></a> -->
-<!-- 				<ul class="dropdown-menu dropdown-menu-end" -->
-<!-- 					aria-labelledby="navbarDropdown"> -->
-<!-- 					<li><a class="dropdown-item" href="#!">Settings</a></li> -->
-<!-- 					<li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
-<!-- 					<li><hr class="dropdown-divider" /></li> -->
-<!-- 					<li><a class="dropdown-item" href="#!">Logout</a></li> -->
-<!-- 				</ul></li> -->
-<!-- 		</ul> -->
+		<!-- 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4"> -->
+		<!-- 			<li class="nav-item dropdown"><a -->
+		<!-- 				class="nav-link dropdown-toggle" id="navbarDropdown" href="#" -->
+		<!-- 				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i -->
+		<!-- 					class="fas fa-user fa-fw"></i></a> -->
+		<!-- 				<ul class="dropdown-menu dropdown-menu-end" -->
+		<!-- 					aria-labelledby="navbarDropdown"> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Settings</a></li> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
+		<!-- 					<li><hr class="dropdown-divider" /></li> -->
+		<!-- 					<li><a class="dropdown-item" href="#!">Logout</a></li> -->
+		<!-- 				</ul></li> -->
+		<!-- 		</ul> -->
 	</nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
@@ -175,22 +180,19 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 신고 관리
-						</a> 
-						<a class="nav-link" href="/admin/memberAdminList">
+						</a> <a class="nav-link" href="/admin/memberAdminList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 회원 관리
-						</a>
-						<a class="nav-link" href="/admin/boardList">
+						</a> <a class="nav-link" href="/admin/boardList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> 
-						<a class="nav-link" href="charts.html">
+						</a> <a class="nav-link" href="charts.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리
-						</a> 
+						</a>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">
@@ -202,18 +204,42 @@
 		<div id="layoutSidenav_content">
 			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">게시물
 				목록</h3>
-				<div><c:if test="${!empty pList }">
+			<div class="container-fluid px-5">
+				`
+
+
+				<div class="table-responsive">
 					<c:forEach items="${pList }" var="point" varStatus="i">
-					<h3 style="margin-top: 20px">${point.memberNickName }님의 정보</h3>			
-				<h4>${point.memberNickName }님의 총 포인트는 ${point.totalPoint }점 입니다.</h4>				
-				<button><a href="/admin/increasePoint?memberEmail=${point.memberEmail}">추가</a></button>
-				<button><a href="/admin/decreasePoint?memberEmail=${point.memberEmail }">차감</a></button>
-				<button><a href="/admin/resetPoint?memberEmail=${point.memberEmail }">초기화</a></button>
-					</c:forEach>	
-				</c:if></div>
-			<div class="container-fluid px-5">`
-			
-				
+						<c:if test="${!empty pList }">
+							<table class="table table-hover">
+								<thead>
+									<th>회원 닉네임</th>
+									<th>포인트</th>
+									<th>추가</th>
+									<th>차감</th>
+									<th>초기화</th>
+								</thead>
+								<tr>
+									<td>${point.memberNickName }님의정보</td>
+									<td>${point.totalPoint }점</td>
+									<td><button class="btn  btn-outline-primary output col-5">
+											<a
+												href="/admin/increasePoint?memberEmail=${point.memberEmail}">추가</a>
+										</button ></td>
+									<td><button class="btn  btn-outline-primary output col-5"> 
+											<a
+												href="/admin/decreasePoint?memberEmail=${point.memberEmail }">차감</a>
+										</button></td>
+									<td><button class="btn  btn-outline-primary output col-5">
+											<a href="/admin/resetPoint?memberEmail=${point.memberEmail }">초기화</a>
+										</button></td>
+								</tr>
+							</table>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
+
 			<footer class="footer">
 				<div class="footer_inner">
 					<div class="footer_content_first">

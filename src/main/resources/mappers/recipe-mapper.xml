@@ -134,7 +134,6 @@ WHERE RECIPE_TBL.RECIPE_NO = MYRECIPE_TBL.RECIPE_NO AND MYRECIPE_TBL.MEMBER_EMAI
 		<result property="recipeName" 	column="RECIPE_NAME"/>
 	</resultMap>
 	
-	<!-- 	마이레시피 추가할때 사진이름 가져오기 위한 쿼리문 -->
 	
 	<delete id="removeMyRecipe">
 		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo} AND MEMBER_EMAIL = #{memberEmail }
@@ -143,9 +142,7 @@ WHERE RECIPE_TBL.RECIPE_NO = MYRECIPE_TBL.RECIPE_NO AND MYRECIPE_TBL.MEMBER_EMAI
 	<insert id="insertMyRecipe">
 		INSERT INTO MYRECIPE_TBL VALUES(#{memberEmail}, #{recipeNo}, SEQ_MYRECIPE_NO.NEXTVAL, #{recipeName})
 	</insert>
-	
-	
-	
+
 	<select id="selectTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
 	</select>

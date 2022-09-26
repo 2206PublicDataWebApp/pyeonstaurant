@@ -85,7 +85,7 @@
 			<tr align="center" height="20">
 			<td colspan="4">
 				<c:if test="${currentPage != 1 }">
-					<a href="/notice/${urlVal }?page=${currentPage - 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[이전]</a>
+					<a href="/notice/${urlVal }?page=${currentPage - 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">이전</a>
 				</c:if>
 				<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
 					<c:if test="${currentPage eq p }">
@@ -96,7 +96,7 @@
 					</c:if>
 				</c:forEach>
 				<c:if test="${maxPage > currentPage }">
-					<a href="/notice/${urlVal }?page=${currentPage + 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[다음]</a>
+					<a href="/notice/${urlVal }?page=${currentPage + 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">다음</a>
 				</c:if>
 				
 			</td>

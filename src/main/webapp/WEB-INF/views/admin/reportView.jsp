@@ -59,6 +59,10 @@
 	user-select: none;
 }
 
+a{
+	text-decoration:none;
+}
+
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
@@ -231,27 +235,44 @@
 											<td>${report.memberEmail }</td>
 											<td>${report.reportDate }</td>
 											<td>${report.reportResult }</td>
-											<td><button>
+											<td><button class="btn  btn-outline-primary output"  style="margin-left:15px;">
 													<a
 														href="/report/successRecipe?recipeNo=${report.recipeNo }">확인</a>
 												</button></td>
 										</tr>
 									</c:forEach>
 									<c:if test="${!empty rList }">
-										<tr align="center" height="20">
-											<td colspan="6"><c:if test="${currentPage != 1 }">
-													<a href="/report/reportRecipe?page=${currentPage - 1 }">[이전]</a>
-												</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+										<tr align="center">
+										<td colspan="6"><nav aria-label="Page navigation example">
+												<ul class="pagination justify-content-center">
+													<c:if test="${currentPage != 1 }">
+														<a class="page-link"
+															href="/report/reportAdmin?page=${currentPage - 1 }">이전</a>
+													</c:if>
+													
+													<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
 													<c:if test="${currentPage eq p }">
-														<b>${p }</b>
+															<li class="page-item">${p }</a></li>
+														</c:if>
+														<c:if test="${currentPage ne p }">
+															<li class="page-item"><a class="page-link"
+																href="/report/reportAdmin?page=${p }">${p }</a></li>
+														</c:if>
+													</c:forEach>
+													<c:if test="${maxPage > currentPage }">
+														<a class="page-link"
+															href="/report/reportAdmin?page=${currentPage + 1 }">다음</a>
 													</c:if>
-													<c:if test="${currentPage ne p }">
-														<a href="/report/reportRecipe?page=${p }">${p }</a>
-													</c:if>
-												</c:forEach> <c:if test="${maxPage > currentPage }">
-													<a href="/report/reportRecipe?page=${currentPage + 1 }">[다음]</a>
-												</c:if></td>
-										</tr>
+													</li>
+												</ul>
+											</nav>
+											</td>
+									</tr>
+										
+										
+										
+										
+										
 									</c:if>
 								</c:if>
 							</tbody>
@@ -279,27 +300,38 @@
 											<td>${comment.memberEmail }</td>
 											<td>${comment.reportDate }</td>
 											<td>${comment.reportResult }</td>
-											<td><button>
+											<td><button class="btn  btn-outline-primary output"  style="margin-left:15px;">
 													<a
 														href="/report/successComment?commentNo=${comment.commentNo }">확인</a>
 												</button></td>
 									</c:forEach>
 									<c:if test="${!empty cList }">
-										<tr align="center" height="20">
-											<td colspan="6"><c:if test="${currentPage2 != 1 }">
-													<a href="/report/reportRecipe?page=${currentPage2 - 1 }">[이전]</a>
-												</c:if> <c:forEach var="p" begin="${startNavi2 }"
-													end="${endNavi2 }">
+										<tr align="center">
+										<td colspan="6"><nav aria-label="Page navigation example">
+												<ul class="pagination justify-content-center">
+													<c:if test="${currentPage2 != 1 }">
+														<a class="page-link"
+															href="/report/reportAdmin?page=${currentPage2 - 1 }">이전</a>
+													</c:if>
+													
+													<c:forEach var="p" begin="${startNavi2 }" end="${endNavi2 }">
 													<c:if test="${currentPage2 eq p }">
-														<b>${p }</b>
+															<li class="page-item">${p }</a></li>
+														</c:if>
+														<c:if test="${currentPage2 ne p }">
+															<li class="page-item"><a class="page-link"
+																href="/report/reportAdmin?page=${p }">${p }</a></li>
+														</c:if>
+													</c:forEach>
+													<c:if test="${maxPage2 > currentPage2 }">
+														<a class="page-link"
+															href="/report/reportAdmin?page=${currentPage2 + 1 }">다음</a>
 													</c:if>
-													<c:if test="${currentPage2 ne p }">
-														<a href="/report/reportRecipe?page=${p }">${p }</a>
-													</c:if>
-												</c:forEach> <c:if test="${maxPage2 > currentPage2 }">
-													<a href="/report/reportRecipe?page=${currentPage2 + 1 }">[다음]</a>
-												</c:if></td>
-										</tr>
+													</li>
+												</ul>
+											</nav>
+											</td>
+									</tr>	
 									</c:if>
 								</c:if>
 							</tbody>

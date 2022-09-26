@@ -47,7 +47,7 @@
            
             <nav class="main-navigation" id="justify-content">
                 <a href="#" class="header-search"><img src="/resources/images/header_search.svg"></a>
-                <a href="#" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
+                <a href="/myRecipe/list" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
                 
                 <c:if test="${sessionScope.loginUser eq null  }">
                 <a href="/member/joinView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
@@ -57,7 +57,7 @@
                 <a href="/member/myPageView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
                 </c:if>
         
-                 <h1><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
+                 <h1 style="margin-right:970px;"><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
             </nav>
         </div>
     </header>
@@ -79,15 +79,16 @@
 <!-- 				</div> -->
 <!-- 			</div> -->
 <!-- 		</section> -->
-
+		
+		<h3 align="center" style="margin-top:30px;">마이레시피</h3>
 		<div class="album py-5 bg-light">
-			<div class="container" id="justify-content">
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-end">
+			<div class="container" id="justify-content" style="background-color:papayawhip;" >
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-end">
 					<c:if test="${!empty mList }">
 						<c:forEach items="${mList }" var="myRecipe" varStatus="i">
 							
 							<div class="col">
-								<div class="card shadow-sm">
+								<div class="card shadow-sm"  style="margin-bottom:50px;">
 									<div style="display:none;">${myRecipe.recipeNo }</div>
 <!-- 									<svg class="bd-placeholder-img card-img-top" width="100%" -->
 <!-- 										height="225" role="img" preserveAspectRatio="xMidYMid slice" -->

@@ -22,10 +22,10 @@ public class MyRecipeController {
 	@Autowired
 	private MyRecipeService mService;
 
-//	@RequestMapping(value="/myRecipe/remove", method=RequestMethod.GET)
-//	public String removeMyRecipe(Model model, HttpSession session, HttpServletRequest request) {
-//
-//		try {
+	@RequestMapping(value="/myRecipe/remove", method=RequestMethod.GET)
+	public String removeMyRecipe(HttpSession session, HttpServletRequest request) {
+
+		try {
 //			session = request.getSession();
 //			MyRecipe member = (MyRecipe)session.getAttribute("memberEmail");
 //			String memberEmail = member.getMemberId();
@@ -35,13 +35,13 @@ public class MyRecipeController {
 //				session.removeAttribute("recipeNo");
 //			}
 //			
-//		}catch(Exception e) {
-//			//			model.addAttribute("msg", e.toString());
-//			//			return "common/errorPage";
-//
-//		}
-//		return "redirect:/myrecipe/list";
-//	}
+		}catch(Exception e) {
+			//			model.addAttribute("msg", e.toString());
+			//			return "common/errorPage";
+
+		}
+		return "redirect:/myrecipe/list";
+	}
 
 	@RequestMapping(value="/myRecipe/add", method=RequestMethod.GET)
 	public String addMyRecipe(

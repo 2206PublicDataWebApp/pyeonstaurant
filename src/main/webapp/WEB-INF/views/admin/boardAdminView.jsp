@@ -12,43 +12,15 @@
 <meta name="generator" content="Hugo 0.101.0">
 <title>Dashboard Template · Bootstrap v5.2</title>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
-<link href="/resources/css/styles.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
-	crossorigin="anonymous"></script>
-<link rel="canonical"
-	href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
-
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="/resources/css/styles.css" rel="stylesheet" />	
+<link rel="canonical"  href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/swiper.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-
-
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-	crossorigin="anonymous">
-
-<!-- Favicons -->
-<link rel="apple-touch-icon"
-	href="/docs/5.2/assets/img/favicons/apple-touch-icon.png"
-	sizes="180x180">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png"
-	sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png"
-	sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-<link rel="mask-icon"
-	href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg"
-	color="#712cf9">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 <meta name="theme-color" content="#712cf9">
-
 
 <style>
 .bd-placeholder-img {
@@ -63,6 +35,10 @@
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+}
+
+a{
+	text-decoration:none;
 }
 
 .b-example-divider {
@@ -175,22 +151,19 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 신고 관리
-						</a> 
-						<a class="nav-link" href="/admin/memberAdminList">
+						</a> <a class="nav-link" href="/admin/memberAdminList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 회원 관리
-						</a>
-						<a class="nav-link" href="/admin/boardList">
+						</a> <a class="nav-link" href="/admin/boardList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> 
-						<a class="nav-link" href="charts.html">
+						</a> <a class="nav-link" href="charts.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리
-						</a> 
+						</a>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">
@@ -215,8 +188,10 @@
 					<div class="col-xs-8 col-sm-8">
 						<div class="input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="boardInfo"
-								class="form-control" id="searchVal"> <span class="input-group-btn" >
-								<input type="submit" value="검색" class="btn btn-default" onClick="sbm();">
+								class="form-control" id="searchVal"> <span
+								class="input-group-btn"> <input type="submit" value="검색"
+								class="btn  btn-outline-primary output" onClick="sbm();"
+								style="margin-left: 15px;">
 							</span>
 						</div>
 					</div>
@@ -240,70 +215,98 @@
 									<th>작성일</th>
 								</tr>
 							</thead>
-					<tbody>
-							<c:if test="${!empty bList }">
-								<c:forEach items="${bList }" var="board" varStatus="i">
-									<tr>
-										<td>${i.count }</td>
-										<td><a href="/recipe/detail.do?recipeNo=${board.recipeNo }">${board.boardTitle }</a></td>
-										<td>${board.recipeInfo }</td>
-										<td>${board.recipeNo }</td>
-										<td>${board.memberEmail }</td>
-										<td>${board.incertDate }</td>
-									</tr>
-									<!-- 					<form action="/notice/remove" method="get"> -->
-									<!-- 					<td><input type="submit" value="삭제"></td> -->
-									<!-- 					</form> -->
-								</c:forEach>
-								<tr align="center">
-									<td colspan="6"><c:if test="${currentPage != 1 }">
-											<a href="/admin/boardList?page=${currentPage - 1 }">[이전]</a>
-										</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-											<c:if test="${currentPage eq p }">
-												<b>${p }</b>
-											</c:if>
-											<c:if test="${currentPage ne p }">
-												<a href="/admin/boardList?page=${p }">${p }</a>
-											</c:if>
-										</c:forEach> <c:if test="${maxPage > currentPage }">
-											<a href="/admin/boardList?page=${currentPage + 1 }">[다음]</a>
-										</c:if></td>
-
-								</tr>
-							</c:if>
-							<c:if test="${!empty aList }">
-										<c:forEach items="${aList }" var="board" varStatus="i">
-											<tr>
-												<td>${i.count }</td>
-												<td><a href="/recipe/detail.do?recipeNo=${board.recipeNo }">${board.boardTitle }</a></td>
-												<td>${board.recipeInfo }</td>
-												<td>${board.recipeNo }</td>
-												<td>${board.memberEmail }</td>
-												<td>${board.incertDate }</td>
-											</tr>
-										</c:forEach>
-									</c:if>
-								<c:if test="${!empty aList }">
-										<tr align="center">
-											<td colspan="6"><c:if test="${currentPage != 1 }">
-													<a href="/admin/boardList?page=${currentPage - 1 }">[이전]</a>
-												</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-													<c:if test="${currentPage eq p }">
-														<b>${p }</b>
-													</c:if>
-													<c:if test="${currentPage ne p }">
-														<a href="/admin/boardList?page=${p }">${p }</a>
-													</c:if>
-												</c:forEach> <c:if test="${maxPage > currentPage }">
-													<a href="/admin/boardList?page=${currentPage + 1 }">[다음]</a>
-												</c:if></td>
+							<tbody>
+								<c:if test="${!empty bList }">
+									<c:forEach items="${bList }" var="board" varStatus="i">
+										<tr>
+											<td>${i.count }</td>
+											<td><a
+												href="/recipe/detail.do?recipeNo=${board.recipeNo }">${board.boardTitle }</a></td>
+											<td>${board.recipeInfo }</td>
+											<td>${board.recipeNo }</td>
+											<td>${board.memberEmail }</td>
+											<td>${board.incertDate }</td>
 										</tr>
-									</c:if>
+										<!-- 					<form action="/notice/remove" method="get"> -->
+										<!-- 					<td><input type="submit" value="삭제"></td> -->
+										<!-- 					</form> -->
+									</c:forEach>
+									<tr align="center">
+										<td colspan="6"><nav aria-label="Page navigation example">
+												<ul class="pagination justify-content-center">
+													<c:if test="${currentPage != 1 }">
+														<a class="page-link"
+															href="/admin/boardList?page=${currentPage - 1 }">이전</a>
+													</c:if>
+													<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+														<c:if test="${currentPage eq p }">
+															<li class="page-item"><a class="page-link" href="#">${p }</a></li>
+														</c:if>
+														<c:if test="${currentPage ne p }">
+															<li class="page-item"><a class="page-link"
+																href="/admin/boardList?page=${p }">${p }</a></li>
+														</c:if>
+													</c:forEach>
+													<c:if test="${maxPage > currentPage }">
+														<a class="page-link"
+															href="/admin/boardList?page=${currentPage + 1 }">다음</a>
+													</c:if>
+													</li>
+												</ul>
+											</nav></td>
+									</tr>
+								</c:if>
+								<c:if test="${!empty aList }">
+									<c:forEach items="${aList }" var="board" varStatus="i">
+										<tr>
+											<td>${i.count }</td>
+											<td><a
+												href="/recipe/detail.do?recipeNo=${board.recipeNo }">${board.boardTitle }</a></td>
+											<td>${board.recipeInfo }</td>
+											<td>${board.recipeNo }</td>
+											<td>${board.memberEmail }</td>
+											<td>${board.incertDate }</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<c:if test="${!empty aList }">
+									<tr align="center">
+										<td colspan="6"><nav aria-label="Page navigation example">
+												<ul class="pagination justify-content-center">
+													<c:if test="${currentPage != 1 }">
+														<a class="page-link"
+															href="/admin/boardList?page=${currentPage - 1 }">이전</a>
+													</c:if>
+													<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+														<c:if test="${currentPage eq p }">
+															<li class="page-item"><a class="page-link" href="#">${p }</a></li>
+														</c:if>
+														<c:if test="${currentPage ne p }">
+															<li class="page-item"><a class="page-link"
+																href="/admin/boardList?page=${p }">${p }</a></li>
+														</c:if>
+													</c:forEach>
+													<c:if test="${maxPage > currentPage }">
+														<a class="page-link"
+															href="/admin/boardList?page=${currentPage + 1 }">다음</a>
+													</c:if>
+													</li>
+												</ul>
+											</nav></td>
+									</tr>
+								</c:if>
+
+
+
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
+
+
+
 			<footer class="footer">
 				<div class="footer_inner">
 					<div class="footer_content_first">

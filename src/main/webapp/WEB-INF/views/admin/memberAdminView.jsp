@@ -59,6 +59,10 @@
 	user-select: none;
 }
 
+a{
+	text-decoration:none;
+}
+
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
@@ -216,7 +220,7 @@
 						<div class="input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="memberInfo"
 									class="form-control" id="searchVal"> <span class="input-group-btn">
-									<input type="submit" value="검색" class="btn btn-default" onClick="sbm();">
+									<input type="submit" value="검색" class="btn  btn-outline-primary output"  style="margin-left:15px;" onClick="sbm();">
 								</span>
 						</div>
 					</div>
@@ -247,28 +251,46 @@
 										<td>${member.memberEmail }</td>
 										<td>${member.memberNickName }</td>
 										<td><a href="/point/pointList?memberEmail=${member.memberEmail }">${member.totalPoint }</a></td>
-										<td scope="col"><button>
+										<td scope="col"><button class="btn  btn-outline-primary output">
 												<a
 													href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a>
 											</button></td>
 									</tr>
 								</c:forEach>
 							</c:if>
-<c:if test="${!empty aList }">
-								<tr align="center" height="20">
-									<td colspan="6"><c:if test="${currentPage != 1 }">
-											<a href="/admin/memberAdminList?page=${currentPage - 1 }">[이전]</a>
-										</c:if> <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-											<c:if test="${currentPage eq p }">
-												<b>${p }</b>
-											</c:if>
-											<c:if test="${currentPage ne p }">
-												<a href="/admin/memberAdminList?page=${p }">${p }</a>
-											</c:if>
-										</c:forEach> <c:if test="${maxPage > currentPage }">
-											<a href="/admin/memberAdminList?page=${currentPage + 1 }">[다음]</a>
-										</c:if></td>
-								</tr>
+							<c:if test="${!empty aList }">
+								<tr align="center">
+										<td colspan="6"><nav aria-label="Page navigation example">
+												<ul class="pagination justify-content-center">
+													<c:if test="${currentPage != 1 }">
+														<a class="page-link"
+															href="/admin/memberAdminList?page=${currentPage - 1 }">이전</a>
+													</c:if>
+													
+													<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+													<c:if test="${currentPage eq p }">
+															<li class="page-item">${p }</a></li>
+														</c:if>
+														<c:if test="${currentPage ne p }">
+															<li class="page-item"><a class="page-link"
+																href="/admin/memberAdminList?page=${p }">${p }</a></li>
+														</c:if>
+													</c:forEach>
+													<c:if test="${maxPage > currentPage }">
+														<a class="page-link"
+															href="/admin/memberAdminList?page=${currentPage + 1 }">다음</a>
+													</c:if>
+													</li>
+												</ul>
+											</nav>
+											</td>
+									</tr>
+								
+								
+								
+								
+								
+								
 							</c:if>
 							<c:if test="${!empty mList }">
 								<c:forEach items="${mList }" var="member" varStatus="i">
@@ -310,7 +332,7 @@
 									<li class="hr">&nbsp;</li>
 									<li><a href="#">이용약관</a></li>
 									<li class="hr">&nbsp;</li>
-									<li><a href="#">공지사항</a></li>
+									<li><a href="/notice/list">공지사항</a></li>
 									<li class="hr">&nbsp;</li>
 									<li><a href="#">Q &amp;A</a></li>
 								</ul>
