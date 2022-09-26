@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.notice.domain.Notice;
 import com.kh.pyeonstaurant.notice.service.NoticeService;
 
@@ -79,33 +80,46 @@ public class NoticeController {
 	@RequestMapping(value="/notice/list", method=RequestMethod.GET)
 	public ModelAndView noticeListView(
 			ModelAndView mv
-			,@RequestParam(value="page", required=false) Integer page) {
+			,@RequestParam(value="page", required=false) Integer page
+			,HttpSession session
+			,HttpServletRequest request) {
 		/////////////////////////////////////////////////////////////////////////
-		int currentPage = (page != null) ? page : 1;
-		int totalCount = nService.getTotalCount("","");
-		int noticeLimit = 10;
-		int naviLimit = 5;
-		int maxPage;
-		int startNavi;
-		int endNavi;
-		// 23/5 = 4.8 + 0.9 = 5(.7)
-		maxPage = (int)((double)totalCount/noticeLimit + 0.9);
-		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
-		endNavi = startNavi + naviLimit - 1;
-		if(maxPage < endNavi) {
-			endNavi = maxPage;
+		try {
+			session = request.getSession();
+			Boolean adminCheck = (Boolean)session.getAttribute("adminCheck");
+			session.setAttribute("adminCheck", adminCheck);
+			mv.addObject("adminCheck", adminCheck);
+			int currentPage = (page != null) ? page : 1;
+			int totalCount = nService.getTotalCount("","");
+			int noticeLimit = 10;
+			int naviLimit = 5;
+			int maxPage;
+			int startNavi;
+			int endNavi;
+			// 23/5 = 4.8 + 0.9 = 5(.7)
+			maxPage = (int)((double)totalCount/noticeLimit + 0.9);
+			startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+			endNavi = startNavi + naviLimit - 1;
+			if(maxPage < endNavi) {
+				endNavi = maxPage;
+			}
+			List<Notice> nList = nService.printAllNotice(currentPage, noticeLimit);
+			if(!nList.isEmpty()) {
+				mv.addObject("urlVal", "list");
+				mv.addObject("maxPage", maxPage);
+				mv.addObject("currentPage", currentPage);
+				mv.addObject("startNavi", startNavi);
+				mv.addObject("endNavi", endNavi);
+				mv.addObject("nList", nList);
+			}
+		}catch(Exception e) {
+			
 		}
+		
+		
 		//////////////////////////////////////////////////////////////////////////
 		// /notice/list.kh?page=${currentPage }
-		List<Notice> nList = nService.printAllNotice(currentPage, noticeLimit);
-		if(!nList.isEmpty()) {
-			mv.addObject("urlVal", "list");
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("startNavi", startNavi);
-			mv.addObject("endNavi", endNavi);
-			mv.addObject("nList", nList);
-		}
+		
 		mv.setViewName("notice/listView");
 		return mv;
 	}
@@ -175,12 +189,16 @@ public class NoticeController {
 	public ModelAndView detailNotice(ModelAndView mv
 			, @RequestParam("noticeNo") Integer noticeNo
 			, @RequestParam("page") Integer page
-			, HttpSession session) {
+			, HttpSession session
+			, HttpServletRequest request) {
 		try {
+			session = request.getSession();
+			Boolean adminCheck = (Boolean)session.getAttribute("adminCheck");
+			session.setAttribute("adminCheck", adminCheck);
 			Notice notice = nService.printOneByNo(noticeNo);
 			session.setAttribute("noticeNo", notice.getNoticeNo());
-			// ���ǿ� noticeNo ���� -> �����ϱ� ���ؼ�
 			mv.addObject("notice", notice);
+			mv.addObject("adminCheck", adminCheck);
 			mv.addObject("page", page);
 			mv.setViewName("notice/detailView");
 		} catch (Exception e) {

@@ -11,6 +11,7 @@
 		<result property="noticeFileRename" column="NOTICE_FILE_RENAME"/>
 		<result property="noticeFilepath" column="NOTICE_FILE_PATH"/>
 		<result property="noticeDate" column="NOTICE_DATE"/>
+		<result property="adminCheck" column="ADMIN_CHECK"/>
 	</resultMap>
 	
 	

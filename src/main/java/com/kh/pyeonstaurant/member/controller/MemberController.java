@@ -57,13 +57,21 @@ public class MemberController {
 	public ModelAndView memberLogin(
 			@ModelAttribute Member member
 			, ModelAndView mv
-			, HttpServletRequest request) {
+			, HttpServletRequest request
+			, HttpSession session) {
 		try {
-			Member loginUser = mService.loginMember(member);
-			if(loginUser != null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
+			Member loginUser = mService.loginMember(member);	//이메일 저장됨
+			Boolean adminCheck = loginUser.getAdminCheck();
+			
+			if(loginUser != null && adminCheck == false) {
+				session = request.getSession();
+				session.setAttribute("loginUser", loginUser);				
 				mv.setViewName("redirect:/");
+			}else if(adminCheck == true) {
+				session = request.getSession();
+				session.setAttribute("adminCheck", adminCheck);
+				mv.addObject("adminCheck", adminCheck);
+				mv.setViewName("redirect:/admin/memberAdminList");
 			}else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 				mv.setViewName("common/errorPage");

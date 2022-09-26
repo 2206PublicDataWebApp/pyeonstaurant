@@ -81,8 +81,10 @@
 					</tr>
                     <tr>
                         <td colspan="2" align="center">
+                        <c:if test="${adminCheck != false}">
                             <a href="/notice/modifyView?noticeNo=${notice.noticeNo }&page=${page}" class="btn btn-primary pull-center">수정 페이지로 이동</a>
                             <a href="#" onclick="noticeRemove(${page});" class="btn btn-primary pull-center">삭제하기</a>
+						</c:if>
                         </td>
                     </tr>
 				</tbody>

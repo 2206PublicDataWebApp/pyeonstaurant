@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.pyeonstaurant.admin.domain.Admin;
 import com.kh.pyeonstaurant.admin.domain.Board;
 import com.kh.pyeonstaurant.admin.service.AdminService;
+import com.kh.pyeonstaurant.member.domain.Member;
 
 
 
@@ -35,28 +36,41 @@ public class AdminController {
 	@RequestMapping(value="/admin/boardList", method=RequestMethod.GET)
 	public ModelAndView listBoardAdmin(
 			ModelAndView mv
-			,@RequestParam(value="page", required=false) Integer page) {
-		int currentPage = (page != null) ? page : 1;
-		int totalCount = mService.getAllBoardCount();
-		int boardLimit = 10;
-		int naviLimit = 5;
-		int maxPage;
-		int startNavi;
-		int endNavi;
-		// 23/5 = 4.8 + 0.9 = 5(.7)
-		maxPage = (int)((double)totalCount/boardLimit + 0.9);
-		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
-		endNavi = startNavi + naviLimit - 1;
-		if(maxPage < endNavi) {
-			endNavi = maxPage;
-		}		
-		List<Board> aList = mService.printAllBoard(currentPage, boardLimit);
-		if(!aList.isEmpty()) {
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("startNavi", startNavi);
-			mv.addObject("endNavi", endNavi);
-			mv.addObject("aList", aList);
+			,@RequestParam(value="page", required=false) Integer page
+			,HttpSession session
+			,HttpServletRequest request
+			) {
+		try {
+			session = request.getSession();
+			Boolean adminCheck = (Boolean)session.getAttribute("adminCheck");
+			session.setAttribute("adminCheck", adminCheck);
+			mv.addObject("adminCheck", adminCheck);
+			int currentPage = (page != null) ? page : 1;
+			int totalCount = mService.getAllBoardCount();
+			int boardLimit = 10;
+			int naviLimit = 5;
+			int maxPage;
+			int startNavi;
+			int endNavi;
+			// 23/5 = 4.8 + 0.9 = 5(.7)
+			maxPage = (int)((double)totalCount/boardLimit + 0.9);
+			startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+			endNavi = startNavi + naviLimit - 1;
+			if(maxPage < endNavi) {
+				endNavi = maxPage;
+			}		
+			List<Board> aList = mService.printAllBoard(currentPage, boardLimit);
+			if(!aList.isEmpty()) {
+				mv.addObject("maxPage", maxPage);
+				mv.addObject("currentPage", currentPage);
+				mv.addObject("startNavi", startNavi);
+				mv.addObject("endNavi", endNavi);
+				mv.addObject("aList", aList);
+				
+			}
+		}catch(Exception e) {
+			mv.addObject("msg", "관리자 아이디로만 로그인 가능");
+			mv.setViewName("common/error");
 		}
 		mv.setViewName("admin/boardAdminView");
 		return mv;
@@ -80,7 +94,11 @@ public class AdminController {
 	@RequestMapping(value="/admin/memberAdminList", method=RequestMethod.GET)
 	public ModelAndView listMemberAdmin(
 			ModelAndView mv
-			,@RequestParam(value="page", required=false) Integer page) {
+			,@RequestParam(value="page", required=false) Integer page
+			,HttpSession session
+			,HttpServletRequest request) {
+		session = request.getSession();
+		Boolean adminCheck = (Boolean)session.getAttribute("adminCheck");
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = mService.getAllMemberCount();
 		int memberLimit = 10;
@@ -102,6 +120,7 @@ public class AdminController {
 			mv.addObject("startNavi", startNavi);
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("aList", aList);
+			mv.addObject("adminCheck", adminCheck);
 		}
 		mv.setViewName("admin/memberAdminView");
 		return mv;

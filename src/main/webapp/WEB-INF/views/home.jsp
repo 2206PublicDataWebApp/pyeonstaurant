@@ -17,7 +17,7 @@
             <h1><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
             <nav class="main-navigation">
                 <a href="#" class="header-search"><img src="/resources/images/header_search.svg"></a>
-                <a href="#" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
+                <a href="/myRecipe/list" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
                 
                 <c:if test="${sessionScope.loginUser eq null  }">
                 <a href="/member/joinView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
@@ -86,7 +86,7 @@
                             <li class="hr">&nbsp;</li>
                             <li><a href="#">이용약관</a></li>
                             <li class="hr">&nbsp;</li>
-                            <li><a href="#">공지사항</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
                             <li class="hr">&nbsp;</li>
                             <li><a href="#">Q &amp;A</a></li>
                         </ul>

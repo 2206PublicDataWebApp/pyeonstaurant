@@ -101,7 +101,9 @@
 				
 			</td>
 			
-		</tr>
+		</tr>		
+		</c:if>
+		<c:if test="${adminCheck == true}">
 		<button onclick="location.href='/notice/writeView.kh';" class="btn btn-primary pull-right">글쓰기</button>
 		</c:if>
 					

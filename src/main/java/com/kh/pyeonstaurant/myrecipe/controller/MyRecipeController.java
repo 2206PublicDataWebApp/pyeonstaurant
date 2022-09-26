@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.myrecipe.domain.MyRecipe;
 import com.kh.pyeonstaurant.myrecipe.service.MyRecipeService;
 import com.kh.pyeonstaurant.recipe.domain.Recipe;
@@ -23,24 +24,27 @@ public class MyRecipeController {
 	private MyRecipeService mService;
 
 	@RequestMapping(value="/myRecipe/remove", method=RequestMethod.GET)
-	public String removeMyRecipe(HttpSession session, HttpServletRequest request) {
-
+	public String removeMyRecipe(HttpSession session, 
+			HttpServletRequest request
+			,@RequestParam("recipeNo") int recipeNo
+			,@ModelAttribute MyRecipe myRecipe) {
+			
 		try {
-//			session = request.getSession();
-//			MyRecipe member = (MyRecipe)session.getAttribute("memberEmail");
-//			String memberEmail = member.getMemberId();
-//			int result = mService.removeMyRecipe(recipeNo);
-//			
-//			if(result > 0) {
-//				session.removeAttribute("recipeNo");
-//			}
-//			
+			session = request.getSession();
+			Member member = (Member)session.getAttribute("memberEmail");
+			String memberEmail = member.getMemberEmail();
+			myRecipe.setMemberEmail(memberEmail);
+			myRecipe.setRecipeNo(recipeNo);
+			int result = mService.removeMyRecipe(myRecipe);			
+			if(result > 0) {
+				System.out.println("삭제 성공");
+			}
 		}catch(Exception e) {
 			//			model.addAttribute("msg", e.toString());
 			//			return "common/errorPage";
 
 		}
-		return "redirect:/myrecipe/list";
+		return "redirect:/myRecipe/list";
 	}
 
 	@RequestMapping(value="/myRecipe/add", method=RequestMethod.GET)
@@ -48,22 +52,19 @@ public class MyRecipeController {
 			 HttpSession session
 			, @ModelAttribute MyRecipe myRecipe
 			, @RequestParam("recipeNo") int recipeNo
-			, @RequestParam("memberEmail") String memberEmail
+//			, @RequestParam("memberEmail") String memberEmail
 			, @RequestParam("recipeName") String recipeName
 			,HttpServletRequest request) {
 		try {
-//			session = request.getSession();
-//			MyRecipe email = (MyRecipe)session.getAttribute("memberEmail");
-//			String memberEmail = email.getMemberEmail();
+			session = request.getSession();
+			Member email = (Member)session.getAttribute("memberEmail");
+			String memberEmail = email.getMemberEmail();
+
 			myRecipe.setMemberEmail(memberEmail);
 			myRecipe.setRecipeNo(recipeNo);
 			myRecipe.setRecipeName(recipeName);
 			int result = mService.addMyRecipe(myRecipe);
-			if(result > 0) {
-				System.out.println("삽입 성공");
-			}else {
-				System.out.println("실패");
-			}
+
 		}catch(Exception e) {
 			
 		}
@@ -72,17 +73,24 @@ public class MyRecipeController {
 	
 	@RequestMapping(value="/myRecipe/list", method=RequestMethod.GET)
 	public ModelAndView selectAllMyRecipe(ModelAndView mv
-			, HttpSession session
+			,HttpSession session
 			,HttpServletRequest request) {	
-//		session = request.getSession();
-//		MyRecipe myRecipe = (MyRecipe)session.getAttribute("memberEmail");
-		String memberEmail = "user01@user.com";
+		session = request.getSession();
+		Member email = (Member)session.getAttribute("loginUser");
+		String memberEmail = email.getMemberEmail();
+//		String memberEmail = "user01@user.com";
 		// 23/5 = 4.8 + 0.9 = 5(.7)
-		List<Recipe> mList = mService.printMyRecipeList(memberEmail);
-		if(!mList.isEmpty()) {
-			mv.addObject("mList", mList);
+		try {
+			List<Recipe> mList = mService.printMyRecipeList(memberEmail);
+			if(!mList.isEmpty()) {
+				mv.addObject("mList", mList);
+			}
+			mv.setViewName("myrecipe/myRecipeList");
+		}catch(Exception e) {
+			mv.addObject("msg", "장바구니가 비었습니다.");
+			mv.setViewName("common/errorPage");
 		}
-		mv.setViewName("myrecipe/myRecipeList");
+		
 		return mv;
 	}
 	

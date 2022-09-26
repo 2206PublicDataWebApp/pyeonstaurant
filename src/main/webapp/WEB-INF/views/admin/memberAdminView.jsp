@@ -118,7 +118,7 @@ a{
 <link href="dashboard.css" rel="stylesheet">
 </head>
 <body>
-
+<c:if test="${adminCheck == true}">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="index.html">편스토랑 관리자페이지</a>
@@ -351,7 +351,7 @@ a{
 
 		</div>
 	</div>
-
+</c:if>
 
 
 	<script
