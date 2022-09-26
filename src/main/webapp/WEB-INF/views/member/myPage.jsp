@@ -51,7 +51,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/myPageModifyView.kh">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">회원정보 수정</span>
                         </a>
