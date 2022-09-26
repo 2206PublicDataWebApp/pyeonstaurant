@@ -63,7 +63,7 @@ public class MemberController {
 			if(loginUser != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", loginUser);
-				mv.setViewName("redirect:/");
+				mv.setViewName("redirect:/member/joinView.kh");
 			}else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 				mv.setViewName("common/errorPage");
