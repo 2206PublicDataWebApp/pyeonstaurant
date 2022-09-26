@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>검색어</title>
+<title>${serchValue}</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -18,8 +18,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
-
+<script src="/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="/resources/css/recipeSearch.css">
 <style>
 @media ( max-width : 500px) {
 	#button-area {
@@ -131,43 +131,65 @@ transition:.1s;
 	</span>
  </c:if> 
 
-	<section class="container-md">
+	<section class="container-md" id="rowbody">
 
 		<div id="main-contents" class="">
+		        <input type="hidden" name="searchCondition" value="${searchCondition}">
+            	<input type="hidden" name="mainCondition" value="${mainCondition}">
+            	<input type="hidden" name="listCondition" value="${listCondition}">
+		
 			<!-- 검색명 출력 영역-->
 			<div id="serach-title-area">
 				<div>
-					<h1>검색어</h1>
+					<h1>${serchValue}</h1>
 				</div>
 
 				<!-- 검색 창 영역 -->
-				<div class="col-md-6 container" id="search"
+				<div class="col-md-8 container" id="search"
 					style="text-align: center">
 					<!-- 검색창시작 -->
-					<form action="/recipe/recipeSearch.do" method="get">
-						<div class="row" id="searchArea">
+									<div class="row" id="searchArea">
 							<!-- 검색 카테고리 -->
-							<div class="col-md-2 col-3 p-1" " id="searchSelector">
+							<div class="col-md-2 col p-1" " id="searchSelector">
 
-								<select class="form-select" id="floatingSelectGrid"
+								<select class="form-select searchCondition" id="floatingSelectGrid"
 									name="searchCondition">
-									<option value="all"
-										<c:if test="${searchCondition eq 'all' }"> selected </c:if>>전체</option>
-									<option value="title"
-										<c:if test="${searchCondition eq 'title' }"> selected </c:if>>제목</option>
-									<option value="contents"
-										<c:if test="${searchCondition eq 'contents' }"> selected </c:if>>내용</option>
+									<option value="recipeName"
+										<c:if test="${searchCondition eq 'recipeName' }"> selected </c:if>>제목명</option>
+									<option value="recipe_material"
+										<c:if test="${searchCondition eq 'recipe_material' }"> selected </c:if>>재료명</option>
+									<option value="recipe_tag"
+										<c:if test="${searchCondition eq 'recipe_tag' }"> selected </c:if>>해시태그순</option>
 								</select>
 
 							</div>
+							
+								<div class="col-md-2 col p-1" " id="searchSelector">
+
+								<select class="form-select hachCondition" id="floatingSelectGrid"
+									name="searchCondition">
+									 <option value="" selected>해시태그</option>
+	                    			<option value="easy" >간편한</option>
+	                    			<option value="full">든든한</option>
+				                    <option value="goodSpicy">맛있게 매운</option>			 
+				                    <option value="healthy">건강한</option>			 
+				                    <option value="jmt">JMT</option>			 
+				                    <option value="party">파티용</option>			 
+				                    <option value="soSpicy">아주매운</option>			 
+				                    <option value="sweet">달콤한</option>	
+		
+								</select>
+
+							</div>
+							
 							<!-- 검색 카테고리 종료 -->
 							<!-- 검색어입력창 -->
-							<div class="row col-md-8  col-8 p-1">
+							<div class="row col-md-6  col p-1">
 								<div class="col-md">
 
 									<input type="text" name="searchValue" class="form-control"
 										id="floatingInputGrid" value="${searchValue }"
-										required="required">
+										required="required" > 
 
 								</div>
 
@@ -176,7 +198,7 @@ transition:.1s;
 							<!-- 검색 버튼영역 -->
 							<div id="search-button" class="col-md-2 col-1 p-1"
 								style="width: auto;">
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" class="btn btn-primary"  onclick="addon2();">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 							  <path
@@ -188,7 +210,7 @@ transition:.1s;
 
 							</div>
 						</div>
-					</form>
+					
 				</div>
 				<!-- 검색창 종료 -->
 
@@ -202,18 +224,22 @@ transition:.1s;
 					<div id="blank-area" class="col-md-9"></div>
 					<div id="button-area" class="col-md-3">
 						<button type="button" class="btn" name="listCondition"
-							onclick="like(value);" style="color: gray" id="jo"
+							onclick="btnpattern(this.value);" style="color: gray" id="jo"
 							value="viewCount">조회수</button>
 						|
 						<button type="button" id="chu" class="btn " name="listCondition"
-							style="color: gray" onclick="like(value);" value="recommandCount">추천순</button>
+							style="color: gray" onclick="btnpattern(this.value);" value="recommandCount">추천순</button>
 						|
 						<button type="button" id="dun" class="btn " name="listCondition"
-							onclick="like(value);" style="color: gray" value="insertDate">등록일</button>
+							onclick="btnpattern(this.value);" style="color: gray" value="insertDate">등록일</button>
 					</div>
 
 				</div>
 				<!--정렬 버튼 영역종료-->
+				
+				
+				
+				
 				<!--랭킹영역-->
 				<div id="rank-area" class="row"
 					style="text-align: center; justify-content: space-evenly">
@@ -315,51 +341,42 @@ transition:.1s;
 				</div>
 				<!--일반 리스트 영역종료-->
 
+
 			</div>
 			<!-- 본문 구간 종료 -->
 
-
-			<!-- 페이징 영역 시작 -->
-			<div id="page-area">
-
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item"><c:if test="${startNavi !=1}">
-								<a class="page-link"
-									href="/search/move.kh?page=${startNavi - 1 }"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a>
-							</c:if></li>
-						<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-							<!-- 현재페이지면 진하게 -->
-							<c:if test="${currentPage eq P }">
-								<li class="page-item"><a class="page-link" href="#"><b>${p }</b></a></li>
-							</c:if>
-							<c:if test="${currentPage ne P }">
-								<li class="page-item"><a class="page-link"
-									href="/search/search/search.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}$listCondition=${listCondition}">
-										${p }</a></li>
-							</c:if>
-						</c:forEach>
-						<li class="page-item"><c:if test="${currentPage ne p }">
-								<a class="page-link"
-									href="search/move.kh?page=${currentPage+3 }" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</c:if></li>
-					</ul>
-				</nav>
-
-
-
-
-			</div>
+		
 
 		</div>
 
 
 
 	</section>
+	
+	<script>
+	
+	/*버튼 토글 스크립트  */
+	var buttons = document.querySelectorAll('.btn');
+	buttons.forEach(function (button) {
+	  var button = new bootstrap.Button(button);
+	  button.toggle();
+	})
+	
+	function btnpattern(value){
+		var mainCondition=$("[name=mainCondition]").val();				
+		location.href="/search/main3btn.kh?listCondition="+value+"&mainCondition="+mainCondition; 
+	}
+	
+	function addon2(){
+		var searchCondition= $(".searchCondition").val();
+		var serchValue=$('#serchValue').val();
+		var hachCondition= $(".hachCondition").val();
+		var listCondition=$("[name=listCondition]").val();
+		location.href="/search/search3btn.kh?searchCondition="+searchCondition+"&serchValue="+serchValue+"&listCondition="+listCondition+"&hachCondition="+hachCondition;
+    	
+	}	
+	
+	</script>
 
 </body>
 </html>

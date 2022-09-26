@@ -1,0 +1,15 @@
+
+/* 검색후 이미지등등이 올라갈 자리들 */
+
+#rowbody{
+	width:100%;
+   
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    overFlow-y: auto; 
+}
+ 
+  
+   
+
+
