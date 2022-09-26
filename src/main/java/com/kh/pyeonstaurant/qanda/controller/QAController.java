@@ -2,9 +2,11 @@
 package com.kh.pyeonstaurant.qanda.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,13 +17,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.qanda.domain.QA;
 import com.kh.pyeonstaurant.qanda.domain.QAComment;
 import com.kh.pyeonstaurant.qanda.service.QAService;
+import com.kh.pyeonstaurant.recipe.service.RecipeService;
 
 @Controller
 public class QAController {
@@ -37,6 +41,16 @@ public class QAController {
 	 */
 	@RequestMapping(value = "/qna/wirteForm.do", method = RequestMethod.GET)
 	public ModelAndView showQandAWrite(ModelAndView mv, HttpSession session) {
+		
+//		로그인 유저용
+		if(session.getAttribute("loginUser")==null) {
+			mv.addObject("msg", "로그인한 유저만 작성가능합니다");
+			mv.setViewName("common/error");
+			return mv;
+			
+		}
+		
+		
 
 		mv.setViewName("/qna/qnaWirteForm");
 
@@ -44,16 +58,6 @@ public class QAController {
 
 	}
 
-	/**
-	 * qa 등록창 연결
-	 * 
-	 * @param mv
-	 * @param session
-	 * @return
-	 */
-	public ModelAndView QandModifyView(ModelAndView mv, HttpSession session) {
-		return mv;
-	}
 
 	/**
 	 * qna등록
@@ -93,7 +97,6 @@ public class QAController {
 					upFile.get(i).transferTo(new File(savePath + "\\" + qaFileRename[i]));// 파일을 buploadFile경로에
 																							// 저장
 					
-					System.out.println(new File(savePath + "\\" + qaFileRename[i]));
 				}
 				///// 여기까지 사진 저장코드/////
 
@@ -174,6 +177,14 @@ public class QAController {
 			
 			
 			List<QA> qList = qService.allQAList(currentPage, boardLimit);
+			
+			//사용자 이름 출력영역
+			String name[] = new String[qList.size()];
+			for(int i=0; i<name.length;i++) {
+				name[i]=qService.printMemberName(qList.get(i).getMemberEmail());
+				qList.get(i).setName(name[i]);
+					}
+			
 			mv.addObject("qList", qList);
 
 			mv.setViewName("/qna/qnaList");
@@ -195,10 +206,21 @@ public class QAController {
 	@RequestMapping(value = "/qna/modifyView.do", method = RequestMethod.GET)
 	public ModelAndView modifyQandAView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page,
 			@RequestParam("qaNo") Integer qaNo) {
+		
+		
+		try {
+			
+
+		
+		
 		QA qa = qService.printOneQANo(qaNo);
 		mv.addObject("qa", qa);
 		mv.setViewName("/qna/qnamodifyView");
 
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+//			mv.setViewName("common/error");
+		}
 		return mv;
 	}
 
@@ -218,7 +240,16 @@ public class QAController {
 			HttpServletRequest request) {
 
 		try {
-
+			
+			
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			if(!loginUser.getMemberEmail().equals(qA.getMemberEmail())&&loginUser.getAdminCheck()==false) {
+			
+				mv.addObject("msg", "작성자만 수정할 수 있습니다");
+				mv.setViewName("common/error");
+				return mv;
+			}
+			
 			// 파일 교체 시작//
 
 			String filename[] = new String[5];
@@ -276,7 +307,9 @@ public class QAController {
 			}
 
 			int result = qService.modifyQandA(qA);
+			int page = 1;
 			mv.addObject("qa", qA);
+			mv.addObject("page", page);
 			mv.setViewName("redirect:/qna/detail.do?qaNo=" + qA.getQaNo());
 
 		} catch (Exception e) {
@@ -297,9 +330,22 @@ public class QAController {
 	 * @return
 	 */
 	@RequestMapping(value = "/qna/remove.do", method = RequestMethod.GET)
-	public ModelAndView removeQA(HttpSession session, ModelAndView mv, @RequestParam("qaNo") Integer qaNo,
-			String memberEmail) {
+	public ModelAndView removeQA(HttpSession session, ModelAndView mv, @RequestParam("qaNo") Integer qaNo
+			 ) {
 		try {
+
+			//작성자 아니면 삭제금지
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			String memberEmail = qService.getMemberEmail(qaNo);
+			
+			if(!loginUser.getMemberEmail().equals(memberEmail)&&loginUser.getAdminCheck()==false) {
+				
+				mv.addObject("msg", "작성자만 삭제할 수 있습니다");
+				mv.setViewName("common/error");
+				return mv;
+			}
+			
+			
 
 			int result = qService.reomoveOneQandANo(qaNo);
 			mv.setViewName("redirect:/qna/List.do");
@@ -320,13 +366,56 @@ public class QAController {
 	 * @return
 	 */
 	@RequestMapping(value = "/qna/detail.do", method = RequestMethod.GET)
-	public ModelAndView viewDetailQa(ModelAndView mv, @RequestParam("qaNo") int qaNo, HttpSession session) {
+	public @ResponseBody ModelAndView viewDetailQa(ModelAndView mv, @RequestParam("qaNo") int qaNo, HttpSession session
+			,@RequestParam(value="page", required = false) int page
+			,@RequestParam(value="searchCondition", required = false) String searchCondition
+			,@RequestParam(value="searchValue", required = false) String searchValue,
+			@RequestParam(value="searchValue", required = false) Optional<String> sValue
+			
+			) {
 		try {
 			QA qa = qService.printOneQANo(qaNo);
 			List<QAComment> qcList = qService.allQACommentList(0, 0, qaNo);
-
+			
+			
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			//비밀글시에
+			if(qa.isQaSecret()){
+				if(!loginUser.getMemberEmail().equals(qa.getMemberEmail())&&loginUser.getAdminCheck()==false) {
+				
+					mv.addObject("msg", "작성자만 확인할수 있습니다");
+					mv.setViewName("common/error");
+					return mv;
+					
+				}
+				
+			}
+			
+			//사용자 이름 출력영역
+			String name = qService.printMemberName(qa.getMemberEmail());
+			qa.setName(name);
+			//코멘트 이름 출력영역
+			String[] cName = new String[qcList.size()];
+			for(int i=0; i<cName.length; i++) {
+				cName[i]=qService.printMemberName(qcList.get(i).getMemberEmail());
+				qcList.get(i).setQcName(cName[i]);
+				
+			}
+			
+			//한글 깨짐 방지용
+			if(sValue.isPresent()) {
+				
+				searchValue =URLEncoder.encode(searchValue, "UTF-8");
+			}
+			
+			mv.addObject("page",page);
 			mv.addObject("qa", qa);
 			mv.addObject("qcList", qcList);
+			mv.addObject("searchCondition", searchCondition);
+			mv.addObject("searchValue", searchValue); //한글깨짐 방지코드
+			
+	
+			
 
 			mv.setViewName("/qna/qnaDtail");
 
@@ -362,6 +451,15 @@ public class QAController {
 
 			if (!qList.isEmpty()) {
 
+				
+				//사용자 이름 출력영역
+				String name[] = new String[qList.size()];
+				for(int i=0; i<name.length;i++) {
+					name[i]=qService.printMemberName(qList.get(i).getMemberEmail());
+					qList.get(i).setName(name[i]);
+						}
+				
+
 				mv.addObject("qList", qList);
 
 			} else {
@@ -376,7 +474,6 @@ public class QAController {
 			int maxPage; // 게시판의 총 페이지 수
 			int startNavi; // 한 화면에 출력되는 게시판 페이지의 처음 수
 			int endNavi;// 한 화면에 출력되는 게시판 페이지의 마지막 수
-
 			maxPage = (int) ((double) totalCount / boardLimit + 0.9);
 			startNavi = ((int) ((double) currentPage / naviLimit + 0.9) - 1) * naviLimit + 1;
 			endNavi = startNavi + naviLimit - 1;
@@ -391,7 +488,8 @@ public class QAController {
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("maxPage", maxPage);
 			//////////////////////////////// 페이징종료///////////////////////////////////
-
+			
+			
 			mv.addObject("pageNow", currentPage);
 			mv.addObject("searchValue", searchValue);
 			mv.addObject("searchCondition", searchCondition);
@@ -407,9 +505,26 @@ public class QAController {
 
 	}
 	
+	/**
+	 * qa여러개삭제
+	 * @param mv
+	 * @param arrayNo
+	 * @return
+	 */
 	@RequestMapping(value="/qna/removeArray.do", method=RequestMethod.GET)
-	public ModelAndView removeArray(ModelAndView mv, @RequestParam(value="array", required = false ) String arrayNo) {
+	public ModelAndView removeArray(ModelAndView mv, @RequestParam(value="array", required = false ) String arrayNo, HttpSession session) {
 		try {
+			
+			//관리자 아니면 삭제금지
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			if(loginUser.getAdminCheck()==false) {
+				
+				mv.addObject("msg", "관리자만 삭제할 수 있습니다");
+				mv.setViewName("common/error");
+				return mv;
+			}
+			
+			
 		String removeNo[] =  arrayNo.split(",");
 		int result=0;
 		for(int i=0; i<removeNo.length;i++) {

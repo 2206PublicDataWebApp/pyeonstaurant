@@ -53,7 +53,6 @@ public class QAStoreLogic implements QAStore {
 
 	public List<QAComment> selectallQACommentList(int currentPage, int limit, int qaNo, SqlSessionTemplate session) {
 		List<QAComment> qcList = session.selectList("QnAMapper.SelectAllQnAComment", qaNo);
-		System.out.println(qcList);
 
 		return qcList;
 
@@ -79,6 +78,19 @@ public class QAStoreLogic implements QAStore {
 		List<QA> qList = session.selectList("QnAMapper.selectAllByValue", paramMap, rowBounds);
 
 		return qList;
+	}
+
+	@Override
+	public String selectMemberName(String memberEmail, SqlSessionTemplate session) {
+		String name = session.selectOne("RecipeMapper.selectOneName", memberEmail);
+		return name;
+	}
+
+	@Override
+	public String selectMeberEmail(Integer qaNo,SqlSessionTemplate session) {
+		
+		String memberEmail = session.selectOne("QnAMapper.selectMemberEmail", qaNo);
+		return memberEmail;
 	}
 }
 

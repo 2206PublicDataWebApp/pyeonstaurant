@@ -18,5 +18,10 @@ public interface RecipeCommentService {
 
 	public int  removeOneRecipeComment(int commentNo);
 
+
+
+
+	public String selectMemberEmail(Integer commentNo);
+
 }
 

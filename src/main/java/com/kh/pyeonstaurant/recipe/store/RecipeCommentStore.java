@@ -18,5 +18,8 @@ public interface RecipeCommentStore {
 
 	public int deleteOneRecipeComment(int commentNo,SqlSessionTemplate session);
 
+
+	public String selectMemberEmail(SqlSessionTemplate session, Integer commentNo);
+
 }
 

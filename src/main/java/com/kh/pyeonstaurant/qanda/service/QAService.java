@@ -24,6 +24,10 @@ public interface QAService {
 
 	public List<QA> printAllByValue(String searchCondition, String searchValue, int currentPage, int boardLimit);
 
+	public String printMemberName(String memberEmail);
+
+	public String getMemberEmail(Integer qaNo);
+
 
 }
 

@@ -40,6 +40,7 @@ padding:0 !important;
 		<div class="row container" >
 			<form action="/qna/modify.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${qa.qaNo}" name="qaNo">
+			<input type="hidden" value="${qa.memberEmail}" name="memberEmail">
 			<!-- 상단영역시작 -->
 			<div id="first">
 				<!-- 카테고리영역 -->
