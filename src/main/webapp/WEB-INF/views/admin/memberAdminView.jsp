@@ -250,7 +250,7 @@ a{
 										<td>${i.count }</td>
 										<td>${member.memberEmail }</td>
 										<td>${member.memberNickName }</td>
-										<td><a href="/point/pointList?memberEmail=${member.memberEmail }">${member.totalPoint }</a></td>
+										<td><button class="btn  btn-outline-primary output col-5"><a href="/point/pointList?memberEmail=${member.memberEmail }">${member.totalPoint }</a></button></td>
 										<td scope="col"><button class="btn  btn-outline-primary output">
 												<a
 													href="/admin/removeMember?memberEmail=${member.memberEmail }">탈퇴</a>

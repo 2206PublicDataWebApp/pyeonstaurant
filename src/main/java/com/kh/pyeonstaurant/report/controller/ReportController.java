@@ -91,7 +91,7 @@ public class ReportController {
 			report.setMemberEmail(memberEmail);
 			int result = rService.addReportRecipe(report);
 			if(result > 0) {
-				mv.setViewName("redirect:/������ ��������");
+				mv.setViewName("redirect:/report/reportAdmin");
 			}
 		}catch(Exception e) {
 			
@@ -112,13 +112,14 @@ public class ReportController {
 			report.setMemberEmail(memberEmail);
 			int result = rService.addReportComment(report);
 			if(result > 0) {
-				mv.setViewName("redirect:/������ ��������");
+				mv.setViewName("redirect:/report/reportAdmin");
 			}
 		}catch(Exception e) {
 			
 		}
 		return mv;	
 	}
+	
 	@RequestMapping(value="/report/successRecipe", method=RequestMethod.GET)
 	public String successReportRecipe(@RequestParam("recipeNo") int recipeNo) {
 		int result = rService.processedReportRecipe(recipeNo);

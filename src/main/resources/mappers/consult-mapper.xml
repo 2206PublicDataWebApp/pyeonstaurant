@@ -28,6 +28,8 @@
 		<result  property="csFileRename" column="CS_FILERENAME"/> 
 		<result  property="csFilePath" column="CS_FILEPATH"/> 
   	</resultMap>
+  	
+  	
   	<resultMap type="SwitchChat" id="SwitchChatMap">
   		<id property="on_off" column="ON_OFF"/> 
 		<result  property="on_off" column="ON_OFF"/> 
