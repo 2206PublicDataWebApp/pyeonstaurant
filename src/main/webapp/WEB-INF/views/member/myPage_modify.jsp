@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>마이페이지</title>
 	<script src="/resources/js/myPage.js"></script>
-	<link rel="stylesheet" href="/resources/css/myPage.css">
+	<link rel="stylesheet" href="/resources/css/myPage_modify.css">
 	<link rel="stylesheet" href="/resources/css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -101,34 +101,39 @@
     </nav>
     
     <main>
-        <div class="user-card">
-            <div class="user-photo">
-              <img src="/resources/images/user.png">
-            </div>
-            <h1 class="user-name">
-              ${sessionScope.loginUser.memberNickname }
-            </h1>
-      
-            <h2>
-                ${sessionScope.loginUser.memberEmail }
-            </h2>
-            <div class="user-info">
-                  <li>
-                      <ul class= "info-property">레시피 수</ul>
-                      <ul class= "info-value">구현 미완</ul>
-                  </li>
-      
-                  <li>
-                      <ul class= "info-property">댓글</ul>
-                      <ul class= "info-value">구현 미완</ul>
-                  </li>
-      
-                  <li>
-                      <ul class= "info-property">포인트</ul>
-                      <ul class= "info-value">${sessionScope.loginUser.totalPoint }P</ul>
-                  </li>
-            </div>
-          </div>
+		<form action="/member/modifyNickname.kh" method="post">
+			<table>
+				<tr>
+					<td>닉네임</td>
+					<td>
+						<input type="text" name="memberNickname" value="${member.memberNickname }">
+					</td>
+				</tr>				
+
+				<tr>
+					<td colspan="1" align="center">
+						<input type="submit" value="수정하기">
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+				<form action="/member/modifyPwd.kh" method="post">
+			<table>
+				<tr>
+					<td> 비밀번호</td>
+					<td>
+						<input type="password" name="memberPwd">
+					</td>
+				</tr>			
+
+				<tr>
+					<td colspan="1" align="center">
+						<input type="submit" value="수정하기">
+					</td>
+				</tr>
+			</table>
+		</form>
     </main>
 
 

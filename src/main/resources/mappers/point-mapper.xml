@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PointMapper">
+	<resultMap type="Point" id="pointResultMap">
+		<result property="pointMemberEmail" 	column="POINT_MEMBER_EMAIL"/>
+		<result property="pointDetail" 	column="POINT_DETAIL"/>
+		<result property="usingPoint" 	column="USING_POINT"/>
+		<result property="pointDate" 	column="POINT_DATE"/>
+	</resultMap>
+
+	<select id="selectAllPoint" resultMap="memberResultMap">
+		SELECT * FROM POINT WHERE POINT_MEMBER_EMAIL = #{pointmemberEmail } order by POINT_DATE desc
+	</select>
+</mapper>

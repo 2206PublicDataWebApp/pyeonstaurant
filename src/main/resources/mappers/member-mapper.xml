@@ -24,7 +24,7 @@
 	
 	<update id="updateMemberPwd" parameterType="Member">
 		UPDATE MEMBER_TBL
-		SET MEMBER_PWD = #{memberPwd }
+		SET MEMBER_PW = #{memberPwd }
 		WHERE MEMBER_EMAIL = #{memberEmail }
 	</update>
 	<delete id="deleteMember">

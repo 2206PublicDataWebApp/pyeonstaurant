@@ -36,7 +36,7 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public int updateMemberPwd(SqlSession session, Member member) {
-		int result = session.update("MemberMapper.updateMembePwd", member);
+		int result = session.update("MemberMapper.updateMemberPwd", member);
 		return result;
 	}
 	

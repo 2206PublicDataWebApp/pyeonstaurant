@@ -37,15 +37,20 @@ public class MemberController {
 	@RequestMapping(value="/member/joinView.kh", method=RequestMethod.GET)
 	public String memberJoinView(Model model) {
 		return "member/join";
-		// /WEB-INF/views/member/join.jsp
 	}
 	
 	// 로그인 상태일 때 마이페이지 창으로 이동
 	@RequestMapping(value="/member/myPageView.kh", method=RequestMethod.GET)
 	public String memberMyPageView(Model model) {
 		return "member/myPage";
-		// /WEB-INF/views/member/join.jsp
 	}
+	
+	// 회원 정보 수정 창으로 이동
+	@RequestMapping(value="/member/myPageModifyView.kh", method=RequestMethod.GET)
+	public String memberMyPageModifyView(Model model) {
+		return "member/myPage_modify";
+	}
+	
 	
 	// 로그인 기능
 	@RequestMapping(value="/member/login.kh", method=RequestMethod.POST)
@@ -141,6 +146,45 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	// 닉네임 수정
+	@RequestMapping(value="/member/modifyNickname.kh", method=RequestMethod.POST)
+	public ModelAndView modifyMemberNickname(
+			@ModelAttribute Member member
+			, ModelAndView mv) {
+		try {
+			int result = mService.modifyMemberNickname(member);
+			if(result > 0) {
+				mv.setViewName("redirect:/");
+			}else {
+				mv.addObject("msg", "회원 정보 수정 실패!");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	// 비밀번호 수정
+	@RequestMapping(value="/member/modifyPwd.kh", method=RequestMethod.POST)
+	public ModelAndView modifyMemberPwd(
+			@ModelAttribute Member member
+			, ModelAndView mv) {
+		try {
+			int result = mService.modifyMemberPwd(member);
+			if(result > 0) {
+				mv.setViewName("redirect:/");
+			}else {
+				mv.addObject("msg", "회원 정보 수정 실패!");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	
 	// 로그아웃
 	@RequestMapping(value="/member/logout.kh", method=RequestMethod.GET)
