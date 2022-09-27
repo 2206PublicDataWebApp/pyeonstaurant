@@ -1,9 +1,13 @@
 package com.kh.pyeonstaurant.member.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.member.store.MemberStore;
+import com.kh.pyeonstaurant.recipe.domain.Recipe;
 
 @Repository
 public class MemberStoreLogic implements MemberStore{
@@ -44,6 +48,13 @@ public class MemberStoreLogic implements MemberStore{
 	public int deleteMember(SqlSession session, String memberEmail) {
 		int result = session.delete("MemberMapper.deleteMember", memberEmail);
 		return result;
+	}
+
+	@Override
+	public List<Recipe> selectRecipeNuber(SqlSessionTemplate session, String memberEmail) {
+		List<Recipe> rList =session.selectList("MemberMapper.selectRecipeNumber", memberEmail);
+		System.out.println(rList);
+		return rList;
 	}
 
 }

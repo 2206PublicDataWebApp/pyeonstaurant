@@ -39,4 +39,29 @@
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_EMAIL = #{memberEmail }
 	</select>
+	
+	<resultMap type="Recipe" id="recipeResultMap1">
+		<id property="recipeNo" 			column="RECIPE_NO" />
+		<result property="recipeName" 		column="RECIPE_NAME" />
+		<result property="recipeInfo" 		column="RECIPE_INFO" />
+		<result property="mainPic" 			column="MAIN_PICTURE" />
+		<result property="insertDate" 		column="INCERT_DATE" />
+		<result property="recipeCategory" 	column="RECIPE_CATEGORY" />
+		<result property="recipeVideo" 		column="RECIPE_VIDEO" />
+		<result property="viewCount" 		column="VIEW_COUNT" />
+		<result property="memberEmail" 		column="MEMBER_EMAIL" />
+		<result property="updateDate" 		column="UPDATE_DATE" />
+		<result property="recipeStatus"		column="RECIPE_STATUS" />
+		<result property="recommandCount" 	column="RECOMMAND_COUNT" />
+		<result property="mainPicRename" 	column="MAIN_PIC_RENAME" />
+		<result property="recipeTime" 		column="RECIPE_TIME" />
+	</resultMap>
+	
+	<select id="selectRecipeNumber" resultMap="recipeResultMap1">
+	
+	select * from recipe_tbl where MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
+	
+	
 </mapper>

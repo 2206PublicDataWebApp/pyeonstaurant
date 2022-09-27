@@ -58,7 +58,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callMyRecipe.kh">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">작성 레시피 관리</span>
                         </a>
@@ -115,12 +115,12 @@
             <div class="user-info">
                   <li>
                       <ul class= "info-property">레시피 수</ul>
-                      <ul class= "info-value">구현 미완</ul>
+                      <ul class= "info-value">3</ul>
                   </li>
       
                   <li>
                       <ul class= "info-property">댓글</ul>
-                      <ul class= "info-value">구현 미완</ul>
+                      <ul class= "info-value">5</ul>
                   </li>
       
                   <li>

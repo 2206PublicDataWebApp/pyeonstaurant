@@ -1,5 +1,7 @@
 package com.kh.pyeonstaurant.member.service.logic;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.member.service.MemberService;
 import com.kh.pyeonstaurant.member.store.MemberStore;
 import com.kh.pyeonstaurant.member.store.logic.MemberStoreLogic;
+import com.kh.pyeonstaurant.recipe.domain.Recipe;
 
 
 @Service
@@ -51,6 +54,12 @@ public class MemberServiceImpl implements MemberService {
 	public int removeMember(String memberEmail) {
 		int result = mStore.deleteMember(session, memberEmail);
 		return result;
+	}
+
+	@Override
+	public List<Recipe> selectRecipeNumber(String memberEmail) {
+		List<Recipe> rList = mStore.selectRecipeNuber(session, memberEmail);
+		return rList;
 	}
 
 }

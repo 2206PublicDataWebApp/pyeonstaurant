@@ -116,11 +116,6 @@
           </div>
     </main>
 
-    <div class="fixed-icon">
-        <a href="#" class="store-icon"><img src="/resources/images/store.png"></a>
-        <a href="#"><img src="/resources/images/chat.png"></a>
-    </div>
-    
 
 
 </body>

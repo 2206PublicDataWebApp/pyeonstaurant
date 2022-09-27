@@ -73,7 +73,7 @@
                             1:1 문의하기
                         </button>
                         <button>
-                            공지사항
+                            편의점 위치 찾기
                         </button>
                     </div>
                 </div>
