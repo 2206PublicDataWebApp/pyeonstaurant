@@ -253,7 +253,7 @@ text-align:center;
 						<div id="wirter-area" class="col-md-12">
 							<h5>
 								작성자 : ${recipe.memberEmail }
-								<button class="btn btn-danger">신고</button>
+								<button class="btn btn-danger"><a href="/report/add">신고</a></button>
 							</h5>
 						</div>
 						<!-- 작성자 영역종료 -->
@@ -457,7 +457,7 @@ text-align:center;
 												<h4>${rcList.memberEmail }</h4>
 											</div>
 											<div id="comment-button" class="col-md-2"
-												style="text-align: right">신고</div>
+												style="text-align: right"><a href="/report/addComment">신고</a></div>
 										</div>
 										<div id="comment-text-area">
 											<span>${rcList.commentDate }</span> <br>

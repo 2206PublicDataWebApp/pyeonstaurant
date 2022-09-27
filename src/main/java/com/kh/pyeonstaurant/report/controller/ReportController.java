@@ -1,7 +1,5 @@
 package com.kh.pyeonstaurant.report.controller;
 
-import java.sql.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.report.domain.Report;
 import com.kh.pyeonstaurant.report.service.ReportService;
 
@@ -78,7 +74,7 @@ public class ReportController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/report/add", method=RequestMethod.POST)
+	@RequestMapping(value="/report/add", method=RequestMethod.GET)
 	public ModelAndView addReportRecipe(ModelAndView mv
 			, HttpSession session
 			, @ModelAttribute Report report
@@ -86,12 +82,12 @@ public class ReportController {
 			) {
 		try {
 			session = request.getSession();
-			Report email = (Report)session.getAttribute("memberEmail");
-			String memberEmail = email.getMemberEmail();	//�Ű��� �̸���
+			Member email = (Member)session.getAttribute("loginUser");
+			String memberEmail = email.getMemberEmail();
 			report.setMemberEmail(memberEmail);
 			int result = rService.addReportRecipe(report);
 			if(result > 0) {
-				mv.setViewName("redirect:/������ ��������");
+				mv.setViewName("redirect:/recipe/recipeList.do");
 			}
 		}catch(Exception e) {
 			
@@ -99,7 +95,7 @@ public class ReportController {
 		return mv;	
 	}
 	
-	@RequestMapping(value="/report/addComment", method=RequestMethod.POST)
+	@RequestMapping(value="/report/addComment", method=RequestMethod.GET)
 	public ModelAndView addReportComment(ModelAndView mv
 			, HttpSession session
 			, @ModelAttribute Report report
@@ -107,12 +103,12 @@ public class ReportController {
 			) {
 		try {
 			session = request.getSession();
-			Report email = (Report)session.getAttribute("memberEmail");
-			String memberEmail = email.getMemberEmail();	//�Ű��� �̸���
+			Member email = (Member)session.getAttribute("loginUser");
+			String memberEmail = email.getMemberEmail();
 			report.setMemberEmail(memberEmail);
 			int result = rService.addReportComment(report);
 			if(result > 0) {
-				mv.setViewName("redirect:/������ ��������");
+				mv.setViewName("redirect:/recipe/recipeList.do");
 			}
 		}catch(Exception e) {
 			

@@ -31,7 +31,7 @@ public class MyRecipeController {
 			
 		try {
 			session = request.getSession();
-			Member member = (Member)session.getAttribute("memberEmail");
+			Member member = (Member)session.getAttribute("loginUser");
 			String memberEmail = member.getMemberEmail();
 			myRecipe.setMemberEmail(memberEmail);
 			myRecipe.setRecipeNo(recipeNo);

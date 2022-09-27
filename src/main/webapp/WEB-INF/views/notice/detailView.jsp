@@ -23,11 +23,11 @@
                 <a href="#" class="header-search"><img src="/resources/images/header_search.svg"></a>
                 <a href="#" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
                 
-                <c:if test="${sessionScope.loginUser eq null  }">
+                <c:if test="${sessionScope.loginUser eq null && empty adminCheck }">
                 <a href="/member/joinView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
                 </c:if>
                 
-                <c:if test="${not empty loginUser }">
+                <c:if test="${not empty loginUser || not empty adminCheck}">
                 <a href="/member/myPageView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
                 </c:if>
         
@@ -81,7 +81,7 @@
 					</tr>
                     <tr>
                         <td colspan="2" align="center">
-                        <c:if test="${adminCheck != false}">
+                        <c:if test="${adminCheck == true}">
                             <a href="/notice/modifyView?noticeNo=${notice.noticeNo }&page=${page}" class="btn btn-primary pull-center">수정 페이지로 이동</a>
                             <a href="#" onclick="noticeRemove(${page});" class="btn btn-primary pull-center">삭제하기</a>
 						</c:if>

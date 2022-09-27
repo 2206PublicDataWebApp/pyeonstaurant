@@ -320,7 +320,7 @@ a{
 							<p class="work_time">오전 10시 ~ 오후 5시 (주말, 공휴일 제외)</p>
 							<div>
 								<button>1:1 문의하기</button>
-								<button>공지사항</button>
+								<button><a href="/notice/list"></a>공지사항</button>
 							</div>
 						</div>
 

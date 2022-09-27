@@ -1,5 +1,24 @@
 @charset "UTF-8";
-  /* The switch - the box around the slider */
+  /* The switch - the box around the slider */\
+  body{
+    width: 1000px; 
+    height: 800px; 
+  }
+
+  /* 해더 */
+  #headTwo{
+    width: 100%;
+    height: 70px;
+    float: right;
+    text-align: right;
+    border-radius: 5px;
+}
+
+#headTwo button{
+    border : 0px;
+    background-color: white;
+
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -65,18 +84,20 @@ p {
 	font-size:15px;
 	font-weight:bold;
 }
-
+#rowbody{
+  width:1200px;
+  margin-left: 30px;
+  margin-right: 0px;
+  height: 500px;
+}
     /* 제목 */
 #pagename{
-    width: 600px;
-    height: 100px;
-    border-radius: 15%;
-    font-size: 50px;
+    width: 100%;
+    height: 80px;    
+    font-size: 30px;
     font-weight: bold ;
-    color: #FFF;    
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: rgb(7, 26, 133);
+    color: rgb(7, 26, 133);
+    margin: 10px;    
     justify-content: center;
 }
 
@@ -84,6 +105,37 @@ span{
   display: inline;
   font-size: 20px;
   font-weight: bold;  
-  padding: 5px;
+  margin-left: 10px;
   
+}
+table{
+  width: 700px;
+  margin-left: 20px; 
+}
+tdody>td{
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+ 
+}
+
+.footer p{
+  font-size: 10px;
+  text-align: center;
+
+}
+.footer{
+  display: block;
+  text-align: center;
+  background-color: aliceblue ;
+  margin-top: 80px;
+  padding : 10px;
+  
+}
+#nav{
+  background-color: rgb(7, 26, 133);
+  height: 500PX;
+}
+#nav>ul>li>a {
+  color: #FFF;
+  font-weight: bold;
 }
