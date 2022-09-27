@@ -12,21 +12,5 @@ import com.kh.pyeonstaurant.point.store.PointStore;
 
 @Service
 public class PontServiceImpl implements PointService{
-	@Autowired
-	PointStore pStore;
-	
-	@Autowired
-	SqlSessionTemplate session;
 
-	@Override
-	public List<Point> printAllBoard(int currentPage, int limit) {
-		List<Point> pList = pStore.selectAllBoard(session, currentPage, limit);
-		return pList;
-	}
-	
-	@Override
-	public int getTotalCount() {
-		int totalCount = pStore.selectTotalCount(session);
-		return totalCount;
-	}
 }

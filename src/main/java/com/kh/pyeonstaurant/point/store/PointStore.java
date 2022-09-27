@@ -7,6 +7,5 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.pyeonstaurant.point.domain.Point;
 
 public interface PointStore {
-	public List<Point> selectAllBoard(SqlSession session, int currentPage, int limit);
-	public int selectTotalCount(SqlSession session);
+
 }

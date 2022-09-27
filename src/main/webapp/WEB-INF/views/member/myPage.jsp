@@ -65,14 +65,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callMyComment.kh">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">작성 댓글 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callPoint.kh">
                             <i class='bx bx-heart icon' ></i>
                             <span class="text nav-text">포인트 내역 조회</span>
                         </a>

@@ -1,31 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/myPage_recipe.css">
 </head>
 <body>
 
-<table>
-			<tr>
-				<td>레시피이름</td>
-				<td>레시피사진</td>
-				<td>레시피설명</td>
-			</tr>
-				
-	<c:forEach items="${rList}" var="recipe" varStatus="i">
-			<tr>
-				<td>${recipe.recipeNo }</td>
-				<td><a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">${recipe.recipeName }</a></td>
-				<td><img src="/resources/recipeImg/${recipe.mainPicRename }"></td>
-				<td>${recipe.recipeInfo }</td>
-				
-			</tr>
-			
-	</c:forEach>
+		<table class="table">
+			<tbody>
+			<c:forEach items="${rcList}" var="rcList" varStatus="i">
+				<tr>
+					<td>${rcList.recipeNo}</td>
+					<td>${rcList.commentContents }</td>
+					<td>${rcList.commentDate }</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+
 			
 		</table>
 

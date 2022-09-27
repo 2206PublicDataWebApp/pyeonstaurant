@@ -25,7 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.member.service.MemberService;
 import com.kh.pyeonstaurant.member.service.logic.MemberServiceImpl;
+import com.kh.pyeonstaurant.point.domain.Point;
 import com.kh.pyeonstaurant.recipe.domain.Recipe;
+import com.kh.pyeonstaurant.recipe.domain.RecipeComment;
 
 @Controller
 public class MemberController {
@@ -218,15 +220,13 @@ public class MemberController {
 		return mv;
 	}
 	
+	// 내가 쓴 레시피 불러오기
 	@RequestMapping(value="/member/callMyRecipe.kh",method = RequestMethod.GET)
 	public ModelAndView callBoard(HttpSession session
 			, ModelAndView mv) {
-		
 		try {
 			Member member = (Member)session.getAttribute("loginUser");
-					
 			List<Recipe> rList = mService.selectRecipeNumber(member.getMemberEmail());
-			System.out.println(rList.toString());
 			mv.addObject("rList",rList);
 			mv.setViewName("member/myPage_recipe");
 		}catch (Exception e) {
@@ -235,8 +235,40 @@ public class MemberController {
 		}
 		
 		return mv;
-
+	}
+	
+	// 내가 쓴 댓글 불러오기 
+	@RequestMapping(value="/member/callMyComment.kh",method = RequestMethod.GET)
+	public ModelAndView callComment(HttpSession session
+			, ModelAndView mv) {
+		try {
+			Member member = (Member)session.getAttribute("loginUser");
+			List<RecipeComment> rcList = mService.selectCommentNumber(member.getMemberEmail());
+			mv.addObject("rcList",rcList);
+			mv.setViewName("member/myPage_comment");
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
 		
+		return mv;
+	}
+	
+	// 포인트 내역 불러오기
+	@RequestMapping(value="/member/callPoint.kh",method = RequestMethod.GET)
+	public ModelAndView callPoint(HttpSession session
+			, ModelAndView mv) {
+		try {
+			Member member = (Member)session.getAttribute("loginUser");
+			List<Point> pList = mService.selectPoint(member.getMemberEmail());
+			mv.addObject("pList",pList);
+			mv.setViewName("member/myPage_point");
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
 	}
 	
 	

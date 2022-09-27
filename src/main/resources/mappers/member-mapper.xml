@@ -9,13 +9,13 @@
 		<result property="memberNickname" 	column="MEMBER_NICKNAME"/>
 		<result property="adminCheck" 	column="ADMIN_CHECK"/>
 		<result property="totalPoint" 	column="TOTAL_POINT"/>
-		
 	</resultMap>
 
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER_TBL
 		VALUES(#{memberEmail}, #{memberPwd}, #{memberNickname}, DEFAULT, DEFAULT)
 	</insert>
+	
 	<update id="updateMemberNickname" parameterType="Member">
 		UPDATE MEMBER_TBL
 		SET MEMBER_NICKNAME = #{memberNickname }
@@ -27,20 +27,23 @@
 		SET MEMBER_PWD = #{memberPwd }
 		WHERE MEMBER_EMAIL = #{memberEmail }
 	</update>
+	
 	<delete id="deleteMember">
 		DELETE FROM MEMBER_TBL
 		WHERE MEMBER_EMAIL = #{memberEmail }
 	</delete>
+	
 	<select id="selectLoginOne" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
 		 WHERE MEMBER_EMAIL = #{memberEmail } AND MEMBER_PW = #{memberPwd }
 	</select>
+	
 	<select id="selectOneByEmail" resultMap="memberResultMap">
 		SELECT * FROM MEMBER_TBL
 		WHERE MEMBER_EMAIL = #{memberEmail }
 	</select>
 	
-	<resultMap type="Recipe" id="recipeResultMap1">
+	<resultMap type="Recipe" id="recipeResultMap">
 		<id property="recipeNo" 			column="RECIPE_NO" />
 		<result property="recipeName" 		column="RECIPE_NAME" />
 		<result property="recipeInfo" 		column="RECIPE_INFO" />
@@ -57,11 +60,31 @@
 		<result property="recipeTime" 		column="RECIPE_TIME" />
 	</resultMap>
 	
-	<select id="selectRecipeNumber" resultMap="recipeResultMap1">
-	
-	select * from recipe_tbl where MEMBER_EMAIL = #{memberEmail}
+	<select id="selectRecipeNumber" resultMap="recipeResultMap">
+		select * from recipe_tbl where MEMBER_EMAIL = #{memberEmail} order by UPDATE_DATE DESC
 	</select>
 	
+	<resultMap type="RecipeComment" id="RecipeCommentResultMap">
+		<id property="commentNo" 				column="COMMENT_NO" />
+		<result property="commentDate"			column="COMMENT_DATE" />
+		<result property="commentContents" 		column="COMMNET_CONTENTS" />
+		<result property="recipeNo" 			column="RECIPE_NO" />
+		<result property="memberEmail"			column="MEMBER_EMAIL" />
+	</resultMap>
 	
+	<select id="selectCommentNumber" resultMap="RecipeCommentResultMap">
+		select * from RECIPE_COMMENT where MEMBER_EMAIL = #{memberEmail} order by COMMENT_NO DESC
+	</select>
+
 	
+	<resultMap type="Point" id="pointResultMap">
+		<result property="pointMemberEmail" 	column="POINT_MEMBER_EMAIL"/>
+		<result property="pointDetail" 			column="POINT_DETAIL"/>
+		<result property="usingPoint" 			column="USING_POINT"/>
+		<result property="pointDate" 			column="POINT_DATE"/>
+	</resultMap>
+
+	<select id="selectPoint" resultMap="pointResultMap">
+		SELECT * FROM POINT WHERE POINT_MEMBER_EMAIL = #{pointMemberEmail } order by POINT_DATE DESC
+	</select>
 </mapper>

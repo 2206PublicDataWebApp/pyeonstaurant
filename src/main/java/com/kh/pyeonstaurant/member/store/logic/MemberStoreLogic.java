@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.member.store.MemberStore;
+import com.kh.pyeonstaurant.point.domain.Point;
 import com.kh.pyeonstaurant.recipe.domain.Recipe;
+import com.kh.pyeonstaurant.recipe.domain.RecipeComment;
 
 @Repository
 public class MemberStoreLogic implements MemberStore{
@@ -51,10 +53,20 @@ public class MemberStoreLogic implements MemberStore{
 	}
 
 	@Override
-	public List<Recipe> selectRecipeNuber(SqlSessionTemplate session, String memberEmail) {
+	public List<Recipe> selectRecipeNumber(SqlSessionTemplate session, String memberEmail) {
 		List<Recipe> rList =session.selectList("MemberMapper.selectRecipeNumber", memberEmail);
-		System.out.println(rList);
 		return rList;
+	}
+	
+	@Override
+	public List<RecipeComment> selectCommentNumber(SqlSessionTemplate session, String memberEmail) {
+		List<RecipeComment> rcList =session.selectList("MemberMapper.selectCommentNumber", memberEmail);
+		return rcList;
+	}
+	
+	public List<Point> selectPoint(SqlSessionTemplate session, String pointMemberEmail) {
+		List<Point> pList =session.selectList("MemberMapper.selectPoint", pointMemberEmail);
+		return pList;
 	}
 
 }
