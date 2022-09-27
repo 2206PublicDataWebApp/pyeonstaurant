@@ -22,11 +22,10 @@
 
 <!-- <link rel="stylesheet" href="/resources/css/recipeSearch.css"> -->
 <style>
-@media ( max-width : 500px) {
-	#button-area {
-		text-align: center;
-	}
+body{
+margin-top:10rem;
 }
+
 
 #serach-title-area {
 	text-align: center;
@@ -113,11 +112,29 @@ img:hover{
 transform: scale(1.1);
 transition:.1s;
 }
+
+@media ( max-width : 500px) {
+	#button-area {
+		text-align: center;
+	}
+	
+	body{
+	margin : 0 ;
+	}
+	
+	#write-icon {
+	position: fixed;
+	top: 15%;
+	left: 6%;
+	z-index: 99;
+}
+}
 </style>
 
 </head>
 <body>
 
+<jsp:include page="../header.jsp"/>
 <c:if test="${loginUser != null }"> 
 <!-- 로그인 했을때만 보임  -->
 	<!--글 입력 아이콘 영역-->
@@ -353,7 +370,7 @@ transition:.1s;
 
 
 	</section>
-	
+	<jsp:include page="../footer.jsp"/>
 	<script>
 	
 	/*버튼 토글 스크립트  */

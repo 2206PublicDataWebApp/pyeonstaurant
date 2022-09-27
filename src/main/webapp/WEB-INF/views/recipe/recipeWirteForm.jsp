@@ -21,11 +21,19 @@
 
 
 <style>
+
+body{
+margin-top:10rem;
+}
 @media (max-width: 500px) {
 label{
 padding: 0px;
 
+
+
 }
+
+
 #up-area-left{
 padding: 0px;
 margin:0 auto;
@@ -118,12 +126,19 @@ padding:0.5em;
 justify-content: space-evenly
 }
 
+@media (max-width: 500px) {
+
+body{
+margin:0;}
+}
+
 </style>
 
 </head>
 
 
 <body>
+<jsp:include page="../header.jsp"/>
 <section class="container">
 
 <div class="container row col-md-12" id="recipe-wrtie-from"><!-- 레시피 입력 폼 시작 -->
@@ -505,7 +520,7 @@ justify-content: space-evenly
 </div><!-- 레시피 입력 폼 종료 -->
 </section>	
 
-
+<jsp:include page="../footer.jsp"/>
 
 	<script>
 	

@@ -21,6 +21,9 @@
 
 
 <style>
+body{
+margin-top:10rem;
+}
 section {
 	margin-top: 100px;
 }
@@ -29,10 +32,12 @@ img {
 	width: 50%;
 	height: auto;
 }
+a{
+color:black;}
 </style>
 </head>
 <body>
-
+<jsp:include page="../header.jsp"/>
 	<section>
 		<!-- 전체 감싸기 -->
 		<div class="container">
@@ -324,7 +329,7 @@ img {
 		</div>
 		<!-- 전체 감싸는 div종료 -->
 	</section>
-
+<jsp:include page="../footer.jsp"/>
 
 	<script>
 

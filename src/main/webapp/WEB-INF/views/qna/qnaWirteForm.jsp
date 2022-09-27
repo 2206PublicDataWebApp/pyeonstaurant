@@ -16,6 +16,9 @@
 
 
 <style>
+body{
+margin-top:10rem;
+}
 
 
 @media (max-width: 500px) {
@@ -42,6 +45,8 @@ cursor:pointer;
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
+
 
 	<section class="container">
 			<!-- 게시판 영역시작 -->
@@ -211,6 +216,8 @@ cursor:pointer;
 
 
 	</section>
+	
+	<jsp:include page="../footer.jsp"/>
 <script>
 
 //섬머노트 스크립트

@@ -22,6 +22,9 @@
 <link href="/resources/css/page.css" rel="stylesheet">
 
 <style>
+body{
+margin-top:10rem;
+}
 @media ( max-width : 500px) {
 	#title-cell {
 		width: 65% !important;
@@ -36,6 +39,7 @@ a {
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 	<!-- q&a게시판 영역시작 -->
 	<section>
 		<!-- 게시판 영역 -->
@@ -345,7 +349,7 @@ a {
 		<!-- 게시판영역종료 -->
 	</section>
 	<!-- qna게시판 종료 -->
-
+<jsp:include page="../footer.jsp"/>
 	<script>
 		function checkRemove() {
 

@@ -17,23 +17,7 @@
 	overflow: hidden;
 }
 
-@media ( max-width : 500px) {
-	#imgDiv {
-		width: 100%;
-		height: auto;
-		overflow: hidden;
-	}
-	iframe {
-		height: auto;
-	}
-	
-	#other-recipe-area{
-	display:none;
-	}
-	
-	
-}
-/* 미디어 쿼리 영역 종료 */
+
 
 
 #mainImg {
@@ -108,7 +92,52 @@ text-align:center;
     height: 10rem;
     overflow: hidden;
 }
+body{
+margin-top:10rem;
+}
 
+#step-img-area{
+padding-top: 5rem;
+}
+
+
+@media ( max-width : 500px) {
+	#imgDiv {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+	}
+	iframe {
+		height: auto;
+	}
+	
+	#other-recipe-area{
+	display:none;
+	}
+	
+	#article1{
+	
+    border-right-width: 0px;
+
+	}
+	#step-img-area{
+	padding:0px;
+	}
+	
+	body{
+	margin 0;
+	}
+	
+	#list-icon {
+	position: fixed;
+	top: 15%;
+	left: 6%;
+	z-index: 99;
+}
+	
+	
+}
+/* 미디어 쿼리 영역 종료 */
 
 </style>
 
@@ -117,7 +146,7 @@ text-align:center;
 </head>
 <body>
 	
-
+<jsp:include page="../header.jsp"/>
 	<section style="margin: 0 auto;">
 		<span id="list-icon-area"> <svg onclick="list();"
 				id="list-icon" xmlns="http://www.w3.org/2000/svg" width="50"
@@ -174,11 +203,13 @@ text-align:center;
 				<!-- 해쉬태그 영역종료 -->
 
 				<div id="button-area" class="col-md-2">
+					<c:if test="${loginUser.memberEmail==recipe.memberEmail || loginUser.adminCheck==true }">
 					<!-- 버튼영역 -->
 					<button class="btn btn-primary"
 						onclick="location.href='/recipe/modifyForm.do?recipeNo=${recipe.recipeNo }';">수정</button>
 					<button class="btn btn-primary"
 						onclick="removeRecipe(${recipe.recipeNo });">삭제</button>
+					</c:if>
 				</div>
 				<div id="info-area">${recipe.recipeInfo }</div>
 
@@ -278,15 +309,26 @@ text-align:center;
 
 
 						<!--레시피 순서영역 -->
-						<div id="step-area" class="col-md-12">
-							<c:forEach items="${rsList }" var="rsList">
+						<div id="step-area" class="col-md-12 row">
+						<c:forEach items="${rsList }" var="rsList">
+						<div class="row m-2" id="step-one-area">
+						<div class="col-md-6"> 
 								<c:if test="${rsList.recipePicRename ne null }">
 									<img id="step-img"
 										src="/resources/recipeImg/${rsList.recipePicRename }">
 									<br>
 								</c:if>
-
+						   </div>
+						   <div class="col-md-6" id="step-img-area">
 								<p>${rsList.recipeDescription }</p>
+						   </div>
+						   
+						</div>
+						<c:if test="${rsList.recipePicRename ne null || rsList.recipeDescription eq ''}">
+						   <hr>
+						   </c:if>
+							
+
 
 							</c:forEach>
 						</div>
@@ -523,7 +565,7 @@ text-align:center;
 											
 											<!-- 관리자 작성자만 보임 -->
 											<c:if test= "${loginUser != null }">
-											<c:if test="${loginUser.memberEmail == rcList.memberEmail}">
+											<c:if test="${(loginUser.memberEmail == rcList.memberEmail)&& loginUser.adminCheck==false}">
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
 											<button
@@ -678,6 +720,8 @@ text-align:center;
 		</div>
 		<!-- 메인 내용 폼 전체 들어감 -->
 	</section>
+	
+	<jsp:include page="../footer.jsp"/>
 
 	<!-- 부트스트랩 스타일 -->
 	<link

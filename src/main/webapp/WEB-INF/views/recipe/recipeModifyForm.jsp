@@ -25,7 +25,13 @@
 @media (max-width: 500px) {
 label{
 padding: 0px;
+width: 250px !important;
 
+
+}
+
+textarea{
+width: 250px !important;
 }
 #up-area-left{
 padding: 0px;
@@ -100,8 +106,8 @@ padding-left:0 !important;
 }
 
 
-body {
-
+body{
+margin-top:10rem;
 }
 
 #recipe-button{
@@ -118,6 +124,10 @@ padding:0.5em;
 justify-content: space-evenly
 }
 
+@media (max-width: 500px) {
+body{margin:0;}
+}
+
 
 </style>
 
@@ -125,6 +135,7 @@ justify-content: space-evenly
 
 
 <body>
+<jsp:include page="../header.jsp"/>
 <section class="container">
 
 <div class="container row col-md-12" id="recipe-wrtie-from"><!-- 레시피 입력 폼 시작 -->
@@ -179,20 +190,20 @@ justify-content: space-evenly
 							for="floatingInput">유튜브 링크</label>
 						</div>
 					</div> <!--  상단 오른쪽 위 영역 종료 -->
-					
-					<!-- 상단 오른쪽 아래 영역 -->
+										<!-- 상단 오른쪽 아래 영역 -->
 					<div class="mt-4 col-12">
 						<label for="validationCustom04" class="form-label"><h5>카테고리</h5></label>
 						<select class="form-select" id="" name="recipeCategory" required>
+						
 							<option selected disabled value="">카테고리 선택</option>
 							<option value="mael"
-								<c:if test="${recipeCategory == mael}"> selected</c:if>>식사</option>
+								<c:if test="${recipe.recipeCategory == 'mael'}"> selected</c:if>>식사</option>
 							<option value="relish"
-								<c:if test="${recipeCategory == relish}"> selected</c:if>>술안주</option>
+								<c:if test="${recipe.recipeCategory == 'relish'}"> selected</c:if>>술안주</option>
 							<option value="dessert"
-								<c:if test="${recipeCategory == dessert}"> selected</c:if>>간식</option>
+								<c:if test="${recipe.recipeCategory == 'dessert'}"> selected</c:if>>간식</option>
 							<option value="drink"
-								<c:if test="${recipeCategory == drink}"> selected</c:if>>술/음료</option>
+								<c:if test="${recipe.recipeCategory == 'drink'}"> selected</c:if>>술/음료</option>
 						</select>
 						<div class="invalid-feedback">카테고리를 선택하세요</div>
 						<br>
@@ -459,7 +470,7 @@ justify-content: space-evenly
 </div><!-- 레시피 입력 폼 종료 -->
 </section>	
 
-
+<jsp:include page="../footer.jsp"/>
 
 	<script>	
 	//유튜브 링크 유효성체크//
