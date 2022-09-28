@@ -42,6 +42,15 @@
 	<update id="deleteRecipe">
 		update recipe_tbl set RECIPE_STATUS = 'N' where RECIPE_NO = #{recipeNo}
 	</update>
+	
+	<!-- 포인트추가 -->
+	<insert id="insertPoint">
+		insert into point values(#{memberEmail},'레시피 등록 적립',10,sysdate)
+	</insert>
+	
+	<update id="updatePiont">
+	update member_tbl set TOTAL_POINT = TOTAL_POINT+10 where MEMBER_EMAIL = #{memberEmail}
+	</update>
 
 <update id = "updateOneRecipe">
 	update recipe_tbl set RECIPE_NAME = #{recipeName}, RECIPE_INFO = #{recipeInfo}, MAIN_PICTURE = #{mainPic}, RECIPE_CATEGORY= #{recipeCategory},

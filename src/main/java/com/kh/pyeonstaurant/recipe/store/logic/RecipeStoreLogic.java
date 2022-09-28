@@ -28,6 +28,8 @@ public class RecipeStoreLogic implements RecipeStore {
 	@Override
 	public int insertRecipe(Recipe recipe, SqlSessionTemplate session) {
 		int result = session.insert("RecipeMapper.insertRecipe", recipe);
+		result += session.insert("RecipeMapper.insertPoint",recipe.getMemberEmail());
+		result+= session.update("RecipeMapper.updatePiont",recipe.getMemberEmail());
 		return result;
 	}
 
