@@ -17,8 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <style>
-body{
-margin-top:10rem;
+section {
+	margin-top: 10rem !important;
 }
 @media (max-width: 500px) {
 .container{

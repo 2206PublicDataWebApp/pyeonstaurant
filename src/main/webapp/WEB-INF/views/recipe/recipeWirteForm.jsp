@@ -22,8 +22,8 @@
 
 <style>
 
-section{
-margin-top:10rem;
+section {
+	margin-top: 10rem !important;
 }
 
 @media (max-width: 500px) {

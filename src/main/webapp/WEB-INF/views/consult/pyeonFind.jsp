@@ -60,9 +60,9 @@
                 <div id="headOne"><h1>편의점 위치를 확인하실 수 있습니다.</h1></div>            
                 
                 <div id="headTwo">
-                    <button value="검색"><img src="/resources/images/chat.png" style="width: 50px; background-color: #fff;"></button>
-                    <button value="홈"><img src="/resources/images/store.png" style="width: 50px; background-color: #fff;"></button>
-                    <button value="로그인"><img src="/resources/images/user.png" style="width: 50px; background-color: #fff;"></button>
+                    <button onclick="location.href='/search/move.kh';" value="검색"><img src="/resources/images/search.svg" style="width: 50px; background-color: #fff;"></button>
+                    <button onclick="location.href='/';"value="홈"><img src="/resources/images/house-door.svg" style="width: 50px; background-color: #fff;"></button>
+                    <button onclick="location.href='/member/joinView.kh';" value="로그인"><img src="/resources/images/person.svg" style="width: 50px; background-color: #fff;"></button>
                 </div>
             </div>
 

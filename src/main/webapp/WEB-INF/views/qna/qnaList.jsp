@@ -22,8 +22,8 @@
 <link href="/resources/css/page.css" rel="stylesheet">
 
 <style>
-body{
-margin-top:10rem;
+section {
+	margin-top: 10rem !important;
 }
 @media ( max-width : 500px) {
 	#title-cell {

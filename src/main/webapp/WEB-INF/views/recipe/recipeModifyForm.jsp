@@ -30,6 +30,9 @@ width: 250px !important;
 
 }
 
+section {
+	margin-top: 10rem !important;
+}
 textarea{
 width: 250px !important;
 }
@@ -124,9 +127,7 @@ padding:0.5em;
 justify-content: space-evenly
 }
 
-@media (max-width: 500px) {
-body{margin:0;}
-}
+
 
 
 </style>
@@ -136,7 +137,7 @@ body{margin:0;}
 
 <body>
 <jsp:include page="../header.jsp"/>
-<section class="container">
+<section class="container" style="margin-top:10rem">
 
 <div class="container row col-md-12" id="recipe-wrtie-from"><!-- 레시피 입력 폼 시작 -->
 	<form action="/recipe/modify.do" method="post"
@@ -469,8 +470,10 @@ body{margin:0;}
 	</form>
 </div><!-- 레시피 입력 폼 종료 -->
 </section>	
-
+<footer>
 <jsp:include page="../footer.jsp"/>
+</footer>
+</body>
 
 	<script>	
 	//유튜브 링크 유효성체크//

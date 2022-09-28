@@ -22,10 +22,9 @@
 
 <!-- <link rel="stylesheet" href="/resources/css/recipeSearch.css"> -->
 <style>
-body{
-margin-top:10rem;
+section {
+	margin-top: 10rem !important;
 }
-
 
 #serach-title-area {
 	text-align: center;

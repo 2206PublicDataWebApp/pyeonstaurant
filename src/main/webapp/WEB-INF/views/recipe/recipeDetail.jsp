@@ -11,6 +11,9 @@
 <link href="/resources/css/page.css" rel="stylesheet">
 
 <style>
+section {
+	margin-top: 10rem !important;
+}
 #imgDiv {
 	width: 100%;
 	height: 27rem;
@@ -92,9 +95,7 @@ text-align:center;
     height: 10rem;
     overflow: hidden;
 }
-body{
-margin-top:10rem;
-}
+
 
 #step-img-area{
 padding-top: 5rem;
@@ -124,9 +125,7 @@ padding-top: 5rem;
 	padding:0px;
 	}
 	
-	body{
-	margin 0;
-	}
+	
 	
 	#list-icon {
 	position: fixed;

@@ -331,7 +331,7 @@ a{
 									<li class="hr">&nbsp;</li>
 									<li><a href="/notice/list">공지사항</a></li>
 									<li class="hr">&nbsp;</li>
-									<li><a href="#">Q &amp;A</a></li>
+									<li><a href="/qna/List.do">Q &amp;A</a></li>
 								</ul>
 							</div>
 

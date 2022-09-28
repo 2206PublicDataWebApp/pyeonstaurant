@@ -22,10 +22,10 @@
 
 <style>
 body{
-margin-top:10rem;
+margin-top:20rem;
 }
 section {
-	margin-top: 100px;
+	margin-top: 10rem !important;
 }
 
 img {

@@ -23,7 +23,7 @@
 <!-- <link rel="stylesheet" href="/resources/css/recipeSearch.css"> -->
 <style>
 section {
-	margin-top: 20rem
+	margin-top: 10rem !important;
 }
 
 #write-icon {
