@@ -22,9 +22,26 @@
 
 <!-- <link rel="stylesheet" href="/resources/css/recipeSearch.css"> -->
 <style>
+section {
+	margin-top: 20rem
+}
+
+#write-icon {
+	position: fixed;
+	top: 10%;
+	left: 6%;
+	z-index: 99;
+}
+
 @media ( max-width : 500px) {
 	#button-area {
 		text-align: center;
+	}
+	section {
+		margin-top: 10rem
+	}
+	#write-icon {
+		top: 15%;
 	}
 }
 
@@ -33,12 +50,6 @@
 	margin: 3rem 0;
 }
 
-#write-icon {
-	position: fixed;
-	top: 6%;
-	left: 6%;
-	z-index: 99;
-}
 
 #jo:hover, #dun:hover {
 	background-color: rgb(101, 241, 46);
@@ -77,145 +88,144 @@ a {
 
 #wirte-icon-area:hover {
 	cursor: pointer
-	
 }
 
-
-.normal-img-area{
+.normal-img-area {
 	margin-left: 0px !important;
-    margin-right: 0px !important;
-    width: 100%;
-    border-radius: 15px;
-}
-.card-img-top{
-width:100%;
-
-}
-.card-text{
-font-weight: 600;
+	margin-right: 0px !important;
+	width: 100%;
+	border-radius: 15px;
 }
 
-
-#list-area .card{
-padding:0;
-margin:0 auto !important;
+.card-img-top {
+	width: 100%;
 }
 
- p{margin : 0 auto;
+.card-text {
+	font-weight: 600;
 }
 
-#list-area .card .card-body{
-
-    margin-bottom: 30px;
-
+#list-area .card {
+	padding: 0;
+	margin: 0 auto !important;
 }
-img:hover{
-transform: scale(1.1);
-transition:.1s;
-}
-body{
-margin-top:10rem;
 
+p {
+	margin: 0 auto;
+}
+
+#list-area .card .card-body {
+	margin-bottom: 30px;
+}
+
+img:hover {
+	transform: scale(1.1);
+	transition: .1s;
+}
+
+body {
+	margin-top: 10rem;
 }
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
-<c:if test="${loginUser != null }"> 
-<!-- 로그인 했을때만 보임  -->
-	<!--글 입력 아이콘 영역-->
-	<span id="wirte-icon-area"> <svg
-			onclick="location.href='/recipe/writeView.do'" id="write-icon"
-			xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-			fill="currentColor" class="bi bi-arrow-left-circle-fill"
-			viewBox="0 0 16 16">
+	<jsp:include page="../header.jsp" />
+	<c:if test="${loginUser != null }">
+		<!-- 로그인 했을때만 보임  -->
+		<!--글 입력 아이콘 영역-->
+		<span id="wirte-icon-area"> <svg
+				onclick="location.href='/recipe/writeView.do'" id="write-icon"
+				xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+				fill="currentColor" class="bi bi-arrow-left-circle-fill"
+				viewBox="0 0 16 16">
                <path
-				d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+					d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                </svg>
-	</span>
- </c:if> 
+		</span>
+	</c:if>
 
 	<section class="container-md" id="">
 
-		<div id="main-contents" class="">		        
-            	<input type="hidden" name="mainCondition" value="${mainCondition}">
-            	<input type="hidden" name="listCondition" value="${listCondition}">
-		
+		<div id="main-contents" class="">
+			<input type="hidden" name="mainCondition" value="${mainCondition}">
+			<input type="hidden" name="listCondition" value="${listCondition}">
+
 			<!-- 검색명 출력 영역-->
 			<div id="serach-title-area">
 				<div>
-					<span class="titleLavel">${mainConditionHangul}</span>  <!--식사 간식, 술안주 음료/술외  -->
-            		<span class="titleLavel">${listConditionHangul}</span>
+					<span class="titleLavel">${mainConditionHangul}</span>
+					<!--식사 간식, 술안주 음료/술외  -->
+					<span class="titleLavel">${listConditionHangul}</span>
 				</div>
 
 				<!-- 검색 창 영역 -->
 				<div class="col-md-8 container" id="search"
 					style="text-align: center">
 					<!-- 검색창시작 -->
-									<div class="row" id="searchArea">
-							<!-- 검색 카테고리 -->
-							<div class="col-md-2 col p-1" " id="searchSelector">
+					<div class="row" id="searchArea">
+						<!-- 검색 카테고리 -->
+						<div class="col-md-2 col p-1" " id="searchSelector">
 
-								<select class="form-select searchCondition" id="floatingSelectGrid"
-									name="searchCondition">
-									<option value="recipeName"
-										<c:if test="${searchCondition eq 'recipeName' }"> selected </c:if>>제목명</option>
-									<option value="recipe_material"
-										<c:if test="${searchCondition eq 'recipe_material' }"> selected </c:if>>재료명</option>
-									<option value="recipe_tag"
-										<c:if test="${searchCondition eq 'recipe_tag' }"> selected </c:if>>해시태그순</option>
-								</select>
+							<select class="form-select searchCondition"
+								id="floatingSelectGrid" name="searchCondition">
+								<option value="recipeName"
+									<c:if test="${searchCondition eq 'recipeName' }"> selected </c:if>>제목명</option>
+								<option value="recipe_material"
+									<c:if test="${searchCondition eq 'recipe_material' }"> selected </c:if>>재료명</option>
+								<option value="recipe_tag"
+									<c:if test="${searchCondition eq 'recipe_tag' }"> selected </c:if>>해시태그순</option>
+							</select>
 
-							</div>
-							
-								<div class="col-md-2 col p-1" " id="searchSelector">
+						</div>
 
-								<select class="form-select hachCondition" id="floatingSelectGrid"
-									name="searchCondition">
-									 <option value="" selected>해시태그</option>
-	                    			<option value="easy" >간편한</option>
-	                    			<option value="full">든든한</option>
-				                    <option value="goodSpicy">맛있게 매운</option>			 
-				                    <option value="healthy">건강한</option>			 
-				                    <option value="jmt">JMT</option>			 
-				                    <option value="party">파티용</option>			 
-				                    <option value="soSpicy">아주매운</option>			 
-				                    <option value="sweet">달콤한</option>	
-		
-								</select>
+						<div class="col-md-2 col p-1" " id="searchSelector">
 
-							</div>
-							
-							<!-- 검색 카테고리 종료 -->
-							<!-- 검색어입력창 -->
-							<div class="row col-md-6  col p-1">
-								<div class="col-md">
+							<select class="form-select hachCondition" id="floatingSelectGrid"
+								name="searchCondition">
+								<option value="" selected>해시태그</option>
+								<option value="easy">간편한</option>
+								<option value="full">든든한</option>
+								<option value="goodSpicy">맛있게 매운</option>
+								<option value="healthy">건강한</option>
+								<option value="jmt">JMT</option>
+								<option value="party">파티용</option>
+								<option value="soSpicy">아주매운</option>
+								<option value="sweet">달콤한</option>
 
-									<input type="text" name="searchValue" class="form-control"
-										id="floatingInputGrid" value="${serchValue }"
-										required="required" > 
-						
+							</select>
 
-								</div>
+						</div>
+
+						<!-- 검색 카테고리 종료 -->
+						<!-- 검색어입력창 -->
+						<div class="row col-md-6  col p-1">
+							<div class="col-md">
+
+								<input type="text" name="searchValue" class="form-control"
+									id="floatingInputGrid" value="${serchValue }"
+									required="required">
+
 
 							</div>
-							<!-- 검색어입력창 종료 -->
-							<!-- 검색 버튼영역 -->
-							<div id="search-button" class="col-md-2 col-1 p-1"
-								style="width: auto;">
-								<button type="submit" class="btn btn-primary"  onclick="addon2();">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+
+						</div>
+						<!-- 검색어입력창 종료 -->
+						<!-- 검색 버튼영역 -->
+						<div id="search-button" class="col-md-2 col-1 p-1"
+							style="width: auto;">
+							<button type="submit" class="btn btn-primary" onclick="addon2();">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+									fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 							  <path
-											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+										d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
 							</svg>
 
-								</button>
+							</button>
 
 
-							</div>
 						</div>
-					
+					</div>
+
 				</div>
 				<!-- 검색창 종료 -->
 
@@ -233,18 +243,20 @@ margin-top:10rem;
 							value="viewCount">조회수</button>
 						|
 						<button type="button" id="chu" class="btn " name="listCondition"
-							style="color: gray" onclick="btnpattern(this.value);" value="recommandCount" >추천순</button>
+							style="color: gray" onclick="btnpattern(this.value);"
+							value="recommandCount">추천순</button>
 						|
 						<button type="button" id="dun" class="btn " name="listCondition"
-							onclick="btnpattern(this.value)" style="color: gray" value="insertDate" >등록일</button>
+							onclick="btnpattern(this.value)" style="color: gray"
+							value="insertDate">등록일</button>
 					</div>
 
 				</div>
 				<!--정렬 버튼 영역종료-->
-				
-				
-				
-				
+
+
+
+
 				<!--랭킹영역-->
 				<div id="rank-area" class="row "
 					style="text-align: center; justify-content: space-evenly">
@@ -326,18 +338,17 @@ margin-top:10rem;
 
 
 						<div class="card col-md-3 m-3" style="width: 18rem;">
-						<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">
-							<div class="normal-img-area" id="normal-img-area">
-							
-								<img src="/resources/recipeImg/${recipe.mainPicRename }"
-									class="card-img-top" alt="">
-							</div>
-							<div class="card-body normal-card-body">
-								<p class="card-text">
-									${recipe.recipeName }
-								
-								<p>${recipe.recipeInfo }</p>
-							</div></a>
+							<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">
+								<div class="normal-img-area" id="normal-img-area">
+
+									<img src="/resources/recipeImg/${recipe.mainPicRename }"
+										class="card-img-top" alt="">
+								</div>
+								<div class="card-body normal-card-body">
+									<p class="card-text">${recipe.recipeName }
+									<p>${recipe.recipeInfo }</p>
+								</div>
+							</a>
 						</div>
 
 					</c:forEach>
@@ -350,38 +361,40 @@ margin-top:10rem;
 			</div>
 			<!-- 본문 구간 종료 -->
 
-		
+
 
 		</div>
 
 
-<jsp:include page="../footer.jsp"/>
+		<jsp:include page="../footer.jsp" />
 	</section>
-	
+
 	<script>
-	
-	/*버튼 토글 스크립트  */
-	var buttons = document.querySelectorAll('.btn');
-	buttons.forEach(function (button) {
-	  var button = new bootstrap.Button(button);
-	  button.toggle();
-	})
-	
-	function btnpattern(value){
-		var mainCondition = "${mainCondition }";
-		console.log(mainCondition);
-		location.href="/search/main3btn.kh?listCondition="+value+"&mainCondition="+mainCondition; 
-	}
-	
-	function addon2(){
-		var searchCondition= $("[name=searchCondition]").val();
-		var serchValue=$("[name=searchValue]").val();
-		var hachCondition= $("[name=hachCondition]").val();
-		var listCondition=$("[name=listCondition]").val();
-		location.href="/search/search3btn.kh?searchCondition="+searchCondition+"&serchValue="+serchValue+"&listCondition="+listCondition+"&hachCondition="+hachCondition;
-    	
-	}	
-	
+		/*버튼 토글 스크립트  */
+		var buttons = document.querySelectorAll('.btn');
+		buttons.forEach(function(button) {
+			var button = new bootstrap.Button(button);
+			button.toggle();
+		})
+
+		function btnpattern(value) {
+			var mainCondition = "${mainCondition }";
+			console.log(mainCondition);
+			location.href = "/search/main3btn.kh?listCondition=" + value
+					+ "&mainCondition=" + mainCondition;
+		}
+
+		function addon2() {
+			var searchCondition = $("[name=searchCondition]").val();
+			var serchValue = $("[name=searchValue]").val();
+			var hachCondition = $("[name=hachCondition]").val();
+			var listCondition = $("[name=listCondition]").val();
+			location.href = "/search/search3btn.kh?searchCondition="
+					+ searchCondition + "&serchValue=" + serchValue
+					+ "&listCondition=" + listCondition + "&hachCondition="
+					+ hachCondition;
+
+		}
 	</script>
 
 </body>

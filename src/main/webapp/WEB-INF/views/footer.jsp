@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 </head>
 <body>
-    <footer class="footer">
+     <footer class="footer">
         <div class="footer_inner">
             <div class="footer_content_first">
                 <div class="footer_content left">
@@ -20,12 +20,22 @@
                     <p class="tel">02-123-4567</p>
                     <p class="work_time">오전 10시 ~ 오후 5시 (주말, 공휴일 제외)</p>
                     <div>
-                        <button>
-                            1:1 문의하기
-                        </button>
-                        <button>
-                            공지사항
-                        </button>
+
+						<button onclick="startChat('${loginUser.memberNickname}');" class="learn-more">
+						  <span class="circle" aria-hidden="true">
+						  <span class="icon arrow"></span>
+						  </span>
+						  <span class="button-text">1대1 상담</span>
+						</button>
+						
+						<button class="learn-more" onclick="onPeon();">
+						  <span class="circle" aria-hidden="true">
+						  <span class="icon arrow"></span>
+						  </span>
+						  <span class="button-text">편의점 위치 찾기</span>
+						</button>
+
+
                     </div>
                 </div>
                 
@@ -37,9 +47,9 @@
                             <li class="hr">&nbsp;</li>
                             <li><a href="#">이용약관</a></li>
                             <li class="hr">&nbsp;</li>
-                            <li><a href="#">공지사항</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
                             <li class="hr">&nbsp;</li>
-                            <li><a href="#">Q &amp;A</a></li>
+                            <li><a href="http://127.0.0.1:8888/qna/List.do">Q&amp;A</a></li>
                         </ul>
                     </div>
 
