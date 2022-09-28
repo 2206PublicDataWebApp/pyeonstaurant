@@ -35,6 +35,8 @@
 		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" alias="ConsultServer" /><!--은정꺼예요.  -->
 		<typeAlias type="com.kh.pyeonstaurant.consult.domain.Consult"	alias="Consult" /><!--은정꺼예요.  -->
 		<typeAlias type="com.kh.pyeonstaurant.consult.domain.SwitchChat" alias="SwitchChat" />  <!--은정꺼예요.  -->
+		
+		<typeAlias type="com.kh.pyeonstaurant.point.domain.Point" alias="Point" />
 </typeAliases>
 		
 
@@ -55,7 +57,7 @@
 		<mapper resource="mappers/search-mapper.xml" /><!--은정꺼예요.  -->
 		
 		<mapper resource="mappers/notice-mapper.xml" />  
-		
+		<mapper resource="mappers/point-mapper.xml" />
 	</mappers>
 
 

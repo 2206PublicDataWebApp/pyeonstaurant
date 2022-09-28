@@ -34,6 +34,51 @@ body{
     color: #fff;
 }
 
+/* 헤더 */
+header {
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.header-container {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  position: relative;
+  padding-right: 50px;
+}
+
+
+header h1 img {
+  width: 200px;
+  height: 80px;
+  display: block;
+  position: relative;
+}
+
+.main-navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+  text-align: center;
+}
+
+.main-navigation a {
+  margin-left: 20px;
+}
+
 
 /* ===== Sidebar ===== */
  .sidebar{

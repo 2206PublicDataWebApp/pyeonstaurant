@@ -15,9 +15,9 @@
 			<tbody>
 			<c:forEach items="${pList}" var="pList" varStatus="i">
 				<tr>
-					<td>${rcList.pointDate }</td>
+					<td>${pList.pointDate }</td>
 					<td>${pList.pointDetail}</td>
-					<td>${rcList.usingPoint }</td>
+					<td>${pList.usingPoint }</td>
 
 				</tr>
 			</c:forEach>
