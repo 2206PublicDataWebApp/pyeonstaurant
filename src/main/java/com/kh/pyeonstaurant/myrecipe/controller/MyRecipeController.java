@@ -57,10 +57,13 @@ public class MyRecipeController {
 		try {
 			session = request.getSession();
 			Member email = (Member)session.getAttribute("loginUser");
+			System.out.println(email);
 			String memberEmail = email.getMemberEmail();
+			System.out.println(memberEmail);
 			myRecipe.setMemberEmail(memberEmail);
 			myRecipe.setRecipeNo(recipeNo);
 			myRecipe.setRecipeName(recipeName);
+			System.out.println(myRecipe.toString());
 			int result = mService.addMyRecipe(myRecipe);
 			if(result > 0) {
 				System.out.println("추가 성공");

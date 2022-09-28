@@ -22,16 +22,16 @@
 
 <style>
 
-body{
+section{
 margin-top:10rem;
 }
+
 @media (max-width: 500px) {
 label{
 padding: 0px;
 
-
-
 }
+
 
 
 #up-area-left{
@@ -108,9 +108,6 @@ padding-left:0 !important;
 }
 
 
-body {
-
-}
 
 #recipe-button{
 text-align:center;
@@ -127,9 +124,9 @@ justify-content: space-evenly
 }
 
 @media (max-width: 500px) {
-
-body{
-margin:0;}
+section{
+ margin-top :
+}
 }
 
 </style>
