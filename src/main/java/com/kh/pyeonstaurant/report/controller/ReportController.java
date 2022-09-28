@@ -102,14 +102,14 @@ public class ReportController {
 			, HttpSession session
 			, @ModelAttribute Report report
 			, HttpServletRequest request
-			, @RequestParam("recipeNo") int recipeNo
+			, @RequestParam("commentNo") int commentNo
 			) {
 		try {
 			session = request.getSession();
 			Member email = (Member)session.getAttribute("loginUser");
 			String memberEmail = email.getMemberEmail();
 			report.setMemberEmail(memberEmail);
-			report.setRecipeNo(recipeNo);
+			report.setRecipeNo(commentNo);
 			int result = rService.addReportComment(report);
 			if(result > 0) {
 				mv.setViewName("redirect:/recipe/recipeList.do");
