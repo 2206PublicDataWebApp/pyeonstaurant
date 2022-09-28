@@ -54,23 +54,38 @@
     	 if(p1btn!=null){
                $('p').toggle();
                $('#togglePart').toggle();
-               //var requestTime = new Date();
-            // 신규 상담 목록들을 가져온다.
-               //지금시간...으로 매핑 예정
-           printer = setInterval(printList,2000); 
+               printer = setInterval(printList,5000); 
     	 }else{
     		 if(confirm("정말로 종료하시겠습니까?")){
     	  		 $('p').toggle();
     	  		 clearInterval(printer);
-    	  		 $('tr').remove();   	  		 
+    	  		 $('tr').remove();  
     	  		 
-	    		 alert("상담요청을 받지 않습니다.")
-	    		 location.href = "/home.kh/";  //관리자 메인페이지로 가자
-    		 }
-    		 
-    	 }
-
-    });
+    	  		 var suc=success();
+    	  		$.ajax({							//종료시 on/off변경								
+   				 url:"/manager/chatEndbtn.kh",
+   		         type:'get',
+   		         data :{
+   		        	 on_off:"N"                   
+   		         },
+   		         dataType:"json",
+   		         success:function(result) {
+   		        	 if(result>0){		         
+      			 			alret("result");
+      		    			//location.href = "/home.kh/";  //관리자 메인페이지에서 오픈하기때문에 변경하지 않음
+   		        	 }else{
+   	   		    		 alret("상담종료 오류입니다. 다시 진행부탁드립니다.");		        		 
+   		        	 };
+   		         },
+   		         error:function(e){
+   		        	 alert('error');
+   				 },
+   		        	 
+   		     })
+      		    
+       	 }
+       	 
+        });
     /// 리스트 반복 출력구간
     
    function printList(){
@@ -95,7 +110,7 @@
                 }else{
                 	a+='<td></td>';
                 }
-			    count+=1
+			   
                 $('tbody').append(a);
                 $('#count').html(count);
               }
@@ -120,18 +135,3 @@
 </script>
 </body>
 </html>
-<%-- 처음 시작할때 채팅리스트 들어갔던 구문
-               <c:forEach items="${chatList }" var="chat">
-               
-				 <tr id="list">
-					<td>${chat.consultNo }</td>
-					<td>${chat.csNickName}</td>
-					<td>${chat.csTitle }</td>
-					<td>${chat.csDate }</td>
-					<td>
-						<c:if test="${chat.csResult ne null }">${chat.csResult }</c:if>
-						<c:if test="${chat.csResult eq null }"><input type="button" id="chatbtn" value="상담시작"></c:if>
-					<td>
-		
-			</c:forEach>	
-                 --%>

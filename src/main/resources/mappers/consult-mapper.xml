@@ -37,7 +37,7 @@
  <!--서버 매핑  --> 
 	 <!--채팅 시작 버튼 변경여부  -->
 	 <update id="switchUpdate">
-		UPDATE SWITCHCHAT SET ON_OFF=#{string}
+		UPDATE SWITCHCHAT SET ON_OFF=#{chatbtn}
 	 </update>
 	 
 	 <select id="switchbtncheck" resultType="string">

@@ -1,163 +1,93 @@
-body{    
-    margin:0px;
-    padding:0px;
-    width: 1200px;
-    height: 130vh;
-    text-align: center;
-       
+<style>
+@media ( max-width : 500px) {
+	#button-area {
+		text-align: center;
+	}
 }
-.head-part{  
-     margin: 0px;
-    padding: 30px;
+
+#serach-title-area {
+	text-align: center;
+	margin: 3rem 0;
+}
+
+#write-icon {
+	position: fixed;
+	top: 6%;
+	left: 6%;
+	z-index: 99;
+}
+
+#jo:hover, #dun:hover {
+	background-color: rgb(101, 241, 46);
+}
+
+#chu:hover {
+	background-color: rgb(154, 0, 192);
+}
+
+.card {
+	border: 0 !important;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.img-area {
+	width: 100%;
+	height: 10em;
+	overflow: hidden;
+}
+
+.normal-img-area {
+	width: 80%;
+	height: 10em;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.normal-card-body {
+	padding: 2px;
+}
+
+#wirte-icon-area:hover {
+	cursor: pointer
+	
+}
+
+
+.normal-img-area{
+	margin-left: 0px !important;
+    margin-right: 0px !important;
     width: 100%;
-    height: 150px ;
-        
+    border-radius: 15px;
 }
-#headtop{
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-}
-#head1{
-    text-align: left;
+.card-img-top{
+width:100%;
 
 }
-#head2{
-    
-    text-align:center;
-}
-#head3{
-    text-align: right;
+.card-text{
+font-weight: 600;
 }
 
-/* 메뉴바관련 */
 
-.navi{
-    display: flex;
-  justify-content: center;
-  align-items: center;  
-  justify-content: space-around;   
-}
-.navi>li {
-    background-color: rgb(9, 252, 240);
-    list-style-type: none;
-    width:150px;
-    height: 40px;
-    font-size: 20px;    
-    float: left;    
-    text-align: center;  
-    border-radius: 10%;          
-    
-}
-.navi>li>a {
-    color: darkblue;
-    text-rendering: geometricPrecision;
-    text-decoration: none;   
-    line-height: 40px;
-    width: 100%;
-    height: 100%;
-    display: inline-block; /*메뉴영역에 마우스가 올라가도 선택될수 있도록 변경*/
-    
-    
-}
-.navi>li>a:hover {
-    font-size: 1.6em;
-    font-weight: bold;
-    
-}
-  
-/* 메뉴 끝 */
-/* 본문내용 */
-.container{
-    position:relative;
-    margin: 0%;
-    width: 100%;
-    height: 70%; 
-    display: flex;
-}
-#rowL{
-    left: 0ch;
-    flex: 1;    
-    text-align: left;  
-        
-}
-.rowcenter{   
-    flex: 8; 
-    height: 100px;
-    right:20px;
-    margin: 0 auto;
-    padding: 0;       
+#list-area .card{
+padding:0;
+margin:0 auto !important;
 }
 
-#rowR{
-    flex: 1;    
-    float: right;
-    text-align: center;      
+ p{margin : 0 auto;
 }
 
-#rowhead{    
-    margin: 0;
-    height: 80px; 
-    justify-content: space-around;      
-}
-/* 입력 검색창 3개셋트 */
-select{
-    width: 150px;
-    height: 50px;
-    border: 2px solid cornflowerblue;
-    border-radius: 10%;   
-}
+#list-area .card .card-body{
 
-#serchInput{
-    width: 400px;
-    height: 50px;
-    border: 2px solid cornflowerblue;
-    border-radius: 10%
-}
+    margin-bottom: 30px;
 
-#addon2{
-    width: 80px;
-    height: 50px;
-    border: 2px solid cornflowerblue;
-    border-radius: 10%
 }
-/* 조회수 추천순 등록일 */
-#rowbtn{
-    margin: 0;
-    width: 100%;
-    height: 50px;
-    border-top: 3px solid cornflowerblue ;
-    text-align: right;
+img:hover{
+transform: scale(1.1);
+transition:.1s;
 }
-/*검색결과 말해주는 자리  */
-#laveltitle{
-	width:100%;
-	display:flex;		
-}
-.titleLavel{
-	font-size: 1.6em;
-    font-weight: bold;
-}
-/* 검색후 이미지등등이 올라갈 자리들 */
-
-#rowbody{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    overFlow-y: auto; 
-}
-
-/* 하단자리 */
-.footer{
-    width: 100%;
-    height: 150px;
-    background-color: honeydew;
-}
-.pagination{
-    justify-content: center;
-};
-    
-  
-   
-
-
+</style>

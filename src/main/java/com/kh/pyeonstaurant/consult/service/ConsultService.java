@@ -24,7 +24,7 @@ public interface ConsultService {
 	//관리자 채팅종료
 		public int chatFinish(ConsultServer conServer);
 		//on버튼으로 변경
-		public int changebutten(String string);
+		public int changebutten(String chatbtn);
 		//버튼값 받기
 		public String selechbtn();
 

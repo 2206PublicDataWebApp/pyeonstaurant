@@ -60,10 +60,10 @@
 			data:msg,                           /* 서버로 부터 받은 msg의 val를 메세지변수에 넣음 */		
 			success:function(result){  			/* 이벤트 핸들러 result에 서버가 보낸준 값이 리턴됨. */
 				console.log("채팅전송성공:"+result);
-				collList();
+				printer=setInterval(collList,5000);
 			},
 			error: function(e) {
-				alert('error');
+				alert('error:'+e);
 			},
 		});
 		
@@ -132,9 +132,8 @@
 				success : function(data) {					
 						console.log("data:"+data);
 						if(data.result>0){
-							console.log("3번");
-						//	var win=window.open("","_self");
-						//window.opener.closeparents();
+							clearInterval(printer);
+							console.log("3번");					
 							self.close();
 						}else {
 							console.log("3");

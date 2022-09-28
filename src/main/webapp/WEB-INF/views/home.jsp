@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>편스토랑</title>
+    <title>Document</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/swiper.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
 </head>
 <body>
     <header>
         <div class="header-container">
             <h1><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
             <nav class="main-navigation">
-                <a href="#" class="header-search"><img src="/resources/images/header_search.svg"></a>
+                <a href="#" class="header-search" on><img src="/resources/images/header_search.svg"></a>
                 <a href="#" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
                 
                 <c:if test="${sessionScope.loginUser eq null  }">
@@ -35,10 +35,10 @@
     <nav class="board-navigation">
         <div class="board-container">
             <ul>
-                <li><a href="#">식사</a></li>
-                <li><a href="#">술안주</a></li>
-                <li><a href="#">간식</a></li>
-                <li><a href="#">음료/술</a></li>
+            	<li><a href="/search/mainSearch.kh?mainCondition=mael&listCondition=${listCondition}">식사</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=dessert&listCondition=${listCondition}">간식</a></li>
+                <li ><a href="/search/mainSearch.kh?mainCondition=relish&listCondition=${listCondition}">술안주</a></li>
+                <li ><a href="/search/mainSearch.kh?mainCondition=drink&listCondition=${listCondition}">술/음료</a></li>                
             </ul>
         </div>
     </nav>
@@ -58,8 +58,8 @@
             <div class="swiper-pagination"></div>
           </div>
     </main>
-
-           
+      	<button onclick="startChat('${loginUser.memberNickName}');">채팅상담</button>
+	<button onclick="onPeon();">편의점 위치검색</button>     
 
         <footer class="footer">
         <div class="footer_inner">
@@ -69,11 +69,11 @@
                     <p class="tel">02-123-4567</p>
                     <p class="work_time">오전 10시 ~ 오후 5시 (주말, 공휴일 제외)</p>
                     <div>
-                        <button>
+                        <button onclick="startChat('${loginUser.memberNickName}');">
                             1:1 문의하기
                         </button>
                         <button>
-                            공지사항
+                            공지사항!
                         </button>
                     </div>
                 </div>
@@ -109,6 +109,44 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
+    <script>
+	function startChat(memberNickName) {
+	  $.ajax({						
+			url:"/client/chatCheck.kh",
+			dataType:"json",
+			type:'get',	 			           			                         	
+			success:function(result){  			/* 이벤트 핸들러 result에 서버가 보낸준 값이 리턴됨. */
+				console.log("버튼확인성공:"+result);
+				 if(result.switchbtn=='N'){
+					 alert("관리자가 준비되지 않았습니다. 잠시후 부탁드립니다.");  //버튼값이 n이면 그냥 종료
+				 }else{
+					 chatbtnSuccess(memberNickName)                                //y이면 로그인 확인
+				 };				
+			},
+			error: function(e) {
+				alert('error');
+			},
+		});
+	}
+	 
+	 
+	 
+	 function chatbtnSuccess(memberNickName){
+			if(memberNickName==null){
+				alert("로그인 이후 가능합니다.");          
+			 
+			}else{			
+				 var windo="status=no , nenubar=no,resizable=no,titlebar=no, width=550,height=650";
+				window.open("/consult/chatbefore.kh","PopupWin",windo);
+			};
+	 } 
+	 function onPeon(){
+		  window.open("/peon/peon.kh");
+		
+	 }
+			
+
+</script>
 </body>
-</html>
+
 </html>

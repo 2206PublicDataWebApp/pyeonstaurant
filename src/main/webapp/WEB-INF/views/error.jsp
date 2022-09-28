@@ -9,6 +9,6 @@
 <body>
 <h1>에러메세지</h1>
 <h3>${msg } </h3>
-<a href="/home.kh"> 홈으로</a>
+<a href="/"> 홈으로</a>
 </body>
 </html>

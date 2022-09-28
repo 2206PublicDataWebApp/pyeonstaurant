@@ -49,7 +49,7 @@
 				
 		<if test="listCondition.toString() =='viewCount'">ORDER BY VIEW_COUNT DESC</if>
 	   	<if test="listCondition.toString() =='recommandCount'">ORDER BY RECOMMAND_COUNT DESC</if>
-	   	<if test="listCondition.toString() =='insertDate'">ORDER BY INCERT_DATE DESC</if>	
+	   	<if test="listCondition.toString() =='insertDate'">ORDER BY INSERT_DATE DESC</if>	
 	</select>
 	
 	

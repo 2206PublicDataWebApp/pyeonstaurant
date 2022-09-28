@@ -35,10 +35,10 @@
     <nav class="board-navigation">
         <div class="board-container">
             <ul>
-                <li><a href="#">식사</a></li>
-                <li><a href="#">술안주</a></li>
-                <li><a href="#">간식</a></li>
-                <li><a href="#">음료/술</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=mael&listCondition=${listCondition}">식사</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=dessert&listCondition=${listCondition}">간식</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=relish&listCondition=${listCondition}">술안주</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=drink&listCondition=${listCondition}">술/음료</a></li>
             </ul>
         </div>
     </nav>
