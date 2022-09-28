@@ -14,6 +14,7 @@
 		<style type="text/css">
 			li {list-style: none; display:inline; padding: 6px;}
 		</style>
+		<link rel="stylesheet" href="/resources/css/NewFile.css">
 		 <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/swiper.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
@@ -52,7 +53,7 @@
     
     <main>
     	<div class="container">
-    	<h3>공지사항</h3>
+    	<h3 align="center" >공지사항</h3>
 		<section id="container">
 				<table class="table table-hover">
 					<thead>
