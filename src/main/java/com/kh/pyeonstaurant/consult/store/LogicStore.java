@@ -53,8 +53,8 @@ public class LogicStore implements ConsultStore{
 	}
 //채팅 시작 버튼 변경
 	@Override
-	public int changebutten(SqlSessionTemplate session,String string) {
-		int num=session.update("ConsultMapper.switchUpdate",string);
+	public int changebutten(SqlSessionTemplate session,String chatbtn) {
+		int num=session.update("ConsultMapper.switchUpdate",chatbtn);
 		return num;
 	}
 //버튼값 받기

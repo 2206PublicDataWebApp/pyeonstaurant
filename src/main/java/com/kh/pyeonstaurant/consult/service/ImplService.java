@@ -64,8 +64,8 @@ public class ImplService implements ConsultService{
 
 //버튼 체인지
 	@Override
-	public int changebutten(String string) {
-		int num=cStore.changebutten(session,string);
+	public int changebutten(String chatbtn) {
+		int num=cStore.changebutten(session,chatbtn);
 		return num;
 	}
 

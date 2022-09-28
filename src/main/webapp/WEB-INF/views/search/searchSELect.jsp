@@ -1,120 +1,365 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html>
+
 <head>
 <meta charset="UTF-8">
-<title>명칭검색페이지</title>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2차 검색</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  	<link rel="stylesheet" href="/resources/css/recipeSearch.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>편스토랑 2차 검색</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<script src="/resources/js/jquery-3.6.0.min.js"></script>
 
-    <script src="/resources/js/jquery-3.6.0.min.js"></script>
-    </head>
-    <body>
-        <div class="head-part" >
-            <div id="headtop">                
-                <div id="head1">
-                    <spna>편스토랑 마크</spna>
-                </div>
-                <div id="head2">
-                    <h1>레시피 검색</h1>
-                </div>
-                <div id="head3">
-                    <button value="검색"></button>
-                    <button value="홈"></button>
-                    <button value="로그인"></button>
-                </div>
-            </div>
-            <div class="headunder">
-                <ul class="navi">
-                    <li><a href="/search/mainSearch.kh?mainCondition=mael&listCondition='${listCondition}'">식사</a></li>
-                    <li><a href="/search/mainSearch.kh?mainCondition=dessert&listCondition='${listCondition}">간식</a></li>
-                    <li ><a href="/search/mainSearch.kh?mainCondition=relish&listCondition='${listCondition}">술안주</a></li>
-                    <li ><a href="/search/mainSearch.kh?mainCondition=drink&listCondition='${listCondition}">술/음료</a></li>
-                </ul>
-            </div>
-        </div>
-<!--본문구간  -->
-        <div class="container">
-        	<!--본문 왼쪽  -->
-            <div class="rowL"><button >레시피추가</button></div>
-            
-            <!-- 본문 center부분 -->
-            <div class="rowcenter">
-            	<input type="hidden" name="searchCondition" value="${searchCondition}">
-            	<input type="hidden" name="mainCondition" value="${mainCondition}">
+<!-- <link rel="stylesheet" href="/resources/css/recipeSearch.css"> -->
+<style>
+@media ( max-width : 500px) {
+	#button-area {
+		text-align: center;
+	}
+}
+
+#serach-title-area {
+	text-align: center;
+	margin: 3rem 0;
+}
+
+#write-icon {
+	position: fixed;
+	top: 6%;
+	left: 6%;
+	z-index: 99;
+}
+
+#jo:hover, #dun:hover {
+	background-color: rgb(101, 241, 46);
+}
+
+#chu:hover {
+	background-color: rgb(154, 0, 192);
+}
+
+.card {
+	border: 0 !important;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.img-area {
+	width: 100%;
+	height: 10em;
+	overflow: hidden;
+}
+
+.normal-img-area {
+	width: 80%;
+	height: 10em;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.normal-card-body {
+	padding: 2px;
+}
+
+#wirte-icon-area:hover {
+	cursor: pointer
+	
+}
+
+
+.normal-img-area{
+	margin-left: 0px !important;
+    margin-right: 0px !important;
+    width: 100%;
+    border-radius: 15px;
+}
+.card-img-top{
+width:100%;
+
+}
+.card-text{
+font-weight: 600;
+}
+
+
+#list-area .card{
+padding:0;
+margin:0 auto !important;
+}
+
+ p{margin : 0 auto;
+}
+
+#list-area .card .card-body{
+
+    margin-bottom: 30px;
+
+}
+img:hover{
+transform: scale(1.1);
+transition:.1s;
+}
+body{
+margin-top:10rem;
+
+}
+</style>
+</head>
+<body>
+<jsp:include page="../header.jsp"/>
+<c:if test="${loginUser != null }"> 
+<!-- 로그인 했을때만 보임  -->
+	<!--글 입력 아이콘 영역-->
+	<span id="wirte-icon-area"> <svg
+			onclick="location.href='/recipe/writeView.do'" id="write-icon"
+			xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+			fill="currentColor" class="bi bi-arrow-left-circle-fill"
+			viewBox="0 0 16 16">
+               <path
+				d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+               </svg>
+	</span>
+ </c:if> 
+
+	<section class="container-md" id="">
+
+		<div id="main-contents" class="">
+		        <input type="hidden" name="searchCondition" value="${searchCondition}">
+            	<input type="hidden" name="searchValue" value="${searchValue}">
+            	<input type="hidden" name="hachCondition" value="${hachCondition}">
             	<input type="hidden" name="listCondition" value="${listCondition}">
-            	
-            	
-            	
-                <div id="rowhead">
-                    <select class="searchCondition" >
-                        <option value="recipeName" selected>제목명</option>
-                        <option value="recipe_material">재료명</option>
-                        <option value="recipe_tag">해시태그순</option>			 
-                    </select>
-                    
-                    <select class="hachCondition" >
-                        <option value="easy" selected>해시태그 소분류</option>
-	                    <option value="easy" >간편한</option>
-	                    <option value="full">든든한</option>
-	                    <option value="goodSpicy">맛있게 매운</option>			 
-	                    <option value="healthy">건강한</option>			 
-	                    <option value="jmt">JMT</option>			 
-	                    <option value="party">파티용</option>			 
-	                    <option value="soSpicy">아주매운</option>			 
-	                    <option value="sweet">달콤한</option>			 
-                    </select>     
-                    <input type="text" id="serchValue" placeholder="검색할 단어를 입력하세요" >
-                    <button type="button" onclick="addon2();">조회</button>                    
-                </div>
-                <div id="rowbtn">
-                    <button type="button" class="btn" name="listCondition" onclick="btnpattern(this.value);" value="viewCount">조회수</button>
-                    <button type="button" class="btn" name="listCondition" onclick="btnpattern(this.value);" value="recommandCount">추천순</button>
-                    <button type="button" class="btn"name="listCondition" onclick="btnpattern(this.value);" value="insertDate">등록일</button>
-                </div>
-                
-            <!--검색부분 종료 -->
-            <!--화면 출력 부분  -->    
-            <div id="rowbody">
-            	<div id="laveltitle">
-            		<span class="titleLavel">${selectHangul}</span>     <!-- search기준 -->
-           			<span class="titleLavel">${serchValue}</span>     <!-- 검색어 -->
-           			<span class="titleLavel">${hachConditionHangul}</span>     <!-- 해시태그 -->
-            		<span class="titleLavel">${listConditionHangul}</span>   <!--조회수외 2개  -->
-            		<span class="titleLavel">검색되었습니다.</span>
-            		
-            		
-            	</div>
-                 	<!--1,2,3위 메뉴  -->
-            	<c:forEach items="${rList }" var="recipe" varStatus="i">
-				<div class="card" style="width: 18rem;">
-					<img src="${recipe.mainPicRename} " class="card-img-top" alt="레시피사진">
-					<div class="card-body">
-						<p class="num">${i.count }위</p>
-						<h5 class="card-title">${recipe.recipeName }</h5>
-						<a href="#" class="btn btn-primary">레시피 보기</a>
-					</div>
-				</div>
-				</c:forEach>				
-			</div>  
-			
-            </div>
 		
-        <div id="rowR"></div>
-        </div>
-                
-        <div class="footer">
-            <div class="col-sm-3 col-md-3">License</div>
-            <div class="col-sm-9 col-md-9">Company inpo</div>
-        </div>
+			<!-- 검색명 출력 영역-->
+			<div id="serach-title-area">
+				<div>
+					<div id="laveltitle">
+            		<c:if test="${searchCondition ne 'no' }"><span class="titleLavel">${selectHangul}</span></c:if>     <!-- search기준 -->
+           			<span class="titleLavel">${searchValue}</span>     <!-- 검색어 -->
+           			<c:if test="${hachConditionHangul ne 'no' }"><span class="titleLavel">${hachConditionHangul}</span></c:if>     <!-- 해시태그 -->
+            		<span class="titleLavel">${listConditionHangul}</span>
+				</div>
+
+				<!-- 검색 창 영역 -->
+				<div class="col-md-8 container" id="search"
+					style="text-align: center">
+					<!-- 검색창시작 -->
+									<div class="row" id="searchArea">
+							<!-- 검색 카테고리 -->
+							<div class="col-md-2 col p-1" " id="searchSelector">
+
+								<select class="form-select searchCondition" id="searchcondition"
+									name="searchCondition">
+									<option value="mu"
+										<c:if test="${searchCondition eq 'no' }"> selected </c:if>></option>
+									<option value="recipeName"
+										<c:if test="${searchCondition eq 'recipeName' }"> selected </c:if>>제목명</option>
+									<option value="recipe_material"
+										<c:if test="${searchCondition eq 'recipe_material' }"> selected </c:if>>재료명</option>
+									<option value="recipe_tag"
+										<c:if test="${searchCondition eq 'recipe_tag' }"> selected </c:if>>해시태그순</option>
+								</select>
+
+							</div>
+							
+								<div class="col-md-2 col p-1" " id="searchSelector">
+
+								<select class="form-select hachCondition" id="hachCondition"
+									name="hachCondition">
+									 <option value="no" selected>해시태그</option>
+	                    			<option value="easy" >간편한</option>
+	                    			<option value="full">든든한</option>
+				                    <option value="goodSpicy">맛있게 매운</option>			 
+				                    <option value="healthy">건강한</option>			 
+				                    <option value="jmt">JMT</option>			 
+				                    <option value="party">파티용</option>			 
+				                    <option value="soSpicy">아주매운</option>			 
+				                    <option value="sweet">달콤한</option>	
+		
+								</select>
+
+							</div>
+							
+							<!-- 검색 카테고리 종료 -->
+							<!-- 검색어입력창 -->
+							<div class="row col-md-6  col p-1">
+								<div class="col-md">
+									<input type="text" name="searchValue" class="form-control"
+										id="searchvalue" value="${searchValue }" required="required"  > 							
+								</div>
+
+							</div>
+							<!-- 검색어입력창 종료 -->
+							<!-- 검색 버튼영역 -->
+							<div id="search-button" class="col-md-2 col-1 p-1"
+								style="width: auto;">
+								<button type="submit" class="btn btn-primary"  onclick="addon2();">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+							  <path
+											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+							</svg>
+
+								</button>
+
+
+							</div>
+						</div>
+					
+				</div>
+				<!-- 검색창 종료 -->
+
+			</div>
+
+			<!--본문구간  -->
+			<div id="contetns-area" class="container-md" style="">
+				<hr>
+				<!--정렬 버튼 영역-->
+				<div id="setp-aera" class="row" >
+					<div id="blank-area" class="col-md-9"></div>
+					<div id="button-area" class="col-md-3">
+						<button type="button" class="btn" name="listCondition"
+							onclick="btnpattern(this.value);" style="color: gray" id="jo"
+							value="viewCount">조회수</button>
+						|
+						<button type="button" id="chu" class="btn" name="listCondition"
+							style="color: gray" onclick="btnpattern(this.value)" value="recommandCount">추천순</button>
+						|
+						<button type="button" id="dun" class="btn " name="listCondition"
+							onclick="btnpattern(this.value)" style="color: gray" value="insertDate">등록일</button>
+					</div>
+
+				</div>
+				<!--정렬 버튼 영역종료-->
+				
+				
+				
+				
+				<!--랭킹영역-->
+				<div id="rank-area" class="row "
+					style="text-align: center; justify-content: space-evenly">
+
+					<c:forEach items="${rList}" var="recipe" varStatus="i" begin="1"
+						end="3">
+
+
+						<div class="card col-md-4 m-3 overflow-hidden"
+							style="width: 18rem; height: auto;">
+							<!-- 순위 아이콘 if 문 -->
+							<c:if test="${i.count == 1 }">
+								<svg class="m-2" xmlns="http://www.w3.org/2000/svg" width="3em"
+									height="3em" fill="currentColor" class="bi bi-1-square"
+									viewBox="0 0 16 16">
+						  <path
+										d="M9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z" />
+						  <path
+										d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z" />
+						</svg>
+
+							</c:if>
+
+							<c:if test="${i.count == 2 }">
+								<svg class="m-2" xmlns="http://www.w3.org/2000/svg" width="3em"
+									height="3em" fill="currentColor" class="bi bi-2-square"
+									viewBox="0 0 16 16">
+						  <path
+										d="M6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z" />
+						  <path
+										d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z" />
+						</svg>
+
+							</c:if>
+
+							<c:if test="${i.count == 3 }">
+								<svg class="m-2" xmlns="http://www.w3.org/2000/svg" width="3em"
+									height="3em" fill="currentColor" class="bi bi-3-square"
+									viewBox="0 0 16 16">
+						  <path
+										d="M7.918 8.414h-.879V7.342h.838c.78 0 1.348-.522 1.342-1.237 0-.709-.563-1.195-1.348-1.195-.79 0-1.312.498-1.348 1.055H5.275c.036-1.137.95-2.115 2.625-2.121 1.594-.012 2.608.885 2.637 2.062.023 1.137-.885 1.776-1.482 1.875v.07c.703.07 1.71.64 1.734 1.917.024 1.459-1.277 2.396-2.93 2.396-1.705 0-2.707-.967-2.754-2.144H6.33c.059.597.68 1.06 1.541 1.066.973.006 1.6-.563 1.588-1.354-.006-.779-.621-1.318-1.541-1.318Z" />
+						  <path
+										d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2Z" />
+						</svg>
+
+							</c:if>
+							<!-- if문 종료 -->
+
+
+							<div id="rank-img-area" class="img-area">
+								<img src="/resources/recipeImg/${recipe.mainPicRename } "
+									class="card-img-top" alt="레시피사진">
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">${recipe.recipeName }</h5>
+								<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }"
+									class="btn btn-outline-info">레시피 보기</a>
+							</div>
+						</div>
+					</c:forEach>
+					<!-- 랭킹 3위 출력완료 -->
+
+
+
+
+
+					<div id="second-area" class="col-md-4"></div>
+					<div id="third-area" class="col-md-4"></div>
+					<hr>
+				</div>
+				<!--랭킹영역 종료-->
+				<!--일반 리스트 영역-->
+				<div id="list-area" class="row"
+					style="justify-content: space-around;">
+					<c:forEach items="${rList}" var="recipe" varStatus="i" begin="4"
+						end="${fn:length(rList)}">
+
+
+
+
+						<div class="card col-md-3 m-3" style="width: 18rem;">
+						<a href="/recipe/detail.do?recipeNo=${recipe.recipeNo }">
+							<div class="normal-img-area" id="normal-img-area">
+							
+								<img src="/resources/recipeImg/${recipe.mainPicRename }"
+									class="card-img-top" alt="">
+							</div>
+							<div class="card-body normal-card-body">
+								<p class="card-text">
+									${recipe.recipeName }
+								
+								<p>${recipe.recipeInfo }</p>
+							</div></a>
+						</div>
+
+					</c:forEach>
+
+
+				</div>
+				<!--일반 리스트 영역종료-->
+
+
+			</div>
+			<!-- 본문 구간 종료 -->
+
+		
+
+		</div>
+	</div>
+<jsp:include page="../footer.jsp"/>
+	</section>
+
         <script>
         
 			/*버튼 토글 스크립트  */
@@ -125,19 +370,19 @@
 			});
 			
 			function btnpattern(value){
-				var searchCondition= $(".searchCondition").val();
-				var hachCondition= $(".hachCondition").val();
-				var serchValue= $("#serchValue").val();			
-				location.href="/search/search3btn.kh?listCondition="+value+"searchCondition="+searchCondition+"&serchValue="+serchValue+"&hachCondition="+hachCondition; 
+				var searchCondition= "${searchCondition }";
+				var hachCondition= "${hachCondition }";
+				var searchValue= "${searchValue }";		
+				location.href="/search/search3btn.kh?listCondition="+value+"searchCondition="+searchCondition+"&searchValue="+searchValue+"&hachCondition="+hachCondition; 
 			}
 			
 			//select검색
 			function addon2(){
-				var searchCondition= $(".searchCondition").val();
-				var hachCondition= $(".hachCondition").val();
-				var serchValue= $("#serchValue").val();
-            	var listCondition=$("[name=listCondition]").val();
-            	location.href="/search/search3btn.kh?searchCondition="+searchCondition+"&serchValue="+serchValue+"&listCondition="+listCondition+"&hachCondition="+hachCondition; 
+				var searchCondition= $("#searchcondition").val();
+				var hachCondition= $("#hachCondition").val();
+				var searchValue= $("#searchvalue").val();
+            	var listCondition="${listCondition }";
+            	location.href="/search/search3btn.kh?searchCondition="+searchCondition+"&searchValue="+searchValue+"&listCondition="+listCondition+"&hachCondition="+hachCondition; 
             	
 			}
 	

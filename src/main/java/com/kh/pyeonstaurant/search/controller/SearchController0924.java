@@ -56,21 +56,28 @@ public class SearchController0924 {
 			,@RequestParam(value = "listCondition", required = false) String listCondition
 			,@RequestParam(value = "mainCondition", required = false) String mainCondition
 			) {	
-		     
+		if(listCondition==null) {
+			listCondition="viewCount";
+			
+		}
 		try {
+			System.out.println("메인 정렬버튼 클릭");
 			System.out.println(listCondition);
 			List<Recipe> rList = sService.mainSearch(listCondition,mainCondition);
 			System.out.println(rList.size());
+			mv.addObject("rList", rList);
 			
-
-			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환
 			mv.addObject("mainConditionHangul",mainCon);
+			mv.addObject("mainCondition",mainCondition);
+			
+			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환
+			mv.addObject("listConditionHangul",listCon);
 			mv.addObject("listCondition",listCondition);
-			mv.addObject("listConditionHangul",listCon);	
-			mv.addObject("rList", rList);
+			
 			mv.setViewName("/search/searchPattern");
 		 } catch (Exception e) {
+			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("/error");
 		}
@@ -86,8 +93,12 @@ public class SearchController0924 {
 			) {	
 
 		try {
+			System.out.println("메인 메뉴 클릭");
 			System.out.println(mainCondition);
 			System.out.println(listCondition);
+			if(listCondition==null) {
+				listCondition="viewCount";
+			}
 			List<Recipe> rList = sService.mainSearch(mainCondition,listCondition);
 			System.out.println(rList.size());
 			
@@ -95,8 +106,7 @@ public class SearchController0924 {
 			mv.addObject("listConditionHangul",listCon);	
 			
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환
-			mv.addObject("mainConditionHangul",mainCon);
-			
+			mv.addObject("mainConditionHangul",mainCon);			
 			mv.addObject("mainCondition",mainCondition);
 			mv.addObject("listCondition",listCondition);
 			mv.addObject("rList", rList);
@@ -110,17 +120,20 @@ public class SearchController0924 {
 
 
 	//search할때 조회순, 추천순, 등록일 순. 
-		@RequestMapping(value = "/search/search3btn.kh", method = RequestMethod.GET)
+		@RequestMapping(value = "/search/search3btn.kh",produces="application/json;charset=UTF-8", method = RequestMethod.GET)
 		public ModelAndView searchPattern(ModelAndView mv
 				,@RequestParam(value = "listCondition", required = false) String listCondition
 				,@RequestParam(value = "searchCondition", required = false) String searchCondition
-				,@RequestParam(value = "serchValue", required = false) String serchValue
-				,@RequestParam(value = "hachCondition", required = false) String  hachCondition
+				,@RequestParam(value = "searchValue", required = false) String searchValue
+				,@RequestParam(value = "hachCondition", required = false) String hachCondition
 				) {	
-			     
+			if(listCondition==null) {
+				listCondition="viewCount";
+			}
 			try {
+				System.out.println("써치 검색어");
 				System.out.println("해시태그값:"+hachCondition);	
-				System.out.println("검색태그값:"+serchValue);
+				System.out.println("검색태그값:"+searchValue);
 				System.out.println("검색제목값:"+searchCondition);
 				
 				String hachCon=hachTagFind(hachCondition);  //해시태그는 값이 있던없던 보내줘서 분류해서 매핑할수 있게 함				
@@ -135,16 +148,17 @@ public class SearchController0924 {
 				mv.addObject("selectHangul",selectCon);
 				mv.addObject("searchCondition",searchCondition);
 				
-				if(hachCondition!=null) {
-					List<Recipe> rList = sService.selectSearch(serchValue,listCondition,searchCondition);					
-					mv.addObject("serchValue",serchValue);	//검색어 
+				if(hachCon=="no") {
+					List<Recipe> rList = sService.selectSearch(searchValue,listCondition,searchCondition);					
+					mv.addObject("searchValue",searchValue);	   //검색어 값은 그대로 전달.
 					mv.addObject("rList", rList);					
 					mv.setViewName("/search/searchSELect");
-					
+					System.out.println("searchValue: "+ rList.size());
 				} else {
 					List<Recipe> rList = sService.hachPattern(listCondition,hachCondition);
 					mv.addObject("rList", rList);					
 					mv.setViewName("/search/searchSELect");
+					System.out.println("hachCon: "+ rList.size());
 				}
 			 } catch (Exception e) {
 				mv.addObject("msg", e.getMessage());
@@ -225,7 +239,7 @@ public class SearchController0924 {
 					   	 break;
 		case "sweet" : hachCon="달콤한";
 					   break;
-		default :hachCon="";
+		default :hachCon="no";
 		         break;
 						
 		}

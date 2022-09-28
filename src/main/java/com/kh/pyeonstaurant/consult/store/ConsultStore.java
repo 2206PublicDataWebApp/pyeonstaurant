@@ -25,8 +25,8 @@ public interface ConsultStore {
 
 
 	public int finishChat(SqlSessionTemplate session, ConsultServer conServer);
-
-	public int changebutten(SqlSessionTemplate session, String string);
+//채팅 버튼 변경
+	public int changebutten(SqlSessionTemplate session, String chatbtn);
 
 	public String selechbtn(SqlSessionTemplate session);
 

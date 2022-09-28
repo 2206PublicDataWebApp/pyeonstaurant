@@ -105,7 +105,7 @@
 				data:msg,							/* 서버로 부터 받은 msg의 val를 메세지변수에 넣음 */
 				success:function(result){  			/* 이벤트 핸들러 result에 서버가 보낸준 값이 리턴됨. */
 					console.log("채팅전송성공:"+result);
-					collList();
+					printer=setInterval(collList,4000);
 				},
 				error: function(e) {
 					alert('error : ' + e);
@@ -145,10 +145,8 @@
 		}
 
 		function addChat(cNickName, cContext, cDate) {
-			console.log("데이터 올림 확인 : " + cNickName);
-			function addChat(cNickName, cContext, cDate) {
 				console.log("데이터 올림 확인 : " + cNickName);
-				if(cNickName==='manager'){
+				if(cNickName!='임시관리자'){
 					 $('#after').append(
 						 '<div class="right">'
 	                 	   +'<h5 >'+cNickName+'</h5>'
@@ -161,15 +159,17 @@
 		                 	   +'<h5 >'+cNickName+'</h5>'
 		                       +'<div class="middleBox"><span class="contextBox">'+ cContext +'</span>'
 		                       +'<span class="dateBox">'+cDate+'</span></div></div>');				
-				}			
-			}
+				}
+				$('#after').scrollTop=$('#after').scrollHeight
+			
 		}
 
 		//종료 버튼 누를경우
 		function chatfinish() {
 
 			if (confirm("정말로 종료하시겠습니까?")) {
-				location.href = "/home.kh/";
+				clearInterval(printer);
+				location.href = "/";
 			}
 		}
 	</script>

@@ -1,13 +1,94 @@
-
-#rowbody{
-
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-
+<style>
+@media ( max-width : 500px) {
+	#button-area {
+		text-align: center;
+	}
 }
 
-    
-  
-   
+#serach-title-area {
+	text-align: center;
+	margin: 3rem 0;
+}
+
+#write-icon {
+	position: fixed;
+	top: 6%;
+	left: 6%;
+	z-index: 99;
+}
+
+#jo:hover, #dun:hover {
+	background-color: rgb(101, 241, 46);
+}
+
+#chu:hover {
+	background-color: rgb(154, 0, 192);
+}
+
+.card {
+	border: 0 !important;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.img-area {
+	width: 100%;
+	height: 10em;
+	overflow: hidden;
+}
+
+.normal-img-area {
+	width: 80%;
+	height: 10em;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.normal-card-body {
+	padding: 2px;
+}
+
+#wirte-icon-area:hover {
+	cursor: pointer
+	
+}
 
 
+.normal-img-area{
+	margin-left: 0px !important;
+    margin-right: 0px !important;
+    width: 100%;
+    border-radius: 15px;
+}
+.card-img-top{
+width:100%;
+
+}
+.card-text{
+font-weight: 600;
+}
+
+
+#list-area .card{
+padding:0;
+margin:0 auto !important;
+}
+
+ p{margin : 0 auto;
+}
+
+#list-area .card .card-body{
+
+    margin-bottom: 30px;
+
+}
+img:hover{
+transform: scale(1.1);
+transition:.1s;
+}
+</style>
+>>>>>>> refs/remotes/origin/eunjeoung220928

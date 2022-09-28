@@ -182,7 +182,9 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> <a class="nav-link" href="/admin/chattingList">
+
+						<a class="nav-link" href="/consult/move.kh">   <!--관리자 채팅페이지 -->
+
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리
