@@ -30,7 +30,6 @@
 		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QA" alias="QA"/>
 		<typeAlias type="com.kh.pyeonstaurant.qanda.domain.QAComment" alias="QAComment"/>
 		<typeAlias type="com.kh.pyeonstaurant.recipe.domain.Recommandation" alias="Recommandation"/>
-		
 
 		<typeAlias type="com.kh.pyeonstaurant.consult.domain.ConsultServer" alias="ConsultServer" /><!--은정꺼예요.  -->
 		<typeAlias type="com.kh.pyeonstaurant.consult.domain.Consult"	alias="Consult" /><!--은정꺼예요.  -->
@@ -45,8 +44,9 @@
 		<!-- 이런 형식으로 넣어주세요 -->
 		<!-- <mapper resource="mappers/member-mapper.xml"/> -->
 		<!-- <mapper resource="mappers/board-mapper.xml"/> -->
+
+
 		<mapper resource="mappers/member-mapper.xml"/>
-<!-- 		<mapper resource="mappers/myRecipe-mapper.xml"/> -->
 		<mapper resource="mappers/report-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>

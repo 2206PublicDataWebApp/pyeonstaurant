@@ -17,6 +17,9 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <style>
+body{
+margin-top:10rem;
+}
 @media (max-width: 500px) {
 .container{
 padding:0 !important;
@@ -34,12 +37,15 @@ padding:0 !important;
 
 
 <body onload="textSave();">
+<jsp:include page="../header.jsp"/>
+
 
 	<section class="container">
 			<!-- 게시판 영역시작 -->
 		<div class="row container" >
 			<form action="/qna/modify.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${qa.qaNo}" name="qaNo">
+			<input type="hidden" value="${qa.memberEmail}" name="memberEmail">
 			<!-- 상단영역시작 -->
 			<div id="first">
 				<!-- 카테고리영역 -->
@@ -218,6 +224,9 @@ padding:0 !important;
 
 
 	</section>
+	
+	<jsp:include page="../footer.jsp"/>
+	
 <script>
 
 //섬머노트 스크립트

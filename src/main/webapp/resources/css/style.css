@@ -123,6 +123,7 @@ main {
 /*footer*/
 
 .footer_content_first {
+<<<<<<< HEAD
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -133,12 +134,26 @@ margin: auto;
 padding: 0 100px;
 max-width: 1440px;
 justify-content: space-between;
+=======
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+	padding-bottom: 91px;
+	margin: auto;
+	padding: 0 100px;
+	max-width: 1440px;
+	justify-content: space-between;
+>>>>>>> refs/remotes/origin/hana220926
 
 }
 footer > .footer_inner {
 padding: 16px 0;
 margin: 0 auto;
+
 }
+
 
 .footer_content.right .title {
 margin-bottom: 5px;
@@ -345,9 +360,31 @@ button:hover .button-text {
       padding: 0;
   }
 
+<<<<<<< HEAD
   .left {
       display: none;
   }
+=======
+    .fixed-icon {
+        bottom: 10px;
+        right: 20px;
+    }
+    
+    .footer_content_first {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+    }
+>>>>>>> refs/remotes/origin/hana220926
 
   .right {
       display: flex;

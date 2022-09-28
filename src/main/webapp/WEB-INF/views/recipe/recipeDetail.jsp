@@ -17,23 +17,7 @@
 	overflow: hidden;
 }
 
-@media ( max-width : 500px) {
-	#imgDiv {
-		width: 100%;
-		height: auto;
-		overflow: hidden;
-	}
-	iframe {
-		height: auto;
-	}
-	
-	#other-recipe-area{
-	display:none;
-	}
-	
-	
-}
-/* 미디어 쿼리 영역 종료 */
+
 
 
 #mainImg {
@@ -101,8 +85,59 @@ text-align:center;
 
 #recommand-area{
     padding-left: 50px;
-
 }
+
+.img-area{
+
+    height: 10rem;
+    overflow: hidden;
+}
+body{
+margin-top:10rem;
+}
+
+#step-img-area{
+padding-top: 5rem;
+}
+
+
+@media ( max-width : 500px) {
+	#imgDiv {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+	}
+	iframe {
+		height: auto;
+	}
+	
+	#other-recipe-area{
+	display:none;
+	}
+	
+	#article1{
+	
+    border-right-width: 0px;
+
+	}
+	#step-img-area{
+	padding:0px;
+	}
+	
+	body{
+	margin 0;
+	}
+	
+	#list-icon {
+	position: fixed;
+	top: 15%;
+	left: 6%;
+	z-index: 99;
+}
+	
+	
+}
+/* 미디어 쿼리 영역 종료 */
 
 </style>
 
@@ -110,13 +145,8 @@ text-align:center;
 
 </head>
 <body>
-
-<header>
-	<jsp:include page="../header.jsp"/>
-
-</header>
 	
-
+<jsp:include page="../header.jsp"/>
 	<section style="margin: 0 auto;">
 		<span id="list-icon-area"> <svg onclick="list();"
 				id="list-icon" xmlns="http://www.w3.org/2000/svg" width="50"
@@ -173,11 +203,13 @@ text-align:center;
 				<!-- 해쉬태그 영역종료 -->
 
 				<div id="button-area" class="col-md-2">
+					<c:if test="${loginUser.memberEmail==recipe.memberEmail || loginUser.adminCheck==true }">
 					<!-- 버튼영역 -->
 					<button class="btn btn-primary"
 						onclick="location.href='/recipe/modifyForm.do?recipeNo=${recipe.recipeNo }';">수정</button>
 					<button class="btn btn-primary"
 						onclick="removeRecipe(${recipe.recipeNo });">삭제</button>
+					</c:if>
 				</div>
 				<div id="info-area">${recipe.recipeInfo }</div>
 
@@ -252,8 +284,13 @@ text-align:center;
 						<!-- 작성자 영역 -->
 						<div id="wirter-area" class="col-md-12">
 							<h5>
-								작성자 : ${recipe.memberEmail }
-								<button class="btn btn-danger"><a href="/report/add?recipeNo=${recipe.recipeNo }">신고</a></button>
+								작성자 : ${name }
+								
+							<c:if test="${loginUser !=null }"> <!-- 로그인시에만 보임 -->
+								<button class="btn btn-danger" onclick="location.href='/report/add?recipeNo=${recipe.recipeNo }'">신고</button>
+								</c:if>
+								
+
 							</h5>
 						</div>
 						<!-- 작성자 영역종료 -->
@@ -273,15 +310,26 @@ text-align:center;
 
 
 						<!--레시피 순서영역 -->
-						<div id="step-area" class="col-md-12">
-							<c:forEach items="${rsList }" var="rsList">
+						<div id="step-area" class="col-md-12 row">
+						<c:forEach items="${rsList }" var="rsList">
+						<div class="row m-2" id="step-one-area">
+						<div class="col-md-6"> 
 								<c:if test="${rsList.recipePicRename ne null }">
 									<img id="step-img"
 										src="/resources/recipeImg/${rsList.recipePicRename }">
 									<br>
 								</c:if>
-
+						   </div>
+						   <div class="col-md-6" id="step-img-area">
 								<p>${rsList.recipeDescription }</p>
+						   </div>
+						   
+						</div>
+						<c:if test="${rsList.recipePicRename ne null || rsList.recipeDescription eq ''}">
+						   <hr>
+						   </c:if>
+							
+
 
 							</c:forEach>
 						</div>
@@ -290,11 +338,19 @@ text-align:center;
 						<!-- 추천, 나만의 레시피 이이콘 영역 -->
 						<div id="recom-bookm-area" class="my-2 row">
 						<!-- 추천을 하지 않았을때는 검은색 추천을 했다면 빨간 아이콘 -->
+						
+						
+						
+						
 						<!-- 추천 아이콘 -->
+						<c:if test="${loginUser != null }">
+						
+						
+						<c:if test="${recodCheck == false }">
 							<div id="Black-heart" class="p-3 p3 col-6">
 	
 							<form action="/recipe/recommand.do" method="get">
-							<input type="hidden" name="memberEmail" value="">
+							<input type="hidden" name="memberEmail" value="${loginUser.memberEmail }">
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo}">
 							<label for="recommandButton">
 								<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -308,13 +364,17 @@ text-align:center;
 				
 								<br>추천<br> ${recipe.recommandCount }
 							</div>
+						</c:if>
+							
 							<!-- 추천아이콘 종료 -->
 							
 							<!-- 추천 취소 아이콘 -->
+							
+						<c:if test="${recodCheck == true }">
 							<div id="heart" class="p-3 p3 col-6">
 	
 							<form action="/recipe/recoRemove.do" method="get">
-							<input type="hidden" name="memberEmail" value="">
+							<input type="hidden" name="memberEmail" value="${loginUser.memberEmail }">
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo}">
 							<label for="recoRomoveButton">
 								<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
@@ -328,42 +388,82 @@ text-align:center;
 				
 								<br>추천 취소<br> ${recipe.recommandCount }
 							</div>
+							</c:if>
+							
+							</c:if>
 							<!-- 추천취소 아이콘 종료 -->
 							
+							<!-- //로그인 안했을때 보이는 추천 아이콘 -->
+							<c:if test="${loginUser == null }">
+							<div id="non-login-icon-heart" class="p-3 p3 col-6">
+							<label for="recoRomoveButton">
+								<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+									fill="red" class="bi bi-chat-heart" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd"
+										d="M2.965 12.695a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2Zm-.8 3.108.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125ZM8 5.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z" />				
+						</svg></label>
+							<br>추천<br> ${recipe.recommandCount }
+							</div>
+							</c:if>
 							
 							
 							
 							<!-- 나만의 레시피 아이콘 -->
-						
+							<!-- 로그인시 -->
+							<c:if test="${loginUser != null }">
+							
+							
+							<c:if test="${checkMyrecipe == false}" >
 							<div id="star" class="p-3 p3 col-6">
+<<<<<<< HEAD
 
 							<form action="/myRecipe/add" method="get">
 						
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo}" style="display:none">
 							<input type="hidden" name="recipeName" value="${recipe.recipeName}" style="display:none">
 							<label for="addMyRecipeButton">		
+=======
+							<label for=""><a href="/myRecipe/add?recipeNo=${recipe.recipeNo}&recipeName=${recipe.recipeName } ">
+>>>>>>> refs/remotes/origin/hana220926
 								<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
 									fill="orange" class="bi bi-star" viewBox="0 0 16 16">
-						  <path fill-rule="evenodd"
+						  <path
 										d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />					
-						</svg></label>
+						</svg></a></label>
 								<br>나만의 레시피
-								<input type="submit" style="display:none" id="addMyRecipeButton">
-								</form>
 							</div>
-				
+							</c:if>
 						<!-- 나만의 레시피 아이콘 종료 -->
 						
 							<!-- 나만의 레시피취소 아이콘 -->
+							<c:if test="${checkMyrecipe}" >
+							<div id="star" class="p-3 p3 col-6">
+							<label for=""><a href="/myRecipe/remove?recipeNo=${recipe.recipeNo} ">
+								<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+									fill="orange" class="bi bi-star" viewBox="0 0 16 16">
+						    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						</svg></a></label>
+								<br>나만의 레시피 취소
+							</div>
+							</c:if>
+						<!-- 나만의 레시피 아이콘 취소 종료 -->
+						</c:if>
+						<!-- 로그인시 종료 -->
+						
+						
+						<!-- 로그인 안했을시 나만의 레시피 아이콘 -->
+						<c:if test="${loginUser == null }">
 							<div id="star" class="p-3 p3 col-6">
 							<label for="">
 								<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
 									fill="orange" class="bi bi-star" viewBox="0 0 16 16">
 						    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 						</svg></label>
-								<br>나만의 레시피 취소
+								<br>나만의 레시피
 							</div>
-						<!-- 나만의 레시피 아이콘 취소 종료 -->
+						
+						
+						</c:if>
 						
 						
 						
@@ -454,10 +554,19 @@ text-align:center;
 										class="shadow-lg p-3 mb-5 bg-body rounded mt-4 text-justify">
 										<div id="comment-row" class="row">
 											<div id="comment-writer" class="col-md-10">
-												<h4>${rcList.memberEmail }</h4>
+												<h4>${rcList.memberName }</h4>
 											</div>
-											<div id="comment-button" class="col-md-2"
-												style="text-align: right"><a href="/report/addComment">신고</a></div>
+											<div id="comment-button" class="col-md-2" style="text-align: right">
+												 
+												 <!--  신고 로그인시에만 보임 -->
+												 <c:if test= "${loginUser != null }"> 
+												 <a href="/report/addComment?commentNo=${rcList.commentNo}">
+												신고
+												 </a>
+												 </c:if> 
+												
+												</div>
+
 										</div>
 										<div id="comment-text-area">
 											<span>${rcList.commentDate }</span> <br>
@@ -465,11 +574,31 @@ text-align:center;
 										</div>
 										<div id="comment-delmodi-buttom-area"
 											style="text-align: right">
+											
+											<!-- 관리자 작성자만 보임 -->
+											<c:if test= "${loginUser != null }">
+											<c:if test="${(loginUser.memberEmail == rcList.memberEmail)&& loginUser.adminCheck==false}">
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
 											<button
 												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );"
 												class="btn btn-outline-primary">삭제</button>
+<<<
+											
+											
+											</c:if>
+											 <c:if test="${loginUser.adminCheck}"> 
+										
+											<button type="button" onclick="modifyViewOn(this);"
+												class="btn btn-outline-primary">수정</button>
+											<button
+												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo});"
+												class="btn btn-outline-primary">삭제</button>
+												
+												 </c:if>
+												 </c:if>
+
+
 										</div>
 									</div>
 								</div>
@@ -512,16 +641,19 @@ text-align:center;
 
 					<!-- 코멘트 작성영역 -->
 
+				<!-- 로그인 시에만 보임 -->
+				 <c:if test="${loginUser != null}"> 
+				
 					<form action="/recipe/commentWrite.do" method="post">
 						<div id="comment-write-area" class="row">
-							<input type="hidden" value="" name="memberEmail"> <input
+							<input type="hidden" value="${loginUser.memberEmail }" name="memberEmail"> <input
 								type="hidden" value="${recipe.recipeNo }" name="recipeNo">
 							<div id="comment-textarea" class="col-md-11">
 								<!-- 세션에서 사용자 id가지고 올것 -->
 								<div class="form-floating">
 									<textarea name="commentContents" class="form-control"
 										placeholder="Leave a comment here" id="floatingTextarea2"
-										style="height: 100px"></textarea>
+										style="height: 100px" required="required"></textarea>
 									<label for="floatingTextarea2">댓글을 등록해주세요</label>
 								</div>
 							</div>
@@ -534,6 +666,9 @@ text-align:center;
 
 
 						</div>
+						</form>
+					 	</c:if> 
+						
 						<!-- 코멘트 작성영역 종료 -->
 						
 						

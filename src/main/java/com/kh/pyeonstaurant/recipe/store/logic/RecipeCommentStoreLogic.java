@@ -20,7 +20,6 @@ public class RecipeCommentStoreLogic implements RecipeCommentStore {
 	@Override
 	public int updateOneRecipeComment(RecipeComment rComment, SqlSessionTemplate session) {
 		int result= session.update("RecipeMapper.updateOneComment",rComment);
-		System.out.println(rComment.toString());
 		return result;
 	}
 
@@ -28,6 +27,13 @@ public class RecipeCommentStoreLogic implements RecipeCommentStore {
 	public int deleteOneRecipeComment(int commentNo, SqlSessionTemplate session) {
 		int result = session.delete("RecipeMapper.deleteOneRecipeComment",commentNo);
 		return result;
+	}
+
+	/**작성자 이메일 가져오기*/
+	@Override
+	public String selectMemberEmail(SqlSessionTemplate session, Integer commentNo) {
+		String memberEmail = session.selectOne("RecipeMapper.selectCommentMember", commentNo);
+		return memberEmail;
 	}
 
 

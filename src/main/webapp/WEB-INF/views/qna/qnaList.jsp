@@ -22,6 +22,9 @@
 <link href="/resources/css/page.css" rel="stylesheet">
 
 <style>
+body{
+margin-top:10rem;
+}
 @media ( max-width : 500px) {
 	#title-cell {
 		width: 65% !important;
@@ -32,9 +35,11 @@ a {
 	text-decoration: none;
 	color: black;
 }
+
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 	<!-- q&a게시판 영역시작 -->
 	<section>
 		<!-- 게시판 영역 -->
@@ -50,8 +55,11 @@ a {
 				<div id="button-search-area" class="row">
 					<div class="col-6" id="button">
 						<!-- 삭제버튼영역 -->
-
+						 <c:if test="${loginUser.adminCheck==true}"> <%--세션으로 관리자 체크 --%>
+						
 						<button onclick="checkRemove()" class="btn btn-outline-primary">삭제</button>
+						
+						 </c:if>
 					</div>
 
 					<!-- 검색영역 -->
@@ -108,7 +116,12 @@ a {
 				<table class="col-12 table table-striped mt-2"
 					style="text-align: center">
 					<tr class="">
+					
+						<c:if test="${loginUser.adminCheck==true}"> <%-- 세션으로 관리자 체크 --%>
 						<td style="width: 5%"></td>
+						 </c:if> 
+						
+						
 						<td style="width: 16%" class="d-md-table-cell d-none">번호</td>
 						<td style="width: 20%" class="d-md-table-cell d-none">카테고리</td>
 						<td style="width: 40%" id="title-cell">제목</td>
@@ -116,12 +129,17 @@ a {
 						<td class="d-md-table-cell d-none">작성일</td>
 					</tr>
 
+				<!-- 게시판 내용 출력영역	 -->
 					<c:forEach items="${qList }" var="qList">
 						<tr>
+							
+							<c:if test="${loginUser.adminCheck==true}"> <!-- 세션용 관리자일시에만 보임> -->
 							<td>
-								<!-- 삭제용 체크박스 --> <input type="checkbox" name="qaNo"
-								value="${qList.qaNo }">
+								<!-- 삭제용 체크박스 -->
+
+					<input type="checkbox" name="qaNo" value="${qList.qaNo }">
 							</td>
+							</c:if>
 							<!-- 삭제용 체크 박스 종료 -->
 							<td class="d-md-table-cell d-none">${qList.qaNo }</td>
 							<td class="d-md-table-cell d-none"><c:if
@@ -131,26 +149,105 @@ a {
 
 
 
-							<td><a href="/qna/detail.do?qaNo=${qList.qaNo}"> <c:if
-										test="${qList.qaSecret == true}">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							
+							<td>
+<!--검색시 제목 연결-->
+								
+							<c:if test="${searchValue !=null }">
+							
+						<!-- 비밀글 아닐때 상세창으로 링크연결 -->
+						<c:if test="${qList.qaSecret == false}">
+						<a href="/qna/detail.do?qaNo=${qList.qaNo}&searchCondition=${searchCondition}&searchValue=${searchValue }&page=${pageNow}">
+			 			${qList.qaTitle }</a>
+			 			</c:if>
+			 			
+			 			
+			 			
+			 			<!-- 비밀글일떄는 관리자와 작성자만 링크연결 -->
+			 			<c:if test="${qList.qaSecret == true}">	
+			 			<c:if test="${loginUser.adminCheck==true || loginUser.memberEmail == qList.memberEmail}">
+			 				 
+						<a href="/qna/detail.do?qaNo=${qList.qaNo}&searchCondition=${searchCondition}&searchValue=${searchValue }&page=${pageNow}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
-			  <path
+			 								 <path
 												d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
-			</svg>
-									</c:if> ${qList.qaTitle }
-							</a></td>
-							<td>${qList.memberEmail }</td>
+											</svg>
+							${qList.qaTitle }
+							</a>
+							
+							</c:if>
+								
+							<!-- 관리자가 작성자가 아니면 링크가 연결되지 않고 타이틀만 보임 -->
+							<c:if test="${(loginUser.adminCheck==false && loginUser.memberEmail != qList.memberEmail)||loginUser == null}">
+							
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+			 								 <path
+												d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
+											</svg>
+							${qList.qaTitle }
+							
+							</c:if>
+							</c:if>
+							</c:if>
+<!--  검색 시 연결 종료 -->
+
+<!--검색아닐시 제목 연결-->
+					<c:if test="${searchValue ==null }">
+					<!-- 비밀글 아닐때는 상세창으로 링크연결 -->
+						<c:if test="${qList.qaSecret == false}"><a href="/qna/detail.do?qaNo=${qList.qaNo}&page=${pageNow}">
+						${qList.qaTitle }</a>
+					</c:if>
+					
+					
+					<!-- 비밀글일때는 관리자와 작성자만 링크연결됨 -->
+						<c:if test="${qList.qaSecret == true}">
+			 			<c:if test="${loginUser.adminCheck==true || loginUser.memberEmail == qList.memberEmail}"> 
+						<a href="/qna/detail.do?qaNo=${qList.qaNo}&page=${pageNow}">
+					 	 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+			 				<path
+								d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
+							</svg>
+									 ${qList.qaTitle } 
+							</a>
+							</c:if>
+							
+							<!-- 작성자나 관리자 아닐시 제목만 보임 -->
+							
+							<c:if test="${(loginUser.adminCheck==false && loginUser.memberEmail != qList.memberEmail) || loginUser==null}"> 
+					 	 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+			 				<path
+								d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
+							</svg>
+									 ${qList.qaTitle } 
+							</c:if>
+							
+							
+							
+							</c:if>
+							</c:if>
+<!--  검색아닐 시 연결 종료 -->
+							</td>
+							
+							
+							
+							<td>${qList.name }</td>
 							<td class="d-md-table-cell d-none">${qList.qaInsertDate }</td>
-						</tr>
+						</tr> 
 					</c:forEach>
 
 				</table>
 				<!-- 글쓰기 버튼영역 -->
 				<div class="col-md-12" id="write-button-area"
 					style="text-align: right">
+					
+<%-- 					<c:if test="${loginUser !=null }"> 로그인 했을때만 보임 --%>
 					<button class="btn btn-outline-primary"
 						onclick="location.href='/qna/wirteForm.do';">글쓰기</button>
+<%-- 						</c:if> --%>
 				</div>
 			</div>
 			<!-- 게시판 출력영역 종료 -->
@@ -161,7 +258,7 @@ a {
 					<!-- 검색/ 일반 페이징 c:if 시작 -->
 
 					<!--  일반 페이징 시작 -->
-					<c:if test="${searchValue eq null }">
+					<c:if test="${searchCondition eq null }">
 
 
 						<div id="app" class="container">
@@ -200,7 +297,7 @@ a {
 					<!--  검색 페이징 시작 -->
 					
 					
-						<c:if test="${searchValue ne null }">
+						<c:if test="${searchCondition ne null }">
 
 
 						<div id="app" class="container">
@@ -252,7 +349,7 @@ a {
 		<!-- 게시판영역종료 -->
 	</section>
 	<!-- qna게시판 종료 -->
-
+<jsp:include page="../footer.jsp"/>
 	<script>
 		function checkRemove() {
 

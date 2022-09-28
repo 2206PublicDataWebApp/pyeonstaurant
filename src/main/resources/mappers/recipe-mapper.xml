@@ -42,6 +42,15 @@
 	<update id="deleteRecipe">
 		update recipe_tbl set RECIPE_STATUS = 'N' where RECIPE_NO = #{recipeNo}
 	</update>
+	
+	<!-- 포인트추가 -->
+	<insert id="insertPoint">
+		insert into point values(#{memberEmail},'레시피 등록 적립',10,sysdate)
+	</insert>
+	
+	<update id="updatePiont">
+	update member_tbl set TOTAL_POINT = TOTAL_POINT+10 where MEMBER_EMAIL = #{memberEmail}
+	</update>
 
 <update id = "updateOneRecipe">
 	update recipe_tbl set RECIPE_NAME = #{recipeName}, RECIPE_INFO = #{recipeInfo}, MAIN_PICTURE = #{mainPic}, RECIPE_CATEGORY= #{recipeCategory},
@@ -113,41 +122,17 @@ update recipe_tbl set RECOMMAND_COUNT = RECOMMAND_COUNT-1 where RECIPE_NO = #{re
 	</select>
 	
 	<select id="selectRecommandRecipe" resultMap="recipeResultMap">
-	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory}
+	 select * from recipe_tbl where RECIPE_CATEGORY = #{recipeCategory} and RECIPE_STATUS = 'Y'
 	</select>
 	
-	<!-- 	마이레시피 조회용 -->
-	<select id="selectAllByValue" resultMap="recipeResultMap">
-<!-- 		SELECT * FROM RECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail} -->
-		SELECT * FROM RECIPE_TBL, MYRECIPE_TBL 
-WHERE RECIPE_TBL.RECIPE_NO = MYRECIPE_TBL.RECIPE_NO AND MYRECIPE_TBL.MEMBER_EMAIL = #{memberEmail}
+	<select id="selectMember" resultType="string">
+	select MEMBER_EMAIL from recipe_tbl where RECIPE_NO = #{recipeNo}
 	</select>
 	
-	
-	
-<!-- 	마이레시피 맵 -->
 
-	<resultMap type="MyRecipe" id="MyRecipeResultMap">
-		<result property="memberEmail" 	column="MEMBER_EMAIL"/>
-		<result property="recipeNo" 	column="RECIPE_NO"/>
-		<result property="myRecipeNo" 	column="MYRECIPE_NO"/>
-		<result property="recipeName" 	column="RECIPE_NAME"/>
-	</resultMap>
 	
 	
-	<delete id="removeMyRecipe">
-		DELETE FROM MYRECIPE_TBL WHERE RECIPE_NO = #{recipeNo} AND MEMBER_EMAIL = #{memberEmail }
-	</delete>
 	
-	<insert id="insertMyRecipe">
-		INSERT INTO MYRECIPE_TBL VALUES(#{memberEmail}, #{recipeNo}, SEQ_MYRECIPE_NO.NEXTVAL, #{recipeName})
-	</insert>
-
-	<select id="selectTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MYRECIPE_TBL WHERE MEMBER_EMAIL = #{memberEmail}
-	</select>
-	
-<!-- 	마이레시피 맵 끝 -->
 
 	<resultMap type="RecipeMaterial" id="RecipeMaterialResultMap">
 		<id property="recipeNo"				column="RECIPE_NO" />
@@ -210,7 +195,16 @@ WHERE RECIPE_TBL.RECIPE_NO = MYRECIPE_TBL.RECIPE_NO AND MYRECIPE_TBL.MEMBER_EMAI
 
 	</resultMap>
 
-
+	<select id="selectRecommandCount" resultType="_int">
+	
+	select count(*) from RECOMMANDATION where RECIPE_NO= #{recipeNo} and MEMBER_EMAIL = #{memberEmail}
+	
+	</select>
+	
+	<select id="selectMyrecipe" resultType="_int">
+	
+	select count(*) from myrecipe_tbl where RECIPE_NO= #{recipeNo} and MEMBER_EMAIL = #{memberEmail}
+	</select>
 
 
 
@@ -252,6 +246,17 @@ select count(*) from recipe_comment where RECIPE_NO = #{recipeNo}
 
 </select>
 
+<select id="selectCommentMember" resultType="string">
+select MEMBER_EMAIL from recipe_comment where COMMENT_NO = #{commentNo}
+</select>
+
+
+<!-- 멤버 불러오기 영역 -->
+
+
+<select id="selectOneName" resultType="string">
+select MEMBER_NICKNAME from Member_tbl where MEMBER_EMAIL =#{memberEmail}
+</select>
 
 
 </mapper>

@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${qa.qaTitle }</title>
 
 <link
@@ -21,6 +21,9 @@
 
 
 <style>
+body{
+margin-top:10rem;
+}
 section {
 	margin-top: 100px;
 }
@@ -29,10 +32,12 @@ img {
 	width: 50%;
 	height: auto;
 }
+a{
+color:black;}
 </style>
 </head>
 <body>
-
+<jsp:include page="../header.jsp"/>
 	<section>
 		<!-- 전체 감싸기 -->
 		<div class="container">
@@ -59,7 +64,7 @@ img {
 				<!-- 타이틀 영역 종료 -->
 				<!-- 글쓴이 영역 -->
 				<div id="writer-area" class="col-md-2">
-					<h4>작성자 : ${qa.memberEmail }</h4>
+					<h4> ${qa.name }</h4>
 				</div>
 				<!-- 글쓴이 영역 종료 -->
 			</div>
@@ -68,22 +73,30 @@ img {
 			<!-- 내용영역 -->
 			<article>
 				<div id="contents-area" class="row">
+			<!-- 날짜 버튼영역 -->
 					<div id="date-button-area" class="py-10 row">
 						<hr style="margin: 2px">
 						<div id="date area" class="col-md-10" style="padding: 1em;">
 							${qa.qaInsertDate }</div>
 						<div class="col-md-2 row"
 							style="text-align: center; padding: 1em;">
+
+							<c:if test="${qa.memberEmail ==loginUser.memberEmail || loginUser.adminCheck==true }">
+
 							<div class="col-6">
 								<button
 									onclick="location.href='/qna/modifyView.do?qaNo=${qa.qaNo}'"
 									class=" btn btn-outline-primary" style="width: 100%">수정</button>
 							</div>
 							<div class="col-6">
-								<button onclick="location.href='/qna/remove.do?qaNo=${qa.qaNo}'"
+								<button onclick="removeQnA()"
 									class="btn btn-outline-primary" style="width: 100%">삭제</button>
 
 							</div>
+
+							 </c:if> 
+
+
 
 						</div>
 					</div>
@@ -162,11 +175,10 @@ img {
 									<div
 										class="shadow-lg p-3 mb-5 bg-body rounded mt-4 text-justify">
 										<div id="comment-row" class="row">
-											<div id="comment-writer" class="col-md-10">
-												<h4>${qcList.memberEmail }작성자</h4>
+											<div id="comment-writer" class="col-md-12">
+												<h4>${qcList.qcName }</h4>
 											</div>
-											<div id="comment-button" class="col-md-2"
-												style="text-align: right">신고</div>
+
 										</div>
 										<div id="comment-text-area">
 											<span>${qcList.qaCommentDate }</span> <br>
@@ -174,11 +186,30 @@ img {
 										</div>
 										<div id="comment-delmodi-buttom-area"
 											style="text-align: right">
+
+											<c:if test="${loginUser.adminCheck==true}">
+
 											<button type="button" onclick="modifyViewOn(this);"
 												class="btn btn-outline-primary">수정</button>
+												
+												
+											<!-- 검색아닐시 -->	
+										<c:if test="${searchCondition == null }">
 											<button
-												onclick="removeComment(${qcList.qaCommentNo},${qcList.qaNo} );"
+												onclick="removeComment(${qcList.qaCommentNo},${qcList.qaNo},${page } );"
 												class="btn btn-outline-primary">삭제</button>
+										</c:if>
+											<!-- 검색시 -->
+										<c:if test="${searchCondition != null }">
+											<button
+												onclick="removeComment1(${qcList.qaCommentNo},${qcList.qaNo},${page },'${searchCondition}','${searchValue}' );"
+												class="btn btn-outline-primary">삭제</button>
+										</c:if>
+											
+											
+											
+											
+											</c:if>
 
 										</div>
 
@@ -195,7 +226,18 @@ img {
 										name="memberEmail"> <input type="hidden"
 										value="${qcList.qaNo }" name="qaNo"> <input
 										type="hidden" value="${qcList.qaCommentNo }"
-										name="qaCommentNo">
+										name="qaCommentNo"> <input type="hidden"
+										value="${page }" name="page">
+
+									<c:if test="${searchCondition != '' }">
+										<input type="hidden" value="${searchCondition }"
+											name="searchCondition">
+										<input type="hidden" value="${searchValue }"
+											name="searchValue">
+									</c:if>
+
+
+
 									<div id="comment-textarea" class="col-md-11">
 										<!-- 세션에서 사용자 id가지고 올것 -->
 										<div class="form-floating">
@@ -222,13 +264,23 @@ img {
 					</c:forEach>
 					<hr>
 
+<!-- 				관리자 보임 -->
+				<c:if test="${loginUser.adminCheck==true }"> 
 					<!-- 코멘트 작성영역 -->
 
 					<form action="/qna/commentWrite.do" method="post">
 						<div id="comment-write-area" class="row">
-							<input type="hidden" value="" name="memberEmail"> <input
+							<input type="hidden" value="${loginUser.memberEmail }" name="memberEmail"> <input
 								type="hidden" value="${qa.qaNo }" name="qaNo"> <input
-								type="hidden" value="0" name="qaCommentNo">
+								type="hidden" value="0" name="qaCommentNo"> <input
+								type="hidden" value="${page }" name="page">
+
+							<c:if test="${searchCondition != '' }">
+								<input type="hidden" value="${searchCondition }"
+									name="searchCondition">
+								<input type="hidden" value="${searchValue }" name="searchValue">
+							</c:if>
+
 							<div id="comment-textarea" class="col-md-11">
 								<!-- 세션에서 사용자 id가지고 올것 -->
 								<div class="form-floating">
@@ -248,6 +300,7 @@ img {
 						</div>
 						<!-- 코멘트 작성영역 종료 -->
 					</form>
+						</c:if> 
 
 
 				</div>
@@ -258,17 +311,34 @@ img {
 		</div>
 		</article>
 		<!-- 아티클 전체 들어감 -->
-		<div id="list-button-area" style="text-align:center; margin:10px">
-		<button onclick="location.href='/qna/List.do'"class="btn btn-outline-primary" style="width:20rem">목록으로</button>
+
+		<!-- 목록 버튼 영역 -->
+		<div id="list-button-area" style="text-align: center; margin: 10px">
+			<button
+				<c:if test="${searchValue!=null }">
+		 onclick="location.href='/qna/search.do?searchCondition=${searchCondition }&searchValue=${searchValue }&page=${page}'
+		</c:if>
+				<c:if test="${searchValue==null }">
+		 onclick="location.href='/qna/List.do?page=${page}'
+		</c:if>
+		
+		"class="btn btn-outline-primary"
+				style="width: 20rem">목록으로</button>
 		</div>
+		<!-- 목록 버튼 영역 종료 -->
 		</div>
 		<!-- 전체 감싸는 div종료 -->
 	</section>
-
+<jsp:include page="../footer.jsp"/>
 
 	<script>
 
-
+function removeQnA() {
+	if(confirm("삭제하시겠습니까?")){
+	location.href='/qna/remove.do?qaNo=${qa.qaNo}'
+}
+	
+}
 
 
 //코멘트 수정창 안보이게 하기
@@ -292,10 +362,19 @@ function modifyViewOff(obj) {
 }
 
 //댓글 삭제 확인
-function removeComment(commentNo,qaNo) {
+function removeComment(commentNo,qaNo,page,memberEmail) {
 	
 	if(confirm("댓글을 삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
-		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo;
+		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo+'&page='+page;
+	}
+	
+}
+
+//검색시 댓글 삭제 확인
+function removeComment1(commentNo,qaNo,page,searchCondition,searchValue,memberEmail) {
+	var sValue = decodeURI(searchValue);
+	if(confirm("댓글을 삭제 하시겠습니까? 삭제하면 복구할수 없습니다")){
+		location.href='/qna/removeComment.do?qaCommentNo='+commentNo+'&qaNo='+qaNo+'&page='+page+'&searchCondition='+searchCondition+'&searchValue='+sValue;
 	}
 	
 }

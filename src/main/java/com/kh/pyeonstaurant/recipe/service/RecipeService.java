@@ -1,4 +1,3 @@
-
 package com.kh.pyeonstaurant.recipe.service;
 
 
@@ -61,6 +60,12 @@ public interface RecipeService {
 	public List<Recipe> recomadRecipe(String recipeCategory);
 
 	public int getTotalCount(int recipeNo);
+
+	public String printMemberName(String memberEmail);
+
+	public int checkMyRecipe(int recipeNo, String memberEmail);
+
+	public String getMemberEmial(int recipeNo);
 
 
 

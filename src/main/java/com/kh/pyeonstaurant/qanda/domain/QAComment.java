@@ -11,6 +11,17 @@ public class QAComment {
 	private String qaCommentContents;
 	private Date qaCommentDate;
 	private Date qaModifyDate;
+	private String qcName;
+	
+	
+	
+	
+	public String getQcName() {
+		return qcName;
+	}
+	public void setQcName(String qcName) {
+		this.qcName = qcName;
+	}
 	public int getQaCommentNo() {
 		return qaCommentNo;
 	}
@@ -53,6 +64,8 @@ public class QAComment {
 				+ ", qaCommentContents=" + qaCommentContents + ", qaCommentDate=" + qaCommentDate + ", qaModifyDate="
 				+ qaModifyDate + "]";
 	}
+	
+	
 	
 }
 

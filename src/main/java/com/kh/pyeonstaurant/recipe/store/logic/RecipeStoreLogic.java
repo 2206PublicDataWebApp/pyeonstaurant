@@ -28,6 +28,8 @@ public class RecipeStoreLogic implements RecipeStore {
 	@Override
 	public int insertRecipe(Recipe recipe, SqlSessionTemplate session) {
 		int result = session.insert("RecipeMapper.insertRecipe", recipe);
+		result += session.insert("RecipeMapper.insertPoint",recipe.getMemberEmail());
+		result+= session.update("RecipeMapper.updatePiont",recipe.getMemberEmail());
 		return result;
 	}
 
@@ -104,18 +106,17 @@ public class RecipeStoreLogic implements RecipeStore {
 		return rTag;
 	}
 
-
+	/**레시피 추천 수 가져오기*/
 	@Override
 	public int selectRecommand(SqlSessionTemplate session, int recipeNo, String memberEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Recipe recipeOne = new Recipe();
+		recipeOne.setRecipeNo(recipeNo);
+		recipeOne.setMemberEmail(memberEmail);
+		int result = session.selectOne("RecipeMapper.selectRecommandCount", recipeOne);
+		return result;
 	}
 
-	@Override
-	public int countRecommand(SqlSessionTemplate session, int recipeNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	/**레시피 코멘트 출력*/
 	@Override
@@ -232,7 +233,6 @@ public class RecipeStoreLogic implements RecipeStore {
 	@Override
 	public List<Recipe> selectRecomandRecipe(SqlSessionTemplate session, String recipeCategory) {
 		List<Recipe> recommandList = session.selectList("RecipeMapper.selectRecommandRecipe",recipeCategory);
-		System.out.println(recommandList.toString());
 		return recommandList;
 	}
 
@@ -242,6 +242,31 @@ public class RecipeStoreLogic implements RecipeStore {
 		int count = session.selectOne("RecipeMapper.selectCommentCount",recipeNo);
 		return count;
 		
+	}
+
+	/**멤버 닉네임 가져오기*/
+	@Override
+	public String selectMemberName(String memberEmail,SqlSessionTemplate session) {
+		String name = session.selectOne("RecipeMapper.selectOneName", memberEmail);
+		return name;
+	}
+
+	
+	/**마이레시피 등록여부 확인하기*/
+	@Override
+	public int selectMyRecipe(SqlSessionTemplate session, int recipeNo, String memberEmail) {
+		Recipe oneRecipe = new Recipe();
+		oneRecipe.setMemberEmail(memberEmail);
+		oneRecipe.setRecipeNo(recipeNo);
+		int result = session.selectOne("RecipeMapper.selectMyrecipe", oneRecipe);
+		return result;
+	}
+
+	/**회원이메일 가져오기*/
+	@Override
+	public String selectMemberEmail(SqlSessionTemplate session, int recipeNo) {
+		String memberEmail=session.selectOne("RecipeMapper.selectMember", recipeNo);
+		return memberEmail;
 	}
 
 }
