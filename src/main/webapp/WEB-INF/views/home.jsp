@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,22 +26,22 @@
             <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
 
-
                 <a href="#"><i class="fa-solid fa-magnifying-glass icon"></i></a>
                 <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
 
 
-                
-                <c:if test="${sessionScope.loginUser eq null  && empty adminCheck}">
+              <c:if test="${sessionScope.loginUser eq null}">
                 <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
-
                 </c:if>
                 
-                <c:if test="${not empty loginUser || not empty adminCheck}">
-
+                <c:if test="${not empty loginUser}">
                 <a href="/member/myPageView.kh"><i class="fa-solid fa-user icon"></i></a>
-
                 </c:if>
+                <c:if test="${loginUser.adminCheck == true }">
+                관리자
+                </c:if>
+
+              
             </nav>
         </div>
     </header>
@@ -77,8 +78,7 @@ class="board-menu">간식</a></li>
             <div class="swiper-pagination"></div>
           </div>
     </main>
-      	<button onclick="startChat('${loginUser.memberNickName}');">채팅상담</button>
-	<button onclick="onPeon();">편의점 위치검색</button>     
+ 
 
         <footer class="footer">
         <div class="footer_inner">
@@ -89,14 +89,14 @@ class="board-menu">간식</a></li>
                     <p class="work_time">오전 10시 ~ 오후 5시 (주말, 공휴일 제외)</p>
                     <div>
 
-						<button onclick="startChat('${loginUser.memberNickName}');" class="learn-more">
+						<button onclick="startChat('${loginUser.memberNickname}');" class="learn-more">
 						  <span class="circle" aria-hidden="true">
 						  <span class="icon arrow"></span>
 						  </span>
 						  <span class="button-text">1대1 상담</span>
 						</button>
 						
-						<button class="learn-more">
+						<button class="learn-more" onclick="onPeon();">
 						  <span class="circle" aria-hidden="true">
 						  <span class="icon arrow"></span>
 						  </span>
