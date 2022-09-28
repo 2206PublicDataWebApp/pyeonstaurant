@@ -9,37 +9,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>마이페이지</title>
 	<script src="/resources/js/myPage.js"></script>
+	<link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="/resources/css/myPage.css">
 	<link rel="stylesheet" href="/resources/css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         <div class="header-container">
-            <h1><a href="#"><img src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu"></a></h1>
+            <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
-                <a href="#" class="header-search"></a>
-                <a href="#" class="header-cart"></a>
-                <a href="#" class="header-mypage"></a>
+                <a href="#"><i class="fa-solid fa-magnifying-glass icon"></i></a>
+                <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
+                <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
             </nav>
         </div>
     </header>
     
 	    <nav class="sidebar">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <!--<img src="logo.png" alt="">-->
-                </span>
-
-                <div class="text logo-text">
-                    <span class="name">Codinglab</span>
-                    <span class="profession">Web developer</span>
-                </div>
-            </div>
-        </header>
-
         <div class="menu-bar">
             <div class="menu">
                 <ul class="menu-links">
@@ -58,21 +47,21 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callMyRecipe.kh">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">작성 레시피 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callMyComment.kh">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">작성 댓글 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callPoint.kh">
                             <i class='bx bx-heart icon' ></i>
                             <span class="text nav-text">포인트 내역 조회</span>
                         </a>
@@ -92,7 +81,7 @@
                 <li class="">
                     <a href="/member/logout.kh">
                         <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
+                        <span class="text nav-text">로그아웃</span>
                     </a>
                 </li>
             </div>
@@ -115,12 +104,12 @@
             <div class="user-info">
                   <li>
                       <ul class= "info-property">레시피 수</ul>
-                      <ul class= "info-value">구현 미완</ul>
+                      <ul class= "info-value">3</ul>
                   </li>
       
                   <li>
                       <ul class= "info-property">댓글</ul>
-                      <ul class= "info-value">구현 미완</ul>
+                      <ul class= "info-value">5</ul>
                   </li>
       
                   <li>

@@ -1,7 +1,5 @@
-
 package com.kh.pyeonstaurant.member.controller;
-
-
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.pyeonstaurant.member.domain.Member;
 import com.kh.pyeonstaurant.member.service.MemberService;
 import com.kh.pyeonstaurant.member.service.logic.MemberServiceImpl;
+import com.kh.pyeonstaurant.point.domain.Point;
+import com.kh.pyeonstaurant.recipe.domain.Recipe;
+import com.kh.pyeonstaurant.recipe.domain.RecipeComment;
 
 @Controller
 public class MemberController {
@@ -226,5 +227,77 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	// 내가 쓴 레시피 불러오기
+	@RequestMapping(value="/member/callMyRecipe.kh",method = RequestMethod.GET)
+	public ModelAndView callBoard(HttpSession session
+			, ModelAndView mv) {
+		try {
+			Member member = (Member)session.getAttribute("loginUser");
+			List<Recipe> rList = mService.selectRecipeNumber(member.getMemberEmail());
+			mv.addObject("rList",rList);
+			mv.setViewName("member/myPage_recipe");
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	// 내가 쓴 댓글 불러오기 
+	@RequestMapping(value="/member/callMyComment.kh",method = RequestMethod.GET)
+	public ModelAndView callComment(HttpSession session
+			, ModelAndView mv) {
+		try {
+			Member member = (Member)session.getAttribute("loginUser");
+			List<RecipeComment> rcList = mService.selectCommentNumber(member.getMemberEmail());
+			mv.addObject("rcList",rcList);
+			mv.setViewName("member/myPage_comment");
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	// 포인트 내역 불러오기
+	@RequestMapping(value="/member/callPoint.kh",method = RequestMethod.GET)
+	public ModelAndView callPoint(HttpSession session
+			, ModelAndView mv) {
+		try {
+			Member member = (Member)session.getAttribute("loginUser");
+			List<Point> pList = mService.selectPoint(member.getMemberEmail());
+			mv.addObject("pList",pList);
+			mv.setViewName("member/myPage_point");
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	// 비밀 번호 찾기 기능 구현 중
+	/*@RequestMapping(value="/member/findPw.kh", method=RequestMethod.GET)
+	public ModelAndView modifyMemberPwd(
+			@ModelAttribute Member member
+			, ModelAndView mv) {
+		try {
+			int result = mService.modifyMemberPwd(member);
+			if(result > 0) {
+				mv.setViewName("redirect:/");
+			}else {
+				mv.addObject("msg", "회원 정보 수정 실패!");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
+		return mv;
+	}*/
 }
 

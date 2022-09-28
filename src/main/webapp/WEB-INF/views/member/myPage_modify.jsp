@@ -54,6 +54,7 @@
                         <a href="/member/myPageModifyView.kh">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">회원정보 수정</span>
+                            
                         </a>
                     </li>
 
@@ -102,11 +103,12 @@
     
     <main>
 		<form action="/member/modifyNickname.kh" method="post">
+			<input type="text" name="memberEmail" value="${loginUser.memberEmail }">
 			<table>
 				<tr>
 					<td>닉네임</td>
 					<td>
-						<input type="text" name="memberNickname" value="${member.memberNickname }">
+						<input type="text" name="memberNickname" value="${loginUser.memberNickname }">
 					</td>
 				</tr>				
 

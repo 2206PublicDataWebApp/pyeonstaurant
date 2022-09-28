@@ -6,28 +6,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>편스토랑</title>
+    <title>편스토랑 메인</title>
+    <link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/swiper.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="header-container">
-            <h1><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
+            <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
-                <a href="#" class="header-search"><img src="/resources/images/header_search.svg"></a>
-                <a href="/myRecipe/list" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
+
+                <a href="#"><i class="fa-solid fa-magnifying-glass icon"></i></a>
+                <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
+
                 
-                <c:if test="${sessionScope.loginUser eq null && empty adminCheck }">
-                <a href="/member/joinView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
+                <c:if test="${sessionScope.loginUser eq null  && empty adminCheck}">
+                <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
+
                 </c:if>
                 
                 <c:if test="${not empty loginUser || not empty adminCheck}">
-                <a href="/member/myPageView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
+
+                <a href="/member/myPageView.kh"><i class="fa-solid fa-user icon"></i></a>
+
                 </c:if>
-        
-                
             </nav>
         </div>
     </header>
@@ -35,10 +41,16 @@
     <nav class="board-navigation">
         <div class="board-container">
             <ul>
-                <li><a href="/recipe/recipeList.do">식사</a></li>
-                <li><a href="#">술안주</a></li>
-                <li><a href="#">간식</a></li>
-                <li><a href="#">음료/술</a></li>
+
+                <li><a href="/search/mainSearch.kh?mainCondition=mael&listCondition=${listCondition}"
+ class="board-menu">식사</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=relish&listCondition=${listCondition}"
+class="board-menu">술안주</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=dessert&listCondition=${listCondition}"
+class="board-menu">간식</a></li>
+                <li><a href="/search/mainSearch.kh?mainCondition=drink&listCondition=${listCondition}"
+ class="board-menu">음료/술</a></li>
+
             </ul>
         </div>
     </nav>
@@ -53,8 +65,6 @@
               <div class="swiper-slide"><img src="/resources/images/sample4.jpg"></div>
               <div class="swiper-slide"><img src="/resources/images/sample5.jpg"></div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
           </div>
     </main>
@@ -69,12 +79,19 @@
                     <p class="tel">02-123-4567</p>
                     <p class="work_time">오전 10시 ~ 오후 5시 (주말, 공휴일 제외)</p>
                     <div>
-                        <button>
-                            1:1 문의하기
-                        </button>
-                        <button>
-                            공지사항
-                        </button>
+						<button class="learn-more">
+						  <span class="circle" aria-hidden="true">
+						  <span class="icon arrow"></span>
+						  </span>
+						  <span class="button-text">1대1 상담</span>
+						</button>
+						
+						<button class="learn-more">
+						  <span class="circle" aria-hidden="true">
+						  <span class="icon arrow"></span>
+						  </span>
+						  <span class="button-text">편의점 위치 찾기</span>
+						</button>
                     </div>
                 </div>
                 
@@ -88,7 +105,7 @@
                             <li class="hr">&nbsp;</li>
                             <li><a href="/notice/list">공지사항</a></li>
                             <li class="hr">&nbsp;</li>
-                            <li><a href="#">Q &amp;A</a></li>
+                            <li><a href="http://127.0.0.1:8888/qna/List.do">Q&amp;A</a></li>
                         </ul>
                     </div>
 

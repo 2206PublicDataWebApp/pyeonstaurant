@@ -12,15 +12,5 @@ import com.kh.pyeonstaurant.point.store.PointStore;
 
 @Service
 public class PontServiceImpl implements PointService{
-	@Autowired
-	PointStore pStore;
-	
-	@Autowired
-	SqlSessionTemplate session;
 
-	@Override
-	public List<Point> printPointHistory(String pointMemberEmail) {
-		List<Point> pList = pStore.selectAllPoint(pointMemberEmail, session);
-		return pList;
-	}
 }
