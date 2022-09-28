@@ -581,7 +581,6 @@ padding-top: 5rem;
 											<button
 												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );"
 												class="btn btn-outline-primary">삭제</button>
-<<<
 											
 											
 											</c:if>
