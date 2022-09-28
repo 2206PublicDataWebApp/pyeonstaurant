@@ -188,7 +188,7 @@ a{
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> <a class="nav-link" href="charts.html">
+						</a> <a class="nav-link" href="/admin/chattingList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리

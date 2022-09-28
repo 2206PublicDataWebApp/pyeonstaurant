@@ -53,9 +53,10 @@
                 <a href="/member/joinView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
                 </c:if>
                 
-                <c:if test="${not empty loginUser || not empty adminCheck}">
+                <c:if test="${not empty loginUser}">
                 <a href="/member/myPageView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
                 </c:if>
+
         
                  <h1 style="margin-right:970px;"><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
             </nav>

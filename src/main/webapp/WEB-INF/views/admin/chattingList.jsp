@@ -114,7 +114,6 @@
 <link href="dashboard.css" rel="stylesheet">
 </head>
 <body>
-
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="index.html">편스토랑 관리자페이지</a>
@@ -175,22 +174,19 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 신고 관리
-						</a> 
-						<a class="nav-link" href="/admin/memberAdminList">
+						</a> <a class="nav-link" href="/admin/memberAdminList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 회원 관리
-						</a>
-						<a class="nav-link" href="/admin/boardList">
+						</a> <a class="nav-link" href="/admin/boardList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> 
-						<a class="nav-link" href="charts.html">
+						</a> <a class="nav-link" href="/admin/chattingList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리
-						</a> 
+						</a>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">
@@ -200,16 +196,69 @@
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
-			<h3 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">게시물
-				목록</h3>
-
-			<div class="container-fluid px-5">
-					
-
+			<h2 style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;"><div class="form-check form-switch">	
+			<form action="/admin/chatBtn">
+                <label class="form-check-label" for="flexSwitchCheckChecked">
+                     <input class="form-check-input" id="checkbox flexSwitchCheckChecked" role="switch" type="checkbox" value="true" checked> 
+                    <span class="slider round"></span>
+                    <p >OFF</p>
+                  <p style="display: none;">ON</p>  
+                  </label>
+                  
+                  </form>  
+            </div>
+            
+<!--             <div class="form-check form-switch"> -->
+<!--             <label class="form-check-label" for="flexSwitchCheckChecked"> -->
+<!--   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"  value="true"  checked> -->
+<!--    <p >OFF</p> -->
+<!--                   <p style="display: none;">ON</p>   -->
+<!--   </label> -->
+<!-- </div> -->
+            
+            
+            <div>
+                <div>
+                    <span >상담 대기인원 :</span> <span id="count"></span><span id="count">명</span>
+                </div>
+                <div>                             
+                   <div id="pagename" align="center">채팅상담리스트</div>            
+                    <div class="container-fluid px-5">
 				<div class="card mb-5">
-
-
+					<div class="table-responsive">
+						<table class="table table-hover" id="togglePart">
+							<thead class="table-light">
+								 <tr>
+                                    <th style="font-size: 20px;">번호</th>
+                                    <th style="font-size: 20px;">고객닉네임</th>
+                                    <th style="font-size: 20px;">문의주제</th>
+                                    <th style="font-size: 20px;">신청시간</th>
+                                    <th style="font-size: 20px;">상담결과</th>
+               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-size: 15px;">ddd</td>
+                                    <td style="font-size: 15px;">dd</td>
+                                    <td style="font-size: 15px;">dd</td>
+                                    <td style="font-size: 15px;">dd</td>
+                                    <td style="font-size: 15px;">dd</td>
+                                    <td style="font-size: 15px;">dd</th>                
+                                </tr>
+                            </tbody>
+						</table>
+					</div>
+				</div>
 			</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+				</h2>
 			<footer class="footer">
 				<div class="footer_inner">
 					<div class="footer_content_first">
@@ -248,10 +297,100 @@
 				</div>
 			</footer>
 
-		</div>
+	
 	</div>
+	
+	 <script>    	
+     $('#checkbox').click(function(){    	
+    	 var p1btn=$('p').eq(0).css('display');
+    	 var printer
+    	 if(p1btn!=null){
+               $('p').toggle();
+               $('#togglePart').toggle();
+               //var requestTime = new Date();
+            // 신규 상담 목록들을 가져온다.
+               //지금시간...으로 매핑 예정
+               
+           printer = setInterval(printList,5000); 
+    	 }else if(confirm("정말로 종료하시겠습니까?")){
+   	  		 $('p').toggle();
+   	  		 clearInterval(printer);
+   	  		 $('tr').remove();   	  		 
+   	  		 var suc=success();
+			$.ajax({							//종료시 on/off변경								
+				 url:"/manager/chatEndbtn.kh",
+		         type:'get',
+		         data :{
+		        	 on_off:"N"                   
+		         },
+		         dataType:"json",
+		         success:function(result) {
+		        	 if(result>0){		         
+   			 			alret("result");
+   		    			location.href = "/home.kh/";  //관리자 메인페이지로 가자 
+		        	 }else{
+	   		    		 alret("상담종료 오류입니다. 다시 진행부탁드립니다.");		        		 
+		        	 };
+		         },
+		         error:function(e){
+		        	 alert('error');
+				 },
+		        	 
+		     })
+   		    
+    	 }
+    	 
+     });
+         		
+	  
+     
+    /// 리스트 반복 출력구간  //이때 db on/off버튼도 컨트롤러에서 변경한다.
+    
+   function printList(){
+	   $('tbody').html('');
+    	$.ajax({
+         url:"/consult/chatSession.kh",
+         type:'get',
+         //data:requestTime,                   
+         dataType:"json",
+         success:function(result) {
+        	 var count=0;
+         	 for (var i in result){
+            	   var a='<tr>'+
+            			'<td name="info'+i+'" scope="row">'+result[i].titleNo+'</td>'+
+                		'<td name="info'+i+'" scope="row">'+result[i].csNickName+'</td>'+
+                        '<td name="info'+i+'" scope="row">'+result[i].csTitle+'</td>'+                            
+                        '<td name="info'+i+'" scope="row">'+result[i].csDate+'</td>'+ 
+                        '<td name="info'+i+'" scope="row">'+result[i].csResult+'</td>';
+			    if(result[i].csResult==null){
+			    		count+=1;
+            			a+='<td><input type="button" onclick="serverchat('+i+');" value="상담시작"></td>';
+                }else{
+                	a+='<td></td>';
+                }
+			   
+                $('tbody').append(a);
+                $('#count').html(count);
+              }
+                
+		  }        	
+      })
+   };
+    		 
+  ///버튼 클릭시 해당 상담창으로 이동   
+     function serverchat(i){  
+    	
+    	var	titleNo=$('[name="info'+i+'"]').eq(0).text();
+    	var	csNickName=$('[name="info'+i+'"]').eq(1).text();
+    	var	csTitle = $('[name="info'+i+'"]').eq(2).text();    		
+    	
+	 /*  location.href="/serverchat/start.kh?titleNo"+titleNo+"&cNickName="+cNickName+"&csTitle="+csTitle;   */ 	
+	 var windo="status=no , nenubar=no,resizable=no,titlebar=no, width=550,height=650";
 
-
+	 window.open("/serverchat/start.kh?titleNo="+titleNo+"&csNickName="+csNickName+"&csTitle="+csTitle,"PopupWin",windo);	
+  }
+ 
+</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

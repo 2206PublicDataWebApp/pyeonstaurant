@@ -33,6 +33,19 @@ public class AdminController {
 //	}
 //	
 	
+	@RequestMapping(value="/admin/chatBtn", method=RequestMethod.POST)
+	public ModelAndView chattingOn(ModelAndView mv) {
+		
+		return mv;		
+	}
+	
+	@RequestMapping(value="/admin/chattingList", method=RequestMethod.GET)
+	public String increasePoint() {
+		return "admin/chattingList";	
+	}
+	
+	
+	
 	@RequestMapping(value="/admin/boardList", method=RequestMethod.GET)
 	public ModelAndView listBoardAdmin(
 			ModelAndView mv

@@ -253,7 +253,7 @@ text-align:center;
 						<div id="wirter-area" class="col-md-12">
 							<h5>
 								작성자 : ${recipe.memberEmail }
-								<button class="btn btn-danger"><a href="/report/add">신고</a></button>
+								<button class="btn btn-danger"><a href="/report/add?recipeNo=${recipe.recipeNo }">신고</a></button>
 							</h5>
 						</div>
 						<!-- 작성자 영역종료 -->
@@ -338,7 +338,7 @@ text-align:center;
 							<div id="star" class="p-3 p3 col-6">
 
 							<form action="/myRecipe/add" method="get">
-							<input type="hidden" name="memberEmail" value="${recipe.memberEmail }" style="display:none">
+						
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo}" style="display:none">
 							<input type="hidden" name="recipeName" value="${recipe.recipeName}" style="display:none">
 							<label for="addMyRecipeButton">		
@@ -470,9 +470,7 @@ text-align:center;
 											<button
 												onclick="removeComment(${rcList.commentNo},${rcList.recipeNo} );"
 												class="btn btn-outline-primary">삭제</button>
-
 										</div>
-
 									</div>
 								</div>
 							</div>

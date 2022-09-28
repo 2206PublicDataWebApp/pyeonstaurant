@@ -35,7 +35,7 @@
     <nav class="board-navigation">
         <div class="board-container">
             <ul>
-                <li><a href="#">식사</a></li>
+                <li><a href="/recipe/recipeList.do">식사</a></li>
                 <li><a href="#">술안주</a></li>
                 <li><a href="#">간식</a></li>
                 <li><a href="#">음료/술</a></li>

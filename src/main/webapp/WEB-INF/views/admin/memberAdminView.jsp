@@ -179,22 +179,19 @@ a{
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 신고 관리
-						</a> 
-						<a class="nav-link" href="/admin/memberAdminList">
+						</a> <a class="nav-link" href="/admin/memberAdminList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 회원 관리
-						</a>
-						<a class="nav-link" href="/admin/boardList">
+						</a> <a class="nav-link" href="/admin/boardList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 게시판 관리
-						</a> 
-						<a class="nav-link" href="charts.html">
+						</a> <a class="nav-link" href="/admin/chattingList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 채팅 관리
-						</a> 
+						</a>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">

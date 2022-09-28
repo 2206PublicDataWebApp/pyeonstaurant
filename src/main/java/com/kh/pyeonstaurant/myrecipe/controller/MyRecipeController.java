@@ -52,18 +52,19 @@ public class MyRecipeController {
 			 HttpSession session
 			, @ModelAttribute MyRecipe myRecipe
 			, @RequestParam("recipeNo") int recipeNo
-//			, @RequestParam("memberEmail") String memberEmail
 			, @RequestParam("recipeName") String recipeName
-			,HttpServletRequest request) {
+			, HttpServletRequest request) {
 		try {
 			session = request.getSession();
-			Member email = (Member)session.getAttribute("memberEmail");
+			Member email = (Member)session.getAttribute("loginUser");
 			String memberEmail = email.getMemberEmail();
-
 			myRecipe.setMemberEmail(memberEmail);
 			myRecipe.setRecipeNo(recipeNo);
 			myRecipe.setRecipeName(recipeName);
 			int result = mService.addMyRecipe(myRecipe);
+			if(result > 0) {
+				System.out.println("추가 성공");
+			}
 
 		}catch(Exception e) {
 			

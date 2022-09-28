@@ -78,13 +78,15 @@ public class ReportController {
 	public ModelAndView addReportRecipe(ModelAndView mv
 			, HttpSession session
 			, @ModelAttribute Report report
-			,HttpServletRequest request
+			, HttpServletRequest request
+			, @RequestParam("recipeNo") int recipeNo
 			) {
 		try {
 			session = request.getSession();
 			Member email = (Member)session.getAttribute("loginUser");
 			String memberEmail = email.getMemberEmail();
 			report.setMemberEmail(memberEmail);
+			report.setRecipeNo(recipeNo);
 			int result = rService.addReportRecipe(report);
 			if(result > 0) {
 				mv.setViewName("redirect:/recipe/recipeList.do");
@@ -99,13 +101,15 @@ public class ReportController {
 	public ModelAndView addReportComment(ModelAndView mv
 			, HttpSession session
 			, @ModelAttribute Report report
-			,HttpServletRequest request
+			, HttpServletRequest request
+			, @RequestParam("recipeNo") int recipeNo
 			) {
 		try {
 			session = request.getSession();
 			Member email = (Member)session.getAttribute("loginUser");
 			String memberEmail = email.getMemberEmail();
 			report.setMemberEmail(memberEmail);
+			report.setRecipeNo(recipeNo);
 			int result = rService.addReportComment(report);
 			if(result > 0) {
 				mv.setViewName("redirect:/recipe/recipeList.do");
@@ -115,6 +119,7 @@ public class ReportController {
 		}
 		return mv;	
 	}
+	
 	@RequestMapping(value="/report/successRecipe", method=RequestMethod.GET)
 	public String successReportRecipe(@RequestParam("recipeNo") int recipeNo) {
 		int result = rService.processedReportRecipe(recipeNo);
