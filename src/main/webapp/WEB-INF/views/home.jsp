@@ -12,6 +12,7 @@
 	<link rel="icon" href="/resources/images/favicon.ico" type="image/x-icon">
 
     <title>Document</title>
+    <script src="../resources/js/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/swiper.css">

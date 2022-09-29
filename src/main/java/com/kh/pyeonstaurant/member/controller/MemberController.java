@@ -62,14 +62,13 @@ public class MemberController {
 			, HttpSession session) {
 		try {
 			Member loginUser = mService.loginMember(member);	//이메일 저장됨
+			session = request.getSession();
 			Boolean adminCheck = loginUser.getAdminCheck();
+			session.setAttribute("loginUser", loginUser);				
 			
 			if(loginUser != null && adminCheck == false) {
-				session = request.getSession();
-				session.setAttribute("loginUser", loginUser);				
 				mv.setViewName("redirect:/");
 			}else if(adminCheck == true) {
-				session = request.getSession();
 				session.setAttribute("adminCheck", adminCheck);
 				mv.addObject("adminCheck", adminCheck);
 				mv.setViewName("redirect:/admin/memberAdminList");
