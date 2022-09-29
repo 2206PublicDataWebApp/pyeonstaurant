@@ -19,7 +19,7 @@
         <input id="checkbox" type="checkbox" value="true" >
         <span class="slider round"></span>
       </label>
-      <p >OFF</p>
+      <p>OFF</p>
       <p style="display: none;">ON</p> 
 
 </div>
@@ -60,30 +60,29 @@
     	  		 $('p').toggle();
     	  		 clearInterval(printer);
     	  		 $('tr').remove();  
-    	  		 
-    	  		 var suc=success();
-    	  		$.ajax({							//종료시 on/off변경								
-   				 url:"/manager/chatEndbtn.kh",
-   		         type:'get',
-   		         data :{
-   		        	 on_off:"N"                   
-   		         },
-   		         dataType:"json",
-   		         success:function(result) {
-   		        	 if(result>0){		         
-      			 			alret("result");
-      		    			//location.href = "/home.kh/";  //관리자 메인페이지에서 오픈하기때문에 변경하지 않음
-   		        	 }else{
-   	   		    		 alret("상담종료 오류입니다. 다시 진행부탁드립니다.");		        		 
-   		        	 };
-   		         },
-   		         error:function(e){
-   		        	 alert('error');
-   				 },
-   		        	 
-   		     })
+    	    	$.ajax({							//종료시 on/off변경								
+	   				 url:"/manager/chatEndbtn.kh",
+	   		         type:'get',
+	   		         data :{
+	   		        	 on_off:"N"                   
+	   		         },
+	   		         dataType:"json",
+	   		         success:function(result) {
+	   		        	 if(result>0){		         
+	      			 			alret("result");
+	      		    			//location.href = "/home.kh/";  //관리자 메인페이지에서 오픈하기때문에 변경하지 않음
+	   		        	 }else{
+	   	   		    		 alret("상담종료 오류입니다. 다시 진행부탁드립니다.");		        		 
+	   		        	 };
+	   		         },
+	   		         error:function(e){
+	   		        	 alert('error');
+	   				 }
+	   		        	 
+   		      });
       		    
-       	 }
+       	 	};
+    	 }
        	 
         });
     /// 리스트 반복 출력구간
