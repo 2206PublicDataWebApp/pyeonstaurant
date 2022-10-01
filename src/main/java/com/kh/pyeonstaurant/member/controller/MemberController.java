@@ -54,35 +54,34 @@ public class MemberController {
 	
 	
 	// 로그인 기능
-	@RequestMapping(value="/member/login.kh", method=RequestMethod.POST)
-	public ModelAndView memberLogin(
-			@ModelAttribute Member member
-			, ModelAndView mv
-			, HttpServletRequest request
-			, HttpSession session) {
-		try {
-			Member loginUser = mService.loginMember(member);	//이메일 저장됨
-			Boolean adminCheck = loginUser.getAdminCheck();
-			
-			if(loginUser != null && adminCheck == false) {
-				session = request.getSession();
-				session.setAttribute("loginUser", loginUser);				
-				mv.setViewName("redirect:/");
-			}else if(adminCheck == true) {
-				session = request.getSession();
-				session.setAttribute("adminCheck", adminCheck);
-				mv.addObject("adminCheck", adminCheck);
-				mv.setViewName("redirect:/admin/memberAdminList");
-			}else {
-				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
-				mv.setViewName("common/errorPage");
-			}
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}
+	   @RequestMapping(value="/member/login.kh", method=RequestMethod.POST)
+	   public ModelAndView memberLogin(
+	         @ModelAttribute Member member
+	         , ModelAndView mv
+	         , HttpServletRequest request
+	         , HttpSession session) {
+	      try {
+	         Member loginUser = mService.loginMember(member);   //이메일 저장됨
+	         session = request.getSession();
+	         Boolean adminCheck = loginUser.getAdminCheck();
+	         session.setAttribute("loginUser", loginUser);            
+	         
+	         if(loginUser != null && adminCheck == false) {
+	            mv.setViewName("redirect:/");
+	         }else if(adminCheck == true) {
+	            session.setAttribute("adminCheck", adminCheck);
+	            mv.addObject("adminCheck", adminCheck);
+	            mv.setViewName("redirect:/admin/memberAdminList");
+	         }else {
+	            mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
+	            mv.setViewName("common/errorPage");
+	         }
+	      } catch (Exception e) {
+	         mv.addObject("msg", e.toString());
+	         mv.setViewName("common/errorPage");
+	      }
+	      return mv;
+	   }
 	
 	// 회원가입 기능
 	@RequestMapping(value="/member/register.kh", method=RequestMethod.POST)

@@ -10,36 +10,23 @@
 	<title>마이페이지</title>
 	<script src="/resources/js/myPage.js"></script>
 	<link rel="stylesheet" href="/resources/css/myPage_modify.css">
-	<link rel="stylesheet" href="/resources/css/style.css">
+	<link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/images/favicon.ico" type="image/x-icon">
 	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         <div class="header-container">
-            <h1><a href="#"><img src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu"></a></h1>
+            <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
-                <a href="#" class="header-search"></a>
-                <a href="#" class="header-cart"></a>
-                <a href="#" class="header-mypage"></a>
+                <a href="#"><i class="fa-solid fa-magnifying-glass icon"></i></a>
+                <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
+                <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
             </nav>
         </div>
     </header>
-    
 	    <nav class="sidebar">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <!--<img src="logo.png" alt="">-->
-                </span>
-
-                <div class="text logo-text">
-                    <span class="name">Codinglab</span>
-                    <span class="profession">Web developer</span>
-                </div>
-            </div>
-        </header>
-
         <div class="menu-bar">
             <div class="menu">
                 <ul class="menu-links">
@@ -54,26 +41,25 @@
                         <a href="/member/myPageModifyView.kh">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">회원정보 수정</span>
-                            
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callMyRecipe.kh">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">작성 레시피 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callMyComment.kh">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">작성 댓글 관리</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/member/callPoint.kh">
                             <i class='bx bx-heart icon' ></i>
                             <span class="text nav-text">포인트 내역 조회</span>
                         </a>
@@ -85,57 +71,43 @@
                             <span class="text nav-text">탈퇴하기</span>
                         </a>
                     </li>
-
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <li class="">
+                <li>
                     <a href="/member/logout.kh">
                         <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
+                        <span class="text nav-text">로그아웃</span>
                     </a>
                 </li>
+				</ul>
             </div>
         </div>
-
     </nav>
     
     <main>
+    <div class="user-card">
 		<form action="/member/modifyNickname.kh" method="post">
-			<input type="text" name="memberEmail" value="${loginUser.memberEmail }">
-			<table>
-				<tr>
-					<td>닉네임</td>
-					<td>
-						<input type="text" name="memberNickname" value="${loginUser.memberNickname }">
-					</td>
-				</tr>				
-
-				<tr>
-					<td colspan="1" align="center">
-						<input type="submit" value="수정하기">
-					</td>
-				</tr>
-			</table>
+			<input type="text" name="memberEmail" value="${loginUser.memberEmail }" class="hidden">
+			<div class="input-box">
+				<i class="fas fa-user"></i>
+				<input type="text" name="memberNickname"  value="${loginUser.memberNickname }" id="hide2">
+			</div>
+			
+			<div class="button input-box">
+                <input type="submit" value="닉네임 수정하기" >
+           </div>
 		</form>
 		
-				<form action="/member/modifyPwd.kh" method="post">
-			<table>
-				<tr>
-					<td> 비밀번호</td>
-					<td>
-						<input type="password" name="memberPwd">
-					</td>
-				</tr>			
-
-				<tr>
-					<td colspan="1" align="center">
-						<input type="submit" value="수정하기">
-					</td>
-				</tr>
-			</table>
+		<form action="/member/modifyPwd.kh" method="post">
+			<input type="text" name="memberEmail" value="${loginUser.memberEmail }" class="hidden">
+				<div class="input-box">
+					<i class="fas fa-lock"></i>
+					<input type="password" name="memberPwd" id="hide1">
+				</div>
+					
+				<div class="button input-box">
+                    <input type="submit" value="비밀번호 수정하기" >
+                </div>
 		</form>
+	</div>
     </main>
 
 

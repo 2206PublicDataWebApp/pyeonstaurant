@@ -12,12 +12,11 @@
 	<link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/resources/images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="/resources/css/myPage.css">
-	<link rel="stylesheet" href="/resources/css/style.css">
 	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-    <header>
+<header>
         <div class="header-container">
             <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
@@ -27,7 +26,6 @@
             </nav>
         </div>
     </header>
-    
 	    <nav class="sidebar">
         <div class="menu-bar">
             <div class="menu">
@@ -73,20 +71,15 @@
                             <span class="text nav-text">탈퇴하기</span>
                         </a>
                     </li>
-
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <li class="">
+                <li>
                     <a href="/member/logout.kh">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">로그아웃</span>
                     </a>
                 </li>
+				</ul>
             </div>
         </div>
-
     </nav>
     
     <main>
@@ -104,12 +97,12 @@
             <div class="user-info">
                   <li>
                       <ul class= "info-property">레시피 수</ul>
-                      <ul class= "info-value">3</ul>
+                      <ul class= "info-value">1</ul>
                   </li>
       
                   <li>
                       <ul class= "info-property">댓글</ul>
-                      <ul class= "info-value">5</ul>
+                      <ul class= "info-value">1</ul>
                   </li>
       
                   <li>
