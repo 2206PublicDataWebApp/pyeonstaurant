@@ -90,10 +90,10 @@ a{
 <link href="dashboard.css" rel="stylesheet">
 </head>
 <body>
-<c:if test="${adminCheck == true }">
+<c:if test="${loginUser.adminCheck == true }">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">편스토랑 관리자페이지</a>
+		<a class="navbar-brand ps-3" href="../">편스토랑 관리자페이지</a>
 
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 "
 			id="sidebarToggle" href="#!">

@@ -84,10 +84,10 @@ public class ConsultController {
 		conServer.setCsNickName(cNickName);
 		conServer.setCsTitle(csTitle);
 		conServer.setCsMail(cEmail);
-//		System.out.println("고객상담접수:"+conServer.toString());
+
 		int result = cService.receiptChat(conServer);//상담접수하고
 		int titleNo= cService.serchTitleNo(conServer); //접수번호 가져오기
-//		System.out.println("titleNo:"+titleNo);
+
 		JSONObject jsonObj = new JSONObject();
 		if (result >= 0) {
 			jsonObj.put("resultMsg", "success");

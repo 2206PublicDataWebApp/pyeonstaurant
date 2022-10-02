@@ -31,7 +31,7 @@ public class SearchController0924 {
 			String conditionList="";
 		try {
 			List<Recipe> rList = sService.recipeAllList();
-			System.out.println(rList.size());
+			
 			System.out.println("리스트 준비 완료 ");
 			String listCon = listConditionFind(conditionList);  //조회수/ 추천수/등록일관련 한글변환
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환

@@ -97,12 +97,12 @@
             <div class="user-info">
                   <li>
                       <ul class= "info-property">레시피 수</ul>
-                      <ul class= "info-value">1</ul>
+                      <ul class= "info-value">${recipeCount }</ul>
                   </li>
       
                   <li>
                       <ul class= "info-property">댓글</ul>
-                      <ul class= "info-value">1</ul>
+                      <ul class= "info-value">${commentCount }</ul>
                   </li>
       
                   <li>

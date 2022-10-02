@@ -89,7 +89,14 @@
 		SELECT * FROM POINT WHERE POINT_MEMBER_EMAIL = #{pointMemberEmail } order by POINT_DATE DESC
 
 	</select>
+	
+	<select id="selectCountRecipeByOneEmail" resultType="_int">
+	select Count(*) from recipe_tbl where member_email=#{memberEmail}
+	</select>
 
+	<select id="selectCountCommentByOneEmail" resultType="_int">
+	select Count(*) from RECIPE_COMMENT where member_email=#{memberEmail}
+	</select>
 	
 	</mapper>
 

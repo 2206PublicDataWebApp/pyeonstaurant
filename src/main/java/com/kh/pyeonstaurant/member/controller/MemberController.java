@@ -43,13 +43,14 @@ public class MemberController {
 	// 로그인 상태일 때 마이페이지 창으로 이동
 	@RequestMapping(value="/member/myPageView.kh", method=RequestMethod.GET)
 	public String memberMyPageView(Model model) {
+		
 		return "member/myPage";
 	}
 	
 	// 회원 정보 수정 창으로 이동
 	@RequestMapping(value="/member/myPageModifyView.kh", method=RequestMethod.GET)
 	public String memberMyPageModifyView(Model model) {
-		return "member/myPage_modify";
+		return "redirect:/member/myPage.kh";
 	}
 	
 	
@@ -63,15 +64,9 @@ public class MemberController {
 	      try {
 	         Member loginUser = mService.loginMember(member);   //이메일 저장됨
 	         session = request.getSession();
-	         Boolean adminCheck = loginUser.getAdminCheck();
-	         session.setAttribute("loginUser", loginUser);            
-	         
-	         if(loginUser != null && adminCheck == false) {
+	         session.setAttribute("loginUser", loginUser);            	         
+	         if(loginUser != null) {
 	            mv.setViewName("redirect:/");
-	         }else if(adminCheck == true) {
-	            session.setAttribute("adminCheck", adminCheck);
-	            mv.addObject("adminCheck", adminCheck);
-	            mv.setViewName("redirect:/admin/memberAdminList");
 	         }else {
 	            mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 	            mv.setViewName("common/errorPage");
@@ -140,13 +135,18 @@ public class MemberController {
 	// 회원정보 상세 조회
 	@RequestMapping(value="/member/myPage.kh", method=RequestMethod.GET)
 	public ModelAndView showMyPage(HttpServletRequest request
-			, ModelAndView mv) {
+			, ModelAndView mv, HttpSession session) {
 		try {
-			HttpSession session = request.getSession();
 			Member member = (Member)session.getAttribute("loginUser");
 			String memberEmail = member.getMemberEmail();
+			
 			Member mOne = mService.printOneByEmail(memberEmail);
+			int recipeCount = mService.countRecipeByEmail(memberEmail);
+			int commentCount = mService.countCommentByEmail(memberEmail);
+	
 			mv.addObject("member", mOne);
+			mv.addObject("recipeCount",recipeCount);
+			mv.addObject("commentCount",commentCount);
 			mv.setViewName("member/myPage");
 
 		} catch (Exception e) {
@@ -270,6 +270,7 @@ public class MemberController {
 			List<Point> pList = mService.selectPoint(member.getMemberEmail());
 			mv.addObject("pList",pList);
 			mv.setViewName("member/myPage_point");
+			
 		}catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("common/errorPage");

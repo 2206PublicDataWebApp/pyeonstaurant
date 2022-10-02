@@ -69,4 +69,16 @@ public class MemberStoreLogic implements MemberStore{
 		return pList;
 	}
 
+	@Override
+	public int selectRecipeCountbyOneEmail(SqlSessionTemplate session, String memberEmail) {
+		int result = session.selectOne("MemberMapper.selectCountRecipeByOneEmail", memberEmail);
+		return result;
+	}
+
+	@Override
+	public int selectCountCommentByOneEmail(SqlSessionTemplate session, String memberEmail) {
+		int result= session.selectOne("MemberMapper.selectCountCommentByOneEmail", memberEmail);
+		return result;
+	}
+
 }

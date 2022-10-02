@@ -12,23 +12,31 @@
 </head>
 <body>
      <header>
-        <div class="header-container">
+           <div class="header-container">
             <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
 
-                <a href="#"><i class="fa-solid fa-magnifying-glass icon" style="font-size:13px"></i></a>
-                <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
-
+                <a href="#"><img src="/resources/images/search-1.svg" class="head-icon"></a>
+                
+                
+                               
+                <c:if test="${sessionScope.loginUser != null }">
+                <a href="/myRecipe/list"><img src="/resources/images/star-fill.svg" class="head-icon"></a>
+                </c:if>
+     
 
               <c:if test="${sessionScope.loginUser eq null}">
-                <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
+                <a href="/member/joinView.kh"><img src="/resources/images/person.svg" class="head-icon"></a>
                 </c:if>
                 
-                <c:if test="${not empty loginUser}">
-                <a href="/member/myPageView.kh"><i class="fa-solid fa-user icon"></i></a>
+                
+                
+                <c:if test="${not empty sessionScope.loginUser}">
+                <a href="/member/myPage.kh"><img src="/resources/images/person-fill.svg" class="head-icon"></a>
                 </c:if>
+                
                 <c:if test="${loginUser.adminCheck == true }">
-                관리자
+                <a href="/admin/memberAdminList">관리자</a>
                 </c:if>
 
               
