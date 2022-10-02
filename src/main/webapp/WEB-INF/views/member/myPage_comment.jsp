@@ -99,7 +99,7 @@
 			<c:forEach items="${rcList}" var="rcList" varStatus="i">
 				<tr>
 					<td>${rcList.recipeNo}</td>
-					<td>${rcList.commentContents }</td>
+					<td><a href="/recipe/detail.do?recipeNo=${rcList.recipeNo}#reply-area">${rcList.commentContents }</a></td>
 					<td>${rcList.commentDate }</td>
 				</tr>
 			</c:forEach>

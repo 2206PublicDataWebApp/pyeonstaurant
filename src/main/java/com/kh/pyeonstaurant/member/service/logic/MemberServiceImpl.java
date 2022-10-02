@@ -77,5 +77,17 @@ public class MemberServiceImpl implements MemberService {
 		return pList;
 	}
 
+	@Override
+	public int countRecipeByEmail(String memberEmail) {
+		int result = mStore.selectRecipeCountbyOneEmail(session,memberEmail);
+		return result;
+	}
+
+	@Override
+	public int countCommentByEmail(String memberEmail) {
+		int result = mStore.selectCountCommentByOneEmail(session,memberEmail);
+		return result;
+	}
+
 
 }

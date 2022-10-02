@@ -27,18 +27,26 @@
             <nav class="main-navigation">
 
                 <a href="#"><i class="fa-solid fa-magnifying-glass icon"></i></a>
+                
+                
+                               
+                <c:if test="${sessionScope.loginUser != null }">
                 <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
-
+                </c:if>
+     
 
               <c:if test="${sessionScope.loginUser eq null}">
                 <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
                 </c:if>
                 
-                <c:if test="${not empty loginUser}">
-                <a href="/member/myPageView.kh"><i class="fa-solid fa-user icon"></i></a>
+                
+                
+                <c:if test="${not empty sessionScope.loginUser}">
+                <a href="/member/myPage.kh"><i class="fa-solid fa-user icon"></i></a>
                 </c:if>
+                
                 <c:if test="${loginUser.adminCheck == true }">
-                관리자
+                <a href="/admin/memberAdminList">관리자</a>
                 </c:if>
 
               
@@ -117,7 +125,7 @@ class="board-menu">간식</a></li>
                             <li class="hr">&nbsp;</li>
                             <li><a href="/notice/list">공지사항</a></li>
                             <li class="hr">&nbsp;</li>
-                            <li><a href="http://127.0.0.1:8888/qna/List.do">Q&amp;A</a></li>
+                            <li><a href="/qna/List.do">Q&amp;A</a></li>
                         </ul>
                     </div>
 
@@ -125,7 +133,7 @@ class="board-menu">간식</a></li>
                         법인명 : (주)편스토랑  |  사업자등록번호 : 000-00-00000  | 벤처기업 : 제 20220923103호
                         <br>특허 제 00-000000호  |  통신판매업신고 : 2022-서울종로구-0000  |   개인정보보호책임자 : 송신애
                         <br>주소 : 서울 종로구 어딘가 159, KH 정보교육원 3층 |  대표이사 :  공석
-                        <br>제휴/협력 문의 : asdf@asdf.com  | 
+                        <br>제휴/협력 문의 : asdf@asdf.com  |   image: <a href="http://Freepik.com" target="_blank">Freepik.com</a>
                     </p>
                 </div>
                 </div>
@@ -139,41 +147,40 @@ class="board-menu">간식</a></li>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
     <script>
-	function startChat(memberNickName) {
-	  $.ajax({						
-			url:"/client/chatCheck.kh",
-			dataType:"json",
-			type:'get',	 			           			                         	
-			success:function(result){  			/* 이벤트 핸들러 result에 서버가 보낸준 값이 리턴됨. */
-				console.log("버튼확인성공:"+result);
-				 if(result.switchbtn=='N'){
-					 alert("관리자가 준비되지 않았습니다. 잠시후 부탁드립니다.");  //버튼값이 n이면 그냥 종료
-				 }else{
-					 chatbtnSuccess(memberNickName)                                //y이면 로그인 확인
-				 };				
-			},
-			error: function(e) {
-				alert('error');
-			},
-		});
-	}
-	 
-	 
-	 
-	 function chatbtnSuccess(memberNickName){
-			if(memberNickName==null){
-				alert("로그인 이후 가능합니다.");          
-			 
-			}else{			
-				 var windo="status=no , nenubar=no,resizable=no,titlebar=no, width=550,height=650";
-				window.open("/consult/chatbefore.kh","PopupWin",windo);
-			};
-	 } 
-	 function onPeon(){
-		  window.open("/peon/peon.kh");
-		
-	 }
-			
+    function startChat(memberNickName) {
+  	  $.ajax({						
+  			url:"/client/chatCheck.kh",
+  			dataType:"json",
+  			type:'get',	 			           			                         	
+  			success:function(result){  			/* 이벤트 핸들러 result에 서버가 보낸준 값이 리턴됨. */
+  				console.log("버튼확인성공:"+result);
+  				 if(result.switchbtn=='N'){
+  					 alert("관리자가 준비되지 않았습니다. 잠시후 부탁드립니다.");  //버튼값이 n이면 그냥 종료
+  				 }else{
+  					 chatbtnSuccess(memberNickName)                                //y이면 로그인 확인
+  				 };				
+  			},
+  			error: function(e) {
+  				alert('error');
+  			},
+  		});
+  	}
+  	 
+  	 
+  	 
+  	 function chatbtnSuccess(memberNickName){
+  			if(memberNickName==null){
+  				alert("로그인 이후 가능합니다.");          
+  			 
+  			}else{			
+  				 var windo="status=no , nenubar=no,resizable=no,titlebar=no, width=550,height=650";
+  				window.open("/consult/chatbefore.kh","PopupWin",windo);
+  			};
+  	 } 
+  	 function onPeon(){
+  		  window.open("/peon/peon.kh");
+  		
+  	 }	
 
 </script>
 </body>

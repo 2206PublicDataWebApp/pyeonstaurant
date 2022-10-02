@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,11 @@
             <h1><a href="#"><img onclick="location.href='/'" src="/resources/images/logo.png"></a></h1>
             <nav class="main-navigation">
                 <a href="#"><i class="fa-solid fa-magnifying-glass icon"></i></a>
+                
+                  <c:if test="${sessionScope.loginUser != null }">
                 <a href="/myRecipe/list"><i class="fa-solid fa-star icon"></i></a>
+                </c:if>
+                
                 <a href="/member/joinView.kh"><i class="fa-regular fa-user icon"></i></a>
             </nav>
         </div>

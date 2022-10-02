@@ -22,4 +22,6 @@ public interface MemberService {
 	public List<Recipe> selectRecipeNumber(String memberEmail);
 	public List<RecipeComment> selectCommentNumber(String memberEmail);
 	public List<Point> selectPoint(String pointMemberEmail);
+	public int countRecipeByEmail(String memberEmail);
+	public int countCommentByEmail(String memberEmail);
 }

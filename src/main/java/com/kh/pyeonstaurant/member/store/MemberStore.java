@@ -25,4 +25,6 @@ public interface MemberStore {
 	public List<Recipe> selectRecipeNumber(SqlSessionTemplate session, String memberEmail);
 	public List<RecipeComment> selectCommentNumber(SqlSessionTemplate session, String memberEmail);
 	public List<Point> selectPoint(SqlSessionTemplate session, String pointMemberEmail);
+	public int selectRecipeCountbyOneEmail(SqlSessionTemplate session, String memberEmail);
+	public int selectCountCommentByOneEmail(SqlSessionTemplate session, String memberEmail);
 }

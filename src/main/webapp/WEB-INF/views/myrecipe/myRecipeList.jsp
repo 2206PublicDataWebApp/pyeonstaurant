@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="">
 <head>
  <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,49 +42,15 @@
 
 </head>
 <body>
-	<header>
-        <div class="header-container">
-           
-            <nav class="main-navigation" id="justify-content">
-                <a href="#" class="header-search"><img src="/resources/images/header_search.svg"></a>
-                <a href="/myRecipe/list" class="header-cart"><img src="/resources/images/header_cart.svg"></a>
-                
-                <c:if test="${sessionScope.loginUser eq null  }">
-                <a href="/member/joinView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
-                </c:if>
-                
-                <c:if test="${not empty loginUser}">
-                <a href="/member/myPageView.kh" class="header-mypage"><img src="/resources/images/header_mypage.svg"></a>
-                </c:if>
-
-        
-                 <h1 style="margin-right:970px;"><a href="#"><img onclick="location.href='/'" src="https://statics.goorm.io/logo/edu/goorm_edu.svg" alt="goorm edu" ></a></h1>
-            </nav>
-        </div>
-    </header>
-<nav class="board-navigation">
-        <div class="board-container">
-            <ul> 
-                <li><a href="#">음료/술</a></li>
-                <li><a href="#">간식</a></li>
-                <li><a href="#">술안주</a></li>
-                <li><a href="#">식사</a></li>
-            </ul>
-        </div>
-    </nav>
+	<jsp:include page="../header.jsp"/>
+	
 	<main>
-<!-- 		<section class="py-5 text-center container"> -->
-<!-- 			<div class="row py-lg-5"> -->
-<!-- 				<div class="col-lg-6 col-md-8 mx-auto"> -->
-<!-- 					<h1 class="fw-light">장바구니</h1> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</section> -->
+
 		
 		<h3 align="center" style="margin-top:30px;">마이레시피</h3>
 		<div class="album py-5 bg-light">
 			<div class="container" id="justify-content" style="background-color:papayawhip;" >
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-end">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-end" style="flex-direction: row-reverse">
 					<c:if test="${!empty mList }">
 						<c:forEach items="${mList }" var="myRecipe" varStatus="i">
 							
@@ -104,7 +70,7 @@
 													class="btn btn-sm btn-outline-secondary"><a href="/myRecipe/remove?recipeNo=${myRecipe.recipeNo }">삭제</a></button>
 											</div>
 											
-											<a href="/recipe/detail.do">
+											<a href="/recipe/detail.do?recipeNo=${myRecipe.recipeNo }">
 											<small class="text-muted">${myRecipe.recipeName }</small>
 											</a>
 										</div>

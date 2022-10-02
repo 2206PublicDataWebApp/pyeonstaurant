@@ -585,7 +585,7 @@ import com.kh.pyeonstaurant.recipe.service.RecipeService;
 			}
 			
 			String memberEmail = rService.getMemberEmial(recipeNo);
-			System.out.println(memberEmail);
+			
 			//작성자 아니면 삭제금지
 			Member loginUser= (Member)session.getAttribute("loginUser");
 			if(!loginUser.getMemberEmail().equals(memberEmail)&&loginUser.getAdminCheck()==false) {
