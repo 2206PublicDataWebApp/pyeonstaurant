@@ -124,10 +124,12 @@
 <p>
 <img src="https://user-images.githubusercontent.com/109611438/193573728-7c788814-80ae-4316-83a3-34f21b8c7c98.jpg"/>
 </p>
+
 ### 10. 검색
 <p>
 <img src="https://user-images.githubusercontent.com/109611438/193573734-3a6133de-0c72-4373-a794-6c60fb999565.JPG"/>
 </p>
+
 ### 11. 관리자 페이지
 
 
