@@ -90,8 +90,19 @@
 ### 4. 마이레시피
 
 ### 5. 레시피 게시판
+<p align="center">
+<img src="./Readme_assets/recipe_list_1.png">
+</p>
 
 ### 6. 레시피 상세 페이지
+<p align="center">
+<img src="./Readme_assets/recipe_dtail_1.png">
+<p align="center">
+<img src="./Readme_assets/recipe_modify_1.png">
+<p align="center">
+<img src="./Readme_assets/recipe_write_1.png">
+</p>
+
 
 ### 7. Q&A 게시판
 
