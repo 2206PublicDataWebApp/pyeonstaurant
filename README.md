@@ -105,6 +105,15 @@
 
 
 ### 7. Q&A 게시판
+<p align="center">
+<img src="./Readme_assets/qna_list.png">
+<p align="center">
+<img src="./Readme_assets/qna_search.png">
+<p align="center">
+<img src="./Readme_assets/qna_dtail.png">
+<p align="center">
+<img src="./Readme_assets/qna_write.png">
+</p>
 
 ### 8. 공지사항 게시판
 
