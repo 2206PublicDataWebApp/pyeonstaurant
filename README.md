@@ -130,6 +130,18 @@
 
 ### 8. 공지사항 게시판
 
+<p align="center">
+<img src="./Readme_assets/notice_1.png">
+</p>
+
+<p align="center">
+<img src="./Readme_assets/notice_2.png">
+</p>
+
+<p align="center">
+<img src="./Readme_assets/notice_3.png">
+</p>
+
 ### 9. 채팅 상담
 <p align="center">
 <img src="https://user-images.githubusercontent.com/109611438/193573724-af74d886-ac1d-4a49-8762-7a397c5aaf18.JPG"/>
