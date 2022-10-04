@@ -76,12 +76,15 @@
 <p align="center">
   <img src="./Readme_assets/mypage1.PNG">
 <p>
+
 <p align="center">
   <img src="./Readme_assets/mypage2.PNG">
 <p>
+
 <p align="center">
   <img src="./Readme_assets/mypage3.PNG">
 <p>
+
 <p align="center">
   <img src="./Readme_assets/mypage4.PNG">
 <p>
@@ -97,8 +100,12 @@
 ### 6. 레시피 상세 페이지
 <p align="center">
 <img src="./Readme_assets/recipe_dtail_1.png">
+</p>
+
 <p align="center">
 <img src="./Readme_assets/recipe_modify_1.png">
+</p>
+
 <p align="center">
 <img src="./Readme_assets/recipe_write_1.png">
 </p>
@@ -107,10 +114,16 @@
 ### 7. Q&A 게시판
 <p align="center">
 <img src="./Readme_assets/qna_list.png">
+</p>
+
 <p align="center">
 <img src="./Readme_assets/qna_search.png">
+</p>
+
 <p align="center">
 <img src="./Readme_assets/qna_dtail.png">
+</p>
+
 <p align="center">
 <img src="./Readme_assets/qna_write.png">
 </p>
@@ -126,12 +139,22 @@
 </p>
 
 ### 10. 검색
-<p>
+<p align="center">
 <img src="https://user-images.githubusercontent.com/109611438/193573734-3a6133de-0c72-4373-a794-6c60fb999565.JPG"/>
 </p>
 
 ### 11. 관리자 페이지
+<p align="center">
+<img src="./Readme_assets/admin_police.png"/>
+</p>
 
+<p align="center">
+<img src="./Readme_assets/admin_member.png"/>
+</p>
+
+<p align="center">
+<img src="./Readme_assets/admin_board.png"/>
+</p>
 
 ## 🏆 수상 이력
 
