@@ -153,11 +153,7 @@ body {
 
 			<!-- 검색명 출력 영역-->
 			<div id="serach-title-area">
-				<div>
-					<span class="titleLavel">${mainConditionHangul}</span>
-					<!--식사 간식, 술안주 음료/술외  -->
-					<span class="titleLavel">${listConditionHangul}</span>
-				</div>
+				
 
 				<!-- 검색 창 영역 -->
 				<div class="col-md-8 container" id="search"
