@@ -1,6 +1,7 @@
 package com.kh.pyeonstaurant.search.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletRequest;
 
@@ -23,6 +24,24 @@ import com.kh.pyeonstaurant.search.service.Searchservice;
 public class SearchController0924 {
 	@Autowired
 	private Searchservice sService;
+	
+	@RequestMapping(value="/mealMenu.do", method = RequestMethod.GET)
+	public ModelAndView mealMneu(ModelAndView mv, @RequestParam("menuName") String menuName) {
+		try {
+			List<Recipe> rList = sService.allViewMenu(menuName);
+			mv.addObject("rList",rList);
+			mv.addObject("menuName", menuName);
+			mv.setViewName("/search/searchPattern");
+			
+			
+		}catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("/error");
+		}
+		
+		return mv;
+		
+	}
 	
 	//검색아이콘 클릭시 전체 리스트가 조회순으로 선택된것이다. 
 	@RequestMapping(value = "/search/move.kh", method = RequestMethod.GET)
@@ -53,27 +72,42 @@ public class SearchController0924 {
 	//전체와 메인만  조회순, 추천순, 등록일 순. 
 	@RequestMapping(value = "/search/main3btn.kh", method = RequestMethod.GET)
 	public ModelAndView detailSearch(ModelAndView mv
-			,@RequestParam(value = "listCondition", required = false) String listCondition
-			,@RequestParam(value = "mainCondition", required = false) String mainCondition
+			,@RequestParam(value = "listCondition", required = false) String listCondition //정렬메뉴
+			,@RequestParam(value = "mainCondition", required = false) String mainCondition //메뉴명
+			,@RequestParam(value = "hachCondition", required = false) String hachCondition //해시태그
+			,@RequestParam(value = "serchValue", required = false) String serchValue //검색어
+			,@RequestParam(value = "searchCondition", required = false) String searchCondition //검색분류
+			,@RequestParam(value = "listCondition", required = false) Optional<String> listCon1 //정렬메뉴
+			,@RequestParam(value = "mainCondition", required = false) Optional<String> mainCon1 //메뉴명
+			,@RequestParam(value = "hachCondition", required = false) Optional<String> hachCo1n //해시태그
+			,@RequestParam(value = "serchValue", required = false) Optional<String> serchVal //검색어
+			,@RequestParam(value = "searchCondition", required = false) Optional<String> searchCon //검색분류
 			) {	
-		if(listCondition==null) {
-			listCondition="viewCount";
-			
-		}
+	
 		try {
-			System.out.println("메인 정렬버튼 클릭");
-			System.out.println(listCondition);
-			List<Recipe> rList = sService.mainSearch(listCondition,mainCondition);
-			System.out.println(rList.size());
+			if(!listCon1.isPresent()) {listCondition = "";}
+			if(!mainCon1.isPresent()) {mainCondition = "";}
+			if(!hachCo1n.isPresent()) {hachCondition = "";}
+			if(!serchVal.isPresent()) {serchValue = "";}
+			if(!searchCon.isPresent()) {searchCondition = "";}
+			
+			List<Recipe> rList = sService.mainSearch(listCondition,mainCondition,serchValue,hachCondition,searchCondition);
 			mv.addObject("rList", rList);
 			
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환
 			mv.addObject("mainConditionHangul",mainCon);
-			mv.addObject("mainCondition",mainCondition);
+			mv.addObject("menuName",mainCondition);
+			mv.addObject("hachCondition",hachCondition);
+			mv.addObject("serchValue",serchValue);
 			
 			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환
 			mv.addObject("listConditionHangul",listCon);
 			mv.addObject("listCondition",listCondition);
+			mv.addObject("mainCondition",mainCondition);
+			mv.addObject("hachCondition",hachCondition);
+			mv.addObject("serchValue",serchValue);
+			mv.addObject("searchCondition",searchCondition);
+			
 			
 			mv.setViewName("/search/searchPattern");
 		 } catch (Exception e) {
@@ -99,7 +133,7 @@ public class SearchController0924 {
 			if(listCondition==null) {
 				listCondition="viewCount";
 			}
-			List<Recipe> rList = sService.mainSearch(mainCondition,listCondition);
+			List<Recipe> rList = sService.mainSearch(mainCondition,listCondition,"","","");
 			System.out.println(rList.size());
 			
 			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환

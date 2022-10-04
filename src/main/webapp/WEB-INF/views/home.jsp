@@ -59,14 +59,11 @@
             <ul>
 
 
-                <li><a href="/search/mainSearch.kh?mainCondition=mael&listCondition=${listCondition}"
- class="board-menu">식사</a></li>
-                <li><a href="/search/mainSearch.kh?mainCondition=relish&listCondition=${listCondition}"
-class="board-menu">술안주</a></li>
-                <li><a href="/search/mainSearch.kh?mainCondition=dessert&listCondition=${listCondition}"
-class="board-menu">간식</a></li>
-                <li><a href="/search/mainSearch.kh?mainCondition=drink&listCondition=${listCondition}"
- class="board-menu">음료/술</a></li>
+                <li><a href="/mealMenu.do?menuName=mael" class="board-menu">식사</a></li>
+				<li><a href="/mealMenu.do?menuName=relish" class="board-menu">술안주</a></li>
+				<li><a href="/mealMenu.do?menuName=dessert" class="board-menu">간식</a></li>
+				<li><a href="/mealMenu.do?menuName=drink" class="board-menu">음료/술</a></li>
+
 
 
             </ul>

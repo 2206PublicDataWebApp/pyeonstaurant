@@ -31,8 +31,8 @@ public class SearchserviceImpl implements Searchservice {
 //	}
 	//메인 분류 4가지와 합쳐서 조회
 	@Override
-	public List<Recipe> mainSearch(String mainCondition, String listCondition) {
-		List<Recipe> rList = sStore.mainSearch(session,mainCondition, listCondition);
+	public List<Recipe> mainSearch(String mainCondition, String listCondition, String serchValue, String hachCondition,String searchCondition) {
+		List<Recipe> rList = sStore.mainSearch(session,mainCondition, listCondition,  serchValue,hachCondition,searchCondition);
 		return rList;
 	}
 	//select 합쳐서
@@ -47,6 +47,14 @@ public class SearchserviceImpl implements Searchservice {
 		return rList;
 	}
 
+	
+
+	@Override
+	public List<Recipe> allViewMenu(String menuName) {
+		List<Recipe> rList = sStore.selectAllMenu(session, menuName);
+		return rList;
+	}
+	
 
 
 }

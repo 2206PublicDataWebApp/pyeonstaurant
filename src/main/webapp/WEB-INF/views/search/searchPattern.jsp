@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${serchValue}</title>
+<title>${menuName}</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -129,6 +129,7 @@ body {
 </style>
 </head>
 <body>
+
 	<jsp:include page="../header.jsp" />
 	<c:if test="${loginUser != null }">
 		<!-- 로그인 했을때만 보임  -->
@@ -147,7 +148,7 @@ body {
 	<section class="container-md" id="">
 
 		<div id="main-contents" class="">
-			<input type="hidden" name="mainCondition" value="${mainCondition}">
+			<input type="hidden" name="mainCondition" value="${menuName}">
 			<input type="hidden" name="listCondition" value="${listCondition}">
 
 			<!-- 검색명 출력 영역-->
@@ -167,21 +168,20 @@ body {
 						<div class="col-md-2 col p-1" " id="searchSelector">
 
 							<select class="form-select searchCondition"
-								id="floatingSelectGrid" name="searchCondition">
+								id="floatingSelectGrid" name="searchCondition"  onchange="hashtagView(this.value);">
 								<option value="recipeName"
 									<c:if test="${searchCondition eq 'recipeName' }"> selected </c:if>>제목명</option>
 								<option value="recipe_material"
 									<c:if test="${searchCondition eq 'recipe_material' }"> selected </c:if>>재료명</option>
-								<option value="recipe_tag"
-									<c:if test="${searchCondition eq 'recipe_tag' }"> selected </c:if>>해시태그순</option>
+								
 							</select>
 
 						</div>
 
 						<div class="col-md-2 col p-1" " id="searchSelector">
-
-							<select class="form-select hachCondition" id="floatingSelectGrid"
-								name="searchCondition">
+							
+							<select class="form-select hachCondition" id="hashSel"
+								name="hachCondition">
 								<option value="" selected>해시태그</option>
 								<option value="easy">간편한</option>
 								<option value="full">든든한</option>
@@ -193,6 +193,7 @@ body {
 								<option value="sweet">달콤한</option>
 
 							</select>
+							
 
 						</div>
 
@@ -239,16 +240,16 @@ body {
 					<div id="blank-area" class="col-md-9"></div>
 					<div id="button-area" class="col-md-3">
 						<button type="button" class="btn" name="listCondition"
-							onclick="btnpattern(this.value)" style="color: gray" id="jo"
-							value="viewCount">조회수</button>
+							onclick="btnpattern('VIEW_COUNT')" style="color: gray" id="jo"
+							value="VIEW_COUNT">조회수</button>
 						|
 						<button type="button" id="chu" class="btn " name="listCondition"
-							style="color: gray" onclick="btnpattern(this.value);"
-							value="recommandCount">추천순</button>
+							style="color: gray" onclick="btnpattern('RECOMMAND_COUNT');"
+							value="RECOMMAND_COUNT">추천순</button>
 						|
 						<button type="button" id="dun" class="btn " name="listCondition"
-							onclick="btnpattern(this.value)" style="color: gray"
-							value="insertDate">등록일</button>
+							onclick="btnpattern('INCERT_DATE')" style="color: gray"
+							value="INCERT_DATE">등록일</button>
 					</div>
 
 				</div>
@@ -261,8 +262,8 @@ body {
 				<div id="rank-area" class="row "
 					style="text-align: center; justify-content: space-evenly">
 
-					<c:forEach items="${rList}" var="recipe" varStatus="i" begin="1"
-						end="3">
+					<c:forEach items="${rList}" var="recipe" varStatus="i" begin="0"
+						end="2">
 
 
 						<div class="card col-md-4 m-3 overflow-hidden"
@@ -331,7 +332,7 @@ body {
 				<!--일반 리스트 영역-->
 				<div id="list-area" class="row"
 					style="justify-content: space-around;">
-					<c:forEach items="${rList}" var="recipe" varStatus="i" begin="4"
+					<c:forEach items="${rList}" var="recipe" varStatus="i" begin="3"
 						end="${fn:length(rList)}">
 
 
@@ -378,10 +379,12 @@ body {
 		})
 
 		function btnpattern(value) {
-			var mainCondition = "${mainCondition }";
-			console.log(mainCondition);
+			var serchValue = $("[name=searchValue]").val();
+			var hachCondition = $("[name=hachCondition]").val();
+			var mainCondition = "${menuName }";
 			location.href = "/search/main3btn.kh?listCondition=" + value
-					+ "&mainCondition=" + mainCondition;
+					+ "&mainCondition=" + mainCondition+"&hachCondition="
+					+ hachCondition+"&serchValue=" + serchValue;
 		}
 
 		function addon2() {
@@ -389,12 +392,15 @@ body {
 			var serchValue = $("[name=searchValue]").val();
 			var hachCondition = $("[name=hachCondition]").val();
 			var listCondition = $("[name=listCondition]").val();
-			location.href = "/search/search3btn.kh?searchCondition="
+			var mainCondition = "${menuName }";
+			location.href = "/search/main3btn.kh?searchCondition="
 					+ searchCondition + "&serchValue=" + serchValue
 					+ "&listCondition=" + listCondition + "&hachCondition="
-					+ hachCondition;
+					+ hachCondition +"&mainCondition=" + mainCondition ;
 
 		}
+		
+	
 	</script>
 
 </body>

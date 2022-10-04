@@ -151,7 +151,7 @@ padding-top: 5rem;
 	
 <jsp:include page="../header.jsp"/>
 	<section style="margin: 0 auto;">
-		<span id="list-icon-area"> <svg onclick="list();"
+		<span id="list-icon-area"> <svg onclick="history.go(-1)"
 				id="list-icon" xmlns="http://www.w3.org/2000/svg" width="50"
 				height="50" fill="currentColor" class="bi bi-arrow-left-circle-fill"
 				viewBox="0 0 16 16">
