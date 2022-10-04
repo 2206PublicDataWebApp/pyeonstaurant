@@ -4,20 +4,20 @@
   <img src="./Readme_assets/main.PNG">
 <p>
 
-## :film_projector: [웹버전 시연영상](https://youtu.be/21dfU2m0mz4) :iphone: [모바일버전 시연영상](https://youtu.be/ek9YBXw9iXo) :loudspeaker:[기획보고서](https://drive.google.com/file/d/1LX8IT3EKMmE8pXcm2W-HGA7h_zZvk6Jn/view?usp=sharing)
+## :film_projector: [웹버전 시연영상](https://youtu.be/21dfU2m0mz4) :iphone: [모바일버전 시연영상](https://youtu.be/ek9YBXw9iXo) :loudspeaker:[기획보고서](https://drive.google.com/file/d/1tgI4TGPzVjk94w7uZH6swSkuV7SN0593/view?usp=sharing)
 
 
 
 ## :convenience_store: 프로젝트 소개
 ```
-편스토랑은 바쁜 현대 사회에서 어디에나 존재하는 편의점의 음식들을 활용해 요알못도 할 수 있는 쉬운 요리 레시피를 
-공유하는 사이트 입니다.
+편스토랑은 바쁜 현대 사회에서 어디에나 존재하는 편의점의 음식들을 활용해 요알못도 
+할 수 있는 쉬운 요리 레시피를 공유하는 사이트 입니다.
 ```
 
 
 ## 📅 개발 기간
 ```
-                                           2022.9.15 ~ 2022.9.28
+2022.9.15 ~ 2022.9.28
 ```
 
 
