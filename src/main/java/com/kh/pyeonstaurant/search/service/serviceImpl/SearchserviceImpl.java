@@ -31,14 +31,14 @@ public class SearchserviceImpl implements Searchservice {
 //	}
 	//메인 분류 4가지와 합쳐서 조회
 	@Override
-	public List<Recipe> mainSearch(String mainCondition, String listCondition, String serchValue, String hachCondition,String searchCondition) {
-		List<Recipe> rList = sStore.mainSearch(session,mainCondition, listCondition,  serchValue,hachCondition,searchCondition);
+	public List<Recipe> mainSearch(String mainCondition, String listCondition) {
+		List<Recipe> rList = sStore.mainSearch(session,mainCondition, listCondition);
 		return rList;
 	}
 	//select 합쳐서
 	@Override
-	public List<Recipe> selectSearch(String serchValue, String listCondition, String searchCondition) {
-		List<Recipe> rList = sStore.selectSearch(session,serchValue, listCondition,searchCondition);		
+	public List<Recipe> selectSearch(String searchValue, String listCondition, String searchCondition) {
+		List<Recipe> rList = sStore.selectSearch(session,searchValue, listCondition,searchCondition);		
 		return rList;
 	}
 	@Override
@@ -47,14 +47,6 @@ public class SearchserviceImpl implements Searchservice {
 		return rList;
 	}
 
-	
-
-	@Override
-	public List<Recipe> allViewMenu(String menuName) {
-		List<Recipe> rList = sStore.selectAllMenu(session, menuName);
-		return rList;
-	}
-	
 
 
 }

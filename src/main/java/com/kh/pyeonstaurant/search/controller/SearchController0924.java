@@ -1,7 +1,6 @@
 package com.kh.pyeonstaurant.search.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.ServletRequest;
 
@@ -25,34 +24,15 @@ public class SearchController0924 {
 	@Autowired
 	private Searchservice sService;
 	
-	@RequestMapping(value="/mealMenu.do", method = RequestMethod.GET)
-	public ModelAndView mealMneu(ModelAndView mv, @RequestParam("menuName") String menuName) {
-		try {
-			List<Recipe> rList = sService.allViewMenu(menuName);
-			mv.addObject("rList",rList);
-			mv.addObject("menuName", menuName);
-			mv.setViewName("/search/searchPattern");
-			
-			
-		}catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("/error");
-		}
-		
-		return mv;
-		
-	}
-	
 	//검색아이콘 클릭시 전체 리스트가 조회순으로 선택된것이다. 
 	@RequestMapping(value = "/search/move.kh", method = RequestMethod.GET)
 	public ModelAndView searchStart(ModelAndView mv) {	
 			String mainCondition="";//메인메뉴 한글변환
-			String conditionList="";
+			String listCondition="";
 		try {
 			List<Recipe> rList = sService.recipeAllList();
-			
-			System.out.println("리스트 준비 완료 ");
-			String listCon = listConditionFind(conditionList);  //조회수/ 추천수/등록일관련 한글변환
+
+			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환
 			mv.addObject("mainConditionHangul",mainCon);
 			mv.addObject("listConditionHangul",listCon);
@@ -72,42 +52,26 @@ public class SearchController0924 {
 	//전체와 메인만  조회순, 추천순, 등록일 순. 
 	@RequestMapping(value = "/search/main3btn.kh", method = RequestMethod.GET)
 	public ModelAndView detailSearch(ModelAndView mv
-			,@RequestParam(value = "listCondition", required = false) String listCondition //정렬메뉴
-			,@RequestParam(value = "mainCondition", required = false) String mainCondition //메뉴명
-			,@RequestParam(value = "hachCondition", required = false) String hachCondition //해시태그
-			,@RequestParam(value = "serchValue", required = false) String serchValue //검색어
-			,@RequestParam(value = "searchCondition", required = false) String searchCondition //검색분류
-			,@RequestParam(value = "listCondition", required = false) Optional<String> listCon1 //정렬메뉴
-			,@RequestParam(value = "mainCondition", required = false) Optional<String> mainCon1 //메뉴명
-			,@RequestParam(value = "hachCondition", required = false) Optional<String> hachCo1n //해시태그
-			,@RequestParam(value = "serchValue", required = false) Optional<String> serchVal //검색어
-			,@RequestParam(value = "searchCondition", required = false) Optional<String> searchCon //검색분류
+			,@RequestParam(value = "listCondition", required = false) String listCondition
+			,@RequestParam(value = "mainCondition", required = false) String mainCondition
 			) {	
-	
-		try {
-			if(!listCon1.isPresent()) {listCondition = "";}
-			if(!mainCon1.isPresent()) {mainCondition = "";}
-			if(!hachCo1n.isPresent()) {hachCondition = "";}
-			if(!serchVal.isPresent()) {serchValue = "";}
-			if(!searchCon.isPresent()) {searchCondition = "";}
+		if(listCondition==null) {
+			listCondition="viewCount";
 			
-			List<Recipe> rList = sService.mainSearch(listCondition,mainCondition,serchValue,hachCondition,searchCondition);
+		}
+		try {
+
+			List<Recipe> rList = sService.mainSearch(mainCondition,listCondition);
+
 			mv.addObject("rList", rList);
 			
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환
 			mv.addObject("mainConditionHangul",mainCon);
-			mv.addObject("menuName",mainCondition);
-			mv.addObject("hachCondition",hachCondition);
-			mv.addObject("serchValue",serchValue);
+			mv.addObject("mainCondition",mainCondition);
 			
 			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환
 			mv.addObject("listConditionHangul",listCon);
 			mv.addObject("listCondition",listCondition);
-			mv.addObject("mainCondition",mainCondition);
-			mv.addObject("hachCondition",hachCondition);
-			mv.addObject("serchValue",serchValue);
-			mv.addObject("searchCondition",searchCondition);
-			
 			
 			mv.setViewName("/search/searchPattern");
 		 } catch (Exception e) {
@@ -127,22 +91,20 @@ public class SearchController0924 {
 			) {	
 
 		try {
-			System.out.println("메인 메뉴 클릭");
-			System.out.println(mainCondition);
-			System.out.println(listCondition);
+
 			if(listCondition==null) {
 				listCondition="viewCount";
 			}
-			List<Recipe> rList = sService.mainSearch(mainCondition,listCondition,"","","");
-			System.out.println(rList.size());
+			List<Recipe> rList = sService.mainSearch(mainCondition,listCondition);
+
 			
 			String listCon = listConditionFind(listCondition);  //조회수/ 추천수/등록일관련 한글변환
 			mv.addObject("listConditionHangul",listCon);	
+			mv.addObject("listCondition",listCondition);
 			
 			String mainCon=listMainFind(mainCondition);  //메인메뉴 한글변환
 			mv.addObject("mainConditionHangul",mainCon);			
 			mv.addObject("mainCondition",mainCondition);
-			mv.addObject("listCondition",listCondition);
 			mv.addObject("rList", rList);
 			mv.setViewName("/search/searchPattern");
 		 } catch (Exception e) {
@@ -165,11 +127,7 @@ public class SearchController0924 {
 				listCondition="viewCount";
 			}
 			try {
-				System.out.println("써치 검색어");
-				System.out.println("해시태그값:"+hachCondition);	
-				System.out.println("검색태그값:"+searchValue);
-				System.out.println("검색제목값:"+searchCondition);
-				
+
 				String hachCon=hachTagFind(hachCondition);  //해시태그는 값이 있던없던 보내줘서 분류해서 매핑할수 있게 함				
 				mv.addObject("hachConditionHangul",hachCon);
 				mv.addObject("hachCondition",hachCondition);
@@ -182,17 +140,17 @@ public class SearchController0924 {
 				mv.addObject("selectHangul",selectCon);
 				mv.addObject("searchCondition",searchCondition);
 				
-				if(hachCon=="no") {
+				if(!(searchCondition.equals("recipe_tag"))) {
 					List<Recipe> rList = sService.selectSearch(searchValue,listCondition,searchCondition);					
 					mv.addObject("searchValue",searchValue);	   //검색어 값은 그대로 전달.
 					mv.addObject("rList", rList);					
 					mv.setViewName("/search/searchSELect");
-					System.out.println("searchValue: "+ rList.size());
+
 				} else {
 					List<Recipe> rList = sService.hachPattern(listCondition,hachCondition);
 					mv.addObject("rList", rList);					
 					mv.setViewName("/search/searchSELect");
-					System.out.println("hachCon: "+ rList.size());
+
 				}
 			 } catch (Exception e) {
 				mv.addObject("msg", e.getMessage());

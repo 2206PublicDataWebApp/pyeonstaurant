@@ -148,10 +148,9 @@ body {
 	<section class="container-md" id="">
 
 		<div id="main-contents" class="">
-			<input type="hidden" name="searchCondition"
-				value="${searchCondition}"> <input type="hidden"
-				name="searchValue" value="${searchValue}"> <input
-				type="hidden" name="hachCondition" value="${hachCondition}">
+			<input type="hidden" name="searchCondition" value="${searchCondition}"> 
+			<input type="hidden" name="searchValue" value="${searchValue}"> 
+			<input type="hidden" name="hachCondition" value="${hachCondition}">
 			<input type="hidden" name="listCondition" value="${listCondition}">
 
 			<!-- 검색명 출력 영역-->
@@ -177,9 +176,9 @@ body {
 						<!-- 검색창시작 -->
 						<div class="row" id="searchArea">
 							<!-- 검색 카테고리 -->
-							<div class="col-md-2 col p-1" " id="searchSelector">
+							<div class="col-md-2 col p-1" " id="searchSelector" >
 
-								<select class="form-select searchCondition" id="searchcondition"
+								<select class="form-select searchCondition" id="searchCondition"
 									name="searchCondition">
 									<option value="mu"
 										<c:if test="${searchCondition eq 'no' }"> selected </c:if>></option>
@@ -193,7 +192,7 @@ body {
 
 							</div>
 
-							<div class="col-md-2 col p-1" " id="searchSelector">
+							<div class="col-md-8 col p-1" " id="hachTagselector" style="display:none" >
 
 								<select class="form-select hachCondition" id="hachCondition"
 									name="hachCondition">
@@ -213,10 +212,10 @@ body {
 
 							<!-- 검색 카테고리 종료 -->
 							<!-- 검색어입력창 -->
-							<div class="row col-md-6  col p-1">
+							<div class="row col-md-8  col p-1" id="inputTag" style="display:"" >
 								<div class="col-md">
 									<input type="text" name="searchValue" class="form-control"
-										id="searchvalue" value="${searchValue }" required="required">
+										id="searchValue" value="${searchValue }" required="required">
 								</div>
 
 							</div>
@@ -255,11 +254,11 @@ body {
 								value="viewCount">조회수</button>
 							|
 							<button type="button" id="chu" class="btn" name="listCondition"
-								style="color: gray" onclick="btnpattern(this.value)"
+								style="color: gray" onclick="btnpattern(this.value);"
 								value="recommandCount">추천순</button>
 							|
 							<button type="button" id="dun" class="btn " name="listCondition"
-								onclick="btnpattern(this.value)" style="color: gray"
+								onclick="btnpattern(this.value);" style="color: gray"
 								value="insertDate">등록일</button>
 						</div>
 
@@ -271,10 +270,9 @@ body {
 
 					<!--랭킹영역-->
 					<div id="rank-area" class="row "
-						style="text-align: center; justify-content: space-evenly">
-
-						<c:forEach items="${rList}" var="recipe" varStatus="i" begin="1"
-							end="3">
+						style="text-align: center; justify-content: space-evenly">					
+						<c:forEach items="${rList}" var="recipe" varStatus="i" begin="0"
+							end="2">
 
 
 							<div class="card col-md-4 m-3 overflow-hidden"
@@ -343,7 +341,7 @@ body {
 					<!--일반 리스트 영역-->
 					<div id="list-area" class="row"
 						style="justify-content: space-around;">
-						<c:forEach items="${rList}" var="recipe" varStatus="i" begin="4"
+						<c:forEach items="${rList}" var="recipe" varStatus="i" begin="3"
 							end="${fn:length(rList)}">
 
 
@@ -392,8 +390,8 @@ body {
 			var searchCondition = "${searchCondition }";
 			var hachCondition = "${hachCondition }";
 			var searchValue = "${searchValue }";
-			location.href = "/search/search3btn.kh?listCondition=" + value
-					+ "searchCondition=" + searchCondition + "&searchValue="
+
+			location.href = "/search/search3btn.kh?listCondition=" + value + "&searchCondition=" + searchCondition + "&searchValue="
 					+ searchValue + "&hachCondition=" + hachCondition;
 		}
 
@@ -401,7 +399,7 @@ body {
 		function addon2() {
 			var searchCondition = $("#searchcondition").val();
 			var hachCondition = $("#hachCondition").val();
-			var searchValue = $("#searchvalue").val();
+			var searchValue = $("#searchValue").val();
 			var listCondition = "${listCondition }";
 			location.href = "/search/search3btn.kh?searchCondition="
 					+ searchCondition + "&searchValue=" + searchValue
@@ -409,6 +407,18 @@ body {
 					+ hachCondition;
 
 		}
+		
+		$("#searchCondition").on("change",function(){
+			var sc=$("#searchCondition").val();
+			if(sc=='recipe_tag'){
+				$('#hachTagselector').css("display",'');
+				$('#inputTag').css("display",'none');
+			}else{
+				$('#hachTagselector').css("display",'none');
+				$('#inputTag').css("display",'');
+			}
+			
+		})
 	</script>
 
 </body>

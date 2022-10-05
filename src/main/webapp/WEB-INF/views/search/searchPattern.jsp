@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${menuName}</title>
+<title>1차 검색페이지</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -129,8 +129,7 @@ body {
 </style>
 </head>
 <body>
-
-	<jsp:include page="../header.jsp" />
+<jsp:include page="../header.jsp" />
 	<c:if test="${loginUser != null }">
 		<!-- 로그인 했을때만 보임  -->
 		<!--글 입력 아이콘 영역-->
@@ -144,16 +143,19 @@ body {
                </svg>
 		</span>
 	</c:if>
-
 	<section class="container-md" id="">
 
 		<div id="main-contents" class="">
-			<input type="hidden" name="mainCondition" value="${menuName}">
+			<input type="hidden" name="mainCondition" value="${mainCondition}">
 			<input type="hidden" name="listCondition" value="${listCondition}">
 
 			<!-- 검색명 출력 영역-->
 			<div id="serach-title-area">
-				
+				<div>
+					<span class="titleLavel">${mainConditionHangul}</span>
+					<!--식사 간식, 술안주 음료/술외  -->
+					<span class="titleLavel">${listConditionHangul}</span>
+				</div>
 
 				<!-- 검색 창 영역 -->
 				<div class="col-md-8 container" id="search"
@@ -164,19 +166,20 @@ body {
 						<div class="col-md-2 col p-1" " id="searchSelector">
 
 							<select class="form-select searchCondition"
-								id="floatingSelectGrid" name="searchCondition"  onchange="hashtagView(this.value);">
+								id="searchCondition" name="searchCondition">
 								<option value="recipeName"
 									<c:if test="${searchCondition eq 'recipeName' }"> selected </c:if>>제목명</option>
 								<option value="recipe_material"
 									<c:if test="${searchCondition eq 'recipe_material' }"> selected </c:if>>재료명</option>
-								
+								<option value="recipe_tag"
+									<c:if test="${searchCondition eq 'recipe_tag' }"> selected </c:if>>해시태그순</option>
 							</select>
 
 						</div>
 
-						<div class="col-md-2 col p-1" " id="searchSelector">
-							
-							<select class="form-select hachCondition" id="hashSel"
+						<div class="col-md-8 col p-1" " id="hachTagselector" style="display:none">
+
+							<select class="form-select hachCondition" id="hachCondition"
 								name="hachCondition">
 								<option value="" selected>해시태그</option>
 								<option value="easy">간편한</option>
@@ -189,18 +192,17 @@ body {
 								<option value="sweet">달콤한</option>
 
 							</select>
-							
 
 						</div>
 
 						<!-- 검색 카테고리 종료 -->
 						<!-- 검색어입력창 -->
-						<div class="row col-md-6  col p-1">
+						<div class="row col-md-8  col p-1" id="inputTag" style="">
 							<div class="col-md">
 
 								<input type="text" name="searchValue" class="form-control"
-									id="floatingInputGrid" value="${serchValue }"
-									required="required">
+									id="searchValue" value="${searchValue }"
+									required="required" >
 
 
 							</div>
@@ -236,16 +238,16 @@ body {
 					<div id="blank-area" class="col-md-9"></div>
 					<div id="button-area" class="col-md-3">
 						<button type="button" class="btn" name="listCondition"
-							onclick="btnpattern('VIEW_COUNT')" style="color: gray" id="jo"
-							value="VIEW_COUNT">조회수</button>
+							onclick="btnpattern(this.value);" style="color: gray" id="jo"
+							value="viewCount">조회수</button>
 						|
 						<button type="button" id="chu" class="btn " name="listCondition"
-							style="color: gray" onclick="btnpattern('RECOMMAND_COUNT');"
-							value="RECOMMAND_COUNT">추천순</button>
+							style="color: gray" onclick="btnpattern(this.value);"
+							value="recommandCount">추천순</button>
 						|
 						<button type="button" id="dun" class="btn " name="listCondition"
-							onclick="btnpattern('INCERT_DATE')" style="color: gray"
-							value="INCERT_DATE">등록일</button>
+							onclick="btnpattern(this.value);" style="color: gray"
+							value="insertDate">등록일</button>
 					</div>
 
 				</div>
@@ -362,10 +364,8 @@ body {
 
 		</div>
 
-
-		<jsp:include page="../footer.jsp" />
 	</section>
-
+<jsp:include page="../footer.jsp"/>
 	<script>
 		/*버튼 토글 스크립트  */
 		var buttons = document.querySelectorAll('.btn');
@@ -375,28 +375,35 @@ body {
 		})
 
 		function btnpattern(value) {
-			var serchValue = $("[name=searchValue]").val();
-			var hachCondition = $("[name=hachCondition]").val();
-			var mainCondition = "${menuName }";
+			var mainCondition = "${mainCondition }";
+			console.log(this.value);
 			location.href = "/search/main3btn.kh?listCondition=" + value
-					+ "&mainCondition=" + mainCondition+"&hachCondition="
-					+ hachCondition+"&serchValue=" + serchValue;
+					+ "&mainCondition=" + mainCondition;
 		}
 
 		function addon2() {
 			var searchCondition = $("[name=searchCondition]").val();
-			var serchValue = $("[name=searchValue]").val();
-			var hachCondition = $("[name=hachCondition]").val();
+			var searchValue = $("#searchValue").val();
+			var hachCondition = $("#hachCondition").val();
 			var listCondition = $("[name=listCondition]").val();
-			var mainCondition = "${menuName }";
-			location.href = "/search/main3btn.kh?searchCondition="
-					+ searchCondition + "&serchValue=" + serchValue
+			location.href = "/search/search3btn.kh?searchCondition="
+					+ searchCondition + "&searchValue=" + searchValue
 					+ "&listCondition=" + listCondition + "&hachCondition="
-					+ hachCondition +"&mainCondition=" + mainCondition ;
+					+ hachCondition;
 
 		}
 		
-	
+	$("#searchCondition").on("change",function(){
+		var sc=$("#searchCondition").val();
+		if(sc=='recipe_tag'){
+			$('#hachTagselector').css("display",'');
+			$('#inputTag').css("display",'none');
+		}else{
+			$('#hachTagselector').css("display",'none');
+			$('#inputTag').css("display",'');
+		}
+		
+	})
 	</script>
 
 </body>

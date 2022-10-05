@@ -31,26 +31,20 @@ public class SearchstoreLogic implements SearchStore {
 
 //메인 분류 4가지와 합쳐서 조회
 @Override
-public List<Recipe> mainSearch(SqlSessionTemplate session, String listCondition, String mainCondition, String serchValue, String hachCondition, String searchCondition) {
+public List<Recipe> mainSearch(SqlSessionTemplate session, String mainCondition, String listCondition) {
 	HashMap<String, String > paramMap=new HashMap<String, String>();
 	paramMap.put("mainCondition",mainCondition);
 	paramMap.put("listCondition",listCondition);
-	paramMap.put("serchValue",serchValue);
-	paramMap.put("hachCondition",hachCondition);
-	paramMap.put("searchCondition",searchCondition);
-	System.out.println(paramMap.toString());
 	List<Recipe> sList=session.selectList("SearchMapper.mainsearchList", paramMap);
-	System.out.println(sList);
-
 	
 	return sList;
 }
 //select 합쳐서
 @Override
-public List<Recipe> selectSearch(SqlSessionTemplate session, String serchValue, String listCondition,
+public List<Recipe> selectSearch(SqlSessionTemplate session, String searchValue, String listCondition,
 		String searchCondition) {
 	HashMap<String, String > paramMap=new HashMap<String, String>();
-	paramMap.put("serchValue",serchValue);
+	paramMap.put("searchValue",searchValue);
 	paramMap.put("listCondition",listCondition);
 	paramMap.put("searchCondition",searchCondition);
 
@@ -69,13 +63,5 @@ public List<Recipe> hachPattern(SqlSessionTemplate session, String hachCondition
 	
 	return sList;
 }
-
-@Override
-public List<Recipe> selectAllMenu(SqlSessionTemplate session, String menuName) {
-	List<Recipe> rList = session.selectList("SearchMapper.selectAllMenu",  menuName);
-	return rList;
-}
-
-
 	
 }

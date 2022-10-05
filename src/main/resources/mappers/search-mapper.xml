@@ -26,31 +26,37 @@
   		SELECT RECIPE_NO, RECIPE_NAME, MAIN_PIC_RENAME FROM RECIPE_TBL WHERE RECIPE_STATUS='Y' ORDER BY VIEW_COUNT DESC	    		
   	</select>	
 
+	<!-- 1. 제목명. 2.해쉬태그 3. 재료명-->
+<!-- 	<select id="patternList"  resultMap="recipeResultMap">
+		SELECT RECIPE_NO, RECIPE_NAME, MAIN_PIC_RENAME FROM RECIPE_TBL WHERE RECIPE_STATUS='Y' 
+		<if test="listCondition.toString() =='viewCount'">ORDER BY VIEW_COUNT DESC</if>
+	    	<if test="listCondition.toString() =='recommandCount'">ORDER BY RECOMMAND_COUNT DESC</if>
+	    	<if test="listCondition.toString() =='insertDate'">ORDER BY INCERT_DATE DESC</if>	
+	</select>  -->
+	
 	<!--메인메뉴와 3가지 패턴  -->	
 	<select id="mainsearchList"  resultMap="recipeResultMap">
-		SELECT * FROM RECIPE_TBL
-		<where>
-		RECIPE_CATEGORY=#{mainCondition}  
-		<if test="searchCondition.toString() == 'recipeName'"> AND RECIPE_NAME LIKE '%'|| #{serchValue}||'%'</if>
-		<if test="searchCondition.toString() == 'recipe_material'"> AND RECIPE_TBL.RECIPE_NO IN (SELECT RECIPE_MATERIAL.RECIPE_NO FROM RECIPE_MATERIAL WHERE RECIPE_MATERIAL.MATERIAL LIKE '%'||#{serchValue}||'%')</if>		
-		
-		AND RECIPE_STATUS='Y' 
+		SELECT RECIPE_NO, RECIPE_NAME, MAIN_PIC_RENAME FROM RECIPE_TBL 
+		<where>	
+		    <if test="mainCondition.toString() == 'mael'"> RECIPE_CATEGORY=#{mainCondition} AND RECIPE_STATUS='Y'</if>
+	    	<if test="mainCondition.toString() == 'dessert'"> RECIPE_CATEGORY=#{mainCondition} AND RECIPE_STATUS='Y'</if>
+	    	<if test="mainCondition.toString() == 'relish'"> RECIPE_CATEGORY=#{mainCondition} AND RECIPE_STATUS='Y'</if>
+	    	<if test="mainCondition.toString() == 'drink'"> RECIPE_CATEGORY=#{mainCondition} AND RECIPE_STATUS='Y'</if>
+	    	<if test="mainCondition.toString() == 'all'"> RECIPE_STATUS='Y'</if>
+			 
 		</where>
-		<if test="listCondition.toString() == 'VIEW_COUNT'">ORDER BY VIEW_COUNT DESC</if>
-		<if test="listCondition.toString() == 'INCERT_DATE'">ORDER BY INCERT_DATE DESC</if>
-		<if test="listCondition.toString() == 'RECOMMAND_COUNT'">ORDER BY RECOMMAND_COUNT DESC</if>
-		
+	
+				
+		<if test="listCondition.toString() =='viewCount'">ORDER BY VIEW_COUNT DESC</if>
+	   	<if test="listCondition.toString() =='recommandCount'">ORDER BY RECOMMAND_COUNT DESC</if>
+	   	<if test="listCondition.toString() =='insertDate'">ORDER BY INCERT_DATE DESC</if>	
 	</select>
 	
-	
-	<select id="selectAllMenu" resultMap="recipeResultMap">
-	SELECT * FROM RECIPE_TBL where RECIPE_CATEGORY=#{menuName} AND RECIPE_STATUS='Y' ORDER BY VIEW_COUNT DESC	
-	</select>
 	
 
 	<!--명칭검색시 2가지.  -->
 	<select id="selectList" resultMap="recipeResultMap">
-	    	SELECT * FROM RECIPE_TBL 
+	    	SELECT RECIPE_NO, RECIPE_NAME, MAIN_PIC_RENAME FROM RECIPE_TBL 
 	    	<where>
 	    	<if test="searchCondition.toString() == 'recipeName'"> RECIPE_NAME LIKE '%'||#{searchValue}||'%'</if>	    	
 	    	<if test="searchCondition.toString() == 'recipe_material'"> RECIPE_TBL.RECIPE_NO IN (SELECT RECIPE_MATERIAL.RECIPE_NO FROM RECIPE_MATERIAL WHERE RECIPE_MATERIAL.MATERIAL LIKE '%'||#{searchValue}||'%')</if>
@@ -60,10 +66,11 @@
 	    	<if test="listCondition.toString() =='recommandCount'">ORDER BY RECOMMAND_COUNT DESC</if>
 	    	<if test="listCondition.toString() =='insertDate'">ORDER BY INCERT_DATE DESC</if>	    		    		    
 	</select>
+	
 	<!-- 해시태그로 검색시 -->
 		<select id="hachSelect" resultMap="recipeResultMap">
-	    	SELECT * FROM RECIPE_TBL 	    	  	
-	    	JOIN RECIPE_TAG USING(RECIPE_NO) WHERE #{hachCondition}='1'	    	
+	    	SELECT RECIPE_NO, RECIPE_NAME, MAIN_PIC_RENAME FROM RECIPE_TBL     	  	
+	    	JOIN RECIPE_TAG USING(RECIPE_NO) WHERE ${hachCondition}='1'	    	
 	    	AND RECIPE_STATUS='Y'	    	
 	    	
 	    	<if test="listCondition.toString() =='viewCount'">ORDER BY VIEW_COUNT DESC</if>
